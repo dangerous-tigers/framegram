@@ -10,7 +10,9 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@storybook/nextjs": "^10.0.8",
     "next": "16.0.4",
+    "radix-ui": "^1.4.3",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
@@ -19,6 +21,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "sass": "^1.94.2",
     "typescript": "^5"
   }
 }

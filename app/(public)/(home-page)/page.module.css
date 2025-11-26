@@ -1,0 +1,12 @@
+.post {
+  border: 1px solid black;
+  border-radius: 16px;
+  background: #ededed;
+  padding: 8px;
+  margin-top: 8px;
+}
+
+.post:hover {
+  background-color: plum;
+  cursor: pointer;
+}
