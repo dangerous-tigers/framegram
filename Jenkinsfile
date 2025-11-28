@@ -4,9 +4,9 @@ pipeline {
     agent any
     environment {
         ENV_TYPE = "production"
-        PORT = 4115
+        PORT = 4119
         NAMESPACE = "framehub-uk"
-        REGISTRY_HOSTNAME = "dangeroustigers"
+        REGISTRY_HOSTNAME = "unstoppablecyborgs"
         REGISTRY = "registry.hub.docker.com"
         PROJECT = "framehub"
         DEPLOYMENT_NAME = "framehub-deployment"
