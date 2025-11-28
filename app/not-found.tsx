@@ -1,11 +1,9 @@
-import RootLayout from "@/app/layout";
+import RootLayout from "./layout";
 
-export default function NotFound() {
-    return (
-        <RootLayout>
-            <div>
-                NOT FOUND
-            </div>
-        </RootLayout>
-    )
+export default function Page() {
+  return (
+    <RootLayout>
+      <div>404</div>
+    </RootLayout>
+  );
 }
