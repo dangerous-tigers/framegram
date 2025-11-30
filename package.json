@@ -9,7 +9,10 @@
     "format": "prettier --write .",
     "start": "next start",
     "lint": "npx eslint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "rename-icons": "node scripts/rename-icons.cjs",
+    "generate-icons": "pnpm run rename-icons && npx @svgr/cli --out-dir assets/icons/components --jsx-runtime automatic --typescript --ref --memo --replace-attr-values \"#000=currentcolor\"  --replace-attr-values \"#fff=currentcolor\" -- assets/icons/svg",
+    "storybook": "storybook dev -p 6006"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint . --fix --no-cache --max-warnings=0",

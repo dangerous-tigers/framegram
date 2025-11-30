@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
 
-import { Inter, Roboto } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
 import type { ReactNode } from 'react';
 
+import '../shared/styles/globals.scss';
+import { Sidebar } from '@/widgets/sidebar';
+
 const inter = Inter({
   style: ['normal'],
+  subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '600', '700'],
-});
-
-const roboto = Roboto({
-  style: ['normal'],
-  weight: ['400', '500', '700'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -25,8 +25,13 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={inter.className + ' ' + roboto.className}>{children}</body>
+    <html lang='en' className={inter.className}>
+      <body>
+        <div className='container'>
+          <Sidebar />
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

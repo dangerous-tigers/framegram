@@ -5,6 +5,11 @@ import pluginReact from 'eslint-plugin-react';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
+  // Игнорируемые файлы
+  {
+    ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'node_modules/**', '*.cjs', '**/*.cjs'],
+  },
+
   // Базовый JS конфиг
   js.configs.recommended,
 
@@ -15,7 +20,7 @@ export default defineConfig([
   pluginReact.configs.flat.recommended,
 
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    files: ['**/*.{js,mjs,ts,mts,cts,jsx,tsx}'],
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
@@ -25,6 +30,7 @@ export default defineConfig([
       'no-console': 'error',
       'no-debugger': 'error',
       quotes: ['error', 'single'],
+      'comma-dangle': ['error', 'always-multiline'],
     },
     languageOptions: {
       globals: {
@@ -32,10 +38,5 @@ export default defineConfig([
         ...globals.node,
       },
     },
-  },
-
-  // Игнорируемые файлы
-  {
-    ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'node_modules/**'],
   },
 ]);
