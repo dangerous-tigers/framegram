@@ -7,7 +7,16 @@
     "build": "next build",
     "build:production": "yarn build",
     "format": "prettier --write .",
-    "start": "next start"
+    "start": "next start",
+    "lint": "npx eslint",
+    "prepare": "husky",
+    "rename-icons": "node scripts/rename-icons.cjs",
+    "generate-icons": "pnpm run rename-icons && npx @svgr/cli --out-dir assets/icons/components --jsx-runtime automatic --typescript --ref --memo --replace-attr-values \"#000=currentcolor\"  --replace-attr-values \"#fff=currentcolor\" -- assets/icons/svg",
+    "storybook": "storybook dev -p 6006"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint . --fix --no-cache --max-warnings=0",
+    "*.{js,jsx,ts,tsx,md,mdx}": "prettier --write"
   },
   "dependencies": {
     "next": "16.0.4",
@@ -23,8 +32,15 @@
     "@types/react": "19",
     "@types/react-dom": "19",
     "eslint": "9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "16.5.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "lint-staged": "^16.2.7",
     "prettier": "3.7.1",
     "sass": "1.94.2",
     "stylelint": "16.26.0",
