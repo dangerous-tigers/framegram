@@ -1,1 +1,1 @@
-import "./globals.scss";
+import './globals.scss';

@@ -1,4 +1,4 @@
-import { Button } from "@/shared/components/button/Button";
+import { Button } from '@/shared/components/button/Button';
 
 export default function Login() {
   return (

@@ -1,4 +1,4 @@
-import RootLayout from "./layout";
+import RootLayout from './layout';
 
 export default function Page() {
   return (
