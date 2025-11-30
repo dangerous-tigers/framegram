@@ -1,0 +1,7 @@
+.list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 26px;
+  padding: 72px 0 110px;
+  border-right: 1px solid var(--dark-300);
+}
