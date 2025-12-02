@@ -5,7 +5,6 @@ import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import '../shared/styles/globals.scss';
-import { Sidebar } from '@/widgets/sidebar';
 
 const inter = Inter({
   style: ['normal'],
@@ -27,10 +26,7 @@ export default function RootLayout({
   return (
     <html lang='en' className={inter.className}>
       <body>
-        <div className='container'>
-          <Sidebar />
-          {children}
-        </div>
+        <div className='container'>{children}</div>
       </body>
     </html>
   );

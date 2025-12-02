@@ -6,6 +6,7 @@ const config: StorybookConfig = {
     // "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
     '../shared/**/*.mdx',
     '../shared/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../widgets/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
   addons: ['@chromatic-com/storybook', '@storybook/addon-a11y', '@storybook/addon-docs', '@storybook/addon-onboarding'],
   framework: '@storybook/nextjs-vite',
