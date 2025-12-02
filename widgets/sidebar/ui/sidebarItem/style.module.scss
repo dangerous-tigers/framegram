@@ -1,4 +1,4 @@
-.item{
+.item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -7,13 +7,13 @@
   line-height: 171%;
   color: var(--light-100);
   transition: all 0.3s ease-in-out;
-  &:nth-child(6){
+  &:nth-child(6) {
     margin-top: 36px;
   }
-  &:nth-child(7){
+  &:nth-child(7) {
     margin-bottom: auto;
   }
-  &:hover{
+  &:hover {
     color: var(--primary-500);
   }
 }

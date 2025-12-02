@@ -13,7 +13,7 @@
   color: var(--dark-100);
 }
 
-.trigger[data-state="open"] {
+.trigger[data-state='open'] {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   background-color: var(--dark-500);
@@ -28,7 +28,7 @@
   }
 }
 
-.trigger:not([data-state="open"]) {
+.trigger:not([data-state='open']) {
   .arrowDown {
     display: flex;
   }
@@ -44,7 +44,6 @@
   justify-content: space-between;
   font-size: var(--font-size-m);
   color: var(--light-100);
-
 }
 
 .triggerInner[data-disabled] {
@@ -52,7 +51,6 @@
 }
 
 .arrowUp {
-
 }
 
 .content {
@@ -60,7 +58,7 @@
   border-top: 0;
 }
 
-.content[data-state="open"] {
+.content[data-state='open'] {
   background-color: var(--dark-500);
   border-color: var(--light-100);
 }
@@ -79,5 +77,3 @@
   color: var(--primary-500);
   outline: none;
 }
-
-
