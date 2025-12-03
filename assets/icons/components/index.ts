@@ -13,6 +13,7 @@ export { default as Bookmark } from './Bookmark';
 export { default as Brave } from './Brave';
 export { default as CalendarOutline } from './CalendarOutline';
 export { default as Calendar } from './Calendar';
+export { default as CheckboxSelected } from './CheckboxSelected';
 export { default as CheckmarkOutline } from './CheckmarkOutline';
 export { default as CloseOutline } from './CloseOutline';
 export { default as Close } from './Close';
