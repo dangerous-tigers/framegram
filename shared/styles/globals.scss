@@ -39,32 +39,32 @@ body {
   color: var(--light-100);
   background-color: var(--dark-700);
 }
+html, body {
+  height: 100%;
+}
 
-.container {
+.wrapper {
   max-width: 1156px;
   margin: 0 auto;
   padding: 0 16px;
-  display: grid;
-  grid-template-columns: 150px 1fr;
+  display: flex;
+  flex-direction: column;
   column-gap: 24px;
+  min-height: 100vh;
+}
+
+.main-box {
+  flex: 1 1 auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
 }
 
 header {
-  grid-column: span 2;
-  grid-row: 1;
+  flex: 0 1 60px;
 }
 
-aside {
-  grid-column: 1;
-  grid-row: 2;
-}
 
-main {
-  grid-column: 2;
-  grid-row: 2;
-}
 
-footer {
-  grid-column: span 2;
-  grid-row: 3/4;
-}
+

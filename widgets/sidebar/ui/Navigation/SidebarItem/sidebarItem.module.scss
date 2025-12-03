@@ -10,10 +10,16 @@
   &:nth-child(6) {
     margin-top: 36px;
   }
-  &:nth-child(7) {
-    margin-bottom: auto;
+  &:last-child {
+    margin-top: auto;
   }
   &:hover {
     color: var(--primary-500);
   }
+  &.active{
+    color: var(--primary-500);
+  }
+}
+.active{
+  color: var(--primary-500);
 }

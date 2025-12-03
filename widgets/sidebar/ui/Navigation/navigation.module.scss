@@ -1,0 +1,12 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    row-gap: 26px;
+    padding: 72px 0 110px;
+    min-height: 100%;
+    border-right: 1px solid var(--dark-300);
+}
+.active {
+    color: var(--primary-500);
+}
