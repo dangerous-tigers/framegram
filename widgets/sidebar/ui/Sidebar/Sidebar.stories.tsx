@@ -1,14 +1,13 @@
-import { Sidebar } from './Sidebar';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Sidebar } from './Sidebar';
 
 const meta: Meta<typeof Sidebar> = {
-  title: 'Widgets/Sidebar/Sidebar',
+  title: 'Widgets/Sidebar',
   component: Sidebar,
 };
+
 export default meta;
 
-type Story = StoryObj<typeof Sidebar>;
-
-export const Default: Story = {
-  args: {},
+export const Default: StoryObj<typeof Sidebar> = {
+  render: () => <Sidebar />,
 };
