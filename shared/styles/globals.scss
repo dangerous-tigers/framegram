@@ -1,7 +1,7 @@
 @use 'reset';
 @use 'typography';
 @use 'sizes';
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 :root {
   --primary-100: #73a5ff;
   --primary-300: #4c8dff;
@@ -38,6 +38,7 @@
 body {
   color: var(--light-100);
   background-color: var(--dark-700);
+  font-family: 'Inter', sans-serif;
 }
 
 html,
