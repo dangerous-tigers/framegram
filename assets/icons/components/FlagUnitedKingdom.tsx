@@ -7,6 +7,7 @@ const SvgFlagUnitedKingdom = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
     width={24}
     height={24}
     fill='none'
+    viewBox='0 0 24 24'
     ref={ref}
     {...props}
   >

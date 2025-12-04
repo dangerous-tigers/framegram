@@ -1,7 +1,7 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgFirefox = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={36} height={36} fill='none' ref={ref} {...props}>
+  <svg xmlns='http://www.w3.org/2000/svg' width={36} height={36} fill='none' viewBox='0 0 36 36' ref={ref} {...props}>
     <g clipPath='url(#firefox_svg__a)'>
       <path
         fill='currentcolor'

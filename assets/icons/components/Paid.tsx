@@ -1,7 +1,7 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgPaid = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={24} height={24} fill='none' ref={ref} {...props}>
+  <svg xmlns='http://www.w3.org/2000/svg' width={24} height={24} fill='none' viewBox='0 0 24 24' ref={ref} {...props}>
     <path
       fill='#397DF6'
       d='M11.365.521a1 1 0 0 1 1.27 0l2.14 1.758a1 1 0 0 0 .694.225l2.765-.164a1 1 0 0 1 1.026.746l.699 2.68a1 1 0 0 0 .429.59L22.72 7.85a1 1 0 0 1 .392 1.207l-1.01 2.58a1 1 0 0 0 0 .729l1.01 2.579a1 1 0 0 1-.392 1.207l-2.333 1.492a1 1 0 0 0-.429.59l-.698 2.68a1 1 0 0 1-1.027.747l-2.765-.164a1 1 0 0 0-.694.225l-2.14 1.758a1 1 0 0 1-1.27 0l-2.14-1.758a1 1 0 0 0-.694-.225l-2.765.164a1 1 0 0 1-1.027-.746l-.698-2.68a1 1 0 0 0-.429-.59L1.28 16.15a1 1 0 0 1-.392-1.207l1.01-2.58a1 1 0 0 0 0-.729L.887 9.056a1 1 0 0 1 .392-1.207l2.333-1.492a1 1 0 0 0 .429-.59l.698-2.68a1 1 0 0 1 1.027-.747l2.765.164a1 1 0 0 0 .694-.225z'

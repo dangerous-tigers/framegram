@@ -9,7 +9,19 @@ async function main() {
   files.forEach(async (file) => {
     const filePath = join(dirWithIcons, file);
     const fileContent = await fsp.readFile(filePath, 'utf-8');
-    const newFileContent = fileContent.replaceAll('#fff', 'currentcolor');
+    let newFileContent = fileContent.replaceAll('#fff', 'currentcolor');
+
+    const viewBoxMatch = newFileContent.match(/viewBox=["']0 0 (\d+(\.\d+)?) (\d+(\.\d+)?)["']/);
+
+    if (viewBoxMatch) {
+      const width = viewBoxMatch[1];
+      const height = viewBoxMatch[3];
+
+      newFileContent = newFileContent
+        .replace(/width=["']1em["']/, `width={${width}}`)
+        .replace(/height=["']1em["']/, `height={${height}}`);
+    }
+
     fsp.writeFile(filePath, newFileContent);
   });
 }
