@@ -1,0 +1,129 @@
+.root {
+  width: 100%;
+  line-height: var(--line-height-m);
+  color: var(--light-900);
+
+  &.withError {
+    color: var(--danger-500);
+  }
+
+  &.disabled {
+    color: var(--dark-100);
+    cursor: not-allowed;
+  }
+}
+
+.label {
+  font-size: var(--font-size-s);
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+
+  &:has(.input:active) {
+    .leftIcon {
+      color: var(--light-100);
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 6px 12px;
+  font-size: var(--font-size-m);
+  box-shadow: 0 0 0 1px var(--dark-100);
+  border: none;
+  border-radius: 2px;
+  background-color: transparent;
+  color: inherit;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+
+  &.withLeftIcon {
+    padding-left: 41px;
+  }
+  &.withRightIcon {
+    padding-right: 41px;
+  }
+  &:hover:not(:focus):not(:disabled) {
+    box-shadow: 0 0 0 1px var(--light-900);
+  }
+  &:active:not(:disabled) {
+    color: var(--light-100);
+    box-shadow: 0 0 0 1px var(--light-100);
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--primary-500);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  // Состояние ошибки
+  .root.withError & {
+    box-shadow: 0 0 0 1px var(--danger-500);
+    &:active {
+      color: inherit;
+    }
+    &:hover {
+      box-shadow: 0 0 0 1px var(--danger-500);
+    }
+    &:focus-visible {
+      box-shadow: 0 0 0 2px var(--danger-500);
+    }
+  }
+
+  &[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+  &[type='search'] {
+    appearance: textfield;
+  }
+}
+
+.leftIcon,
+.rightIcon {
+  width: 20px;
+  position: absolute;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.leftIcon {
+  margin-left: 12px;
+}
+
+.rightIcon {
+  right: 10px;
+  top: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  pointer-events: auto;
+  color: var(--light-100);
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled) {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--dark-100);
+  }
+}
+
+.errorText {
+  font-size: var(--font-size-s);
+  color: var(--danger-500);
+}
