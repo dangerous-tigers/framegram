@@ -25,12 +25,15 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang='en' className={inter.className}>
+    <html
+      lang='en'
+      className={inter.className}
+    >
       <body>
-        <div className={'wrapper'}>
+        <div className='wrapper'>
           <div className='main-box'>
             <Sidebar />
-            {children}
+            <main className='main'>{children}</main>
           </div>
         </div>
       </body>

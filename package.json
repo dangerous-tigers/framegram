@@ -20,7 +20,7 @@
     "*.{js,jsx,ts,tsx,md,mdx}": "prettier --write"
   },
   "dependencies": {
-    "classnames": "^2.5.1",
+    "clsx": "^2.1.1",
     "next": "16.0.4",
     "radix-ui": "1.4.3",
     "react": "19.2.0",

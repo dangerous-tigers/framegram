@@ -14,6 +14,7 @@ export type NavigationItem = {
   href: string;
   label: string;
   Component: ElementType;
+  disabled?: boolean;
 };
 
 export const navigationItems: NavigationItem[] = [
