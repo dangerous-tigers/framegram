@@ -13,7 +13,7 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const pathname = usePathname();
 
   return (
-    <div className={clsx(className, s.navigation)}>
+    <div className={clsx(s.navigation, className)}>
       {navigationItems.map((item) => {
         const { href, Component, label, disabled } = item;
 

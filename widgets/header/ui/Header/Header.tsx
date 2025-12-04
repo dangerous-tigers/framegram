@@ -11,7 +11,7 @@ export const Header = (props: PropsHeader) => {
   const { className } = props;
 
   return (
-    <header className={clsx(className, s.header)}>
+    <header className={clsx(s.header, className)}>
       <Logo />
       <Notifications />
       <select

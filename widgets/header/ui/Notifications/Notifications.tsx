@@ -10,7 +10,7 @@ export const Notifications = (props: PropsNotifications) => {
   const { className } = props;
 
   return (
-    <div className={clsx(className, s.notifications)}>
+    <div className={clsx(s.notifications, className)}>
       <OutlineBell />
       <span>9</span>
     </div>

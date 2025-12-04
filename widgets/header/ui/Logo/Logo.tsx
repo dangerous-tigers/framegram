@@ -12,7 +12,7 @@ export const Logo = (props: PropsLogo) => {
   return (
     <Link
       href='/'
-      className={clsx(className, s.logo)}
+      className={clsx(s.logo, className)}
     >
       Framehub
     </Link>
