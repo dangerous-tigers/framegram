@@ -6,6 +6,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof SidebarItem> = {
   title: 'Widgets/Sidebar/SidebarItem',
   component: SidebarItem,
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
 };
 export default meta;
 
