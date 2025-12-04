@@ -16,10 +16,17 @@ export const Button = ({
   variant = 'primary',
   type = 'button',
   className,
+  onClick,
   ...props
 }: Props) => {
   return (
-    <button disabled={disabled} type={type} className={cn(s.btn, s[`btn--${variant}`], className)} {...props}>
+    <button
+      disabled={disabled}
+      type={type}
+      onClick={onClick}
+      className={cn(s.btn, s[`btn--${variant}`], className)}
+      {...props}
+    >
       {children}
     </button>
   );
