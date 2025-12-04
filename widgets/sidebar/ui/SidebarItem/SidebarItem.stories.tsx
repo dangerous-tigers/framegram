@@ -6,6 +6,11 @@ import { Meta, StoryObj } from '@storybook/nextjs-vite';
 const meta: Meta<typeof SidebarItem> = {
   title: 'Widgets/Sidebar/SidebarItem',
   component: SidebarItem,
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
 };
 export default meta;
 

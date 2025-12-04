@@ -1,7 +1,15 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgRecaptchalogo1 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={24} height={24} fill='none' ref={ref} {...props}>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={24}
+    height={24}
+    fill='none'
+    viewBox='0 0 24 24'
+    ref={ref}
+    {...props}
+  >
     <path
       fill='#1C3AA9'
       d='M18.72 9.93a7 7 0 0 0-.007-.288V4.204L17.21 5.707a6.7 6.7 0 0 0-5.2-2.468 6.7 6.7 0 0 0-5.346 2.655l2.465 2.49c.241-.447.584-.83.998-1.12.43-.336 1.04-.61 1.883-.61q.152 0 .238.034a3.25 3.25 0 0 1 2.484 1.496L12.988 9.93c2.21-.01 4.706-.014 5.732 0'
