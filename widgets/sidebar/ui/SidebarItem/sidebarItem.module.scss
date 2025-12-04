@@ -14,7 +14,6 @@
     @media (min-width: 768px) {
       margin-top: 36px;
     }
-
   }
 
   &:last-child {
@@ -27,18 +26,16 @@
     color: var(--primary-500);
   }
 
-  &:focus-visible{
+  &:focus-visible {
     border: 2px solid var(--primary-700);
     border-radius: 2px;
   }
   &:active {
     color: var(--primary-500);
     svg {
-
-     stroke: var(--primary-500);
+      stroke: var(--primary-500);
     }
   }
-
 
   &.active {
     color: var(--primary-500);
@@ -55,13 +52,12 @@
 .disabled {
   color: var(--dark-100);
   cursor: default;
-  &:hover{
+  &:hover {
     color: var(--dark-100);
   }
-  &:active{
+  &:active {
     color: var(--dark-100);
     svg {
-
       stroke: var(--dark-100);
     }
   }

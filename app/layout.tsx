@@ -6,6 +6,7 @@ import type { ReactNode } from 'react';
 
 import '../shared/styles/globals.scss';
 import { Sidebar } from '@/widgets/sidebar';
+import { Header } from '@/widgets/header/ui/Header';
 
 const inter = Inter({
   style: ['normal'],
@@ -31,6 +32,7 @@ export default function RootLayout({
     >
       <body>
         <div className='wrapper'>
+          <Header />
           <div className='main-box'>
             <Sidebar />
             <main className='main'>{children}</main>
