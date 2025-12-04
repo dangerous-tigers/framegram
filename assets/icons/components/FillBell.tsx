@@ -1,7 +1,15 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgFillBell = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={24} height={24} fill='none' ref={ref} {...props}>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={24}
+    height={24}
+    fill='none'
+    viewBox='0 0 24 24'
+    ref={ref}
+    {...props}
+  >
     <path
       fill='currentcolor'
       fillRule='evenodd'
@@ -27,7 +35,10 @@ const SvgFillBell = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =>
       />
     </mask>
     <g mask='url(#fill-bell_svg__a)'>
-      <path fill='currentcolor' d='M0 0h24v24H0z' />
+      <path
+        fill='currentcolor'
+        d='M0 0h24v24H0z'
+      />
     </g>
   </svg>
 );

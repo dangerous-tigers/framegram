@@ -1,7 +1,15 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgOpera = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={36} height={36} fill='none' ref={ref} {...props}>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={36}
+    height={36}
+    fill='none'
+    viewBox='0 0 36 36'
+    ref={ref}
+    {...props}
+  >
     <g clipPath='url(#opera_svg__a)'>
       <path
         fill='currentcolor'
@@ -10,7 +18,10 @@ const SvgOpera = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id='opera_svg__a'>
-        <path fill='currentcolor' d='M0 0h36v36H0z' />
+        <path
+          fill='currentcolor'
+          d='M0 0h36v36H0z'
+        />
       </clipPath>
     </defs>
   </svg>
