@@ -25,7 +25,7 @@ export const Select = ({ options, disabled, sizes = 'medium', ...props }: Props)
   return (
     <SelectPrimitive.Root {...props} value={value} onValueChange={(value) => onChangeHandler(value)}>
       <SelectPrimitive.Trigger disabled={disabled} asChild aria-label='Select language'>
-        <TriggerInner className={sizes === 'medium' ? styles.trigger : styles.triggerSmall}>
+        <TriggerInner style={{ width: '100px' }} className={sizes === 'medium' ? styles.trigger : styles.triggerSmall}>
           <SelectPrimitive.Icon className={sizes === 'medium' ? styles.iconSmall : styles.icon} asChild>
             <SelectedItemIcon />
           </SelectPrimitive.Icon>
@@ -36,6 +36,7 @@ export const Select = ({ options, disabled, sizes = 'medium', ...props }: Props)
 
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
+          style={{ width: '100px' }}
           align={'center'}
           alignOffset={0}
           className={sizes === 'medium' ? styles.content : styles.contentSmall}
