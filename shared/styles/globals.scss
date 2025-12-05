@@ -1,7 +1,7 @@
 @use 'reset';
 @use 'typography';
 @use 'sizes';
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 :root {
   --primary-100: #73a5ff;
   --primary-300: #4c8dff;
@@ -38,33 +38,47 @@
 body {
   color: var(--light-100);
   background-color: var(--dark-700);
+  font-family: 'Inter', sans-serif;
 }
 
-.container {
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
   max-width: 1156px;
   margin: 0 auto;
   padding: 0 16px;
-  display: grid;
-  grid-template-columns: 150px 1fr;
+  display: flex;
+  flex-direction: column;
   column-gap: 24px;
+  min-height: 100vh;
+}
+
+.main-box {
+  flex: 1 1 auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 1 1 auto;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.main {
+  flex: 1 1 auto;
+  @media (max-width: 768px) {
+    flex: 1 1 auto;
+  }
 }
 
 header {
-  grid-column: span 2;
-  grid-row: 1;
-}
-
-aside {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-main {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-footer {
-  grid-column: span 2;
-  grid-row: 3/4;
+  flex: 0 1 60px;
 }

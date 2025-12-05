@@ -38,7 +38,10 @@ export const Select = () => {
   };
 
   return (
-    <SelectPrimitive.Root value={value} onValueChange={(value) => onChangeHandler(value)}>
+    <SelectPrimitive.Root
+      value={value}
+      onValueChange={(value) => onChangeHandler(value)}
+    >
       <SelectPrimitive.Trigger
         disabled={disabled}
         ref={triggerRef}
@@ -60,12 +63,21 @@ export const Select = () => {
       </SelectPrimitive.Trigger>
 
       <SelectPrimitive.Portal>
-        <SelectPrimitive.Content style={{ width }} className={styles.content} side={'bottom'} position={'popper'}>
+        <SelectPrimitive.Content
+          style={{ width }}
+          className={styles.content}
+          side={'bottom'}
+          position={'popper'}
+        >
           <SelectPrimitive.ScrollUpButton />
           <SelectPrimitive.Viewport>
             {options.map((option) => {
               return (
-                <SelectPrimitive.Item className={styles.listItem} value={option.title} key={option.id}>
+                <SelectPrimitive.Item
+                  className={styles.listItem}
+                  value={option.title}
+                  key={option.id}
+                >
                   <Image
                     width={20}
                     height={20}
@@ -87,6 +99,10 @@ export const Select = () => {
 };
 
 const TriggerInner = forwardRef<HTMLDivElement, ComponentProps<'div'>>((props, ref) => (
-  <div ref={ref} {...props} className={`${styles.triggerInner} ${props.className ?? ''}`} />
+  <div
+    ref={ref}
+    {...props}
+    className={`${styles.triggerInner} ${props.className ?? ''}`}
+  />
 ));
 TriggerInner.displayName = 'TriggerInner';
