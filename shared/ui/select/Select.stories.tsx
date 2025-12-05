@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-
-import { fn } from 'storybook/test';
 import { Select } from '@/shared/ui/select/Select';
+import { langs } from '@/shared/ui/select/langs';
 
 const meta = {
   title: 'ui/select/Select',
@@ -10,38 +9,40 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
+  argTypes: {},
+  args: {
+    options: langs,
+    sizes: 'medium',
+    disabled: false,
   },
-  args: { onClick: fn() },
 } satisfies Meta<typeof Select>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    primary: true,
-    label: 'Select',
+export const Default: Story = {
+  args: {},
+  render: () => {
+    return <Select options={langs} disabled={false} sizes={'medium'} />;
   },
 };
 
-export const Secondary: Story = {
+export const DefaultDisabled: Story = {
   args: {
-    label: 'Select',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: 'large',
-    label: 'Select',
+    disabled: true,
   },
 };
 
 export const Small: Story = {
-  args: {
-    size: 'small',
-    label: 'Select',
+  args: {},
+  render: () => {
+    return <Select options={langs} disabled={false} sizes={'small'} />;
+  },
+};
+
+export const SmallDisabled: Story = {
+  args: {},
+  render: () => {
+    return <Select options={langs} disabled={true} sizes={'small'} />;
   },
 };
