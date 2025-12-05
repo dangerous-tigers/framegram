@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentPropsWithoutRef, useState, useId } from 'react';
+import { ComponentPropsWithoutRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { Search, EyeOutline, EyeOffOutline } from '@/assets/icons';
@@ -16,7 +16,6 @@ type Props = {
 export const Input = (p: Props) => {
   const { type = 'text', label, error, disabled, ...rest } = p;
   const [showPassword, setShowPassword] = useState(false);
-  const id = useId();
 
   const isSearch = type === 'search';
   const isPassword = type === 'password';
@@ -34,55 +33,50 @@ export const Input = (p: Props) => {
         [s.disabled]: disabled,
       })}
     >
-      {label && (
-        <label
-          htmlFor={id}
-          className={s.label}
-        >
-          {label}
-        </label>
-      )}
+      <label>
+        {label && <span className={s.label}>{label}</span>}
+        <div className={s.inputContainer}>
+          {isSearch && (
+            <Search
+              className={s.leftIcon}
+              aria-hidden='true'
+            />
+          )}
 
-      <div className={s.inputContainer}>
-        {isSearch && (
-          <Search
-            className={s.leftIcon}
-            aria-hidden='true'
-          />
-        )}
-
-        <input
-          id={id}
-          type={inputType}
-          className={clsx(s.input, {
-            [s.withLeftIcon]: isSearch,
-            [s.withRightIcon]: isPassword,
-          })}
-          aria-invalid={hasError}
-          aria-describedby={hasError ? `${id}-error` : undefined}
-          disabled={disabled}
-          {...rest}
-        />
-
-        {isPassword && (
-          <button
-            type='button'
-            onClick={togglePasswordVisibility}
-            className={clsx(s.rightIcon, { [s.disabled]: disabled })}
-            aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
-            aria-disabled={disabled}
+          <input
+            type={inputType}
+            className={clsx(s.input, {
+              [s.withLeftIcon]: isSearch,
+              [s.withRightIcon]: isPassword,
+            })}
+            aria-invalid={hasError}
+            aria-describedby={error}
             disabled={disabled}
-          >
-            {showPassword ? <EyeOutline /> : <EyeOffOutline />}
-          </button>
-        )}
-      </div>
+            {...rest}
+          />
+
+          {isPassword && (
+            <button
+              type='button'
+              onClick={togglePasswordVisibility}
+              className={clsx(s.rightIcon, { [s.disabled]: disabled })}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              aria-pressed={showPassword}
+              aria-disabled={disabled}
+              disabled={disabled}
+            >
+              {showPassword ? <EyeOutline /> : <EyeOffOutline />}
+            </button>
+          )}
+        </div>
+      </label>
 
       {hasError && (
         <p
-          id={`${id}-error`}
+          id={error}
           className={s.errorText}
           role='alert'
+          aria-live='polite'
         >
           {error}
         </p>

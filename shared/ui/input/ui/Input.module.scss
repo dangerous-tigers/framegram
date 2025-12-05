@@ -64,12 +64,9 @@
     cursor: not-allowed;
   }
 
-  // Состояние ошибки
   .root.withError & {
     box-shadow: 0 0 0 1px var(--danger-500);
-    &:active {
-      color: inherit;
-    }
+    color: var(--light-100);
     &:hover {
       box-shadow: 0 0 0 1px var(--danger-500);
     }
