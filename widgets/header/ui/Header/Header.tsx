@@ -12,18 +12,22 @@ export const Header = (props: PropsHeader) => {
 
   return (
     <header className={clsx(s.header, className)}>
-      <Logo />
-      <Notifications />
-      <select
-        name='ir'
-        id='ir'
-      >
-        <option value='ru'>RU</option>
-        <option value='en'>EN</option>
-      </select>
-      <div className={s.buttons}>
-        <button>Log in</button>
-        <button>Sign up</button>
+      <div className='container'>
+        <div className={s.headerBody}>
+          <Logo />
+          <Notifications />
+          <select
+            name='ir'
+            id='ir'
+          >
+            <option value='ru'>RU</option>
+            <option value='en'>EN</option>
+          </select>
+          <div className={s.buttons}>
+            <button>Log in</button>
+            <button>Sign up</button>
+          </div>
+        </div>
       </div>
     </header>
   );
