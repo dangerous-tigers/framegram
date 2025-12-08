@@ -82,7 +82,9 @@
     appearance: textfield;
   }
 }
-
+.leftIconColorWhite {
+  color: var(--light-100);
+}
 .leftIcon,
 .rightIcon {
   width: 20px;

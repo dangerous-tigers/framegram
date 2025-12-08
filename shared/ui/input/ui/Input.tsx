@@ -3,7 +3,7 @@
 import { ComponentPropsWithoutRef, useState } from 'react';
 import clsx from 'clsx';
 
-import { Search, EyeOutline, EyeOffOutline } from '@/assets/icons';
+import { Search, EyeOutline, EyeOffOutline, Close } from '@/assets/icons';
 import s from './Input.module.scss';
 
 type Props = {
@@ -11,10 +11,14 @@ type Props = {
   label?: string;
   error?: string;
   disabled?: boolean;
-} & ComponentPropsWithoutRef<'input'>;
+  value: string;
+  clearable?: boolean;
+  //eslint-disable-next-line no-unused-vars
+  onChange: (value: string) => void;
+} & Omit<ComponentPropsWithoutRef<'input'>, 'onChange' | 'value'>;
 
 export const Input = (p: Props) => {
-  const { type = 'text', label, error, disabled, ...rest } = p;
+  const { type = 'text', label, error, disabled, value, onChange, clearable, ...rest } = p;
   const [showPassword, setShowPassword] = useState(false);
 
   const isSearch = type === 'search';
@@ -38,7 +42,7 @@ export const Input = (p: Props) => {
         <div className={s.inputContainer}>
           {isSearch && (
             <Search
-              className={s.leftIcon}
+              className={clsx(s.leftIcon, { [s.leftIconColorWhite]: error })}
               aria-hidden='true'
             />
           )}
@@ -47,14 +51,22 @@ export const Input = (p: Props) => {
             type={inputType}
             className={clsx(s.input, {
               [s.withLeftIcon]: isSearch,
-              [s.withRightIcon]: isPassword,
+              [s.withRightIcon]: isPassword || value.length > 0,
             })}
+            value={value}
             aria-invalid={hasError}
             aria-describedby={error}
             disabled={disabled}
+            onChange={(e) => onChange(e.currentTarget.value)}
             {...rest}
           />
-
+          {!isPassword && value.length > 0 && clearable && (
+            <Close
+              style={{ width: 20 }}
+              className={clsx(s.rightIcon, { [s.disabled]: disabled })}
+              onClick={() => onChange('')}
+            />
+          )}
           {isPassword && (
             <button
               type='button'

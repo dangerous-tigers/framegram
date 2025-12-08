@@ -1,57 +1,107 @@
+// Input.stories.tsx
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Input } from './Input';
 
 const meta = {
-  title: 'ui/input/Input',
+  title: 'Components/Input',
   component: Input,
-  parameters: {
-    layout: 'centered',
+  tags: ['autodocs'],
+  argTypes: {
+    type: {
+      control: { type: 'select' },
+      options: ['text', 'password', 'search'],
+    },
+    label: { control: 'text' },
+    error: { control: 'text' },
+    disabled: { control: 'boolean' },
+    clearable: { control: 'boolean' },
+    value: { control: 'text' },
+    onChange: { action: 'changed' },
   },
   args: {
+    type: 'text',
     value: '',
     onChange: () => void 0,
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof Input>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: 'Label',
-    type: 'text',
+    label: 'Default Input',
     placeholder: 'Enter text...',
   },
 };
 
-export const Password: Story = {
+export const WithValue: Story = {
   args: {
-    label: 'Pass',
-    type: 'password',
-  },
-};
-
-export const Search: Story = {
-  args: {
-    type: 'search',
-    label: 'Label',
+    label: 'Input with value',
+    value: 'Some text',
     placeholder: 'Enter text...',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: 'Username',
+    label: 'Disabled Input',
+    value: 'Disabled value',
     disabled: true,
-    value: 'Disabled input',
   },
 };
 
-export const Error: Story = {
+export const WithError: Story = {
   args: {
-    label: 'Username',
-    value: 'Name',
-    error: 'Error text',
+    label: 'Input with error',
+    error: 'This field is required',
+    value: '',
+    placeholder: 'Enter text...',
+  },
+};
+
+export const Search: Story = {
+  args: {
+    type: 'search',
+    label: 'Search Input',
+    placeholder: 'Search...',
+    clearable: true,
+  },
+};
+
+export const Password: Story = {
+  args: {
+    type: 'password',
+    label: 'Password Input',
+    placeholder: 'Enter password...',
+  },
+};
+
+export const PasswordWithVisibilityToggle: Story = {
+  args: {
+    type: 'password',
+    label: 'Password with toggle',
+    value: 'secret123',
+    clearable: true,
+  },
+};
+
+export const ClearableText: Story = {
+  args: {
+    label: 'Clearable Text Input',
+    value: 'Clear me!',
+    clearable: true,
+    placeholder: 'Type something...',
+  },
+};
+
+export const SearchWithError: Story = {
+  args: {
+    type: 'search',
+    label: 'Search with error',
+    error: 'No results found',
+    value: 'invalid query',
+    clearable: true,
   },
 };
