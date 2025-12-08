@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import '../shared/styles/globals.scss';
 import { Sidebar } from '@/widgets/sidebar';
 import { Header } from '@/widgets/header/ui/Header';
+import { RadioButtonGroup } from '@/shared/ui/radioGroup/RadioGroup';
 
 export const metadata: Metadata = {
   title: 'Framegram',
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body>
         <div className='wrapper'>
           <Header />
+          <RadioButtonGroup />
 
           <div className='main-box'>
             <div className='main-box__body'>
