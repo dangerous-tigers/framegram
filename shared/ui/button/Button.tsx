@@ -1,12 +1,13 @@
 'use client';
-
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import s from './Button.module.scss';
+import clsx from 'clsx';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'outline' | 'text';
   className?: string;
+  fullWidth: boolean;
 };
 
 export const Button = ({
@@ -16,6 +17,7 @@ export const Button = ({
   type = 'button',
   className,
   onClick,
+  fullWidth = false,
   ...props
 }: Props) => {
   return (
@@ -24,7 +26,7 @@ export const Button = ({
         disabled={disabled}
         type={type}
         onClick={onClick}
-        className={className(s.btn, s[`btn--${variant}`], className)}
+        className={clsx(s.btn, s[`btn--${variant}`], fullWidth && s['btn--full_width'], className)}
         {...props}
       >
         {children}

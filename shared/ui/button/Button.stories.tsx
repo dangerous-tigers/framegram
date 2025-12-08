@@ -27,9 +27,7 @@ const onClickHandler = action('Click');
 
 export const Primary: Story = {
   args: {
-    variant: 'primary',
     children: 'Button primary',
-    type: 'button',
     onClick: onClickHandler,
   },
 };
@@ -38,7 +36,6 @@ export const Secondary: Story = {
   args: {
     variant: 'secondary',
     children: 'Button secondary',
-    type: 'button',
   },
 };
 
@@ -46,7 +43,6 @@ export const Outline: Story = {
   args: {
     variant: 'outline',
     children: 'Button outline',
-    type: 'button',
   },
 };
 
@@ -54,7 +50,6 @@ export const Text: Story = {
   args: {
     variant: 'text',
     children: 'Button text',
-    type: 'button',
   },
 };
 
@@ -63,6 +58,12 @@ export const Disabled: Story = {
     variant: 'primary',
     disabled: true,
     children: 'Button disabled',
-    type: 'button',
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    children: 'Button full width',
+    fullWidth: true,
   },
 };

@@ -18,6 +18,10 @@
     width: 100%;
   }
 
+  &--full_width {
+    width: 100%;
+  }
+
   &--primary {
     background-color: var(--primary-500);
     color: var(--light-100);
