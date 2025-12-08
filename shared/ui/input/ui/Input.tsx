@@ -4,6 +4,7 @@ import { ComponentPropsWithoutRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { Search, EyeOutline, EyeOffOutline, Close } from '@/assets/icons';
+
 import s from './Input.module.scss';
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
   label?: string;
   error?: string;
   disabled?: boolean;
+
   value: string;
   clearable?: boolean;
   //eslint-disable-next-line no-unused-vars
@@ -19,6 +21,7 @@ type Props = {
 
 export const Input = (p: Props) => {
   const { type = 'text', label, error, disabled, value, onChange, clearable, ...rest } = p;
+
   const [showPassword, setShowPassword] = useState(false);
 
   const isSearch = type === 'search';
