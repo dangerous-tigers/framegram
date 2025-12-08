@@ -1,7 +1,15 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgGoogleSvgrepoCom1 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={24} height={24} fill='none' viewBox='0 0 24 24' ref={ref} {...props}>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={24}
+    height={24}
+    fill='none'
+    viewBox='0 0 24 24'
+    ref={ref}
+    {...props}
+  >
     <g clipPath='url(#google-svgrepo-com-1_svg__a)'>
       <path
         fill='#EA4335'
@@ -22,7 +30,10 @@ const SvgGoogleSvgrepoCom1 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
     </g>
     <defs>
       <clipPath id='google-svgrepo-com-1_svg__a'>
-        <path fill='currentcolor' d='M0 0h24v24H0z' />
+        <path
+          fill='currentcolor'
+          d='M0 0h24v24H0z'
+        />
       </clipPath>
     </defs>
   </svg>

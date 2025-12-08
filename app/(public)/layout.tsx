@@ -5,5 +5,5 @@ export default function PublicLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  return <main>{children}</main>;
+  return <>{children}</>;
 }

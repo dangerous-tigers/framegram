@@ -1,7 +1,15 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgMicrosoftEdge = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={36} height={36} fill='none' viewBox='0 0 36 36' ref={ref} {...props}>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={36}
+    height={36}
+    fill='none'
+    viewBox='0 0 36 36'
+    ref={ref}
+    {...props}
+  >
     <g clipPath='url(#microsoft-edge_svg__a)'>
       <path
         fill='currentcolor'
@@ -16,7 +24,10 @@ const SvgMicrosoftEdge = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement
         fill='currentcolor'
         d='M14.864 33.947a11.2 11.2 0 0 1-3.192-2.995c-3.699-5.063-2.588-12.164 2.475-15.863.534-.38 1.083-.731 1.673-1.012.436-.211 1.182-.577 2.18-.563a4.58 4.58 0 0 1 3.614 1.828 4.53 4.53 0 0 1 .9 2.63c0-.028 3.445-11.194-11.25-11.194-6.173 0-11.25 5.864-11.25 10.997a18.34 18.34 0 0 0 1.702 7.875c3.88 8.269 13.33 12.319 21.993 9.436-2.967.928-6.201.52-8.845-1.14'
       />
-      <g filter='url(#microsoft-edge_svg__b)' opacity={0.41}>
+      <g
+        filter='url(#microsoft-edge_svg__b)'
+        opacity={0.41}
+      >
         <path
           fill='currentcolor'
           d='M14.864 33.947a11.2 11.2 0 0 1-3.192-2.995c-3.699-5.063-2.588-12.164 2.475-15.863.534-.38 1.083-.731 1.673-1.012.436-.211 1.182-.577 2.18-.563a4.58 4.58 0 0 1 3.614 1.828 4.53 4.53 0 0 1 .9 2.63c0-.028 3.445-11.194-11.25-11.194-6.173 0-11.25 5.864-11.25 10.997a18.34 18.34 0 0 0 1.702 7.875c3.88 8.269 13.33 12.319 21.993 9.436-2.967.928-6.201.52-8.845-1.14'
@@ -43,14 +54,31 @@ const SvgMicrosoftEdge = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement
         colorInterpolationFilters='sRGB'
         filterUnits='userSpaceOnUse'
       >
-        <feFlood floodOpacity={0} result='BackgroundImageFix' />
-        <feColorMatrix in='SourceAlpha' result='hardAlpha' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0' />
+        <feFlood
+          floodOpacity={0}
+          result='BackgroundImageFix'
+        />
+        <feColorMatrix
+          in='SourceAlpha'
+          result='hardAlpha'
+          values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+        />
         <feOffset dy={4} />
         <feGaussianBlur stdDeviation={2} />
-        <feComposite in2='hardAlpha' operator='out' />
+        <feComposite
+          in2='hardAlpha'
+          operator='out'
+        />
         <feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0' />
-        <feBlend in2='BackgroundImageFix' result='effect1_dropShadow_26444_7692' />
-        <feBlend in='SourceGraphic' in2='effect1_dropShadow_26444_7692' result='shape' />
+        <feBlend
+          in2='BackgroundImageFix'
+          result='effect1_dropShadow_26444_7692'
+        />
+        <feBlend
+          in='SourceGraphic'
+          in2='effect1_dropShadow_26444_7692'
+          result='shape'
+        />
       </filter>
       <filter
         id='microsoft-edge_svg__c'
@@ -61,17 +89,37 @@ const SvgMicrosoftEdge = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement
         colorInterpolationFilters='sRGB'
         filterUnits='userSpaceOnUse'
       >
-        <feFlood floodOpacity={0} result='BackgroundImageFix' />
-        <feColorMatrix in='SourceAlpha' result='hardAlpha' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0' />
+        <feFlood
+          floodOpacity={0}
+          result='BackgroundImageFix'
+        />
+        <feColorMatrix
+          in='SourceAlpha'
+          result='hardAlpha'
+          values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+        />
         <feOffset dy={4} />
         <feGaussianBlur stdDeviation={2} />
-        <feComposite in2='hardAlpha' operator='out' />
+        <feComposite
+          in2='hardAlpha'
+          operator='out'
+        />
         <feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0' />
-        <feBlend in2='BackgroundImageFix' result='effect1_dropShadow_26444_7692' />
-        <feBlend in='SourceGraphic' in2='effect1_dropShadow_26444_7692' result='shape' />
+        <feBlend
+          in2='BackgroundImageFix'
+          result='effect1_dropShadow_26444_7692'
+        />
+        <feBlend
+          in='SourceGraphic'
+          in2='effect1_dropShadow_26444_7692'
+          result='shape'
+        />
       </filter>
       <clipPath id='microsoft-edge_svg__a'>
-        <path fill='currentcolor' d='M0 0h36v36H0z' />
+        <path
+          fill='currentcolor'
+          d='M0 0h36v36H0z'
+        />
       </clipPath>
     </defs>
   </svg>

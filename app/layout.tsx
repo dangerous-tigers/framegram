@@ -1,17 +1,10 @@
 import type { Metadata } from 'next';
 
-import { Inter } from 'next/font/google';
-
 import type { ReactNode } from 'react';
 
 import '../shared/styles/globals.scss';
-
-const inter = Inter({
-  style: ['normal'],
-  subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-});
+import { Sidebar } from '@/widgets/sidebar';
+import { Header } from '@/widgets/header/ui/Header';
 
 export const metadata: Metadata = {
   title: 'Framegram',
@@ -24,9 +17,15 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang='en' className={inter.className}>
+    <html lang='en'>
       <body>
-        <div className='container'>{children}</div>
+        <div className='wrapper'>
+          <Header />
+          <div className='main-box'>
+            <Sidebar />
+            <main className='main'>{children}</main>
+          </div>
+        </div>
       </body>
     </html>
   );
