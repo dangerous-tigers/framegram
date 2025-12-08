@@ -1,4 +1,5 @@
 // Input.stories.tsx
+
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Input } from './Input';
 

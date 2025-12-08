@@ -12,7 +12,6 @@ type Props = {
   label?: string;
   error?: string;
   disabled?: boolean;
-
   value: string;
   clearable?: boolean;
   //eslint-disable-next-line no-unused-vars
@@ -54,6 +53,7 @@ export const Input = (p: Props) => {
             type={inputType}
             className={clsx(s.input, {
               [s.withLeftIcon]: isSearch,
+
               [s.withRightIcon]: isPassword || value.length > 0,
             })}
             value={value}
@@ -70,6 +70,7 @@ export const Input = (p: Props) => {
               onClick={() => onChange('')}
             />
           )}
+
           {isPassword && (
             <button
               type='button'
