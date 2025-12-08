@@ -14,7 +14,7 @@ type Props = {
   disabled?: boolean;
   value: string;
   clearable?: boolean;
-  //eslint-disable-next-line no-unused-vars
+
   onChange: (value: string) => void;
 } & Omit<ComponentPropsWithoutRef<'input'>, 'onChange' | 'value'>;
 
