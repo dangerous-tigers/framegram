@@ -25,7 +25,14 @@ export default defineConfig([
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
       'react/prop-types': 'off',
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': [
+        'error',
+        {
+          vars: 'all',
+          args: 'none',
+        },
+      ],
+      // 'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       semi: 'error',
       'no-console': 'error',
       'no-debugger': 'error',
