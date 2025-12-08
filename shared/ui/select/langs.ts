@@ -1,0 +1,7 @@
+import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons';
+import { Option } from '@/shared/ui/select/types';
+
+export const langs: Option[] = [
+  { value: 'English', label: 'United Kingdom flag', icon: FlagUnitedKingdom },
+  { value: 'Russian', label: 'Russian flag', icon: FlagRussia },
+];

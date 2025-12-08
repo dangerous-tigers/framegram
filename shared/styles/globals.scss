@@ -1,6 +1,7 @@
 @use 'reset';
 @use 'typography';
 @use 'sizes';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
   --primary-100: #73a5ff;
@@ -8,6 +9,7 @@
   --primary-500: #397df6;
   --primary-700: #2f68cc;
   --primary-900: #234e99;
+  --primary-900-rgb: 26, 35, 126;
   --danger-100: #ff8099;
   --danger-300: #f23d61;
   --danger-500: #cc1439;
@@ -38,33 +40,63 @@
 body {
   color: var(--light-100);
   background-color: var(--dark-700);
+  font-family: 'Inter', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  column-gap: 24px;
+  min-height: 100vh;
 }
 
 .container {
   max-width: 1156px;
   margin: 0 auto;
   padding: 0 16px;
+}
+
+.main-box {
+  flex: 1 1 auto;
+  height: 100%;
+  width: 100%;
+
+  max-width: 1156px;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  display: flex;
+  flex-direction: column;
+
+}
+.main-box__body{
+  flex: 1 1 auto;
+  height: 100%;
   display: grid;
-  grid-template-columns: 150px 1fr;
-  column-gap: 24px;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 1 1 auto;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.main {
+  flex: 1 1 auto;
+  @media (max-width: 768px) {
+    flex: 1 1 auto;
+  }
 }
 
 header {
-  grid-column: span 2;
-  grid-row: 1;
-}
-
-aside {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-main {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-footer {
-  grid-column: span 2;
-  grid-row: 3/4;
+  flex: 0 1 60px;
 }

@@ -2,7 +2,6 @@
 
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import s from './Button.module.scss';
-import { cn } from '@/shared/lib/cn';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -20,14 +19,16 @@ export const Button = ({
   ...props
 }: Props) => {
   return (
-    <button
-      disabled={disabled}
-      type={type}
-      onClick={onClick}
-      className={cn(s.btn, s[`btn--${variant}`], className)}
-      {...props}
-    >
-      {children}
-    </button>
+    <>
+      <button
+        disabled={disabled}
+        type={type}
+        onClick={onClick}
+        className={className(s.btn, s[`btn--${variant}`], className)}
+        {...props}
+      >
+        {children}
+      </button>
+    </>
   );
 };

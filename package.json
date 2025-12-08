@@ -11,7 +11,7 @@
     "lint": "npx eslint",
     "prepare": "husky",
     "rename-icons": "node scripts/rename-icons.cjs",
-    "generate-icons": "pnpm run rename-icons && npx @svgr/cli --out-dir assets/icons/components --jsx-runtime automatic --typescript --ref --memo --replace-attr-values \"#000=currentcolor\"  --replace-attr-values \"#fff=currentcolor\" -- assets/icons/svg",
+    "generate-icons": "pnpm run rename-icons && npx @svgr/cli --icon --out-dir assets/icons/components --jsx-runtime automatic --typescript --ref --memo --replace-attr-values \"#000=currentcolor\"  --replace-attr-values \"#fff=currentcolor\" -- assets/icons/svg && node scripts/replace-color.cjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -20,6 +20,7 @@
     "*.{js,jsx,ts,tsx,md,mdx}": "prettier --write"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.2.6",
     "clsx": "^2.1.1",
     "next": "16.0.4",
     "radix-ui": "1.4.3",
