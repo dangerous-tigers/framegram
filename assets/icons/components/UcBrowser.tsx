@@ -1,7 +1,15 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgUcBrowser = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={36} height={36} fill='none' viewBox='0 0 36 36' ref={ref} {...props}>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={36}
+    height={36}
+    fill='none'
+    viewBox='0 0 36 36'
+    ref={ref}
+    {...props}
+  >
     <path
       fill='currentcolor'
       stroke='currentcolor'
@@ -19,7 +27,10 @@ const SvgUcBrowser = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =
       strokeLinejoin='round'
       d='M22.038 28.935s4.489-.824 4.489 2.94H12.393a8.397 8.397 0 0 1-8.398-8.397c0-2.176.825-4.162 2.186-5.65 2.632-2.88 3.825-3.896 3.825-6.282 0-2.385-2.965-3.843-6.01-1.988 2.608-4.55 4.685-5.433 8.925-5.433s6.229 3.534 6.229 6.626c0 6.14-9.898 6.67-9.898 15.688'
     />
-    <path fill='currentcolor' d='M22.038 28.935c.58-1.005.91-2.171.91-3.415a6.848 6.848 0 0 0-12.594-3.726' />
+    <path
+      fill='currentcolor'
+      d='M22.038 28.935c.58-1.005.91-2.171.91-3.415a6.848 6.848 0 0 0-12.594-3.726'
+    />
     <path
       stroke='currentcolor'
       strokeLinecap='round'

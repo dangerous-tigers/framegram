@@ -1,7 +1,15 @@
 import type { SVGProps } from 'react';
 import { Ref, forwardRef, memo } from 'react';
 const SvgYandex = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns='http://www.w3.org/2000/svg' width={36} height={36} fill='none' viewBox='0 0 36 36' ref={ref} {...props}>
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width={36}
+    height={36}
+    fill='none'
+    viewBox='0 0 36 36'
+    ref={ref}
+    {...props}
+  >
     <g clipPath='url(#yandex_svg__a)'>
       <path
         stroke='currentcolor'
@@ -15,7 +23,10 @@ const SvgYandex = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id='yandex_svg__a'>
-        <path fill='currentcolor' d='M0 0h36v36H0z' />
+        <path
+          fill='currentcolor'
+          d='M0 0h36v36H0z'
+        />
       </clipPath>
     </defs>
   </svg>
