@@ -28,17 +28,32 @@ export const Select = ({
   const OptionIcon = option.icon;
 
   return (
-    <Root {...props} value={value} onValueChange={onValueChange}>
-      <Trigger disabled={disabled} asChild aria-label='Select language'>
+    <Root
+      {...props}
+      value={value}
+      onValueChange={onValueChange}
+    >
+      <Trigger
+        className={size === 'medium' ? styles.trigger : styles.triggerSmall}
+        disabled={disabled}
+        asChild
+        aria-label='Select language'
+      >
         <TriggerInner
           style={size === 'medium' ? { width } : { width: '42px' }}
-          className={size === 'medium' ? styles.trigger : styles.triggerSmall}
+          className={size === 'medium' ? styles.triggerInner : styles.triggerInnerSmall}
         >
-          <Icon className={size === 'medium' ? styles.iconSmall : styles.icon} asChild>
+          <Icon
+            className={size === 'medium' ? styles.iconSmall : styles.icon}
+            asChild
+          >
             <OptionIcon />
           </Icon>
           <Value>{size === 'medium' && option.value}</Value>
-          <ArrowIosDownOutline height={size === 'medium' ? 24 : 16} className={styles.arrowDown} />
+          <ArrowIosDownOutline
+            height={size === 'medium' ? 24 : 16}
+            className={styles.arrowDown}
+          />
         </TriggerInner>
       </Trigger>
 
@@ -73,6 +88,10 @@ export const Select = ({
 };
 
 const TriggerInner = forwardRef<HTMLDivElement, ComponentProps<'div'>>(({ className, ...props }, ref) => (
-  <div ref={ref} {...props} className={className} />
+  <div
+    ref={ref}
+    {...props}
+    className={className}
+  />
 ));
 TriggerInner.displayName = 'TriggerInner';

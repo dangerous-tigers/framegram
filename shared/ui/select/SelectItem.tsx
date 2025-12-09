@@ -12,7 +12,13 @@ type Props = {
 
 export const SelectItem = ({ children, label, country, className, Component, ...props }: Props) => {
   return (
-    <Item aria-label={label} {...props} className={className} value={country} key={country}>
+    <Item
+      aria-label={label}
+      {...props}
+      className={className}
+      value={country}
+      key={country}
+    >
       <Icon asChild>{Component}</Icon>
       <ItemText>{children}</ItemText>
     </Item>

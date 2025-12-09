@@ -1,6 +1,6 @@
 // Tabs.stories.tsx
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Tabs } from './Tabs';
 
 const meta: Meta<typeof Tabs> = {
