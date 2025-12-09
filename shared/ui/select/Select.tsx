@@ -29,10 +29,15 @@ export const Select = ({
 
   return (
     <Root {...props} value={value} onValueChange={onValueChange}>
-      <Trigger disabled={disabled} asChild aria-label='Select language'>
+      <Trigger
+        className={size === 'medium' ? styles.trigger : styles.triggerSmall}
+        disabled={disabled}
+        asChild
+        aria-label='Select language'
+      >
         <TriggerInner
           style={size === 'medium' ? { width } : { width: '42px' }}
-          className={size === 'medium' ? styles.trigger : styles.triggerSmall}
+          className={size === 'medium' ? styles.triggerInner : styles.triggerInnerSmall}
         >
           <Icon className={size === 'medium' ? styles.iconSmall : styles.icon} asChild>
             <OptionIcon />
