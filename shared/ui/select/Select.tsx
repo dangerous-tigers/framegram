@@ -28,7 +28,11 @@ export const Select = ({
   const OptionIcon = option.icon;
 
   return (
-    <Root {...props} value={value} onValueChange={onValueChange}>
+    <Root
+      {...props}
+      value={value}
+      onValueChange={onValueChange}
+    >
       <Trigger
         className={size === 'medium' ? styles.trigger : styles.triggerSmall}
         disabled={disabled}
