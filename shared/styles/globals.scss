@@ -2,12 +2,14 @@
 @use 'typography';
 @use 'sizes';
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
   --primary-100: #73a5ff;
   --primary-300: #4c8dff;
   --primary-500: #397df6;
   --primary-700: #2f68cc;
   --primary-900: #234e99;
+  --primary-900-rgb: 26, 35, 126;
   --danger-100: #ff8099;
   --danger-300: #f23d61;
   --danger-500: #cc1439;
@@ -47,16 +49,32 @@ body {
 }
 
 .wrapper {
-  max-width: 1156px;
-  margin: 0 auto;
-  padding: 0 16px;
   display: flex;
   flex-direction: column;
   column-gap: 24px;
   min-height: 100vh;
 }
 
+.container {
+  max-width: 1156px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .main-box {
+  flex: 1 1 auto;
+  height: 100%;
+  width: 100%;
+
+  max-width: 1156px;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  display: flex;
+  flex-direction: column;
+
+}
+.main-box__body{
   flex: 1 1 auto;
   height: 100%;
   display: grid;
