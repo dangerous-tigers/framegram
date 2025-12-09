@@ -1,46 +1,24 @@
-import { Label, RadioGroup } from 'radix-ui';
+import { RadioGroup } from 'radix-ui';
 import s from './RadioGroup.module.scss';
+import { RadioGroupItem } from '@/shared/ui/radioGroup/RadioGroupItem/RadioGroupItem';
+import { RadioGroupProps } from '@/shared/ui/radioGroup/RadioGroup.types';
 
-export const RadioButtonGroup = () => {
+export const RadioButtonGroup = ({ required = true, items, ariaLabel }: RadioGroupProps) => {
   return (
     <RadioGroup.Root
       className={s.radio}
-      defaultValue='default'
-      aria-label='View density'
+      aria-label={ariaLabel}
+      required={required}
+      defaultValue={items[0]?.value}
     >
-      <Label.Root className={s.radio__item}>
-        <RadioGroup.Item
-          checked
-          disabled
-          className={s.radio__input}
-          value='default'
-          id='r1'
-        >
-          <RadioGroup.Indicator className={s.radio__indicator} />
-        </RadioGroup.Item>
-        <span className={s.radio__label}>Default</span>
-      </Label.Root>
-
-      <Label.Root className={s.radio__item}>
-        <RadioGroup.Item
-          className={s.radio__input}
-          value='Comfortable'
-          id='r1'
-        >
-          <RadioGroup.Indicator className={s.radio__indicator} />
-        </RadioGroup.Item>
-        <span className={s.radio__label}>Comfortable</span>
-      </Label.Root>
-      <Label.Root className={s.radio__item}>
-        <RadioGroup.Item
-          className={s.radio__input}
-          value='Indiator'
-          id='r1'
-        >
-          <RadioGroup.Indicator className={s.radio__indicator} />
-        </RadioGroup.Item>
-        <span className={s.radio__label}>Indiator</span>
-      </Label.Root>
+      {items.map((item) => (
+        <RadioGroupItem
+          key={item.value}
+          value={item.value}
+          label={item.label}
+          disabled={item.disabled}
+        />
+      ))}
     </RadioGroup.Root>
   );
 };
