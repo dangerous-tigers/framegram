@@ -1,6 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import styles from './ModalHeader.module.scss';
 import { ArrowIosBackOutline } from '@/assets/icons';
+import { Button } from '../button/Button';
+
 type Props = {
   title: string;
   titleNext?: string;
@@ -12,15 +14,25 @@ type Props = {
 export const ModalHeaderWithNext = ({ title, titleNext = 'Next', onBack, onNext, nextDisabled = false }: Props) => {
   return (
     <>
-      <button className={styles.iconButton} onClick={onBack} type='button' aria-label='Back'>
+      <button
+        className={styles.iconButton}
+        onClick={onBack}
+        type='button'
+        aria-label='Back'
+      >
         <ArrowIosBackOutline />
       </button>
       <Dialog.Title asChild>
         <h2 className={styles.title}>{title}</h2>
       </Dialog.Title>
-      <button onClick={onNext} disabled={nextDisabled} type='button'>
+      <Button
+        variant='text'
+        onClick={onNext}
+        disabled={nextDisabled}
+        fullWidth={false}
+      >
         {titleNext}
-      </button>
+      </Button>
     </>
   );
 };
