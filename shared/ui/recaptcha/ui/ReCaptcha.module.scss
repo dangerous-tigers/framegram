@@ -1,0 +1,14 @@
+.recaptcha {
+  padding: 8px 8px 12px;
+  border: 1px solid var(--transparent);
+}
+
+.error {
+  color: var(--danger-500);
+  margin-top: 12px;
+  font-size: 10px;
+}
+
+.recaptchaError {
+  border: 1px solid var(--danger-500);
+}
