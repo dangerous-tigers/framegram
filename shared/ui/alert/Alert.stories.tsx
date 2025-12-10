@@ -17,8 +17,25 @@ const meta = {
     open: true,
   },
   argTypes: {
+    variant: {
+      control: 'text',
+      description: 'alternative style options',
+    },
+    severity: {
+      control: 'text',
+      description: 'values representing different states',
+    },
+    duration: {
+      control: 'number',
+      description: 'The time in milliseconds that should elapse before automatically closing each toast.',
+    },
+    error: {
+      control: 'text',
+      description: 'error message',
+    },
     onOpenChange: {
       action: 'has been closed',
+      description: 'fired when clicked button "close" ',
     },
   },
 } satisfies Meta<typeof Alert>;
