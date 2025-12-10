@@ -5,6 +5,7 @@ type RadioOption = {
   value: string;
   label: string;
   disabled?: boolean;
+  checked?: boolean;
 };
 
 export type RadioGroupProps = {
@@ -12,3 +13,9 @@ export type RadioGroupProps = {
   items: RadioOption[];
   ariaLabel?: string;
 } & ComponentPropsWithoutRef<typeof RadioGroup.Root>;
+
+export type RadioGroupItemProps = {
+  value: string;
+  label: string;
+  disabled?: boolean;
+};
