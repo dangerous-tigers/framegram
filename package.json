@@ -23,6 +23,8 @@
     "@radix-ui/react-select": "^2.2.6",
     "@storybook/react": "^10.1.5",
     "clsx": "^2.1.1",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-select": "^2.2.6",
     "next": "16.0.4",
     "radix-ui": "1.4.3",
     "react": "19.2.0",
