@@ -8,15 +8,12 @@ importers:
 
   .:
     dependencies:
-      '@radix-ui/react-checkbox':
-        specifier: ^1.3.3
-        version: 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@radix-ui/react-dialog':
-        specifier: ^1.1.15
-        version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@radix-ui/react-select':
         specifier: ^2.2.6
         version: 2.2.6(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@storybook/react':
+        specifier: ^10.1.5
+        version: 10.1.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1864,6 +1861,13 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       storybook: ^10.1.1
 
+  '@storybook/react-dom-shim@10.1.5':
+    resolution: {integrity: sha512-CsXcq26wINUgYP8KnfSuS60B10/Ag34YdcnWIEl9hM5UtTQ65WYJ9fVFqpzfnQrkpgRMd7iQjtmUhCe+4umnHg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      storybook: ^10.1.5
+
   '@storybook/react-vite@10.1.1':
     resolution: {integrity: sha512-gLz5DIKFNKqkoGssibVHP0oYuRr6BrsXdl3yAgOZKW2FUAE7WPrado3Cqp4N1oWNDG2gHndm2C6TmzCgKlcxzw==}
     peerDependencies:
@@ -1878,6 +1882,17 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       storybook: ^10.1.1
+      typescript: '>= 4.9.x'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@storybook/react@10.1.5':
+    resolution: {integrity: sha512-M8fR7WVs79fPJHwRZxkz4XzIfzs/bN0heWdZX0D4iRjeIcY4nLM/tyalCcQDrGgrSJbgAAf4xd7KXaZzaZSAqA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      storybook: ^10.1.5
       typescript: '>= 4.9.x'
     peerDependenciesMeta:
       typescript:
@@ -5697,6 +5712,12 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
       storybook: 10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
 
+  '@storybook/react-dom-shim@10.1.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      storybook: 10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+
   '@storybook/react-vite@10.1.1(esbuild@0.27.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(rollup@4.53.3)(storybook@10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)(vite@7.2.6(@types/node@20.19.25)(jiti@2.6.1)(sass@1.94.2)(yaml@2.8.2))':
     dependencies:
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.6.1(typescript@5.9.3)(vite@7.2.6(@types/node@20.19.25)(jiti@2.6.1)(sass@1.94.2)(yaml@2.8.2))
@@ -5724,6 +5745,19 @@ snapshots:
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/react-dom-shim': 10.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
+      react: 19.2.0
+      react-docgen: 8.0.2
+      react-dom: 19.2.0(react@19.2.0)
+      storybook: 10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@storybook/react@10.1.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)':
+    dependencies:
+      '@storybook/global': 5.0.0
+      '@storybook/react-dom-shim': 10.1.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.1.1(@testing-library/dom@10.4.1)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
       react: 19.2.0
       react-docgen: 8.0.2
       react-dom: 19.2.0(react@19.2.0)
