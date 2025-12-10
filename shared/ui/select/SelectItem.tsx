@@ -1,20 +1,19 @@
 import { ReactElement, ReactNode } from 'react';
-import { Icon, Item, ItemText } from '@radix-ui/react-select';
+import * as PrimitiveSelect from '@radix-ui/react-select';
 
 type Props = {
   children: ReactNode;
   label: string;
-  country: string;
-  sizes: 'small' | 'medium';
+  value: string;
   className: string;
-  Component: ReactElement;
+  Component: ReactElement | ReactNode;
 };
 
-export const SelectItem = ({ children, label, country, className, Component, ...props }: Props) => {
+export const SelectItem = ({ children, label, value, className, Component, ...props }: Props) => {
   return (
-    <Item aria-label={label} {...props} className={className} value={country} key={country}>
-      <Icon asChild>{Component}</Icon>
-      <ItemText>{children}</ItemText>
-    </Item>
+    <PrimitiveSelect.Item aria-label={label} {...props} className={className} value={value}>
+      <PrimitiveSelect.Icon asChild>{Component}</PrimitiveSelect.Icon>
+      <PrimitiveSelect.ItemText>{children}</PrimitiveSelect.ItemText>
+    </PrimitiveSelect.Item>
   );
 };

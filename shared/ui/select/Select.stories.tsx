@@ -19,7 +19,7 @@ const meta = {
     ],
     value: '',
     disabled: false,
-    size: 'medium',
+    variant: 'default',
     width: '210px',
   },
   argTypes: {
@@ -32,7 +32,7 @@ const meta = {
       description: 'selected value',
     },
     onValueChange: {
-      action: 'has been selected',
+      action: 'has been changed',
     },
     placeholder: {
       control: 'text',
@@ -57,12 +57,28 @@ export const WithValue: Story = {
       <Select
         options={langs}
         disabled={false}
-        size={'medium'}
+        variant={'default'}
         width={'210px'}
         value={value}
         onValueChange={(event) => setValue(event)}
       />
     );
+  },
+};
+
+export const WithText: Story = {
+  args: {
+    ...meta.args,
+    disabled: false,
+    options: [
+      { value: '0', label: 'Nullish' },
+      { value: '5', label: 'Five' },
+      { value: '10', label: 'Ten' },
+      { value: '20', label: 'Twenty' },
+    ],
+    value: '0',
+    variant: 'text',
+    width: '64px',
   },
 };
 
@@ -77,14 +93,14 @@ export const WithIcon: Story = {
   args: {
     ...meta.args,
     disabled: false,
-    size: 'small',
-    width: '42px',
+    variant: 'icon',
+    width: '64px',
   },
   render: () => {
     const [value, setValue] = useState<string>(String(langs[0].label));
 
     return (
-      <Select options={langs} disabled={false} value={value} onValueChange={setValue} width={'42px'} size={'small'} />
+      <Select options={langs} disabled={false} value={value} onValueChange={setValue} width={'64px'} variant={'icon'} />
     );
   },
 };
@@ -93,7 +109,7 @@ export const WithIconDisabled: Story = {
   args: {
     ...meta.args,
     disabled: true,
-    size: 'small',
-    width: '42px',
+    variant: 'icon',
+    width: '64px',
   },
 };
