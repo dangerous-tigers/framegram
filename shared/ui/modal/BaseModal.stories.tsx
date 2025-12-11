@@ -48,7 +48,12 @@ export const ConfirmModal: StoryObj<Props> = {
           size='sm'
           onOpenChange={handleClose}
           open={open}
-          header={<ModalHeaderWithClose title='Modal title' onClose={handleClose} />}
+          header={
+            <ModalHeaderWithClose
+              title='Modal title'
+              onClose={handleClose}
+            />
+          }
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '24px' }}>
             <p>We have sent a link to confirm your email to epam@epam.com</p>
@@ -93,7 +98,13 @@ export const CropModal: StoryObj<Props> = {
           size='md'
           onOpenChange={handleClose}
           open={open}
-          header={<ModalHeaderWithNext title='Cropping' onBack={handleBack} onNext={handleNext} />}
+          header={
+            <ModalHeaderWithNext
+              title='Cropping'
+              onBack={handleBack}
+              onNext={handleNext}
+            />
+          }
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '24px' }}>
             <p>Crop content here</p>
@@ -120,7 +131,12 @@ export const FollowersModal: StoryObj<Props> = {
           size='lg'
           onOpenChange={handleClose}
           open={open}
-          header={<ModalHeaderWithClose title='2 258 Following' onClose={handleClose} />}
+          header={
+            <ModalHeaderWithClose
+              title='2 258 Following'
+              onClose={handleClose}
+            />
+          }
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '24px' }}>
             <p>List of followers</p>

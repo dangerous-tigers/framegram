@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import '../shared/styles/globals.scss';
 import { Sidebar } from '@/widgets/sidebar';
 import { Header } from '@/widgets/header/ui/Header';
+import { AppProviders } from '@/app/provider/AppProviders';
 
 export const metadata: Metadata = {
   title: 'Framegram',
@@ -19,16 +20,18 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <div className='wrapper'>
-          <Header />
+        <AppProviders>
+          <div className='wrapper'>
+            <Header />
 
-          <div className='main-box'>
-            <div className='main-box__body'>
-              <Sidebar />
-              <main className='main'>{children}</main>
+            <div className='main-box'>
+              <div className='main-box__body'>
+                <Sidebar />
+                <main className='main'>{children}</main>
+              </div>
             </div>
           </div>
-        </div>
+        </AppProviders>
       </body>
     </html>
   );

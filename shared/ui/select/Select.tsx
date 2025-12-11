@@ -1,19 +1,26 @@
 'use client';
-import { Content, Icon, Portal, Root, Separator, Trigger, Value, Viewport } from '@radix-ui/react-select';
-import React, { ComponentProps, ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
+import * as PrimitiveSelect from '@radix-ui/react-select';
+import React, { ComponentProps, ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react';
 import styles from './Select.module.scss';
 import ArrowIosDownOutline from '@/assets/icons/components/ArrowIosDownOutline';
-import { Option } from '@/shared/ui/select/types';
 import { SelectItem } from '@/shared/ui/select/SelectItem';
+import clsx from 'clsx';
+
+export type Option = {
+  id?: string | number;
+  value: string;
+  icon?: ElementType;
+  label: string;
+};
 
 type Props = {
   children?: ReactNode;
   options: Option[];
   disabled: boolean;
-  size: 'small' | 'medium';
+  variant: 'default' | 'text' | 'icon';
   width: string;
   placeholder?: string;
-} & ComponentPropsWithoutRef<typeof Root>;
+} & ComponentPropsWithoutRef<typeof PrimitiveSelect.Root>;
 
 export const Select = ({
   options,
@@ -21,69 +28,69 @@ export const Select = ({
   value,
   onValueChange,
   width = '210px',
-  size = 'medium',
+  variant = 'default',
   ...props
 }: Props) => {
   const option = options.find((o) => String(o.value) === value) ?? options[0];
   const OptionIcon = option.icon;
 
   return (
-    <Root
+    <PrimitiveSelect.Root
       {...props}
       value={value}
       onValueChange={onValueChange}
     >
-      <Trigger
-        className={size === 'medium' ? styles.trigger : styles.triggerSmall}
+      <PrimitiveSelect.Trigger
+        className={styles.trigger}
         disabled={disabled}
         asChild
         aria-label='Select language'
       >
         <TriggerInner
-          style={size === 'medium' ? { width } : { width: '42px' }}
-          className={size === 'medium' ? styles.triggerInner : styles.triggerInnerSmall}
+          style={{ width }}
+          className={variant === 'default' ? styles.triggerInner : styles.triggerInnerSmall}
         >
-          <Icon
-            className={size === 'medium' ? styles.iconSmall : styles.icon}
-            asChild
-          >
-            <OptionIcon />
-          </Icon>
-          <Value>{size === 'medium' && option.value}</Value>
+          {variant !== 'text' && (
+            <PrimitiveSelect.Icon
+              className={variant === 'icon' ? styles.iconSmall : styles.icon}
+              asChild
+            >
+              {OptionIcon && <OptionIcon />}
+            </PrimitiveSelect.Icon>
+          )}
+          <PrimitiveSelect.Value>{(variant === 'default' || variant === 'text') && option.value}</PrimitiveSelect.Value>
           <ArrowIosDownOutline
-            height={size === 'medium' ? 24 : 16}
+            height={variant === 'default' ? 24 : 16}
             className={styles.arrowDown}
           />
         </TriggerInner>
-      </Trigger>
+      </PrimitiveSelect.Trigger>
 
-      <Portal>
-        <Content
-          style={size === 'medium' ? { width } : { width: '42px' }}
-          className={size === 'medium' ? styles.content : styles.contentSmall}
+      <PrimitiveSelect.Portal>
+        <PrimitiveSelect.Content
+          className={variant === 'default' ? styles.content : styles.contentSmall}
           position={'popper'}
           side={'bottom'}
         >
-          <Viewport>
+          <PrimitiveSelect.Viewport>
             {options.map(({ value, label, icon: Flag }) => {
               return (
                 <SelectItem
-                  className={size === 'medium' ? styles.listItem : styles.listItemSmall}
-                  sizes={'small'}
+                  className={clsx(styles.listItem, variant === 'text' && styles.listItemText)}
                   key={value}
-                  country={value}
+                  value={value}
                   label={label}
-                  Component={<Flag />}
+                  Component={Flag && <Flag />}
                 >
-                  {size === 'medium' && value}
+                  {(variant === 'default' || variant === 'text') && value}
                 </SelectItem>
               );
             })}
-            <Separator />
-          </Viewport>
-        </Content>
-      </Portal>
-    </Root>
+            <PrimitiveSelect.Separator />
+          </PrimitiveSelect.Viewport>
+        </PrimitiveSelect.Content>
+      </PrimitiveSelect.Portal>
+    </PrimitiveSelect.Root>
   );
 };
 
