@@ -1,11 +1,16 @@
 'use client';
 import * as PrimitiveSelect from '@radix-ui/react-select';
-import React, { ComponentProps, ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
+import React, { ComponentProps, ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react';
 import styles from './Select.module.scss';
 import ArrowIosDownOutline from '@/assets/icons/components/ArrowIosDownOutline';
-import { Option } from '@/shared/ui/select/types';
 import { SelectItem } from '@/shared/ui/select/SelectItem';
-import clsx from 'clsx';
+
+export type Option = {
+  id?: string | number;
+  value: string;
+  icon?: ElementType;
+  label: string;
+};
 
 type Props = {
   children?: ReactNode;
