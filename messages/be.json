@@ -1,0 +1,17 @@
+{
+  "header": {
+    "logIn": "Увайсці",
+    "logOut": "Выйсці",
+    "signUp": "Зарэгістравацца"
+  },
+  "sidebar": {
+    "feed": "Стужка",
+    "create": "Стварыць",
+    "myProfile": "Мой профіль",
+    "messenges": "Паведамленні",
+    "search": "Пошук",
+    "statistic": "Статыстыка",
+    "favorites": "Абранае",
+    "logOut": "Выйсці"
+  }
+}

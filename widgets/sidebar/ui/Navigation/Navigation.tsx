@@ -3,7 +3,19 @@ import s from './navigation.module.scss';
 import clsx from 'clsx';
 import { SidebarItem } from '@/widgets/sidebar/ui/SidebarItem/SidebarItem';
 import { usePathname } from 'next/navigation';
-import { navigationItems } from '@/widgets/sidebar/model/navigation';
+import { NavigationItem } from '@/widgets/sidebar/model/navigation';
+import { useTranslations } from 'next-intl';
+
+import {
+  Bookmark,
+  HomeOutline,
+  LogOut,
+  MessageCircle,
+  Search,
+  Person,
+  PlusSquareOutline,
+  TrendingUp,
+} from '@/assets/icons';
 
 type PropsNavigation = {
   className?: string;
@@ -11,6 +23,19 @@ type PropsNavigation = {
 
 export const Navigation = ({ className }: PropsNavigation) => {
   const pathname = usePathname();
+
+  const t = useTranslations('sidebar');
+
+  const navigationItems: NavigationItem[] = [
+    { href: '/', label: t('feed'), Component: HomeOutline },
+    { href: '/create', label: t('create'), Component: PlusSquareOutline },
+    { href: '/profile', label: t('myProfile'), Component: Person },
+    { href: '/messenger', label: t('messenges'), Component: MessageCircle },
+    { href: '/search', label: t('search'), Component: Search },
+    { href: '/statistics', label: t('statistic'), Component: TrendingUp },
+    { href: '/favorites', label: t('favorites'), Component: Bookmark },
+    { href: '/logout', label: t('logOut'), Component: LogOut },
+  ];
 
   return (
     <div className={clsx(s.navigation, className)}>
