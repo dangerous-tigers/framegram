@@ -1,0 +1,19 @@
+.notifications {
+  position: relative;
+  span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 80%;
+    text-align: center;
+    color: var(--light-100);
+    background-color: var(--danger-500);
+    border-radius: 50%;
+    width: 13px;
+    height: 13px;
+    display: grid;
+    place-items: center;
+  }
+}

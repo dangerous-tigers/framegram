@@ -4,6 +4,7 @@ import React, { ComponentProps, ComponentPropsWithoutRef, ElementType, forwardRe
 import styles from './Select.module.scss';
 import ArrowIosDownOutline from '@/assets/icons/components/ArrowIosDownOutline';
 import { SelectItem } from '@/shared/ui/select/SelectItem';
+import clsx from 'clsx';
 
 export type Option = {
   id?: string | number;
@@ -34,19 +35,34 @@ export const Select = ({
   const OptionIcon = option.icon;
 
   return (
-    <PrimitiveSelect.Root {...props} value={value} onValueChange={onValueChange}>
-      <PrimitiveSelect.Trigger className={styles.trigger} disabled={disabled} asChild aria-label='Select language'>
+    <PrimitiveSelect.Root
+      {...props}
+      value={value}
+      onValueChange={onValueChange}
+    >
+      <PrimitiveSelect.Trigger
+        className={styles.trigger}
+        disabled={disabled}
+        asChild
+        aria-label='Select language'
+      >
         <TriggerInner
           style={{ width }}
           className={variant === 'default' ? styles.triggerInner : styles.triggerInnerSmall}
         >
           {variant !== 'text' && (
-            <PrimitiveSelect.Icon className={variant === 'icon' ? styles.iconSmall : styles.icon} asChild>
+            <PrimitiveSelect.Icon
+              className={variant === 'icon' ? styles.iconSmall : styles.icon}
+              asChild
+            >
               {OptionIcon && <OptionIcon />}
             </PrimitiveSelect.Icon>
           )}
           <PrimitiveSelect.Value>{(variant === 'default' || variant === 'text') && option.value}</PrimitiveSelect.Value>
-          <ArrowIosDownOutline height={variant === 'default' ? 24 : 16} className={styles.arrowDown} />
+          <ArrowIosDownOutline
+            height={variant === 'default' ? 24 : 16}
+            className={styles.arrowDown}
+          />
         </TriggerInner>
       </PrimitiveSelect.Trigger>
 
@@ -79,6 +95,10 @@ export const Select = ({
 };
 
 const TriggerInner = forwardRef<HTMLDivElement, ComponentProps<'div'>>(({ className, ...props }, ref) => (
-  <div ref={ref} {...props} className={className} />
+  <div
+    ref={ref}
+    {...props}
+    className={className}
+  />
 ));
 TriggerInner.displayName = 'TriggerInner';
