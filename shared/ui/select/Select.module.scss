@@ -1,11 +1,5 @@
 .trigger {
-  //border: 1px solid var(--dark-100);
   box-shadow: 0 0 0 1px var(--dark-100);
-  //max-width: 210px;
-}
-
-.triggerSmall {
-  box-shadow: none;
 }
 
 .triggerInner {
@@ -26,7 +20,6 @@
   position: relative;
 
   &[aria-expanded='true'] {
-    //border: 1px solid var(--light-100);
     box-shadow: 0 0 0 1px var(--light-100);
   }
 
@@ -44,7 +37,7 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     background-color: var(--dark-500);
-    border-color: var(--light-100);
+    //box-shadow: 0 0 0 1px var(--light-100);
 
     .arrowDown {
       transform: rotate(180deg);
@@ -81,23 +74,15 @@
   composes: triggerInner;
   display: flex;
   align-items: center;
-  //justify-content: start;
+  justify-content: center;
   height: 24px;
   gap: 0;
-  //padding: 0;
-  border: none;
 
   &[aria-expanded='true'] {
-    //box-shadow: none;
     box-shadow: 0 0 0 1px var(--dark-300);
   }
 
-  //span {
-  //  display: none;
-  //}
-
   .arrowDown {
-    //position: static;
     transform: translate(-50%, -50%);
   }
 
@@ -110,10 +95,8 @@
 .content {
   width: var(--radix-select-trigger-width);
   cursor: pointer;
-  //border-top: 0;
 
   &[data-state='open'] {
-    //border: 1px solid var(--light-100);
     box-shadow: 0 0 0 1px var(--light-100);
 
     background-color: var(--dark-500);
@@ -161,20 +144,10 @@
     height: 24px;
   }
 }
-
-.listItemSmall {
+.listItemText {
   composes: listItem;
+  height: fit-content;
   padding: 0;
-  justify-content: center;
-
-  span {
-    display: none;
-  }
-
-  svg {
-    width: 24px;
-    height: 24px;
-  }
 }
 
 @keyframes selectSlideDown {
@@ -204,7 +177,4 @@
 .iconSmall {
   height: 24px;
   width: 24px;
-}
-.text {
-  padding: 0;
 }

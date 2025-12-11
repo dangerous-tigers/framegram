@@ -5,13 +5,13 @@ import styles from './Select.module.scss';
 import ArrowIosDownOutline from '@/assets/icons/components/ArrowIosDownOutline';
 import { Option } from '@/shared/ui/select/types';
 import { SelectItem } from '@/shared/ui/select/SelectItem';
+import clsx from 'clsx';
 
 type Props = {
   children?: ReactNode;
   options: Option[];
   disabled: boolean;
   variant: 'default' | 'text' | 'icon';
-  // size: 'small' | 'medium';
   width: string;
   placeholder?: string;
 } & ComponentPropsWithoutRef<typeof PrimitiveSelect.Root>;
@@ -30,12 +30,7 @@ export const Select = ({
 
   return (
     <PrimitiveSelect.Root {...props} value={value} onValueChange={onValueChange}>
-      <PrimitiveSelect.Trigger
-        className={variant !== 'icon' ? styles.trigger : styles.triggerSmall}
-        disabled={disabled}
-        asChild
-        aria-label='Select language'
-      >
+      <PrimitiveSelect.Trigger className={styles.trigger} disabled={disabled} asChild aria-label='Select language'>
         <TriggerInner
           style={{ width }}
           className={variant === 'default' ? styles.triggerInner : styles.triggerInnerSmall}
@@ -45,8 +40,8 @@ export const Select = ({
               {OptionIcon && <OptionIcon />}
             </PrimitiveSelect.Icon>
           )}
-          <PrimitiveSelect.Value>{variant !== 'icon' && option.value}</PrimitiveSelect.Value>
-          <ArrowIosDownOutline height={variant !== 'icon' ? 24 : 16} className={styles.arrowDown} />
+          <PrimitiveSelect.Value>{(variant === 'default' || variant === 'text') && option.value}</PrimitiveSelect.Value>
+          <ArrowIosDownOutline height={variant === 'default' ? 24 : 16} className={styles.arrowDown} />
         </TriggerInner>
       </PrimitiveSelect.Trigger>
 
@@ -60,13 +55,13 @@ export const Select = ({
             {options.map(({ value, label, icon: Flag }) => {
               return (
                 <SelectItem
-                  className={variant !== 'icon' ? styles.listItem : styles.listItemSmall}
+                  className={clsx(styles.listItem, variant === 'text' && styles.listItemText)}
                   key={value}
                   value={value}
                   label={label}
                   Component={Flag && <Flag />}
                 >
-                  {variant !== 'icon' && value}
+                  {(variant === 'default' || variant === 'text') && value}
                 </SelectItem>
               );
             })}
