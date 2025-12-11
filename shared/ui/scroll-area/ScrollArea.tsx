@@ -31,7 +31,7 @@ const ScrollArea = React.forwardRef<React.ElementRef<typeof OverlayScrollbarsCom
             autoHideDelay: 600,
             dragScroll: true,
             clickScroll: true,
-            ...options?.scrollbars,
+            ...options,
           },
           ...options,
         }}
