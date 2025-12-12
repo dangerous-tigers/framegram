@@ -8,15 +8,26 @@ import { Search, EyeOutline, EyeOffOutline, Close } from '@/assets/icons';
 import s from './Input.module.scss';
 
 type Props = {
-  type?: 'text' | 'password' | 'search';
+  type?: 'text' | 'password' | 'search' | 'email';
   label?: string;
   error?: string;
   disabled?: boolean;
   value: string;
   clearable?: boolean;
-
   onChange: (value: string) => void;
 } & Omit<ComponentPropsWithoutRef<'input'>, 'onChange' | 'value'>;
+
+/**
+ * - `type?` — тип поля ввода (`'text'`, `'password'`, `'search'`, `'email'`)
+ * - `label?` — метка над полем
+ * - `error?` — сообщение об ошибке
+ * - `disabled?` — отключает поле
+ * - `value` — текущее значение (обязательное)
+ * - `clearable?` — показывает иконку очистки
+ * - `onChange` — обработчик изменения значения
+ *
+ * Наследует все пропсы `<input>`, кроме `value` и `onChange` (переопределены).
+ */
 
 export const Input = (p: Props) => {
   const { type = 'text', label, error, disabled, value, onChange, clearable, ...rest } = p;
