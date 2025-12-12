@@ -1,7 +1,6 @@
 import { client } from '@/shared/api/client';
-import { paths } from '@/shared/api/schema';
 
-export const register = async (data: paths['/auth/registration']['post']['requestBody']) => {
+export const register = async (data) => {
   const response = await client.POST('/auth/registration', {
     body: data,
   });

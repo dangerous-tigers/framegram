@@ -1,11 +1,10 @@
-.registerForm{
+.registerForm {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
-.form{
+.form {
   width: 378px;
   display: flex;
   flex-direction: column;
@@ -15,7 +14,7 @@
   border-radius: 2px;
   overflow-y: auto;
 }
-.title{
+.title {
   font-weight: 700;
   font-size: 20px;
   line-height: 180%;
@@ -23,7 +22,7 @@
   color: var(--light-100);
   margin-bottom: 13px;
 }
-.socials{
+.socials {
   display: flex;
   align-items: center;
   gap: 60px;
@@ -31,34 +30,33 @@
   margin-bottom: 24px;
 }
 
-.inputs{
+.inputs {
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-bottom: 12px;
 }
-.checkbox{
+.checkbox {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-  font-size: 12px ;
-  span{
+  font-size: 12px;
+  span {
     font-size: 12px;
   }
-  label{
+  label {
     display: inline-flex;
   }
-
 }
-.btn{
+.btn {
   margin-bottom: 18px;
 }
-.desc{
+.desc {
   line-height: 150%;
   text-align: center;
   color: var(--light-100);
   margin-bottom: 6px;
 }
-.SignIn{
+.SignIn {
   color: var(--primary-500);
 }

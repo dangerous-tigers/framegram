@@ -1,0 +1,17 @@
+{
+  "header": {
+    "logIn": "Log in",
+    "logOut": "Log out",
+    "signUp": "Sign up"
+  },
+  "sidebar": {
+    "feed": "Feed",
+    "create": "Create",
+    "myProfile": "My Profile",
+    "messenges": "Messenges",
+    "search": "Search",
+    "statistic": "Statistics",
+    "favorites": "Favorites",
+    "logOut": "Log out"
+  }
+}

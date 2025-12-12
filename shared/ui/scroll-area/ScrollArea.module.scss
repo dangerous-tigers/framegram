@@ -13,14 +13,14 @@
 
 .scrollbar {
   display: flex;
- user-select: none;
+  user-select: none;
   touch-action: none;
   background: #333;
   border-radius: 3px;
   transition: background 160ms ease-out;
 
   &:hover {
-    background: #8D9094;
+    background: #8d9094;
   }
 
   &--vertical {
@@ -32,7 +32,7 @@
     flex-direction: column;
     height: 4px;
     padding: 0 2px;
- }
+  }
 }
 
 .thumb {
@@ -42,7 +42,7 @@
   position: relative;
 
   &:hover {
-    background: #8D9094;
+    background: #8d9094;
   }
 
   &::before {
@@ -55,5 +55,5 @@
     height: 100%;
     min-width: 4px;
     min-height: 47px;
- }
+  }
 }

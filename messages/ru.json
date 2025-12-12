@@ -1,0 +1,17 @@
+{
+  "header": {
+    "logIn": "Войти",
+    "logOut": "Выйти",
+    "signUp": "Зарегистрироваться"
+  },
+  "sidebar": {
+    "feed": "Лента",
+    "create": "Создать",
+    "myProfile": "Мой профиль",
+    "messenges": "Сообщения",
+    "search": "Поиск",
+    "statistic": "Статистика",
+    "favorites": "Избранное",
+    "logOut": "Выйти"
+  }
+}
