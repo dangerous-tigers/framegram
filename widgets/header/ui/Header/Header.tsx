@@ -2,13 +2,16 @@ import s from './header.module.scss';
 import clsx from 'clsx';
 import { Logo } from '@/widgets/header/ui/Logo';
 import { Notifications } from '@/widgets/header/ui/Notifications';
+import { ToggleLocale } from '@/shared/components/toggleLocale/ToggleLocale';
+import { getTranslations } from 'next-intl/server';
 
 type PropsHeader = {
   className?: string;
 };
 
-export const Header = (props: PropsHeader) => {
+export const Header = async (props: PropsHeader) => {
   const { className } = props;
+  const t = await getTranslations('header');
 
   return (
     <header className={clsx(s.header, className)}>
@@ -16,16 +19,10 @@ export const Header = (props: PropsHeader) => {
         <div className={s.headerBody}>
           <Logo />
           <Notifications />
-          <select
-            name='ir'
-            id='ir'
-          >
-            <option value='ru'>RU</option>
-            <option value='en'>EN</option>
-          </select>
+          <ToggleLocale />
           <div className={s.buttons}>
-            <button>Log in</button>
-            <button>Sign up</button>
+            <button>{t('logIn')}</button>
+            <button>{t('signUp')}</button>
           </div>
         </div>
       </div>

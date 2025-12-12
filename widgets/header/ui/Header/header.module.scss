@@ -10,6 +10,16 @@ width: 100%;
   display: flex;
   align-items: center;
   gap: 24px;
+  position: relative;
+  &:before {
+    content: '';
+    height: 1px;
+    width: 200%;
+    background-color: var(--dark-300);
+    position: absolute;
+    left: -50%;
+    bottom: 0;
+  }
 }
 
 .buttons {
