@@ -32,12 +32,6 @@ importers:
       next:
         specifier: 16.0.4
         version: 16.0.4(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.94.2)
-      next-intl:
-        specifier: ^4.5.8
-        version: 4.5.8(next@16.0.4(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.94.2))(react@19.2.0)(typescript@5.9.3)
-      openapi-fetch:
-        specifier: ^0.15.0
-        version: 0.15.0
       overlayscrollbars:
         specifier: ^2.13.0
         version: 2.13.0
