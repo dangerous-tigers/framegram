@@ -6,7 +6,7 @@ export type Locale = (typeof locales)[number];
 export const localeOptions: Option[] = [
   {
     label: 'be',
-    value: 'Belarusian',
+    value: 'Беларуская',
     icon: Belarusflag,
   },
   {
@@ -16,17 +16,17 @@ export const localeOptions: Option[] = [
   },
   {
     label: 'hi',
-    value: 'Hindi',
+    value: 'हिन्दी',
     icon: Indianflag,
   },
   {
     label: 'ru',
-    value: 'Russia',
+    value: 'Русский',
     icon: FlagRussia,
   },
   {
     label: 'uk',
-    value: 'Ukrainian',
+    value: 'Українська',
     icon: Ukraineflag,
   },
   {
@@ -38,4 +38,4 @@ export const localeOptions: Option[] = [
 
 export const locales = localeOptions.map((opt) => opt.label);
 
-export const defaultLocale: Locale = 'zh';
+export const defaultLocale: Locale = 'en';
