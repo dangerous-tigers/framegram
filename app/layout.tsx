@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 import '../shared/styles/globals.scss';
-import { Sidebar } from '@/widgets/sidebar';
 import { Header } from '@/widgets/header/ui/Header';
 import { AppProviders } from '@/app/provider/AppProviders';
 
@@ -26,7 +25,6 @@ export default function RootLayout({
 
             <div className='main-box'>
               <div className='main-box__body'>
-                <Sidebar />
                 <main className='main'>{children}</main>
               </div>
             </div>

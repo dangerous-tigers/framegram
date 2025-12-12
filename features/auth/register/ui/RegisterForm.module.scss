@@ -1,0 +1,64 @@
+.registerForm{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+.form{
+  width: 378px;
+  display: flex;
+  flex-direction: column;
+  padding: 23px 24px 24px;
+  background: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+  overflow-y: auto;
+}
+.title{
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 180%;
+  text-align: center;
+  color: var(--light-100);
+  margin-bottom: 13px;
+}
+.socials{
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+.checkbox{
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 12px ;
+  span{
+    font-size: 12px;
+  }
+  label{
+    display: inline-flex;
+  }
+
+}
+.btn{
+  margin-bottom: 18px;
+}
+.desc{
+  line-height: 150%;
+  text-align: center;
+  color: var(--light-100);
+  margin-bottom: 6px;
+}
+.SignIn{
+  color: var(--primary-500);
+}
