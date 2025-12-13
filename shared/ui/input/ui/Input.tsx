@@ -12,9 +12,10 @@ type Props = {
   label?: string;
   error?: string;
   disabled?: boolean;
-  value: string;
+  value?: string;
   clearable?: boolean;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
+  onBlur?: (value: string) => void;
 } & Omit<ComponentPropsWithoutRef<'input'>, 'onChange' | 'value'>;
 
 /**
@@ -22,15 +23,16 @@ type Props = {
  * - `label?` — метка над полем
  * - `error?` — сообщение об ошибке
  * - `disabled?` — отключает поле
- * - `value` — текущее значение (обязательное)
+ * - `value?` — текущее значение (обязательное)
  * - `clearable?` — показывает иконку очистки
- * - `onChange` — обработчик изменения значения
+ * - `onChange?` — обработчик изменения значения
+ * - `onBlur` — обработчик изменения значения
  *
  * Наследует все пропсы `<input>`, кроме `value` и `onChange` (переопределены).
  */
 
 export const Input = (p: Props) => {
-  const { type = 'text', label, error, disabled, value, onChange, clearable, ...rest } = p;
+  const { type = 'text', label, error, disabled, value, onChange, onBlur, clearable, ...rest } = p;
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -69,9 +71,10 @@ export const Input = (p: Props) => {
             })}
             value={value}
             aria-invalid={hasError}
-            aria-describedby={error}
+            aria-describedby={hasError ? `${rest.name}-error` : undefined}
             disabled={disabled}
             onChange={(e) => onChange(e.currentTarget.value)}
+            onBlur={(e) => onBlur?.(e.currentTarget.value)}
             {...rest}
           />
           {!isPassword && value.length > 0 && clearable && (
@@ -100,7 +103,7 @@ export const Input = (p: Props) => {
 
       {hasError && (
         <p
-          id={error}
+          id={`${rest.name}-error`}
           className={s.errorText}
           role='alert'
           aria-live='polite'

@@ -1,34 +1,45 @@
 'use client';
 import s from './RegisterForm.module.scss';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registerSchema, type RegisterFormValues } from '../model/register.schema';
+import { type RegisterFormValues, registerSchema } from '../model/register.schema';
 import { useRegisterMutation } from '../model/register.hooks';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button/Button';
-import { useRouter } from 'next/navigation';
 import { Checkbox } from '@/shared/ui';
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
+import { RegisterRequestDto } from '@/features/auth/register/model/register.types';
 
 export const RegisterForm = () => {
-  const router = useRouter();
   const { mutate, isPending } = useRegisterMutation();
   const {
     handleSubmit,
-    watch,
-    setValue,
+    control,
+
     formState: { errors },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
+    mode: 'onChange',
+    defaultValues: {
+      userName: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+      terms: false,
+    },
   });
 
-  const formValues = watch();
-
-  const formSubmit = (data: RegisterFormValues) => {
-    mutate(data, {
+  const onSubmit = (data: RegisterFormValues) => {
+    const payload: RegisterRequestDto = {
+      userName: data.userName,
+      email: data.email,
+      password: data.password,
+      baseUrl: 'http://localhost:3000',
+    };
+    mutate(payload, {
       onSuccess: () => {
         alert('Регистрация успешна!');
-        router.push('/');
+        // router.push('/');
       },
       onError: (e) => {
         alert(e.message);
@@ -39,7 +50,7 @@ export const RegisterForm = () => {
   return (
     <div className={s.registerForm}>
       <form
-        onSubmit={handleSubmit(formSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
         className={s.form}
       >
         <h1 className={s.title}>Sign Up</h1>
@@ -65,53 +76,84 @@ export const RegisterForm = () => {
           </Button>
         </div>
         <div className={s.inputs}>
-          <Input
-            type='text'
-            label='Username'
-            value={formValues.userName || ''}
-            onChange={(value) => setValue('userName', value)}
-            error={errors.userName?.message}
-            placeholder='Введите имя пользователя'
-            clearable
+          <Controller
+            name='userName'
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                type='text'
+                label='Username'
+                error={errors.userName?.message}
+                placeholder='Введите имя пользователя'
+                clearable
+              />
+            )}
           />
-          <Input
-            type='email'
-            label='Email'
-            value={formValues.email || ''}
-            onChange={(value) => setValue('email', value)}
-            error={errors.email?.message}
-            placeholder='Введите email'
-            clearable
+          <Controller
+            name='email'
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                type='email'
+                label='Email'
+                error={errors.email?.message}
+                placeholder='Введите email'
+                clearable
+              />
+            )}
           />
-          <Input
-            type='password'
-            label='Password'
-            value={formValues.password || ''}
-            onChange={(value) => setValue('password', value)}
-            error={errors.password?.message}
-            placeholder='Введите пароль'
-            clearable
+          <Controller
+            name='password'
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                type='password'
+                label='Password'
+                error={errors.password?.message}
+                placeholder='Введите пароль'
+              />
+            )}
           />
-          <Input
-            type='password'
-            label='Password confirmation'
-            value={formValues.password || ''}
-            onChange={(value) => setValue('password', value)}
-            error={errors.password?.message}
-            placeholder='Подтвердите пароль'
-            clearable
+          <Controller
+            name='passwordConfirm'
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                type='password'
+                label='Password confirmation'
+                error={errors.passwordConfirm?.message}
+                placeholder='Подтвердите пароль'
+              />
+            )}
           />
+          {errors.passwordConfirm && <span>{errors.passwordConfirm.message}</span>}
         </div>
         <div className={s.checkbox}>
-          <Checkbox label='I  agree to the' />
+          <Controller
+            name='terms'
+            control={control}
+            render={({ field }) => (
+              <Checkbox
+                checked={field.value}
+                onCheckedChange={field.onChange}
+                label='I agree to the'
+              />
+            )}
+          />
           <span>Terms of Service and Privacy Policy</span>
         </div>
+        {errors.terms && <span>{errors.terms.message}</span>}
+
         <Button
           className={s.btn}
           fullWidth={false}
           type={'submit'}
         >
-          {isPending ? 'Загрузка...' : 'Sign Up'}
+          {isPending ? 'Loading...' : 'Sign Up'}
         </Button>
         <span className={s.desc}>{'Do you have an account?'}</span>
         <Button

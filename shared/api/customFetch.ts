@@ -7,6 +7,7 @@ export async function customFetch(input: RequestInfo, init?: RequestInit) {
   const modifiedInit: RequestInit = {
     ...init,
     headers: {
+      'Content-Type': 'application/json',
       ...(init?.headers || {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },

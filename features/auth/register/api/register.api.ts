@@ -1,12 +1,13 @@
 import { client } from '@/shared/api/client';
+import { RegisterRequest } from '@/features/auth/register/api/register.types';
 
-export const register = async (data) => {
+export const register = async (data: RegisterRequest) => {
   const response = await client.POST('/auth/registration', {
     body: data,
   });
 
   if (response.error) {
-    throw new Error(response.error.message);
+    throw new Error(response.error.messages?.[0].message || response.error.error);
   }
 
   return response.data;
