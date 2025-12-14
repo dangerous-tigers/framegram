@@ -1,25 +1,30 @@
 'use client';
 
-import { ComponentPropsWithoutRef, useState } from 'react';
+import { ComponentPropsWithRef, useState } from 'react';
 import clsx from 'clsx';
 
-import { Search, EyeOutline, EyeOffOutline, Close } from '@/assets/icons';
+import { Search, EyeOutline, EyeOffOutline } from '@/assets/icons';
 
 import s from './Input.module.scss';
 
 type Props = {
-  type?: 'text' | 'password' | 'search';
+  type?: 'text' | 'password' | 'search' | 'email';
   label?: string;
   error?: string;
   disabled?: boolean;
-  value: string;
-  clearable?: boolean;
+} & ComponentPropsWithRef<'input'>;
 
-  onChange: (value: string) => void;
-} & Omit<ComponentPropsWithoutRef<'input'>, 'onChange' | 'value'>;
+/**
+ * - `type?` — тип поля ввода (`'text'`, `'password'`, `'search'`, `'email'`)
+ * - `label?` — метка над полем
+ * - `error?` — сообщение об ошибке
+ * - `disabled?` — отключает поле
+ *
+ * Наследует все пропсы `<input>`.
+ */
 
 export const Input = (p: Props) => {
-  const { type = 'text', label, error, disabled, value, onChange, clearable, ...rest } = p;
+  const { type = 'text', label, error, disabled, ...rest } = p;
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -53,24 +58,13 @@ export const Input = (p: Props) => {
             type={inputType}
             className={clsx(s.input, {
               [s.withLeftIcon]: isSearch,
-
-              [s.withRightIcon]: isPassword || value.length > 0,
+              [s.withRightIcon]: isPassword,
             })}
-            value={value}
             aria-invalid={hasError}
             aria-describedby={error}
             disabled={disabled}
-            onChange={(e) => onChange(e.currentTarget.value)}
             {...rest}
           />
-          {!isPassword && value.length > 0 && clearable && (
-            <Close
-              style={{ width: 20 }}
-              className={clsx(s.rightIcon, { [s.disabled]: disabled })}
-              onClick={() => onChange('')}
-            />
-          )}
-
           {isPassword && (
             <button
               type='button'

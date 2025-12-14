@@ -1,0 +1,17 @@
+{
+  "header": {
+    "logIn": "लॉग इन",
+    "logOut": "लॉग आउट",
+    "signUp": "साइन अप"
+  },
+  "sidebar": {
+    "feed": "फ़ीड",
+    "create": "बनाएँ",
+    "myProfile": "मेरी प्रोफ़ाइल",
+    "messenges": "संदेश",
+    "search": "खोजें",
+    "statistic": "आँकड़े",
+    "favorites": "पसंदीदा",
+    "logOut": "लॉग आउट"
+  }
+}
