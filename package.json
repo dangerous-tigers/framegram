@@ -13,7 +13,9 @@
     "rename-icons": "node scripts/rename-icons.cjs",
     "generate-icons": "pnpm run rename-icons && npx @svgr/cli --icon --out-dir assets/icons/components --jsx-runtime automatic --typescript --ref --memo --replace-attr-values \"#000=currentcolor\"  --replace-attr-values \"#fff=currentcolor\" -- assets/icons/svg && node scripts/replace-color.cjs",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint . --fix --no-cache --max-warnings=0",
@@ -39,6 +41,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
     "@eslint/js": "9.39.1",
+    "@playwright/test": "^1.57.0",
     "@storybook/addon-a11y": "10.1.1",
     "@storybook/addon-docs": "10.1.1",
     "@storybook/addon-onboarding": "10.1.1",
