@@ -1,7 +1,7 @@
 .loginWrapper {
   display: flex;
   justify-content: center;
-  padding: 40px 0;
+  padding: 40px;
 }
 
 .loginCard {
@@ -19,7 +19,7 @@
   text-align: center;
   font-size: var(--font-size-xl);
   font-weight: 600;
-  color: var(--ligth-100);
+  color: var(--light-100);
 }
 
 .form {
@@ -32,7 +32,17 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 60px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
 }
 .formInput {
   display: flex;
@@ -73,7 +83,7 @@
 
 .footerText {
   text-align: center;
-  color: var(--ligth-100);
+  color: var(--light-100);
   font-size: var(--font-size-m);
 }
 

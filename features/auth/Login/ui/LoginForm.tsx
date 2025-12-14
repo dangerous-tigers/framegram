@@ -1,19 +1,23 @@
 'use client';
 import Link from 'next/link';
 import styles from './LoginForm.module.scss';
-import { Controller, useForm } from 'react-hook-form';
-
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { Input } from '@/shared/ui/input';
-
 import { Button } from '@/shared/ui/button/Button';
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { LoginFormData, LoginSchema } from '../model/Login.schema';
 import { useLogin } from '../model/useLogin';
+import { useTranslations } from 'next-intl';
 
 export function LoginForm() {
-  const { control, handleSubmit } = useForm<LoginFormData>({
+  const t = useTranslations('login');
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
   });
 
@@ -22,11 +26,13 @@ export function LoginForm() {
   return (
     <div className={styles.loginWrapper}>
       <div className={styles.loginCard}>
-        <h2 className={styles.title}>Sign In</h2>
+        <h2 className={styles.title}>{t('title')}</h2>
+
         <div className={styles.socialAuth}>
           <Button
             variant='text'
             fullWidth={false}
+            className={styles.iconButton}
             onClick={() => alert('click Google!')}
           >
             <GoogleSvgrepoCom1
@@ -37,6 +43,7 @@ export function LoginForm() {
           <Button
             variant='text'
             fullWidth={false}
+            className={styles.iconButton}
             onClick={() => alert('click GH!')}
           >
             <GithubSvgrepoCom31
@@ -46,46 +53,30 @@ export function LoginForm() {
             />
           </Button>
         </div>
+
         <form
           onSubmit={handleSubmit((data) => mutate(data))}
           className={styles.form}
         >
           <div className={styles.formInput}>
-            <Controller
-              name='email'
-              control={control}
-              render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
-                <Input
-                  value={value || ''}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  label='Email'
-                  type='text'
-                  placeholder='Epam@epam.com'
-                  id='email-field'
-                  error={error?.message}
-                />
-              )}
+            <Input
+              label={t('email')}
+              type='text'
+              placeholder={t('emailPlaceholder')}
+              {...register('email')}
+              error={errors.email?.message}
             />
-
-            <Controller
-              name='password'
-              control={control}
-              render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
-                <Input
-                  value={value || ''}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  label='Password'
-                  type='password'
-                  id='password-field'
-                  error={error?.message}
-                />
-              )}
+            <Input
+              label={t('password')}
+              type='password'
+              placeholder={t('passwordPlaceholder')}
+              {...register('password')}
+              error={errors.password?.message}
             />
           </div>
+
           <div className={styles.forgot}>
-            <Link href='/forgot-password'>Forgot Password</Link>
+            <Link href='/forgot-password'>{t('forgotPassword')}</Link>
           </div>
 
           <Button
@@ -94,14 +85,14 @@ export function LoginForm() {
             fullWidth={true}
             disabled={isPending}
           >
-            {'Sign In'}
+            {t('signIn')}
           </Button>
         </form>
 
-        <div className={styles.footerText}>{'Dont have an account?'}</div>
+        <div className={styles.footerText}>{t('noAccount')}</div>
 
         <div className={styles.footerLink}>
-          <Link href='/registration'>Sign Up</Link>
+          <Link href='/registration'>{t('signUp')}</Link>
         </div>
       </div>
     </div>

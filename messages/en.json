@@ -13,5 +13,16 @@
     "statistic": "Statistics",
     "favorites": "Favorites",
     "logOut": "Log out"
+  },
+  "login": {
+    "title": "Sign In",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot Password",
+    "signIn": "Sign In",
+    "noAccount": "Dont have an account?",
+    "signUp": "Sign Up"
   }
 }
