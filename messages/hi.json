@@ -13,5 +13,16 @@
     "statistic": "आँकड़े",
     "favorites": "पसंदीदा",
     "logOut": "लॉग आउट"
+  },
+  "login": {
+    "title": "साइन इन",
+    "email": "ईमेल",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "पासवर्ड",
+    "passwordPlaceholder": "अपना पासवर्ड दर्ज करें",
+    "forgotPassword": "पासवर्ड भूल गए",
+    "signIn": "साइन इन",
+    "noAccount": "कोई खाता नहीं है?",
+    "signUp": "साइन अप"
   }
 }
