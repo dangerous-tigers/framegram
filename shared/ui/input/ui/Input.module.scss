@@ -61,7 +61,6 @@
     box-shadow: 0 0 0 1px var(--light-100);
   }
   &:focus-visible {
-    color: var(--light-100);
     box-shadow: 0 0 0 2px var(--primary-500);
   }
 
@@ -86,17 +85,13 @@
 
   &:autofill {
     background-color: transparent !important;
-    color: var(--light-900) !important;
   }
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     filter: none;
-    color: var(--light-900) !important;
-    transition:
-      background-color 5000s ease-in-out 0s,
-      color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s;
   }
 }
 
