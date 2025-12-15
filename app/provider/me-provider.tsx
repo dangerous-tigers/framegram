@@ -1,6 +1,6 @@
 'use client';
 
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, useQuery, useQueryClient } from '@tanstack/react-query';
 import { client } from '@/shared/api/client';
 
 const queryClient = new QueryClient();
@@ -18,6 +18,12 @@ function MeFetcher() {
 
   return null;
 }
+
+// Экспорт хука useMe для доступа к данным пользователя
+export const useMe = () => {
+  const queryClient = useQueryClient();
+  return queryClient.getQueryData(['me']);
+};
 
 export function AppTanstackProviders({ children }: { children: React.ReactNode }) {
   return (
