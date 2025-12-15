@@ -5,16 +5,16 @@ import { useRouter } from 'next/navigation';
 import { LoginFormData } from './Login.schema';
 import { parseJwt } from '@/shared/lib/parseJwt';
 
-type ApiError = {
+interface ApiError {
   statusCode: number;
   error: string;
   messages: string;
-};
+}
 
 export const useLogin = () => {
   const router = useRouter();
 
-  return useMutation({
+  return useMutation<{ accessToken: string } | undefined, ApiError, LoginFormData>({
     mutationFn: async (data: LoginFormData) => {
       const response = await client.POST('/auth/login', {
         body: data,
@@ -39,9 +39,6 @@ export const useLogin = () => {
 
         router.push(`/profile/${parsedToken.userId}`);
       }
-    },
-    onError: (error: ApiError) => {
-      alert(error.messages);
     },
   });
 };
