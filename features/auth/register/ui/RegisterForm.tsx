@@ -28,7 +28,7 @@ export const RegisterForm = () => {
     },
   });
 
-  const [onOpenModal, setOnOpenModal] = useState(false);
+  const [onOpenModal, setOnOpenModal] = useState(true);
   const [successEmail, setSuccessEmail] = useState('');
 
   const onSubmit = (data: RegisterFormValues) => {

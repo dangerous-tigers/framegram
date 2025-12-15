@@ -1,0 +1,79 @@
+.root {
+  width: 387px;
+  height: 48px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 24px 12px 24px 12px;
+  position: relative;
+  gap: 4px;
+
+  &[data-swipe="move"] {
+    transform: translateX(var(--radix-toast-swipe-move-x));
+  }
+  &[data-swipe="cancel"] {
+    transform: translateX(0);
+    transition: transform 200ms ease-out;
+  }
+  &[data-swipe="end"] {
+    animation: slideRight 100ms ease-out;
+  }
+
+  @keyframes slideRight {
+    from {
+      transform: translateX(var(--radix-toast-swipe-end-x));
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+}
+
+.success {
+  background-color: var(--success-900);
+  outline: 1px solid var(--success-500);
+}
+
+.error {
+  background-color: var(--danger-900);
+  outline: 1px solid var(--danger-500);
+}
+
+.outlinedError {
+  background: none;
+  outline: 1px solid var(--danger-500);
+}
+.filledError {
+  background-color: var(--danger-900);
+  outline: none;
+}
+.outlinedSuccess {
+  background: none;
+  outline: 1px solid var(--success-500);
+}
+.filledSuccess {
+  background-color: var(--success-900);
+  outline: none;
+}
+
+
+.title {
+  font-size: var(--font-size-m);
+  font-weight: 700;
+  color: var(--light-100);
+}
+.description {
+  font-size: var(--font-size-m);
+  font-weight: 400;
+}
+.close {
+  cursor: pointer;
+  position: absolute;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--light-100);
+
+}
