@@ -1,10 +1,11 @@
 export const routes = {
   auth: {
-    registration: '/auth/registration',
-    login: '/auth/login',
-    confirmEmail: '/auth/confirm-email',
-    logout: '/auth/logout',
+    registration: '/registration',
+    login: '/login',
+    confirmEmail: '/confirm-email',
+    logout: '/logout',
   },
+
   legal: {
     policy: '/legal/policy',
     terms: '/legal/terms',
