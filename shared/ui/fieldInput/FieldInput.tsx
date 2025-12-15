@@ -8,11 +8,10 @@ type Props<T extends FieldValues> = {
   label: string;
   type?: 'text' | 'password' | 'email';
   placeholder?: string;
-  clearable?: boolean;
 };
 
 function FieldInputInner<T extends FieldValues>(props: Props<T>) {
-  const { name, control, label, type = 'text', placeholder, clearable } = props;
+  const { name, control, label, type = 'text', placeholder } = props;
 
   const {
     field,
@@ -26,7 +25,6 @@ function FieldInputInner<T extends FieldValues>(props: Props<T>) {
       type={type}
       label={label}
       placeholder={placeholder}
-      clearable={clearable}
       error={error?.message}
     />
   );

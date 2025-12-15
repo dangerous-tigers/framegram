@@ -28,7 +28,7 @@ export const RegisterForm = () => {
     },
   });
 
-  const [onOpenModal, setOnOpenModal] = useState(true);
+  const [onOpenModal, setOnOpenModal] = useState(false);
   const [successEmail, setSuccessEmail] = useState('');
 
   const onSubmit = (data: RegisterFormValues) => {
@@ -84,7 +84,6 @@ export const RegisterForm = () => {
               control={control}
               label='Username'
               placeholder='Введите имя пользователя'
-              clearable
             />
 
             <FieldInput
@@ -93,7 +92,6 @@ export const RegisterForm = () => {
               type='email'
               label='Email'
               placeholder='Введите email'
-              clearable
             />
 
             <FieldInput
