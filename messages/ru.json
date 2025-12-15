@@ -13,5 +13,16 @@
     "statistic": "Статистика",
     "favorites": "Избранное",
     "logOut": "Выйти"
+  },
+  "login": {
+    "title": "Вход",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "forgotPassword": "Забыли пароль",
+    "signIn": "Войти",
+    "noAccount": "Нет аккаунта?",
+    "signUp": "Зарегистрироваться"
   }
 }
