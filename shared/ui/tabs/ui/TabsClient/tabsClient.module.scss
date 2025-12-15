@@ -1,5 +1,4 @@
 .tabsClient {
-
 }
 
 .triggerList {
@@ -76,12 +75,12 @@
   }
 
   &[data-disabled] {
-//    color: var(--primary-900);
+    //    color: var(--primary-900);
     color: var(--dark-300);
     cursor: default;
 
     &::before {
-//      background: var(--primary-900);
+      //      background: var(--primary-900);
       background: var(--dark-300);
     }
   }

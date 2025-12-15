@@ -27,7 +27,7 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const t = useTranslations('sidebar');
 
   const navigationItems: NavigationItem[] = [
-    { href: '/', label: t('feed'), Component: HomeOutline },
+    { href: '/feed', label: t('feed'), Component: HomeOutline },
     { href: '/create', label: t('create'), Component: PlusSquareOutline },
     { href: '/profile', label: t('myProfile'), Component: Person },
     { href: '/messenger', label: t('messenges'), Component: MessageCircle },
