@@ -1,5 +1,4 @@
-/* Как добавятся общие шрифты удалить */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 
 .btn {
   min-width: 182px;
@@ -19,6 +18,9 @@
 
   @media screen and (max-width: 578px) {
     width: 100%;
+  }
+  &[disabled] {
+    cursor: default;
   }
 
   &--full_width {

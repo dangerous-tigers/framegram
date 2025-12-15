@@ -12,9 +12,9 @@ type Props = {
   label?: string;
   error?: string;
   disabled?: boolean;
-  value?: string;
+  value: string;
   clearable?: boolean;
-  onChange?: (value: string) => void;
+  onChange: (value: string) => void;
   onBlur?: (value: string) => void;
 } & Omit<ComponentPropsWithoutRef<'input'>, 'onChange' | 'value'>;
 

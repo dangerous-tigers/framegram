@@ -1,23 +1,22 @@
 'use client';
 import s from './RegisterForm.module.scss';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type RegisterFormValues, registerSchema } from '../model/register.schema';
 import { useRegisterMutation } from '../model/register.hooks';
-import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button/Button';
-import { Checkbox } from '@/shared/ui';
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { RegisterRequestDto } from '@/features/auth/register/model/register.types';
+import { FieldInput } from '@/shared/ui/fieldInput/FieldInput';
+import { FieldCheckbox } from '@/shared/ui/fieldCheckbox/FieldCheckbox';
+import Link from 'next/link';
+import { routes } from '@/shared/config/routes';
+import { Modal, ModalHeaderWithClose } from '@/shared/ui';
+import { useState } from 'react';
 
 export const RegisterForm = () => {
   const { mutate, isPending } = useRegisterMutation();
-  const {
-    handleSubmit,
-    control,
-
-    formState: { errors },
-  } = useForm<RegisterFormValues>({
+  const { handleSubmit, control, formState } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     mode: 'onChange',
     defaultValues: {
@@ -29,6 +28,9 @@ export const RegisterForm = () => {
     },
   });
 
+  const [onOpenModal, setOnOpenModal] = useState(false);
+  const [successEmail, setSuccessEmail] = useState('');
+
   const onSubmit = (data: RegisterFormValues) => {
     const payload: RegisterRequestDto = {
       userName: data.userName,
@@ -38,8 +40,8 @@ export const RegisterForm = () => {
     };
     mutate(payload, {
       onSuccess: () => {
-        alert('Регистрация успешна!');
-        // router.push('/');
+        setSuccessEmail(data.email);
+        setOnOpenModal(true);
       },
       onError: (e) => {
         alert(e.message);
@@ -49,10 +51,7 @@ export const RegisterForm = () => {
 
   return (
     <div className={s.registerForm}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={s.form}
-      >
+      <div className={s.registerForm__body}>
         <h1 className={s.title}>Sign Up</h1>
         <div className={s.socials}>
           <Button
@@ -75,95 +74,109 @@ export const RegisterForm = () => {
             />
           </Button>
         </div>
-        <div className={s.inputs}>
-          <Controller
-            name='userName'
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                type='text'
-                label='Username'
-                error={errors.userName?.message}
-                placeholder='Введите имя пользователя'
-                clearable
-              />
-            )}
-          />
-          <Controller
-            name='email'
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                type='email'
-                label='Email'
-                error={errors.email?.message}
-                placeholder='Введите email'
-                clearable
-              />
-            )}
-          />
-          <Controller
-            name='password'
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                type='password'
-                label='Password'
-                error={errors.password?.message}
-                placeholder='Введите пароль'
-              />
-            )}
-          />
-          <Controller
-            name='passwordConfirm'
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                type='password'
-                label='Password confirmation'
-                error={errors.passwordConfirm?.message}
-                placeholder='Подтвердите пароль'
-              />
-            )}
-          />
-          {errors.passwordConfirm && <span>{errors.passwordConfirm.message}</span>}
-        </div>
-        <div className={s.checkbox}>
-          <Controller
-            name='terms'
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                checked={field.value}
-                onCheckedChange={field.onChange}
-                label='I agree to the'
-              />
-            )}
-          />
-          <span>Terms of Service and Privacy Policy</span>
-        </div>
-        {errors.terms && <span>{errors.terms.message}</span>}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={s.form}
+        >
+          <div className={s.inputs}>
+            <FieldInput
+              name='userName'
+              control={control}
+              label='Username'
+              placeholder='Введите имя пользователя'
+              clearable
+            />
 
-        <Button
-          className={s.btn}
-          fullWidth={false}
-          type={'submit'}
-        >
-          {isPending ? 'Loading...' : 'Sign Up'}
-        </Button>
-        <span className={s.desc}>{'Do you have an account?'}</span>
-        <Button
-          className={s.SignIn}
-          variant={'text'}
-          fullWidth={false}
-        >
-          {'Sign In'}
-        </Button>
-      </form>
+            <FieldInput
+              name='email'
+              control={control}
+              type='email'
+              label='Email'
+              placeholder='Введите email'
+              clearable
+            />
+
+            <FieldInput
+              name='password'
+              control={control}
+              type='password'
+              label='Password'
+              placeholder='Введите пароль'
+            />
+
+            <FieldInput
+              name='passwordConfirm'
+              control={control}
+              type='password'
+              label='Password confirmation'
+              placeholder='Подтвердите пароль'
+            />
+          </div>
+          <div className={s.checkbox}>
+            <FieldCheckbox
+              name={'terms'}
+              control={control}
+              label={''}
+            />
+            <span>
+              I agree to the{' '}
+              <Link
+                className={s.linkCheckbox}
+                href={routes.legal.terms}
+              >
+                Terms of Service
+              </Link>{' '}
+              and{' '}
+              <Link
+                href={routes.legal.policy}
+                className={s.linkCheckbox}
+              >
+                Privacy Policy
+              </Link>
+            </span>
+          </div>
+          {formState.errors.terms && <p className={s.errorText}>{formState.errors.terms.message}</p>}
+
+          <Button
+            className={s.btn}
+            fullWidth={false}
+            type={'submit'}
+            disabled={!formState.isValid}
+          >
+            {isPending ? 'Loading...' : 'Sign Up'}
+          </Button>
+          <span className={s.desc}>{'Do you have an account?'}</span>
+          <Link
+            href={routes.auth.login}
+            className={s.link}
+          >
+            {'Sign In'}
+          </Link>
+        </form>
+      </div>
+      <Modal
+        open={onOpenModal}
+        onOpenChange={setOnOpenModal}
+        size='sm'
+        header={
+          <ModalHeaderWithClose
+            title='Email confirmation'
+            onClose={() => setOnOpenModal(false)}
+          />
+        }
+      >
+        <div className={s.modal}>
+          <div>We have sent a link to confirm your email {successEmail}</div>
+
+          <Button
+            className={s.btnModal}
+            fullWidth={false}
+            onClick={() => setOnOpenModal(false)}
+          >
+            Ok
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 };

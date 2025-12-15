@@ -3,7 +3,6 @@
 @use 'sizes';
 @use 'overlayscrollbarsTheme';
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
   --primary-100: #73a5ff;
@@ -42,12 +41,15 @@
 body {
   color: var(--light-100);
   background-color: var(--dark-700);
-  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html,
 body {
   height: 100%;
+  font-family: var(--font-inter), sans-serif;
+
 }
 
 .wrapper {

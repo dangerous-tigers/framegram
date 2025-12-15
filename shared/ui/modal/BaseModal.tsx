@@ -17,10 +17,10 @@ export type Props = {
   children: ReactNode;
   className?: string;
   size?:
-    | 'sm' // Рoзмер для confirm modal
-    | 'md' // Розмер по умолчанию/crop modal
-    | 'lg' // Розмер для followers
-    | 'xl'; // Розмер для filters/publication
+    | 'sm' // Размер для confirm modal
+    | 'md' // Размер по умолчанию/crop modal
+    | 'lg' // Размер для followers
+    | 'xl'; // Размер для filters/publication
   showDivider?: boolean; // Рaзделитель
 } & ComponentPropsWithoutRef<typeof Dialog.Root>;
 
