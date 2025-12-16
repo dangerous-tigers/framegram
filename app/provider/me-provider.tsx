@@ -6,7 +6,6 @@ import { client } from '@/shared/api/client';
 const queryClient = new QueryClient();
 
 function MeFetcher() {
-  // этот запрос выполняется каждый раз, когда пользователь открывает сайт
   useQuery({
     queryKey: ['me'],
     queryFn: async () => {
@@ -19,7 +18,6 @@ function MeFetcher() {
   return null;
 }
 
-// Экспорт хука useMe для доступа к данным пользователя
 export const useMe = () => {
   const queryClient = useQueryClient();
   return queryClient.getQueryData(['me']);

@@ -5,8 +5,7 @@ import { SidebarItem } from '@/widgets/sidebar/ui/SidebarItem/SidebarItem';
 import { usePathname } from 'next/navigation';
 import { NavigationItem } from '@/widgets/sidebar/model/navigation';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import { LogoutModal } from '@/features/auth/logout/ui/LogoutModal';
+import { LogoutBtn } from '@/features/auth/logout/ui/LogoutBtn';
 
 import {
   Bookmark,
@@ -27,7 +26,6 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const pathname = usePathname();
 
   const t = useTranslations('sidebar');
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const navigationItems: NavigationItem[] = [
     { href: '/feed', label: t('feed'), Component: HomeOutline },
@@ -40,29 +38,23 @@ export const Navigation = ({ className }: PropsNavigation) => {
     { href: '#', label: t('logOut'), Component: LogOut }, // Изменение href на '#' для предотвращения навигации по умолчанию
   ];
 
-  const handleLogoutClick = (e: React.MouseEvent) => {
-    e.preventDefault(); // Предотвращение навигации по умолчанию
-    setIsLogoutModalOpen(true);
-  };
-
   return (
     <div className={clsx(s.navigation, className)}>
       {navigationItems.map((item) => {
         const { href, Component, label, disabled } = item;
 
-        // Специальная обработка для элемента выхода из системы
         if (label === t('logOut')) {
           return (
-            <SidebarItem
-              disabled={disabled}
-              href={href}
-              Component={<Component />}
-              key={label}
-              isActive={pathname === href}
-              onClick={handleLogoutClick} // Добавить обработчик кликов для выхода из системы
-            >
-              <span>{label}</span>
-            </SidebarItem>
+            <LogoutBtn key={label}>
+              <SidebarItem
+                disabled={disabled}
+                href={href}
+                Component={<Component />}
+                isActive={pathname === href}
+              >
+                <span>{label}</span>
+              </SidebarItem>
+            </LogoutBtn>
           );
         }
 
@@ -78,10 +70,6 @@ export const Navigation = ({ className }: PropsNavigation) => {
           </SidebarItem>
         );
       })}
-      <LogoutModal
-        open={isLogoutModalOpen}
-        onOpenChange={setIsLogoutModalOpen}
-      />
     </div>
   );
 };

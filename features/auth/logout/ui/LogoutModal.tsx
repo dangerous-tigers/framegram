@@ -6,6 +6,8 @@ import { useTranslations } from 'next-intl';
 import { useLogout } from '../api/logout.api';
 import { useMe } from '@/app/provider/me-provider';
 import { useState } from 'react';
+import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
+import s from './LogoutModal.module.scss';
 
 type Props = {
   open: boolean;
@@ -35,15 +37,25 @@ export const LogoutModal = ({ open, onOpenChange }: Props) => {
     onOpenChange(false);
   };
 
+  const handleOnClose = () => {
+    onOpenChange(false);
+  };
+
   return (
     <Modal
       open={open}
       onOpenChange={onOpenChange}
       size='sm'
+      header={
+        <ModalHeaderWithClose
+          title={t('logOut')}
+          onClose={handleOnClose}
+        />
+      }
     >
-      <div style={{ padding: '24px' }}>
-        <p style={{ marginBottom: '24px' }}>{t('logOutMessage', { email: me?.email || '' })}</p>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+      <div className={s.modalContent}>
+        <p className={s.logoutMessage}>{t('logOutMessage', { email: me?.email || '' })}</p>
+        <div className={s.buttonContainer}>
           <Button
             variant='secondary'
             onClick={handleCancel}

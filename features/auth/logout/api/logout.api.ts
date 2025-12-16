@@ -19,15 +19,13 @@ export const useLogout = () => {
         throw response.error;
       }
 
-      // Очистка токена доступа из localStorage
       localStorage.removeItem('accessToken');
 
       return response.data;
     },
     onSuccess: () => {
-      // Перенаправление на страницу входа после успешного выхода
       router.push('/login');
-      router.refresh(); // Обновление для обновления состояния UI
+      router.refresh();
     },
   });
 };
