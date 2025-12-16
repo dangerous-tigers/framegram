@@ -6,14 +6,37 @@ import { ForgotPasswordData, forgotPasswordSchema } from '@/features/auth/Forgot
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/shared/ui/button/Button';
+import { Recaptcha } from '@/shared/ui';
+import { useForgotPassword } from '@/features/auth/ForgotPassword/model/UseForgotPassword';
 
 export const ForgotPasswordForm = () => {
-  const form = useForm<ForgotPasswordData>({
+  const { mutate, isPending } = useForgotPassword();
+
+  const {
+    register,
+    setValue,
+    trigger,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<ForgotPasswordData>({
     resolver: zodResolver(forgotPasswordSchema),
     mode: 'onBlur',
   });
 
-  const onSubmit = form.handleSubmit(() => {});
+  const onSubmit = handleSubmit((data: ForgotPasswordData) => {
+    mutate(
+      {
+        email: data.email,
+        recaptcha: data.recaptcha,
+        baseUrl: window.location.origin,
+      },
+      {
+        onError: (error) => {
+          alert(error.message);
+        },
+      },
+    );
+  });
 
   return (
     <div className={s.wrapper}>
@@ -24,14 +47,14 @@ export const ForgotPasswordForm = () => {
             label={'Email'}
             type='email'
             placeholder={'Epam@epam.com'}
-            {...form.register('email')}
-            error={form.formState.errors.email?.message}
+            {...register('email')}
+            error={errors.email?.message}
           />
           <p className={s.text}>Enter your email and we will send you further instruction</p>
           <div className={s.buttons}>
             <Button
               fullWidth={true}
-              disabled={!form.formState.isValid}
+              disabled={!isValid || isPending}
               type={'submit'}
               className={s.btn}
             >
@@ -41,9 +64,16 @@ export const ForgotPasswordForm = () => {
               fullWidth={true}
               className={s.btn}
               variant={'text'}
+              disabled={isPending}
             >
               Back to Sign In
             </Button>
+            <Recaptcha
+              register={register}
+              setValue={setValue}
+              trigger={trigger}
+              errors={errors}
+            />
           </div>
         </form>
       </div>
