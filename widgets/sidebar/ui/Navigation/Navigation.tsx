@@ -35,7 +35,7 @@ export const Navigation = ({ className }: PropsNavigation) => {
     { href: '/search', label: t('search'), Component: Search },
     { href: '/statistics', label: t('statistic'), Component: TrendingUp },
     { href: '/favorites', label: t('favorites'), Component: Bookmark },
-    { href: '#', label: t('logOut'), Component: LogOut }, // Изменение href на '#' для предотвращения навигации по умолчанию
+    { href: '', label: t('logOut'), Component: LogOut }, // Пустая строка для предотвращения навигации по умолчанию
   ];
 
   return (

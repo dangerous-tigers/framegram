@@ -31,7 +31,6 @@ export const SidebarItem = (props: Props) => {
     );
   }
 
-  // If onClick is provided, use a span instead of Link to handle the click
   if (onClick) {
     return (
       <span

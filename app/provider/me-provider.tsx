@@ -20,7 +20,9 @@ function MeFetcher() {
 
 export const useMe = () => {
   const queryClient = useQueryClient();
-  return queryClient.getQueryData(['me']);
+  return queryClient.getQueryData(['me']) as
+    | { userId: number; userName: string; email: string; isBlocked: boolean }
+    | undefined;
 };
 
 export function AppTanstackProviders({ children }: { children: React.ReactNode }) {
