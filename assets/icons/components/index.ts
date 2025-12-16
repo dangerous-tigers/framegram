@@ -41,6 +41,7 @@ export { default as FillBell } from './FillBell';
 export { default as Firefox } from './Firefox';
 export { default as FlagRussia } from './FlagRussia';
 export { default as FlagUnitedKingdom } from './FlagUnitedKingdom';
+export { default as Framehublogo } from './Framehublogo';
 export { default as GithubSvgrepoCom31 } from './GithubSvgrepoCom31';
 export { default as GoogleSvgrepoCom1 } from './GoogleSvgrepoCom1';
 export { default as HeartOutline } from './HeartOutline';
