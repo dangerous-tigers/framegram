@@ -7,7 +7,7 @@ export default function PublicLayout({
   children: ReactNode;
 }>) {
   return (
-    <div className='main-box__body'>
+    <div className='mainBoxBody'>
       <Sidebar />
 
       {children}
