@@ -23,7 +23,6 @@ export const Alert = () => {
       )}
       defaultOpen
     >
-      <Toast.Title className={styles.title}>{error && 'Error!'}</Toast.Title>
       <Toast.Description className={styles.description}>{error ? error : description}</Toast.Description>
 
       <Toast.Close

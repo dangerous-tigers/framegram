@@ -12,7 +12,7 @@ const initialState = {
   severity: 'success' as Severity,
 };
 
-type State = typeof initialState & {
+export type State = typeof initialState & {
   show: (data: Omit<State, 'open' | 'show' | 'hide'>) => void;
   hide: () => void;
 };
