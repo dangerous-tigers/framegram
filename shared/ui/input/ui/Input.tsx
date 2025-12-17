@@ -61,7 +61,7 @@ export const Input = (p: Props) => {
               [s.withRightIcon]: isPassword,
             })}
             aria-invalid={hasError}
-            aria-describedby={error}
+            aria-describedby={hasError ? `${rest.name}-error` : undefined}
             disabled={disabled}
             {...rest}
           />
@@ -83,7 +83,7 @@ export const Input = (p: Props) => {
 
       {hasError && (
         <p
-          id={error}
+          id={`${rest.name}-error`}
           className={s.errorText}
           role='alert'
           aria-live='polite'

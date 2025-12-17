@@ -13,5 +13,16 @@
     "statistic": "Статистика",
     "favorites": "Улюблене",
     "logOut": "Вийти"
+  },
+  "login": {
+    "title": "Вхід",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введіть пароль",
+    "forgotPassword": "Забули пароль",
+    "signIn": "Увійти",
+    "noAccount": "Немає акаунта?",
+    "signUp": "Зареєструватися"
   }
 }

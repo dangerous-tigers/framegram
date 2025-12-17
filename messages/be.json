@@ -13,5 +13,16 @@
     "statistic": "Статыстыка",
     "favorites": "Абранае",
     "logOut": "Выйсці"
+  },
+  "login": {
+    "title": "Уваход",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Увядзіце пароль",
+    "forgotPassword": "Забылі пароль",
+    "signIn": "Увайсці",
+    "noAccount": "Няма акаўнта?",
+    "signUp": "Зарэгістравацца"
   }
 }
