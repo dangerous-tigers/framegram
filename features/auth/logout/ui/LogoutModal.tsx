@@ -1,7 +1,7 @@
 'use client';
 
 import { Modal } from '@/shared/ui/modal';
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui';
 import { useTranslations } from 'next-intl';
 import { useLogout } from '../api/logout.api';
 import { useMe } from '@/app/provider/me-provider';
@@ -11,10 +11,10 @@ import s from './LogoutModal.module.scss';
 
 type Props = {
   open: boolean;
-  onOpenChange: (open: boolean) => void;
+  onOpenChangeAction: (open: boolean) => void;
 };
 
-export const LogoutModal = ({ open, onOpenChange }: Props) => {
+export const LogoutModal = ({ open, onOpenChangeAction }: Props) => {
   const t = useTranslations('sidebar');
   const { mutate: logout, isPending } = useLogout();
   const me = useMe(); // Получение информации о пользователе для отображения email
@@ -24,7 +24,7 @@ export const LogoutModal = ({ open, onOpenChange }: Props) => {
     setIsLoading(true);
     logout(undefined, {
       onSuccess: () => {
-        onOpenChange(false);
+        onOpenChangeAction(false);
         setIsLoading(false);
       },
       onError: () => {
@@ -34,17 +34,17 @@ export const LogoutModal = ({ open, onOpenChange }: Props) => {
   };
 
   const handleCancel = () => {
-    onOpenChange(false);
+    onOpenChangeAction(false);
   };
 
   const handleOnClose = () => {
-    onOpenChange(false);
+    onOpenChangeAction(false);
   };
 
   return (
     <Modal
       open={open}
-      onOpenChange={onOpenChange}
+      onOpenChange={onOpenChangeAction}
       size='sm'
       header={
         <ModalHeaderWithClose
