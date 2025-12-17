@@ -7,7 +7,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'outline' | 'text';
   className?: string;
-  fullWidth: boolean;
+  fullWidth?: boolean;
 };
 
 export const Button = ({
