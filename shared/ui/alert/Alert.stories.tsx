@@ -1,100 +1,84 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Alert } from '@/shared/ui/alert/Alert';
-import { useState } from 'react';
+import { alertDecorator } from '@/storybook/alertDecorator';
 
-const meta = {
+const meta: Meta<typeof Alert> = {
   title: 'ui/alert/Alert',
   component: Alert,
-  parameters: {
-    layout: 'centered',
-    backgrounds: { default: 'black' },
-  },
-  tags: ['autodocs'],
-  args: {
-    description: '',
-    error: '',
-    severity: 'success',
-    open: true,
-  },
-  argTypes: {
-    variant: {
-      control: 'text',
-      description: 'alternative style options',
-    },
-    severity: {
-      control: 'text',
-      description: 'values representing different states',
-    },
-    duration: {
-      control: 'number',
-      description: 'The time in milliseconds that should elapse before automatically closing each toast.',
-    },
-    error: {
-      control: 'text',
-      description: 'error message',
-    },
-    onOpenChange: {
-      action: 'has been closed',
-      description: 'fired when clicked button "close" ',
-    },
-  },
-} satisfies Meta<typeof Alert>;
+};
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Alert>;
 
 export const DefaultSuccess: Story = {
-  args: { ...meta.args, variant: 'default' },
-  render: () => {
-    const [open, setOpen] = useState<boolean>(true);
-
-    return (
-      <Alert
-        description={'Your settings are saved.'}
-        variant={'default'}
-        severity={'success'}
-        open={open}
-        onOpenChange={setOpen}
-      />
-    );
-  },
-};
-export const SuccessOutlined: Story = {
-  args: { ...meta.args, variant: 'outlined', description: 'Your settings are saved.' },
+  decorators: [
+    alertDecorator({
+      open: true,
+      severity: 'success',
+      variant: 'default',
+      error: null,
+      description: 'Something went wrong',
+    }),
+  ],
 };
 
-export const SuccessFilled: Story = {
-  args: { ...meta.args, variant: 'filled', description: 'Your settings are saved.' },
-};
-
-export const ErrorOutlined: Story = {
-  args: {
-    error: 'Server is not available.',
-    variant: 'outlined',
-    severity: 'error',
-  },
-};
-export const ErrorFilled: Story = {
-  args: {
-    error: 'Server is not available.',
-    variant: 'filled',
-    severity: 'error',
-  },
-};
 export const DefaultError: Story = {
-  args: { ...meta.args, variant: 'default' },
-  render: () => {
-    const [open, setOpen] = useState<boolean>(true);
+  decorators: [
+    alertDecorator({
+      open: true,
+      severity: 'error',
+      variant: 'default',
+      error: 'Error occurred',
+      description: null,
+    }),
+  ],
+};
 
-    return (
-      <Alert
-        error={'Server is not available.'}
-        variant={'default'}
-        severity={'error'}
-        open={open}
-        onOpenChange={setOpen}
-      />
-    );
-  },
+export const FilledSuccess: Story = {
+  decorators: [
+    alertDecorator({
+      open: true,
+      severity: 'success',
+      variant: 'filled',
+      error: null,
+      description: 'Something went wrong',
+    }),
+  ],
+};
+
+export const FilledError: Story = {
+  decorators: [
+    alertDecorator({
+      open: true,
+      severity: 'error',
+      variant: 'filled',
+      error: 'Error occurred',
+      description: null,
+    }),
+  ],
+};
+
+export const OutlinedSuccess: Story = {
+  decorators: [
+    alertDecorator({
+      open: true,
+      severity: 'success',
+      variant: 'outlined',
+      error: null,
+      description: 'Something went wrong',
+    }),
+  ],
+};
+
+export const OutlinedError: Story = {
+  decorators: [
+    alertDecorator({
+      open: true,
+      severity: 'error',
+      variant: 'outlined',
+      error: 'Error occurred',
+      description: null,
+    }),
+  ],
 };
