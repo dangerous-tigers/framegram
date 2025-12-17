@@ -27,6 +27,7 @@
   flex-direction: column;
   gap: 16px;
 }
+
 .socialAuth {
   display: flex;
   flex-direction: row;
@@ -44,12 +45,14 @@
     padding: 0;
   }
 }
+
 .formInput {
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-bottom: 36px;
 }
+
 .forgot {
   margin-top: -8px;
   text-align: right;

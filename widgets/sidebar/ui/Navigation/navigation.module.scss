@@ -6,17 +6,20 @@
   padding: 72px 0 110px;
   min-height: 100%;
   border-right: 1px solid var(--dark-300);
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     padding: 20px 0;
     border-right: none;
+
     span {
       display: none;
     }
   }
 }
+
 .active {
   color: var(--primary-500);
 }

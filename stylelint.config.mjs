@@ -3,6 +3,7 @@
 export default {
   extends: ['stylelint-config-standard-scss'],
   plugins: ['stylelint-prettier'],
+  ignoreFiles: ['**/_*.scss'],
   rules: {
     'prettier/prettier': true,
     'no-descending-specificity': null,

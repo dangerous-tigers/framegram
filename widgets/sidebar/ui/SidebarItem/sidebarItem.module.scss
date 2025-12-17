@@ -11,13 +11,13 @@
   outline: none;
 
   &:nth-child(6) {
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       margin-top: 36px;
     }
   }
 
   &:last-child {
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       margin-top: auto;
     }
   }
@@ -30,8 +30,10 @@
     border: 2px solid var(--primary-700);
     border-radius: 2px;
   }
+
   &:active {
     color: var(--primary-500);
+
     svg {
       stroke: var(--primary-500);
     }
@@ -41,7 +43,7 @@
     color: var(--primary-500);
   }
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     flex-direction: row;
   }
 }
@@ -49,14 +51,18 @@
 .active {
   color: var(--primary-500);
 }
+
 .disabled {
   color: var(--dark-100);
   cursor: default;
+
   &:hover {
     color: var(--dark-100);
   }
+
   &:active {
     color: var(--dark-100);
+
     svg {
       stroke: var(--dark-100);
     }
