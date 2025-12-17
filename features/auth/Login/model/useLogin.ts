@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { LoginFormData } from './Login.schema';
 import { parseJwt } from '@/shared/lib/parseJwt';
+import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 
 interface ApiError {
   statusCode: number;
@@ -13,7 +14,7 @@ interface ApiError {
 
 export const useLogin = () => {
   const router = useRouter();
-
+  const { show } = useAlertStore();
   return useMutation<{ accessToken: string } | undefined, ApiError, LoginFormData>({
     mutationFn: async (data: LoginFormData) => {
       const response = await client.POST('/auth/login', {
@@ -39,6 +40,14 @@ export const useLogin = () => {
 
         router.push(`/profile/${parsedToken.userId}`);
       }
+    },
+    onError: (error) => {
+      show({
+        error: error.messages ? error.messages : 'Some occurred error',
+        severity: 'error',
+        variant: 'default',
+        description: null,
+      });
     },
   });
 };
