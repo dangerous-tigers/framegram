@@ -10,9 +10,9 @@ export const RadioGroupItem = ({ value, label, disabled }: RadioGroupItemProps) 
         value={value}
         disabled={disabled}
       >
-        <RadioGroup.Indicator className={s.radio__indicator} />
+        <RadioGroup.Indicator className={s.radioIndicator} />
       </RadioGroup.Item>
-      <span className={s.radio__label}>{label}</span>
+      <span className={s.radiLabel}>{label}</span>
     </Label.Root>
   );
 };

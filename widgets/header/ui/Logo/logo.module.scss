@@ -4,7 +4,8 @@
   line-height: 138%;
   color: var(--light-100);
   margin-right: auto;
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     font-size: 24px;
   }
 }

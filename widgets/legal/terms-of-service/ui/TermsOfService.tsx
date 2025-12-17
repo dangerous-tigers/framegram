@@ -6,7 +6,7 @@ import { routes } from '@/shared/config/routes';
 
 export function TermsOfServiceContent() {
   return (
-    <article className={s.article}>
+    <article>
       <div className={s.body}>
         <BackLink
           href={routes.auth.registration}
