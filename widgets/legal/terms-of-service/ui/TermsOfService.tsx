@@ -1,7 +1,7 @@
 'use client';
 
 import s from './styles.module.scss';
-import { BackLink } from '@/shared/ui/BackLink';
+import { BackLink } from '@/shared/ui/backLink';
 import { routes } from '@/shared/config/routes';
 
 export function TermsOfServiceContent() {

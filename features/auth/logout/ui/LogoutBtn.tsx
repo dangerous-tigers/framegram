@@ -20,7 +20,7 @@ export const LogoutBtn = ({ children }: Props) => {
       </span>
       <LogoutModal
         open={isLogoutModalOpen}
-        onOpenChange={setIsLogoutModalOpen}
+        onOpenChangeAction={setIsLogoutModalOpen}
       />
     </>
   );
