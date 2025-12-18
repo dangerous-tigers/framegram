@@ -1,12 +1,11 @@
 'use client';
 
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, useQuery, useQueryClient } from '@tanstack/react-query';
 import { client } from '@/shared/api/client';
 
 const queryClient = new QueryClient();
 
 function MeFetcher() {
-  // этот запрос выполняется каждый раз, когда пользователь открывает сайт
   useQuery({
     queryKey: ['me'],
     queryFn: async () => {
@@ -18,6 +17,13 @@ function MeFetcher() {
 
   return null;
 }
+
+export const useMe = () => {
+  const queryClient = useQueryClient();
+  return queryClient.getQueryData(['me']) as
+    | { userId: number; userName: string; email: string; isBlocked: boolean }
+    | undefined;
+};
 
 export function AppTanstackProviders({ children }: { children: React.ReactNode }) {
   return (

@@ -1,3 +1,4 @@
+export { Button } from './button/Button';
 export { Checkbox } from './checkbox/Checkbox';
 export { Modal } from './modal';
 export { ModalHeaderWithClose } from './modal';
