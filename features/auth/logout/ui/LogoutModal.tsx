@@ -1,22 +1,17 @@
 'use client';
-
 import { Modal } from '@/shared/ui/modal';
 import { Button } from '@/shared/ui';
 import { useTranslations } from 'next-intl';
-import { useLogout } from '../api/logout.api';
 import { useMe } from '@/app/provider/me-provider';
 import { useState } from 'react';
+import type { KeyboardEvent } from 'react';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
 import s from './LogoutModal.module.scss';
+import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
 
-type Props = {
-  open: boolean;
-  onOpenChangeAction: (open: boolean) => void;
-};
-
-export const LogoutModal = ({ open, onOpenChangeAction }: Props) => {
+export const LogoutModal = () => {
   const t = useTranslations('sidebar');
-  const { mutate: logout, isPending } = useLogout();
+  const { open, hide, logout, isPending } = useLogoutModal();
   const me = useMe(); // Получение информации о пользователе для отображения email
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +19,7 @@ export const LogoutModal = ({ open, onOpenChangeAction }: Props) => {
     setIsLoading(true);
     logout(undefined, {
       onSuccess: () => {
-        onOpenChangeAction(false);
+        hide();
         setIsLoading(false);
       },
       onError: () => {
@@ -33,23 +28,27 @@ export const LogoutModal = ({ open, onOpenChangeAction }: Props) => {
     });
   };
 
-  const handleCancel = () => {
-    onOpenChangeAction(false);
+  const onKeyPressHandler = (e: KeyboardEvent) => {
+    const { key } = e;
+    if (key === 'Escape') {
+      hide();
+    }
   };
 
-  const handleOnClose = () => {
-    onOpenChangeAction(false);
+  const handleClose = () => {
+    hide();
   };
 
   return (
     <Modal
       open={open}
-      onOpenChange={onOpenChangeAction}
+      onOpenChange={hide}
       size='sm'
       header={
         <ModalHeaderWithClose
           title={t('logOut')}
-          onClose={handleOnClose}
+          onClose={handleClose}
+          onKeyPress={onKeyPressHandler}
         />
       }
     >
@@ -57,13 +56,15 @@ export const LogoutModal = ({ open, onOpenChangeAction }: Props) => {
         <p className={s.logoutMessage}>{t('logOutMessage', { email: me?.email || '' })}</p>
         <div className={s.buttonContainer}>
           <Button
+            fullWidth
             variant='secondary'
-            onClick={handleCancel}
+            onClick={handleClose}
             disabled={isPending || isLoading}
           >
             {t('no')}
           </Button>
           <Button
+            fullWidth
             variant='primary'
             onClick={handleLogout}
             disabled={isPending || isLoading}

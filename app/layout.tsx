@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 import { Inter } from 'next/font/google';
+import { LogoutModal } from '@/features/auth/logout/ui/LogoutModal';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -43,6 +44,7 @@ export default async function RootLayout({
                 <div className='mainBox'>
                   <main className='main'>{children}</main>
                 </div>
+                <LogoutModal />
               </div>
             </NextIntlClientProvider>
           </AppTanstackProviders>
