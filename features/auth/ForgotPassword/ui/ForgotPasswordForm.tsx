@@ -6,10 +6,13 @@ import { ForgotPasswordData, forgotPasswordSchema } from '@/features/auth/Forgot
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/shared/ui/button/Button';
-import { Recaptcha } from '@/shared/ui';
+import { Modal, ModalHeaderWithClose, Recaptcha } from '@/shared/ui';
 import { useForgotPassword } from '@/features/auth/ForgotPassword/model/UseForgotPassword';
+import { useState } from 'react';
 
 export const ForgotPasswordForm = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [email, setEmail] = useState('');
   const { mutate, isPending } = useForgotPassword();
 
   const {
@@ -18,9 +21,10 @@ export const ForgotPasswordForm = () => {
     trigger,
     formState: { errors, isValid },
     handleSubmit,
+    setError,
   } = useForm<ForgotPasswordData>({
     resolver: zodResolver(forgotPasswordSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const onSubmit = handleSubmit((data: ForgotPasswordData) => {
@@ -28,11 +32,20 @@ export const ForgotPasswordForm = () => {
       {
         email: data.email,
         recaptcha: data.recaptcha,
-        baseUrl: window.location.origin,
+        baseUrl: `${window.location.origin}/new-password`,
       },
       {
+        onSuccess: () => {
+          setEmail(data.email);
+          setOpenModal(true);
+        },
         onError: (error) => {
-          alert(error.message);
+          const message = error?.message?.[0] ?? 'User with this email does not exist';
+
+          setError('email', {
+            type: 'server',
+            message: message,
+          });
         },
       },
     );
@@ -42,7 +55,10 @@ export const ForgotPasswordForm = () => {
     <div className={s.wrapper}>
       <div className={s.card}>
         <h2 className={s.title}>Forgot Password</h2>
-        <form onSubmit={onSubmit}>
+        <form
+          onSubmit={onSubmit}
+          className={s.form}
+        >
           <Input
             label={'Email'}
             type='email'
@@ -50,7 +66,9 @@ export const ForgotPasswordForm = () => {
             {...register('email')}
             error={errors.email?.message}
           />
+
           <p className={s.text}>Enter your email and we will send you further instruction</p>
+
           <div className={s.buttons}>
             <Button
               fullWidth={true}
@@ -64,10 +82,11 @@ export const ForgotPasswordForm = () => {
               fullWidth={true}
               className={s.btn}
               variant={'text'}
-              disabled={isPending}
             >
               Back to Sign In
             </Button>
+          </div>
+          <div className={s.captcha}>
             <Recaptcha
               register={register}
               setValue={setValue}
@@ -77,6 +96,29 @@ export const ForgotPasswordForm = () => {
           </div>
         </form>
       </div>
+      <Modal
+        open={openModal}
+        onOpenChange={setOpenModal}
+        size='sm'
+        header={
+          <ModalHeaderWithClose
+            title='Email sent'
+            onClose={() => setOpenModal(false)}
+          />
+        }
+      >
+        <div className={s.modal}>
+          <div>We have sent a link to confirm your email to {email}</div>
+
+          <Button
+            className={s.btnModal}
+            fullWidth={false}
+            onClick={() => setOpenModal(false)}
+          >
+            Ок
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 };
