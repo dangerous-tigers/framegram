@@ -9,12 +9,16 @@ import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
 import s from './LogoutModal.module.scss';
 import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
 
-export const LogoutModal = () => {
+type Props = {
+  open: boolean;
+};
+
+export const LogoutModal = ({ open }: Props) => {
   const t = useTranslations('sidebar');
-  const { open, hide, logout, isPending } = useLogoutModal();
+  const { hide, logout, isPending } = useLogoutModal();
   const me = useMe(); // Получение информации о пользователе для отображения email
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log('logout modal');
   const handleLogout = () => {
     setIsLoading(true);
     logout(undefined, {
