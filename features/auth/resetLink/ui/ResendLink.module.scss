@@ -1,0 +1,34 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contentInner {
+  width: 294px;
+  margin: 0 auto 31px;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 19px;
+  font-weight: 700;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-l);
+  text-align: center;
+}
+
+.text {
+  margin-bottom: 30px;
+  font-weight: 400;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  text-align: center;
+}

@@ -8,7 +8,7 @@ export const useRecoveryParams = () => {
   const email = params.get('email');
 
   if (!recoveryCode) {
-    router.push('/resend-link');
+    router.replace('/forgot-password');
     return null;
   }
 

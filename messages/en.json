@@ -27,5 +27,25 @@
     "signIn": "Sign In",
     "noAccount": "Dont have an account?",
     "signUp": "Sign Up"
+  },
+  "forgot": {
+    "title": "Forgot Password",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "text": "Enter your email address and we will send you further instructions ",
+    "sendLink": "Send Link",
+    "backToSignIn": "Back to Sign In"
+  },
+  "newPassword": {
+    "title": "Create New Password",
+    "newPassword": "New Password",
+    "passwordConfirm": "Password confirmation",
+    "text": "Your password must be between 6 and 20 characters",
+    "createBtn": "Create New Password"
+  },
+  "resendLink": {
+    "title": "Email verification link expired",
+    "text": "Looks like the verification link has expired. Not to worry, we can send the link again",
+    "resendBtn": "Resend link"
   }
 }

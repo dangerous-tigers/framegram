@@ -1,18 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import { client } from '@/shared/api/client';
-
-type ForgotPasswordRequest = {
-  email: string;
-  recaptcha: string;
-  baseUrl: string;
-};
+import { ForgotPasswordRequest } from '@/features/auth/ForgotPassword/model/types';
+import { forgotPassword } from '@/features/auth/ForgotPassword/api/ForgotPassword.api';
 
 export const useForgotPassword = () => {
   return useMutation({
     mutationFn: async (data: ForgotPasswordRequest) => {
-      const response = await client.POST('/auth/password-recovery', {
-        body: data,
-      });
+      const response = await forgotPassword(data);
 
       if (response.error) {
         throw new Error(response.error.messages[0].message);

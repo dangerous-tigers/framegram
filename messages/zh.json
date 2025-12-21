@@ -27,5 +27,25 @@
     "signIn": "登录",
     "noAccount": "还没有账号？",
     "signUp": "注册"
+  },
+  "forgot": {
+    "title": "忘記密碼",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "text": "請輸入您的電子郵件地址，我們將向您發送更多說明。",
+    "sendLink": "發送連結",
+    "backToSignIn": "返回登入"
+  },
+  "newPassword": {
+    "title": "建立新密碼",
+    "newPassword": "新密碼",
+    "passwordConfirm": "密碼確認",
+    "text": "您的密碼長度必須介於 6 到 20 個字元之間。",
+    "createBtn": "建立新密碼"
+  },
+  "resendLink": {
+    "title": "電子郵件驗證連結已過期",
+    "text": "驗證連結似乎已過期。不用擔心，我們可以再次發送連結。",
+    "resendBtn": "重新發送連結"
   }
 }

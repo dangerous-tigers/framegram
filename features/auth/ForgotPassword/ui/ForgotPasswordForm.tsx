@@ -9,8 +9,10 @@ import { Button } from '@/shared/ui/button/Button';
 import { Modal, ModalHeaderWithClose, Recaptcha } from '@/shared/ui';
 import { useForgotPassword } from '@/features/auth/ForgotPassword/model/UseForgotPassword';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export const ForgotPasswordForm = () => {
+  const t = useTranslations('forgot');
   const [openModal, setOpenModal] = useState(false);
   const [email, setEmail] = useState('');
   const { mutate, isPending } = useForgotPassword();
@@ -22,6 +24,7 @@ export const ForgotPasswordForm = () => {
     formState: { errors, isValid },
     handleSubmit,
     setError,
+    reset,
   } = useForm<ForgotPasswordData>({
     resolver: zodResolver(forgotPasswordSchema),
     mode: 'onChange',
@@ -36,12 +39,13 @@ export const ForgotPasswordForm = () => {
       },
       {
         onSuccess: () => {
+          reset();
           setEmail(data.email);
           setOpenModal(true);
         },
-        onError: (error) => {
-          const message = error?.message?.[0] ?? 'User with this email does not exist';
 
+        onError: (error) => {
+          const message = error?.message ?? 'User with this email does not exist';
           setError('email', {
             type: 'server',
             message: message,
@@ -54,7 +58,7 @@ export const ForgotPasswordForm = () => {
   return (
     <div className={s.wrapper}>
       <div className={s.card}>
-        <h2 className={s.title}>Forgot Password</h2>
+        <h2 className={s.title}>{t('title')}</h2>
         <form
           onSubmit={onSubmit}
           className={s.form}
@@ -67,7 +71,7 @@ export const ForgotPasswordForm = () => {
             error={errors.email?.message}
           />
 
-          <p className={s.text}>Enter your email and we will send you further instruction</p>
+          <p className={s.text}>{t('text')}</p>
 
           <div className={s.buttons}>
             <Button
@@ -76,14 +80,14 @@ export const ForgotPasswordForm = () => {
               type={'submit'}
               className={s.btn}
             >
-              Send Link
+              {isPending ? '...Loading' : t('sendLink')}
             </Button>
             <Button
               fullWidth={true}
               className={s.btn}
               variant={'text'}
             >
-              Back to Sign In
+              {t('backToSignIn')}
             </Button>
           </div>
           <div className={s.captcha}>
