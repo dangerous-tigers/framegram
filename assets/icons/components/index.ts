@@ -14,6 +14,7 @@ export { default as Bookmark } from './Bookmark';
 export { default as Brave } from './Brave';
 export { default as CalendarOutline } from './CalendarOutline';
 export { default as Calendar } from './Calendar';
+export { default as Catpreloader } from './Catpreloader';
 export { default as CheckboxSelected } from './CheckboxSelected';
 export { default as CheckmarkOutline } from './CheckmarkOutline';
 export { default as Chinaflag } from './Chinaflag';
