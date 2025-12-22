@@ -10,9 +10,11 @@ import { Modal, ModalHeaderWithClose, Recaptcha } from '@/shared/ui';
 import { useForgotPassword } from '@/features/auth/ForgotPassword/model/UseForgotPassword';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { routes } from '@/shared/config/routes';
 
 export const ForgotPasswordForm = () => {
-  const t = useTranslations('forgot');
+  const t = useTranslations('forgot'); // Переводы страницы
+  const e = useTranslations('validateError'); // Переводы ошибок
   const [openModal, setOpenModal] = useState(false);
   const [email, setEmail] = useState('');
   const { mutate, isPending } = useForgotPassword();
@@ -35,7 +37,7 @@ export const ForgotPasswordForm = () => {
       {
         email: data.email,
         recaptcha: data.recaptcha,
-        baseUrl: `${window.location.origin}/new-password`,
+        baseUrl: `${window.location.origin}${routes.auth.newPassword}`,
       },
       {
         onSuccess: () => {
@@ -45,7 +47,7 @@ export const ForgotPasswordForm = () => {
         },
 
         onError: (error) => {
-          const message = error?.message ?? 'User with this email does not exist';
+          const message = error?.message ?? e('emailExist');
           setError('email', {
             type: 'server',
             message: message,
@@ -64,9 +66,9 @@ export const ForgotPasswordForm = () => {
           className={s.form}
         >
           <Input
-            label={'Email'}
+            label={t('email')}
             type='email'
-            placeholder={'Epam@epam.com'}
+            placeholder={t('emailPlaceholder')}
             {...register('email')}
             error={errors.email?.message}
           />

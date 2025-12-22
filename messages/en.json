@@ -47,5 +47,15 @@
     "title": "Email verification link expired",
     "text": "Looks like the verification link has expired. Not to worry, we can send the link again",
     "resendBtn": "Resend link"
+  },
+  "validateError": {
+    "minChars": "Minimum 6 characters",
+    "maxChars": "Maximum 20 characters",
+    "regExPassword": "The password must contain at least one number, one uppercase letter, and one lowercase letter. Special characters are allowed: ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ { | } ~",
+    "passwordMatch": "Passwords must match",
+    "passwordConfirm": "Please confirm your password",
+    "email": "The email must match the format example@example.com",
+    "emailExist": "User with this email does not exist",
+    "captcha": "Please verify that you are not a robot"
   }
 }

@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { newPassword } from '@/features/auth/newPassword/api/NewPassword.api';
 import { NewPasswordRequest } from '@/features/auth/newPassword/model/types';
+import { routes } from '@/shared/config/routes';
 
 type Error = {
   statusCode: number;
@@ -10,7 +11,7 @@ type Error = {
   messages: { message: string; field?: string }[];
 };
 
-export const useNewPassword = () => {
+export const useNewPassword = (email: string | null) => {
   const router = useRouter();
   const { show } = useAlertStore();
 
@@ -22,8 +23,6 @@ export const useNewPassword = () => {
         throw response.error as Error;
       }
 
-      localStorage.removeItem('accessToken');
-
       return response.data;
     },
 
@@ -34,14 +33,16 @@ export const useNewPassword = () => {
         variant: 'default',
         description: null,
       });
-
-      setTimeout(() => {
-        router.replace('/forgot-password');
-      }, 2000);
+      if (error.statusCode === 400) {
+        setTimeout(() => {
+          const query = email ? `?email=${encodeURIComponent(email)}` : '';
+          router.replace(`/resend-link${query}`);
+        }, 2000);
+      }
     },
 
     onSuccess: async () => {
-      router.replace('/login');
+      router.replace(`${routes.auth.login}`);
     },
   });
 };

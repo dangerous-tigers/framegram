@@ -47,5 +47,15 @@
     "title": "電子郵件驗證連結已過期",
     "text": "驗證連結似乎已過期。不用擔心，我們可以再次發送連結。",
     "resendBtn": "重新發送連結"
+  },
+  "validateError": {
+    "minChars": "最少 6 个字符",
+    "maxChars": "最多 20 个字符",
+    "regExPassword": "密码必须包含至少一个数字、一个大写字母和一个小写字母。允许使用特殊字符：! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ { | } ~",
+    "passwordMatch": "密码必须一致",
+    "passwordConfirm": "请确认您的密码",
+    "email": "邮箱格式应为 example@example.com",
+    "emailExist": "此電子郵件地址對應的使用者不存在",
+    "captcha": "请验证您不是机器人"
   }
 }

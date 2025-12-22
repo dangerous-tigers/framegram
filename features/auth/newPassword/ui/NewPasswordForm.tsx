@@ -14,10 +14,14 @@ export const CreateNewPasswordForm = () => {
   const t = useTranslations('newPassword');
 
   const params = useRecoveryParams();
-  if (!params) return null;
 
-  const { recoveryCode } = params;
-  const { mutate, isPending } = useNewPassword();
+  if (!params?.recoveryCode || !params.email) {
+    return null;
+  }
+
+  const { recoveryCode, email } = params;
+
+  const { mutate, isPending } = useNewPassword(email);
 
   const {
     register,
