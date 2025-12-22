@@ -47,7 +47,7 @@ export const Navigation = ({ className }: PropsNavigation) => {
       {navigationItems.map((item) => {
         const { href, Component, label, disabled } = item;
 
-        if (href === '/logout')
+        if (href === routes.empty)
           return (
             <ButtonComponent
               key={label}
