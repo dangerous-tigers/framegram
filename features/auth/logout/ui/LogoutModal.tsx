@@ -4,10 +4,10 @@ import { Modal } from '@/shared/ui/modal';
 import { Button } from '@/shared/ui';
 import { useTranslations } from 'next-intl';
 import { useLogout } from '../api/logout.api';
-import { useMe } from '@/app/provider/me-provider';
 import { useState } from 'react';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
 import s from './LogoutModal.module.scss';
+import { useMe } from '@/entities/user/model/useMe';
 
 type Props = {
   open: boolean;
@@ -17,7 +17,7 @@ type Props = {
 export const LogoutModal = ({ open, onOpenChangeAction }: Props) => {
   const t = useTranslations('sidebar');
   const { mutate: logout, isPending } = useLogout();
-  const me = useMe(); // Получение информации о пользователе для отображения email
+  const { data: me } = useMe(); // Получение информации о пользователе для отображения email
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = () => {

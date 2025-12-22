@@ -10,6 +10,7 @@ export const routes = {
     policy: '/legal/policy',
     terms: '/legal/terms',
   },
+  empty: '',
   feed: '/feed',
   create: '/create',
   profile: '/profile',

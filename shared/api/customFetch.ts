@@ -44,8 +44,7 @@ export async function customFetch(input: RequestInfo, init?: RequestInit) {
 
 async function refreshToken(): Promise<string> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/auth/update`, {
-    // const res = await fetch('https://inctagram.work/api/v1/auth/update', {
-    method: 'GET',
+    method: 'POST',
     credentials: 'include',
   });
 

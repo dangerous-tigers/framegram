@@ -93,6 +93,8 @@ body {
 
 .main {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 
   @media (width <= 768px) {
     flex: 1 1 auto;
@@ -101,4 +103,10 @@ body {
 
 header {
   flex: 0 1 60px;
+}
+
+@media (width <= 768px) {
+  aside + div {
+    flex: 1 1 auto;
+  }
 }

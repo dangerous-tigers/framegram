@@ -1,6 +1,7 @@
 import s from './logo.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { routes } from '@/shared/config/routes';
 
 type PropsLogo = {
   className?: string;
@@ -11,7 +12,7 @@ export const Logo = (props: PropsLogo) => {
 
   return (
     <Link
-      href='/'
+      href={routes.feed}
       className={clsx(s.logo, className)}
     >
       Framehub
