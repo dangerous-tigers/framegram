@@ -10,7 +10,6 @@ import { getLocale } from 'next-intl/server';
 import { AppTanstackProviders } from '@/app/provider/me-provider';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Inter } from 'next/font/google';
-import { LogoutModalWrapper } from '@/features/auth/logout/ui/LogoutModalWrapper';
 
 export const metadata: Metadata = {
   title: 'Framegram',
@@ -43,7 +42,6 @@ export default async function RootLayout({
                 <div className='mainBox'>
                   <main className='main'>{children}</main>
                 </div>
-                <LogoutModalWrapper />
               </div>
             </NextIntlClientProvider>
           </AppTanstackProviders>

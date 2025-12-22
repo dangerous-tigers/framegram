@@ -18,6 +18,7 @@ import {
 import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
 import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
 import Link from 'next/link';
+import { LogoutModalWrapper } from '@/features/auth/logout/ui/LogoutModalWrapper';
 
 type PropsNavigation = {
   className?: string;
@@ -67,6 +68,7 @@ export const Navigation = ({ className }: PropsNavigation) => {
           </ButtonComponent>
         );
       })}
+      <LogoutModalWrapper />
     </div>
   );
 };
