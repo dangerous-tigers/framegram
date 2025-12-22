@@ -7,7 +7,6 @@ import { Header } from '@/widgets/header/ui/Header';
 import { AppProviders } from '@/app/provider/AppProviders';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
-import { AppTanstackProviders } from '@/app/provider/me-provider';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Inter } from 'next/font/google';
 
@@ -35,16 +34,14 @@ export default async function RootLayout({
     >
       <body>
         <AppProviders>
-          <AppTanstackProviders>
-            <NextIntlClientProvider>
-              <div className='wrapper'>
-                <Header />
-                <div className='mainBox'>
-                  <main className='main'>{children}</main>
-                </div>
+          <NextIntlClientProvider>
+            <div className='wrapper'>
+              <Header />
+              <div className='mainBox'>
+                <main className='main'>{children}</main>
               </div>
-            </NextIntlClientProvider>
-          </AppTanstackProviders>
+            </div>
+          </NextIntlClientProvider>
         </AppProviders>
       </body>
       <GoogleAnalytics gaId='G-YCCX45VF8W' />

@@ -2,9 +2,7 @@
 import { Modal } from '@/shared/ui/modal';
 import { Button } from '@/shared/ui';
 import { useTranslations } from 'next-intl';
-import { useMe } from '@/app/provider/me-provider';
 import { useState } from 'react';
-import type { KeyboardEvent } from 'react';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
 import s from './LogoutModal.module.scss';
 import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
@@ -16,9 +14,8 @@ type Props = {
 export const LogoutModal = ({ open }: Props) => {
   const t = useTranslations('sidebar');
   const { hide, logout, isPending } = useLogoutModal();
-  const me = useMe(); // Получение информации о пользователе для отображения email
   const [isLoading, setIsLoading] = useState(false);
-  console.log('logout modal');
+
   const handleLogout = () => {
     setIsLoading(true);
     logout(undefined, {
@@ -30,13 +27,6 @@ export const LogoutModal = ({ open }: Props) => {
         setIsLoading(false);
       },
     });
-  };
-
-  const onKeyPressHandler = (e: KeyboardEvent) => {
-    const { key } = e;
-    if (key === 'Escape') {
-      hide();
-    }
   };
 
   const handleClose = () => {
@@ -52,12 +42,10 @@ export const LogoutModal = ({ open }: Props) => {
         <ModalHeaderWithClose
           title={t('logOut')}
           onClose={handleClose}
-          onKeyPress={onKeyPressHandler}
         />
       }
     >
       <div className={s.modalContent}>
-        <p className={s.logoutMessage}>{t('logOutMessage', { email: me?.email || '' })}</p>
         <div className={s.buttonContainer}>
           <Button
             fullWidth

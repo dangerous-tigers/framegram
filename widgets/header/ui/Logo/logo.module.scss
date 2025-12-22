@@ -1,11 +1,5 @@
 .logo {
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 138%;
+  width: clamp(120px, 19vw, 220px);
   color: var(--light-100);
   margin-right: auto;
-
-  @media (width <= 768px) {
-    font-size: 24px;
-  }
 }

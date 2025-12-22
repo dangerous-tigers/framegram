@@ -13,7 +13,7 @@
     "statistic": "统计",
     "favorites": "收藏",
     "logOut": "退出",
-    "logOutMessage": "您确定要退出账户 \"___email___\" 吗？",
+    "logOutMessage": "您确定要退出账户 {email}, 吗？",
     "yes": "是",
     "no": "否"
   },
