@@ -1,7 +1,7 @@
 import { ElementType } from 'react';
 
 export type NavigationItem = {
-  href: string;
+  href?: string;
   label: string;
   Component: ElementType;
   disabled?: boolean;

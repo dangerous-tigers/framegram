@@ -2,64 +2,45 @@
 import { Modal } from '@/shared/ui/modal';
 import { Button } from '@/shared/ui';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
 import s from './LogoutModal.module.scss';
-import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
+import { useLogout } from '../api/logout.api';
+import { useMe } from '@/entities/user/model/useMe';
 
 type Props = {
   open: boolean;
+  setOpen: (open: boolean) => void;
 };
 
-export const LogoutModal = ({ open }: Props) => {
+export const LogoutModal = ({ open, setOpen }: Props) => {
   const t = useTranslations('sidebar');
-  const { hide, logout, isPending } = useLogoutModal();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleLogout = () => {
-    setIsLoading(true);
-    logout(undefined, {
-      onSuccess: () => {
-        hide();
-        setIsLoading(false);
-      },
-      onError: () => {
-        setIsLoading(false);
-      },
-    });
-  };
-
-  const handleClose = () => {
-    hide();
-  };
+  const { mutate } = useLogout();
+  const { data } = useMe();
 
   return (
     <Modal
       open={open}
-      onOpenChange={hide}
+      onOpenChange={setOpen}
       size='sm'
       header={
         <ModalHeaderWithClose
           title={t('logOut')}
-          onClose={handleClose}
+          onClose={() => setOpen(false)}
         />
       }
     >
       <div className={s.modalContent}>
+        <p className={s.logoutMessage}>{t('logOutMessage', { email: data?.email })}</p>
         <div className={s.buttonContainer}>
           <Button
-            fullWidth
-            variant='secondary'
-            onClick={handleClose}
-            disabled={isPending || isLoading}
+            variant='outline'
+            onClick={() => setOpen(false)}
           >
             {t('no')}
           </Button>
           <Button
-            fullWidth
             variant='primary'
-            onClick={handleLogout}
-            disabled={isPending || isLoading}
+            onClick={() => mutate()}
           >
             {t('yes')}
           </Button>

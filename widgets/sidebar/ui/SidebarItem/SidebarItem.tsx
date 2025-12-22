@@ -1,54 +1,36 @@
-import s from './sidebarItem.module.scss';
-import Link from 'next/link';
+'use client';
+
 import clsx from 'clsx';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import s from './sidebarItem.module.scss';
+import { NavigationItem } from '@/widgets/sidebar/model/navigation';
+import React from 'react';
 
 type Props = {
-  children: React.ReactNode;
-  Component: React.ReactElement;
-  href: string;
-  className?: string;
-  isActive?: boolean;
-  disabled?: boolean;
-  onClick?: (e: React.MouseEvent) => void;
+  item: NavigationItem;
 };
-export const SidebarItem = (props: Props) => {
-  const { children, Component, href, className, isActive, disabled, onClick } = props;
 
-  const classes = clsx(s.item, className, {
-    [s.active]: isActive,
-    [s.disabled]: disabled,
-  });
+export const SidebarItem = ({ item }: Props) => {
+  const pathname = usePathname();
+  const { href, Component, label, disabled } = item;
 
-  if (disabled) {
+  if (!href) {
     return (
-      <span
-        aria-disabled
-        tabIndex={-1}
-        className={classes}
-      >
-        {Component} {children}
-      </span>
-    );
-  }
-
-  if (onClick) {
-    return (
-      <span
-        className={classes}
-        onClick={onClick}
-        style={{ cursor: 'pointer' }}
-      >
-        {Component} {children}
-      </span>
+      <React.Fragment>
+        <Component className={clsx(s.item, { [s.disabled]: disabled })} />
+      </React.Fragment>
     );
   }
 
   return (
     <Link
       href={href}
-      className={classes}
+      className={clsx(s.item, { [s.disabled]: disabled }, { [s.active]: pathname === href })}
     >
-      {Component} {children}
+      <Component />
+      {label}
     </Link>
   );
 };

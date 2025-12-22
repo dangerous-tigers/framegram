@@ -1,0 +1,13 @@
+.children {
+  display: flex;
+  gap: 12px;
+}
+
+.logoutButton {
+  color: var(--light-500);
+  padding: 0;
+}
+
+.logoutButtonActive {
+  color: var(--primary-500);
+}
