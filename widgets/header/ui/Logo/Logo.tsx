@@ -1,3 +1,4 @@
+import { Framehublogo } from '@/assets/icons';
 import s from './logo.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -15,7 +16,7 @@ export const Logo = (props: PropsLogo) => {
       href={routes.feed}
       className={clsx(s.logo, className)}
     >
-      Framehub
+      <Framehublogo />
     </Link>
   );
 };
