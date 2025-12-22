@@ -3,7 +3,7 @@ import s from './RegisterForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type RegisterFormValues, registerSchema } from '../model/register.schema';
-import { useRegisterMutation } from '../model/register.hooks';
+import { useRegisterMutation } from '../model/useRegister';
 import { Button } from '@/shared/ui/button/Button';
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { RegisterRequestDto } from '@/features/auth/register/model/register.types';
@@ -139,7 +139,7 @@ export const RegisterForm = () => {
             className={s.btn}
             fullWidth={false}
             type={'submit'}
-            disabled={!formState.isValid}
+            disabled={isPending}
           >
             {isPending ? 'Loading...' : 'Sign Up'}
           </Button>

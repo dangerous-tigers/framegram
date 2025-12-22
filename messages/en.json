@@ -13,9 +13,10 @@
     "statistic": "Statistics",
     "favorites": "Favorites",
     "logOut": "Log out",
-    "logOutMessage": "Are you really want to log out of your account \"___email___\"?",
+    "logOutMessage": "Are you really want to log out of your account {email}?",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "email": "Email"
   },
   "login": {
     "title": "Sign In",
@@ -27,6 +28,11 @@
     "signIn": "Sign In",
     "noAccount": "Dont have an account?",
     "signUp": "Sign Up"
+  },
+  "confirmEmail": {
+    "title": "Congratulations!",
+    "text": "Your email has been confirmed",
+    "logIn": "Log in"
   },
   "forgot": {
     "title": "Forgot Password",

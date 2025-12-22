@@ -3,9 +3,7 @@ import clsx from 'clsx';
 import { Logo } from '@/widgets/header/ui/Logo';
 import { Notifications } from '@/widgets/header/ui/Notifications';
 import { ToggleLocale } from '@/shared/components/toggleLocale/ToggleLocale';
-import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
-import { routes } from '@/shared/config/routes';
+import { HeaderAuthButtons } from '@/widgets/header/ui/HeaderAuthButtons';
 
 type PropsHeader = {
   className?: string;
@@ -13,7 +11,6 @@ type PropsHeader = {
 
 export const Header = async (props: PropsHeader) => {
   const { className } = props;
-  const t = await getTranslations('header');
 
   return (
     <header className={clsx(s.header, className)}>
@@ -22,20 +19,7 @@ export const Header = async (props: PropsHeader) => {
           <Logo />
           <Notifications />
           <ToggleLocale />
-          <div className={s.buttons}>
-            <Link
-              className={s.link}
-              href={routes.auth.login}
-            >
-              {t('logIn')}
-            </Link>
-            <Link
-              className={s.linkBlue}
-              href={routes.auth.registration}
-            >
-              {t('signUp')}
-            </Link>
-          </div>
+          <HeaderAuthButtons />
         </div>
       </div>
     </header>

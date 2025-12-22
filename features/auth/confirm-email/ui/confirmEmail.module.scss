@@ -50,10 +50,11 @@
   font-size: 16px;
   line-height: 150%;
   text-align: center;
-  color: var(--primary-500);
+  color: var(--light-100);
   padding: 6px 24px;
   outline: none;
-  border: 2px solid transparent;
+  background: var(--primary-500);
+  border: 2px solid var(--primary-500);
   display: inline-grid;
   place-items: center;
 
@@ -66,6 +67,8 @@
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       color: var(--primary-100);
+      background: transparent;
+      border-color: transparent;
     }
   }
 
