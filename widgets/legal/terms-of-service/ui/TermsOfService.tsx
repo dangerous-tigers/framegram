@@ -1,12 +1,12 @@
 'use client';
 
 import s from './styles.module.scss';
-import { BackLink } from '@/shared/ui/BackLink';
+import { BackLink } from '@/shared/ui/backLink';
 import { routes } from '@/shared/config/routes';
 
 export function TermsOfServiceContent() {
   return (
-    <article className={s.article}>
+    <article>
       <div className={s.body}>
         <BackLink
           href={routes.auth.registration}

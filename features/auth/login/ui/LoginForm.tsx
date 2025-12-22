@@ -9,13 +9,9 @@ import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { LoginFormData, LoginSchema } from '../model/Login.schema';
 import { useLogin } from '../model/useLogin';
 import { useTranslations } from 'next-intl';
-import { Alert } from '@/shared/ui/alert/Alert';
-import { useState } from 'react';
 
 export function LoginForm() {
   const t = useTranslations('login');
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
 
   const { mutate, isPending } = useLogin();
   const {
@@ -26,29 +22,11 @@ export function LoginForm() {
     resolver: zodResolver(LoginSchema),
   });
   const onSubmit = (data: LoginFormData) => {
-    mutate(
-      {
-        email: data.email,
-        password: data.password,
-      },
-      {
-        onError: (error) => {
-          setAlertMessage(error.messages);
-          setAlertOpen(true);
-        },
-      },
-    );
+    mutate({ email: data.email, password: data.password });
   };
 
   return (
     <>
-      <Alert
-        open={alertOpen}
-        onOpenChange={setAlertOpen}
-        severity='error'
-        variant='default'
-        error={alertMessage}
-      />
       <div className={styles.loginWrapper}>
         <div className={styles.loginCard}>
           <h2 className={styles.title}>{t('title')}</h2>

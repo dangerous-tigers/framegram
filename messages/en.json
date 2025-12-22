@@ -12,7 +12,11 @@
     "search": "Search",
     "statistic": "Statistics",
     "favorites": "Favorites",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "logOutMessage": "Are you really want to log out of your account {email}?",
+    "yes": "Yes",
+    "no": "No",
+    "email": "Email"
   },
   "login": {
     "title": "Sign In",

@@ -5,6 +5,7 @@ import { SidebarItem } from '@/widgets/sidebar/ui/SidebarItem/SidebarItem';
 import { usePathname } from 'next/navigation';
 import { NavigationItem } from '@/widgets/sidebar/model/navigation';
 import { useTranslations } from 'next-intl';
+import { LogoutBtn } from '@/features/auth/logout/ui/LogoutBtn';
 
 import {
   Bookmark,
@@ -34,13 +35,28 @@ export const Navigation = ({ className }: PropsNavigation) => {
     { href: '/search', label: t('search'), Component: Search },
     { href: '/statistics', label: t('statistic'), Component: TrendingUp },
     { href: '/favorites', label: t('favorites'), Component: Bookmark },
-    { href: '/logout', label: t('logOut'), Component: LogOut },
+    { href: '', label: t('logOut'), Component: LogOut }, // Пустая строка для предотвращения навигации по умолчанию
   ];
 
   return (
     <div className={clsx(s.navigation, className)}>
       {navigationItems.map((item) => {
         const { href, Component, label, disabled } = item;
+
+        if (label === t('logOut')) {
+          return (
+            <LogoutBtn key={label}>
+              <SidebarItem
+                disabled={disabled}
+                href={href}
+                Component={<Component />}
+                isActive={pathname === href}
+              >
+                <span>{label}</span>
+              </SidebarItem>
+            </LogoutBtn>
+          );
+        }
 
         return (
           <SidebarItem

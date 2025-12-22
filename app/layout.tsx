@@ -40,7 +40,7 @@ export default async function RootLayout({
             <NextIntlClientProvider>
               <div className='wrapper'>
                 <Header />
-                <div className='main-box'>
+                <div className='mainBox'>
                   <main className='main'>{children}</main>
                 </div>
               </div>

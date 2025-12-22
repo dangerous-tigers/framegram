@@ -3,6 +3,7 @@
   font-size: var(--font-size-xl);
   font-weight: 700;
 }
+
 .iconButton {
   background: transparent;
   border: none;
@@ -17,12 +18,12 @@
 
   &:hover {
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgb(255 255 255 / 10%);
   }
 
   &:focus-visible {
     border-radius: 50%;
-    outline: 1px solid #0066ff;
+    outline: 1px solid #06f;
     outline-offset: 2px;
   }
 }

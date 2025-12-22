@@ -21,7 +21,7 @@ export default function PublicLayout({
 
   if (!isSuccess) return redirect(routes.auth.login);
   return (
-    <div className='main-box__body'>
+    <div className='mainBoxBody'>
       <Sidebar />
       {children}
     </div>

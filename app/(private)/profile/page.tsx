@@ -1,3 +1,3 @@
-export default function Page() {
-  return <div>Profile by user{}</div>;
+export default async function Page() {
+  return <div>Profile by users </div>;
 }

@@ -19,7 +19,6 @@
 .form {
   display: flex;
   flex-direction: column;
-
 }
 
 .title {
@@ -52,6 +51,7 @@
   margin-bottom: 12px;
   font-size: 12px;
   gap: 4px;
+
   span {
     font-size: 12px;
   }
@@ -72,23 +72,21 @@
   margin-bottom: 6px;
 }
 
-.SignIn {
-  color: var(--primary-500);
-}
-.linkCheckbox{
+.linkCheckbox {
   font-size: 12px;
   line-height: 133%;
   text-decoration: underline;
   color: var(--primary-300);
-
 }
+
 .errorText {
   font-size: var(--font-size-s);
   color: var(--danger-500);
   margin-top: -12px;
   margin-bottom: 12px;
 }
-.link{
+
+.link {
   font-weight: 600;
   font-size: 16px;
   line-height: 150%;
@@ -100,31 +98,36 @@
   display: inline-grid;
   place-items: center;
 
-  &:active{
+  &:active {
     color: var(--primary-700);
   }
+
   transition: all 0.3s ease;
+
   @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        color: var(--primary-100);
-      }
+    &:hover {
+      color: var(--primary-100);
     }
-  &:focus-visible{
+  }
+
+  &:focus-visible {
     border: 2px solid var(--primary-700);
     border-radius: 2px;
   }
 }
 
-.modal{
+.modal {
   display: flex;
-flex-direction: column;
+  flex-direction: column;
   gap: 24px;
   padding: 24px;
-  button{
+
+  button {
     display: inline-flex;
     justify-content: center;
   }
 }
-.btnModal{
+
+.btnModal {
   margin-left: auto;
 }

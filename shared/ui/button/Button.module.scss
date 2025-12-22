@@ -1,12 +1,10 @@
-
-
 .btn {
   min-width: 182px;
   padding: 5px 10px;
   border: 1px solid transparent;
   border-radius: 2px;
   background: transparent;
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, sans-serif;
   font-weight: 600;
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
@@ -16,9 +14,10 @@
     background-color 0.25s ease,
     color 0.25s ease;
 
-  @media screen and (max-width: 578px) {
+  @media screen and (width <= 578px) {
     width: 100%;
   }
+
   &[disabled] {
     cursor: default;
   }
@@ -42,9 +41,10 @@
     }
 
     /* Пока что оставлю закоментированную, не очень работает на пк с :active */
-    /*&:focus {
+
+    /* &:focus {
       background-color: var(--primary-700);
-    }*/
+    } */
 
     &[disabled] {
       background-color: var(--primary-900);
@@ -67,10 +67,10 @@
 
     /* Пока что оставлю закоментированную, не очень работает на пк с :active */
 
-    /*&:focus {
+    /* &:focus {
       background-color: var(--dark-300);
       border-color: var(--primary-300);
-    }*/
+    } */
 
     &[disabled] {
       background-color: var(--dark-500);
@@ -95,10 +95,10 @@
 
     /* Пока что оставлю закоментированную, не очень работает на пк с :active */
 
-    /*&:focus {
+    /* &:focus {
       border-color: var(--primary-700);
       color: var(--primary-700);
-    }*/
+    } */
 
     &[disabled] {
       border-color: var(--primary-900);
@@ -122,10 +122,10 @@
 
     /* Пока что оставлю закоментированную, не очень работает на пк с :active */
 
-    /*&:focus {
+    /* &:focus {
       border-color: var(--primary-500);
       color: var(--primary-500);
-    }*/
+    } */
 
     &[disabled] {
       color: var(--primary-900);

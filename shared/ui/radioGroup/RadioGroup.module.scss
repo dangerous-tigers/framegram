@@ -4,8 +4,7 @@
   gap: 20px;
 
   &[data-orientation='horizontal'] {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
   }
 
   &__item {
@@ -56,16 +55,16 @@
     &:disabled {
       border-color: var(--dark-100);
 
-      .radio__indicator {
+      .radioIndicator {
         background: var(--dark-100);
       }
 
-      & ~ .radio__label {
+      & ~ .radiLabel {
         color: var(--light-900);
       }
     }
 
-    &[data-state='checked'] > .radio__indicator {
+    &[data-state='checked'] > .radioIndicator {
       transform: scale(1);
     }
   }
