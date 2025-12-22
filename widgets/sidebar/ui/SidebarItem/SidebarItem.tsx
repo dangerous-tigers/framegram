@@ -17,11 +17,7 @@ export const SidebarItem = ({ item }: Props) => {
   const { href, Component, label, disabled } = item;
 
   if (!href) {
-    return (
-      <React.Fragment>
-        <Component className={clsx(s.item, { [s.disabled]: disabled })} />
-      </React.Fragment>
-    );
+    return <Component className={clsx(s.item, { [s.disabled]: disabled })} />;
   }
 
   return (
