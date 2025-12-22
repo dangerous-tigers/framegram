@@ -17,6 +17,7 @@ import {
   PlusSquareOutline,
   TrendingUp,
 } from '@/assets/icons';
+import { routes } from '@/shared/config/routes';
 
 type PropsNavigation = {
   className?: string;
@@ -28,14 +29,14 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const t = useTranslations('sidebar');
 
   const navigationItems: NavigationItem[] = [
-    { href: '/feed', label: t('feed'), Component: HomeOutline },
-    { href: '/create', label: t('create'), Component: PlusSquareOutline },
-    { href: '/profile', label: t('myProfile'), Component: Person },
-    { href: '/messenger', label: t('messenges'), Component: MessageCircle },
-    { href: '/search', label: t('search'), Component: Search },
-    { href: '/statistics', label: t('statistic'), Component: TrendingUp },
-    { href: '/favorites', label: t('favorites'), Component: Bookmark },
-    { href: '', label: t('logOut'), Component: LogOut }, // Пустая строка для предотвращения навигации по умолчанию
+    { href: routes.feed, label: t('feed'), Component: HomeOutline },
+    { href: routes.create, label: t('create'), Component: PlusSquareOutline },
+    { href: routes.profile, label: t('myProfile'), Component: Person },
+    { href: routes.messenger, label: t('messenges'), Component: MessageCircle },
+    { href: routes.search, label: t('search'), Component: Search },
+    { href: routes.statistics, label: t('statistic'), Component: TrendingUp },
+    { href: routes.favorites, label: t('favorites'), Component: Bookmark },
+    { href: routes.empty, label: t('logOut'), Component: LogOut }, // Пустая строка для предотвращения навигации по умолчанию
   ];
 
   return (
