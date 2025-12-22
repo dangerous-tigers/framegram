@@ -1,21 +1,22 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { useConfirmEmail } from '../model/useConfirmEmail';
 import { routes } from '@/shared/config/routes';
 import s from './confirmEmail.module.scss';
 import emailConfirmedIllustration from '@/assets/illustrations/confirm-email.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   code: string;
 };
 
 export const ConfirmEmail = ({ code }: Props) => {
-  const router = useRouter();
   const { mutate, isSuccess, isPending, isError, error } = useConfirmEmail();
+
+  const t = useTranslations('confirmEmail');
 
   useEffect(() => {
     mutate(code);
@@ -31,16 +32,16 @@ export const ConfirmEmail = ({ code }: Props) => {
     return (
       <div className={s.confirmEmail}>
         <div className={s.content}>
-          <h1 className={s.title}>Congratulations!</h1>
-          <p className={s.text}>Your email has been confirmed</p>
+          <h1 className={s.title}>{t('title')}</h1>
+          <p className={s.text}>{t('text')}</p>
 
           <Link
+            replace
             className={s.link}
             href={routes.auth.login}
           >
-            Sign In
+            {t('logIn')}
           </Link>
-          <button onClick={() => router.replace(routes.auth.login)}>Sign In</button>
         </div>
 
         <div className={s.image}>

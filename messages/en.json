@@ -24,5 +24,10 @@
     "signIn": "Sign In",
     "noAccount": "Dont have an account?",
     "signUp": "Sign Up"
+  },
+  "confirmEmail": {
+    "title": "Congratulations!",
+    "text": "Your email has been confirmed",
+    "logIn": "Log in"
   }
 }

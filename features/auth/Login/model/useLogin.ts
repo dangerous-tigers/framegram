@@ -1,6 +1,5 @@
 import { client } from '@/shared/api/client';
 import { useMutation } from '@tanstack/react-query';
-
 import { useRouter } from 'next/navigation';
 import { LoginFormData } from './Login.schema';
 import { parseJwt } from '@/shared/lib/parseJwt';
