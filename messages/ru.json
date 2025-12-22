@@ -12,6 +12,20 @@
     "search": "Поиск",
     "statistic": "Статистика",
     "favorites": "Избранное",
-    "logOut": "Выйти"
+    "logOut": "Выйти",
+    "logOutMessage": "Вы действительно хотите выйти из аккаунта \"___email___\"?",
+    "yes": "Да",
+    "no": "Нет"
+  },
+  "login": {
+    "title": "Вход",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "forgotPassword": "Забыли пароль",
+    "signIn": "Войти",
+    "noAccount": "Нет аккаунта?",
+    "signUp": "Зарегистрироваться"
   }
 }

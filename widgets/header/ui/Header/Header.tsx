@@ -4,6 +4,8 @@ import { Logo } from '@/widgets/header/ui/Logo';
 import { Notifications } from '@/widgets/header/ui/Notifications';
 import { ToggleLocale } from '@/shared/components/toggleLocale/ToggleLocale';
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
+import { routes } from '@/shared/config/routes';
 
 type PropsHeader = {
   className?: string;
@@ -21,8 +23,18 @@ export const Header = async (props: PropsHeader) => {
           <Notifications />
           <ToggleLocale />
           <div className={s.buttons}>
-            <button>{t('logIn')}</button>
-            <button>{t('signUp')}</button>
+            <Link
+              className={s.link}
+              href={routes.auth.login}
+            >
+              {t('logIn')}
+            </Link>
+            <Link
+              className={s.linkBlue}
+              href={routes.auth.registration}
+            >
+              {t('signUp')}
+            </Link>
           </div>
         </div>
       </div>

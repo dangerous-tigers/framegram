@@ -12,6 +12,20 @@
     "search": "搜索",
     "statistic": "统计",
     "favorites": "收藏",
-    "logOut": "退出"
+    "logOut": "退出",
+    "logOutMessage": "您确定要退出账户 \"___email___\" 吗？",
+    "yes": "是",
+    "no": "否"
+  },
+  "login": {
+    "title": "登录",
+    "email": "邮箱",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "forgotPassword": "忘记密码",
+    "signIn": "登录",
+    "noAccount": "还没有账号？",
+    "signUp": "注册"
   }
 }

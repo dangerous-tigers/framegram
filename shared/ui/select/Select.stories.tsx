@@ -104,7 +104,14 @@ export const WithIcon: Story = {
     const [value, setValue] = useState<string>(String(langs[0].label));
 
     return (
-      <Select options={langs} disabled={false} value={value} onValueChange={setValue} width={'64px'} variant={'icon'} />
+      <Select
+        options={langs}
+        disabled={false}
+        value={value}
+        onValueChange={setValue}
+        width={'64px'}
+        variant={'icon'}
+      />
     );
   },
 };

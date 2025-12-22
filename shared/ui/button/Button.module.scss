@@ -1,21 +1,25 @@
-/* Как добавятся общие шрифты удалить */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 .btn {
   min-width: 182px;
   padding: 5px 10px;
   border: 1px solid transparent;
   border-radius: 2px;
   background: transparent;
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
   font-weight: 600;
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
   cursor: pointer;
-  transition: border 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+  transition:
+    border 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
 
-  @media screen and (max-width: 578px) {
+  @media screen and (width <= 578px) {
     width: 100%;
+  }
+
+  &[disabled] {
+    cursor: default;
   }
 
   &--full_width {
@@ -26,7 +30,7 @@
     background-color: var(--primary-500);
     color: var(--light-100);
 
-    @media(hover: hover) {
+    @media (hover: hover) {
       &:hover {
         background-color: var(--primary-100);
       }
@@ -37,9 +41,10 @@
     }
 
     /* Пока что оставлю закоментированную, не очень работает на пк с :active */
-    /*&:focus {
+
+    /* &:focus {
       background-color: var(--primary-700);
-    }*/
+    } */
 
     &[disabled] {
       background-color: var(--primary-900);
@@ -50,7 +55,7 @@
     background-color: var(--dark-300);
     color: var(--light-100);
 
-    @media(hover: hover) {
+    @media (hover: hover) {
       &:hover {
         background-color: var(--dark-100);
       }
@@ -62,22 +67,21 @@
 
     /* Пока что оставлю закоментированную, не очень работает на пк с :active */
 
-    /*&:focus {
+    /* &:focus {
       background-color: var(--dark-300);
       border-color: var(--primary-300);
-    }*/
+    } */
 
     &[disabled] {
       background-color: var(--dark-500);
     }
-
   }
 
   &--outline {
     border-color: var(--primary-500);
     color: var(--primary-500);
 
-    @media(hover: hover) {
+    @media (hover: hover) {
       &:hover {
         border-color: var(--primary-100);
         color: var(--primary-100);
@@ -91,23 +95,22 @@
 
     /* Пока что оставлю закоментированную, не очень работает на пк с :active */
 
-    /*&:focus {
+    /* &:focus {
       border-color: var(--primary-700);
       color: var(--primary-700);
-    }*/
+    } */
 
     &[disabled] {
       border-color: var(--primary-900);
       color: var(--primary-900);
     }
-
   }
 
   &--text {
     min-width: 0;
     color: var(--primary-500);
 
-    @media(hover: hover) {
+    @media (hover: hover) {
       &:hover {
         color: var(--primary-100);
       }
@@ -119,14 +122,13 @@
 
     /* Пока что оставлю закоментированную, не очень работает на пк с :active */
 
-    /*&:focus {
+    /* &:focus {
       border-color: var(--primary-500);
       color: var(--primary-500);
-    }*/
+    } */
 
     &[disabled] {
       color: var(--primary-900);
     }
   }
-
 }

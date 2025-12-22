@@ -9,7 +9,6 @@ export default defineConfig([
   {
     ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'node_modules/**', '*.cjs', '**/*.cjs'],
   },
-
   // Базовый JS конфиг
   js.configs.recommended,
 
@@ -44,6 +43,12 @@ export default defineConfig([
         ...globals.browser,
         ...globals.node,
       },
+    },
+  },
+  {
+    files: ['**/*.stories.tsx', '**/*.stories.ts', '**/storybook/**'],
+    rules: {
+      'react/display-name': 'off',
     },
   },
 ]);

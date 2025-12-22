@@ -11,7 +11,12 @@ type Props = {
 
 export const SelectItem = ({ children, label, value, className, Component, ...props }: Props) => {
   return (
-    <PrimitiveSelect.Item aria-label={label} {...props} className={className} value={value}>
+    <PrimitiveSelect.Item
+      aria-label={label}
+      {...props}
+      className={className}
+      value={value}
+    >
       <PrimitiveSelect.Icon asChild>{Component}</PrimitiveSelect.Icon>
       <PrimitiveSelect.ItemText>{children}</PrimitiveSelect.ItemText>
     </PrimitiveSelect.Item>

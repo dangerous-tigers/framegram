@@ -1,0 +1,76 @@
+.confirmEmail {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding: 35px 0;
+
+  @media (width <= 768px) {
+    gap: 24px;
+    padding: 24px 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 180%;
+  text-align: center;
+  color: var(--light-100);
+  margin-bottom: 19px;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--light-100);
+  margin-bottom: 54px;
+}
+
+.image {
+  width: 290px;
+  height: 200px;
+  margin: 0 auto;
+
+  @media (width >= 768px) {
+    width: 432px;
+    height: 300px;
+  }
+}
+
+.link {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--primary-500);
+  padding: 6px 24px;
+  outline: none;
+  border: 2px solid transparent;
+  display: inline-grid;
+  place-items: center;
+
+  &:active {
+    color: var(--primary-700);
+  }
+
+  transition: all 0.3s ease;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--primary-100);
+    }
+  }
+
+  &:focus-visible {
+    border: 2px solid var(--primary-700);
+    border-radius: 2px;
+  }
+}

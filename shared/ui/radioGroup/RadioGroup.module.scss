@@ -3,9 +3,8 @@
   flex-direction: column;
   gap: 20px;
 
-  &[data-orientation="horizontal"] {
-    flex-direction: row;
-    flex-wrap: wrap;
+  &[data-orientation='horizontal'] {
+    flex-flow: row wrap;
   }
 
   &__item {
@@ -33,7 +32,7 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      transition: background .25s;
+      transition: background 0.25s;
       z-index: -1;
     }
 
@@ -56,17 +55,16 @@
     &:disabled {
       border-color: var(--dark-100);
 
-      .radio__indicator {
+      .radioIndicator {
         background: var(--dark-100);
       }
 
-      & ~ .radio__label {
+      & ~ .radiLabel {
         color: var(--light-900);
       }
-
     }
 
-    &[data-state='checked'] > .radio__indicator {
+    &[data-state='checked'] > .radioIndicator {
       transform: scale(1);
     }
   }
@@ -91,5 +89,4 @@
     font-size: var(--font-size-s);
     line-height: var(--line-height-m);
   }
-
 }
