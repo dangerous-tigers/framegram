@@ -1,9 +1,5 @@
-import { PrivacyPolicyContent } from '@/widgets/legal/privacy-policy/ui/PrivacyPolicy';
+import { PrivacyPolicy } from '@/widgets/legal';
 
-export default function PrivacyPolicy() {
-  return (
-    <div>
-      <PrivacyPolicyContent />
-    </div>
-  );
+export default function PrivacyPolicyPage() {
+  return <PrivacyPolicy />;
 }

@@ -1,17 +1,22 @@
 'use client';
 
-import s from './styles.module.scss';
-import { BackLink } from '@/shared/ui/backLink';
+import s from './../../styles/styles.module.scss';
 import { routes } from '@/shared/config/routes';
+import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
+import Link from 'next/link';
+import { ArrowBackOutline } from '@/assets/icons';
 
-export function TermsOfServiceContent() {
+export function TermsOfService() {
   return (
     <article>
       <div className={s.body}>
-        <BackLink
+        <ButtonComponent
+          as={Link}
           href={routes.auth.registration}
-          label={'Back to Sign Up'}
-        />
+          className={s.backLink}
+        >
+          <ArrowBackOutline /> Back to Sign Up
+        </ButtonComponent>
         <h1 className={s.title}>Terms of Service</h1>
         <div className={s.content}>
           <p>

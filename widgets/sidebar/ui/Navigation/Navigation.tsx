@@ -1,22 +1,24 @@
 'use client';
 import s from './navigation.module.scss';
 import clsx from 'clsx';
-import { SidebarItem } from '@/widgets/sidebar/ui/SidebarItem/SidebarItem';
 import { usePathname } from 'next/navigation';
 import { NavigationItem } from '@/widgets/sidebar/model/navigation';
 import { useTranslations } from 'next-intl';
-import { LogoutBtn } from '@/features/auth/logout/ui/LogoutBtn';
 
 import {
   Bookmark,
   HomeOutline,
   LogOut,
   MessageCircle,
-  Search,
   Person,
   PlusSquareOutline,
+  Search,
   TrendingUp,
 } from '@/assets/icons';
+import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
+import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
+import Link from 'next/link';
+import { LogoutModalWrapper } from '@/features/auth/logout/ui/LogoutModalWrapper';
 import { routes } from '@/shared/config/routes';
 
 type PropsNavigation = {
@@ -27,6 +29,7 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const pathname = usePathname();
 
   const t = useTranslations('sidebar');
+  const { show } = useLogoutModal();
 
   const navigationItems: NavigationItem[] = [
     { href: routes.feed, label: t('feed'), Component: HomeOutline },
@@ -44,33 +47,29 @@ export const Navigation = ({ className }: PropsNavigation) => {
       {navigationItems.map((item) => {
         const { href, Component, label, disabled } = item;
 
-        if (label === t('logOut')) {
+        if (href === routes.empty)
           return (
-            <LogoutBtn key={label}>
-              <SidebarItem
-                disabled={disabled}
-                href={href}
-                Component={<Component />}
-                isActive={pathname === href}
-              >
-                <span>{label}</span>
-              </SidebarItem>
-            </LogoutBtn>
+            <ButtonComponent
+              key={label}
+              onClick={show}
+            >
+              <Component /> {label}
+            </ButtonComponent>
           );
-        }
 
         return (
-          <SidebarItem
-            disabled={disabled}
-            href={href}
-            Component={<Component />}
+          <ButtonComponent
+            as={Link}
             key={label}
+            href={href}
+            disabled={disabled}
             isActive={pathname === href}
           >
-            <span>{label}</span>
-          </SidebarItem>
+            <Component /> {label}
+          </ButtonComponent>
         );
       })}
+      <LogoutModalWrapper />
     </div>
   );
 };

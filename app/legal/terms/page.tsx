@@ -1,9 +1,5 @@
-import { TermsOfServiceContent } from '@/widgets/legal/terms-of-service/ui/TermsOfService';
+import { TermsOfService } from '@/widgets/legal';
 
-export default function TermsOfService() {
-  return (
-    <div>
-      <TermsOfServiceContent />
-    </div>
-  );
+export default function TermsOfServicePage() {
+  return <TermsOfService />;
 }
