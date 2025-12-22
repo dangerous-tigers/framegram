@@ -5,7 +5,7 @@ import { useMe } from '@/entities/user/model/useMe';
 import { redirect } from 'next/navigation';
 import { routes } from '@/shared/config/routes';
 
-export default function PublicLayout({
+export default function PrivateLayout({
   children,
 }: Readonly<{
   children: ReactNode;
