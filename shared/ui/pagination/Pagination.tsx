@@ -2,14 +2,19 @@ import styles from './Pagination.module.scss';
 import { ArrowIosBack, ArrowIosForward } from '@/assets/icons/components';
 import { PaginationItem } from '@/shared/ui/pagination/paginationItem/PaginationItem';
 import { getPages } from '@/shared/ui/pagination/lib/getPages';
+import { pageSizeOptions } from '@/shared/ui/pagination/model/pageSizeOptions';
+import { Select } from '@/shared/ui/select/Select';
 
 type Props = {
-  currentPage: number;
   totalPages: number;
+  currentPage: number;
   onPageChange: (page: number) => void;
+  pageSize: string;
+  onPageSizeChange: (value: string) => void;
 };
 
-export const Pagination: React.FC<Props> = ({ currentPage, totalPages, onPageChange }) => {
+export const Pagination: React.FC<Props> = (props) => {
+  const { onPageSizeChange, onPageChange, pageSize, totalPages, currentPage } = props;
   const pages = getPages(currentPage, totalPages);
 
   return (
@@ -44,7 +49,14 @@ export const Pagination: React.FC<Props> = ({ currentPage, totalPages, onPageCha
       </PaginationItem>
       <div className={styles.show}>
         <p>Show</p>
-        <button>100</button>
+        <Select
+          options={pageSizeOptions}
+          value={pageSize}
+          onValueChange={onPageSizeChange}
+          disabled={false}
+          variant='text'
+          width='52px'
+        />
         <p>on page</p>
       </div>
     </div>

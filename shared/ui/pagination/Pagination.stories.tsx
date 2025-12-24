@@ -7,27 +7,30 @@ const meta: Meta<typeof Pagination> = {
   component: Pagination,
   tags: ['autodocs'],
   argTypes: {
-    currentPage: {
-      control: { type: 'number', min: 1 },
-    },
     totalPages: {
       control: { type: 'number', min: 1 },
     },
-    onPageChange: { action: 'pageChanged' },
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof Pagination>;
 
-// Компонент-обёртка для интерактивных историй
+// 🔹 Обёртка с состоянием
 const PaginationWithState = ({ totalPages = 10 }: { totalPages?: number }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState('100');
+
   return (
     <Pagination
       currentPage={currentPage}
       totalPages={totalPages}
-      onPageChange={(page) => setCurrentPage(page)}
+      pageSize={pageSize}
+      onPageChange={setCurrentPage}
+      onPageSizeChange={(value) => {
+        setPageSize(value);
+        setCurrentPage(1); // важно для UX
+      }}
     />
   );
 };
