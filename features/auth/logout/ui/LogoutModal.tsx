@@ -1,30 +1,26 @@
 'use client';
-
 import { Modal } from '@/shared/ui/modal';
 import { Button } from '@/shared/ui';
 import { useTranslations } from 'next-intl';
-import { useLogout } from '../api/logout.api';
 import { useState } from 'react';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
 import s from './LogoutModal.module.scss';
-import { useMe } from '@/entities/user/model/useMe';
+import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
 
 type Props = {
   open: boolean;
-  onOpenChangeAction: (open: boolean) => void;
 };
 
-export const LogoutModal = ({ open, onOpenChangeAction }: Props) => {
+export const LogoutModal = ({ open }: Props) => {
   const t = useTranslations('sidebar');
-  const { mutate: logout, isPending } = useLogout();
-  const { data: me } = useMe(); // Получение информации о пользователе для отображения email
+  const { hide, logout, isPending } = useLogoutModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = () => {
     setIsLoading(true);
     logout(undefined, {
       onSuccess: () => {
-        onOpenChangeAction(false);
+        hide();
         setIsLoading(false);
       },
       onError: () => {
@@ -33,37 +29,34 @@ export const LogoutModal = ({ open, onOpenChangeAction }: Props) => {
     });
   };
 
-  const handleCancel = () => {
-    onOpenChangeAction(false);
-  };
-
-  const handleOnClose = () => {
-    onOpenChangeAction(false);
+  const handleClose = () => {
+    hide();
   };
 
   return (
     <Modal
       open={open}
-      onOpenChange={onOpenChangeAction}
+      onOpenChange={hide}
       size='sm'
       header={
         <ModalHeaderWithClose
           title={t('logOut')}
-          onClose={handleOnClose}
+          onClose={handleClose}
         />
       }
     >
       <div className={s.modalContent}>
-        <p className={s.logoutMessage}>{t('logOutMessage', { email: me?.email || '' })}</p>
         <div className={s.buttonContainer}>
           <Button
+            fullWidth
             variant='secondary'
-            onClick={handleCancel}
+            onClick={handleClose}
             disabled={isPending || isLoading}
           >
             {t('no')}
           </Button>
           <Button
+            fullWidth
             variant='primary'
             onClick={handleLogout}
             disabled={isPending || isLoading}

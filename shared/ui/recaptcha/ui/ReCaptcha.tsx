@@ -1,15 +1,16 @@
 'use client';
 import Script from 'next/script';
 import { useEffect, useRef } from 'react';
-import { FieldErrors, FieldValues, UseFormRegister, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
 import styles from './ReCaptcha.module.scss';
 import clsx from 'clsx';
+import { ForgotPasswordData } from '@/features/auth/ForgotPassword/model/ForgotPassword.schema';
 
 type Props = {
-  register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
-  trigger: UseFormTrigger<FieldValues>;
-  errors: FieldErrors<FieldValues>;
+  register: UseFormRegister<ForgotPasswordData>;
+  setValue: UseFormSetValue<ForgotPasswordData>;
+  trigger: UseFormTrigger<ForgotPasswordData>;
+  errors: FieldErrors<ForgotPasswordData>;
 };
 
 export function Recaptcha({ register, setValue, trigger, errors }: Props) {
@@ -17,25 +18,25 @@ export function Recaptcha({ register, setValue, trigger, errors }: Props) {
   const isReady = useRef(false);
 
   useEffect(() => {
-    register('captcha', {
+    register('recaptcha', {
       required: 'Please verify that you are not a robot.',
     });
 
     // 1. Определяем глобальные коллбэки для reCAPTCHA
     // Как только капча готова, сохраняем значение
     window.onCaptchaSuccess = (token: string) => {
-      setValue('captcha', token);
-      trigger('captcha');
+      setValue('recaptcha', token);
+      trigger('recaptcha');
     };
     // Как только капча истекает, очищаем значение
     window.onCaptchaExpired = () => {
-      setValue('captcha', '');
-      trigger('captcha');
+      setValue('recaptcha', '');
+      trigger('recaptcha');
     };
     // При ошибке также очищаем значение
     window.onCaptchaError = () => {
-      setValue('captcha', '');
-      trigger('captcha');
+      setValue('recaptcha', '');
+      trigger('recaptcha');
     };
 
     // 2. Хак для повторного рендеринга при навигации в Next.js
@@ -66,7 +67,7 @@ export function Recaptcha({ register, setValue, trigger, errors }: Props) {
   }, [register, setValue, trigger]);
 
   return (
-    <div className={clsx(styles.recaptcha, errors.captcha && styles.recaptchaError)}>
+    <div className={clsx(styles.recaptcha, errors.recaptcha && styles.recaptchaError)}>
       <Script
         src='https://www.google.com/recaptcha/api.js'
         strategy='afterInteractive'
@@ -83,7 +84,7 @@ export function Recaptcha({ register, setValue, trigger, errors }: Props) {
         data-error-callback='onCaptchaError'
       />
 
-      {errors.captcha && <p className={styles.error}>{errors.captcha.message as string}</p>}
+      {errors.recaptcha && <p className={styles.error}>{errors.recaptcha.message as string}</p>}
     </div>
   );
 }

@@ -4,8 +4,9 @@ export const routes = {
     login: '/login',
     confirmEmail: '/confirm-email',
     logout: '/logout',
+    forgot: '/forgot-password',
+    newPassword: '/new-password',
   },
-
   legal: {
     policy: '/legal/policy',
     terms: '/legal/terms',

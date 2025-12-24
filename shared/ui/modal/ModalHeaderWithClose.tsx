@@ -1,22 +1,30 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import styles from './ModalHeader.module.scss';
 import { Close } from '@/assets/icons';
+import type { KeyboardEvent } from 'react';
 
-export const ModalHeaderWithClose = ({ title, onClose }: { title: string; onClose: () => void }) => {
+export const ModalHeaderWithClose = ({
+  title,
+  onClose,
+  onKeyPress,
+}: {
+  title: string;
+  onClose: () => void;
+  onKeyPress?: (e: KeyboardEvent) => void;
+}) => {
   return (
     <>
       <Dialog.Title asChild>
         <h2 className={styles.title}>{title}</h2>
       </Dialog.Title>
-      <Dialog.Close asChild>
-        <button
-          className={styles.iconButton}
-          aria-label='Close'
-          type='button'
-          onClick={onClose}
-        >
-          <Close />
-        </button>
+      <Dialog.Close
+        className={styles.iconButton}
+        aria-label='Close'
+        type='button'
+        onClick={onClose}
+        onKeyUp={onKeyPress}
+      >
+        <Close />
       </Dialog.Close>
     </>
   );
