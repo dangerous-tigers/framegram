@@ -1,0 +1,134 @@
+.btn {
+  min-width: 182px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  cursor: pointer;
+  transition:
+    border 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+
+  @media screen and (width <= 578px) {
+    width: 100%;
+  }
+
+  &[disabled] {
+    cursor: default;
+  }
+
+  &--full_width {
+    width: 100%;
+  }
+
+  &--primary {
+    background-color: var(--primary-500);
+    color: var(--light-100);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--primary-100);
+      }
+    }
+
+    &:active {
+      background-color: var(--primary-700);
+    }
+
+    /* Пока что оставлю закоментированную, не очень работает на пк с :active */
+
+    /* &:focus {
+      background-color: var(--primary-700);
+    } */
+
+    &[disabled] {
+      background-color: var(--primary-900);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--dark-300);
+    color: var(--light-100);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--dark-100);
+      }
+    }
+
+    &:active {
+      background-color: #212121;
+    }
+
+    /* Пока что оставлю закоментированную, не очень работает на пк с :active */
+
+    /* &:focus {
+      background-color: var(--dark-300);
+      border-color: var(--primary-300);
+    } */
+
+    &[disabled] {
+      background-color: var(--dark-500);
+    }
+  }
+
+  &--outline {
+    border-color: var(--primary-500);
+    color: var(--primary-500);
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--primary-100);
+        color: var(--primary-100);
+      }
+    }
+
+    &:active {
+      border-color: var(--primary-700);
+      color: var(--primary-700);
+    }
+
+    /* Пока что оставлю закоментированную, не очень работает на пк с :active */
+
+    /* &:focus {
+      border-color: var(--primary-700);
+      color: var(--primary-700);
+    } */
+
+    &[disabled] {
+      border-color: var(--primary-900);
+      color: var(--primary-900);
+    }
+  }
+
+  &--text {
+    min-width: 0;
+    color: var(--primary-500);
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--primary-100);
+      }
+    }
+
+    &:active {
+      color: var(--primary-700);
+    }
+
+    /* Пока что оставлю закоментированную, не очень работает на пк с :active */
+
+    /* &:focus {
+      border-color: var(--primary-500);
+      color: var(--primary-500);
+    } */
+
+    &[disabled] {
+      color: var(--primary-900);
+    }
+  }
+}

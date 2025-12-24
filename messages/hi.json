@@ -1,0 +1,31 @@
+{
+  "header": {
+    "logIn": "लॉग इन",
+    "logOut": "लॉग आउट",
+    "signUp": "साइन अप"
+  },
+  "sidebar": {
+    "feed": "फ़ीड",
+    "create": "बनाएँ",
+    "myProfile": "मेरी प्रोफ़ाइल",
+    "messenges": "संदेश",
+    "search": "खोजें",
+    "statistic": "आँकड़े",
+    "favorites": "पसंदीदा",
+    "logOut": "लॉग आउट",
+    "logOutMessage": "क्या आप वाकई अपने खाता {email} से लॉग आउट करना चाहते हैं?",
+    "yes": "हां",
+    "no": "नहीं"
+  },
+  "login": {
+    "title": "साइन इन",
+    "email": "ईमेल",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "पासवर्ड",
+    "passwordPlaceholder": "अपना पासवर्ड दर्ज करें",
+    "forgotPassword": "पासवर्ड भूल गए",
+    "signIn": "साइन इन",
+    "noAccount": "कोई खाता नहीं है?",
+    "signUp": "साइन अप"
+  }
+}

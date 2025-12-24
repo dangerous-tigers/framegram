@@ -1,0 +1,94 @@
+.root {
+  display: contents;
+  line-height: var(--line-height-m);
+  color: var(--light-900);
+  font-size: var(--font-size-s);
+  position: relative;
+
+  &:has(.field:disabled) {
+    & * {
+      cursor: not-allowed;
+      color: var(--dark-100);
+
+      & > * {
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.overlayscrollbarsReact {
+  width: 100%;
+  height: 5.25rem;
+  border-radius: 2px;
+  border: none;
+  background-color: var(--dark-500);
+  box-shadow: 0 0 0 1px var(--dark-100);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+
+  &:has(.field:active:not(:disabled)):not(.errorText) {
+    box-shadow: 0 0 0 1px var(--light-100);
+    color: var(--light-100);
+  }
+
+  &:has(.field:focus-visible:not(:active, :disabled)):not(.errorText) {
+    box-shadow: 0 0 0 2px var(--primary-700);
+    color: var(--light-100);
+  }
+
+  &.errorText {
+    box-shadow: 0 0 0 1px var(--danger-500) !important;
+    color: var(--light-100);
+  }
+
+  &:has(.field:disabled) {
+    color: var(--dark-100);
+  }
+}
+
+.field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  appearance: none;
+  display: block;
+  border: none;
+  margin: 0;
+  background: transparent;
+  resize: none;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  field-sizing: content;
+  outline: none !important;
+  color: inherit;
+  font-size: var(--font-size-m);
+  padding: 6px 12px;
+}
+
+.resizeButton {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  right: 1px;
+  bottom: 1px;
+  border-radius: 0 0 2px;
+  box-shadow:
+    inset -2px 0 0 0 var(--dark-100),
+    inset 0 -2px 0 0 var(--dark-100);
+  width: 15px;
+  height: 15px;
+
+  &::after {
+    content: '';
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.errorText {
+  color: var(--danger-500);
+}

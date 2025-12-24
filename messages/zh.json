@@ -1,0 +1,31 @@
+{
+  "header": {
+    "logIn": "登录",
+    "logOut": "退出",
+    "signUp": "注册"
+  },
+  "sidebar": {
+    "feed": "动态",
+    "create": "创建",
+    "myProfile": "我的资料",
+    "messenges": "消息",
+    "search": "搜索",
+    "statistic": "统计",
+    "favorites": "收藏",
+    "logOut": "退出",
+    "logOutMessage": "您确定要退出账户 {email}, 吗？",
+    "yes": "是",
+    "no": "否"
+  },
+  "login": {
+    "title": "登录",
+    "email": "邮箱",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "forgotPassword": "忘记密码",
+    "signIn": "登录",
+    "noAccount": "还没有账号？",
+    "signUp": "注册"
+  }
+}

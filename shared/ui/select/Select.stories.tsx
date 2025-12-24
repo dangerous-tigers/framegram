@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { Select } from '@/shared/ui/select/Select';
-import { langs } from '@/shared/ui/select/langs';
+import { Option, Select } from '@/shared/ui/select/Select';
 import { useState } from 'react';
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons';
+
+export const langs: Option[] = [
+  { value: 'English', label: 'United Kingdom flag', icon: FlagUnitedKingdom },
+  { value: 'Russian', label: 'Russian flag', icon: FlagRussia },
+];
 
 const meta = {
   title: 'ui/select/Select',
@@ -19,7 +23,7 @@ const meta = {
     ],
     value: '',
     disabled: false,
-    size: 'medium',
+    variant: 'default',
     width: '210px',
   },
   argTypes: {
@@ -32,7 +36,7 @@ const meta = {
       description: 'selected value',
     },
     onValueChange: {
-      action: 'has been selected',
+      action: 'has been changed',
     },
     placeholder: {
       control: 'text',
@@ -57,12 +61,28 @@ export const WithValue: Story = {
       <Select
         options={langs}
         disabled={false}
-        size={'medium'}
+        variant={'default'}
         width={'210px'}
         value={value}
         onValueChange={(event) => setValue(event)}
       />
     );
+  },
+};
+
+export const WithText: Story = {
+  args: {
+    ...meta.args,
+    disabled: false,
+    options: [
+      { value: '0', label: 'Nullish' },
+      { value: '5', label: 'Five' },
+      { value: '10', label: 'Ten' },
+      { value: '20', label: 'Twenty' },
+    ],
+    value: '0',
+    variant: 'text',
+    width: '64px',
   },
 };
 
@@ -77,14 +97,21 @@ export const WithIcon: Story = {
   args: {
     ...meta.args,
     disabled: false,
-    size: 'small',
-    width: '42px',
+    variant: 'icon',
+    width: '64px',
   },
   render: () => {
     const [value, setValue] = useState<string>(String(langs[0].label));
 
     return (
-      <Select options={langs} disabled={false} value={value} onValueChange={setValue} width={'42px'} size={'small'} />
+      <Select
+        options={langs}
+        disabled={false}
+        value={value}
+        onValueChange={setValue}
+        width={'64px'}
+        variant={'icon'}
+      />
     );
   },
 };
@@ -93,7 +120,7 @@ export const WithIconDisabled: Story = {
   args: {
     ...meta.args,
     disabled: true,
-    size: 'small',
-    width: '42px',
+    variant: 'icon',
+    width: '64px',
   },
 };

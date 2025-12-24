@@ -1,7 +1,7 @@
 @use 'reset';
 @use 'typography';
 @use 'sizes';
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@use 'overlayscrollbarsTheme';
 
 :root {
   --primary-100: #73a5ff;
@@ -40,12 +40,14 @@
 body {
   color: var(--light-100);
   background-color: var(--dark-700);
-  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html,
 body {
   height: 100%;
+  font-family: var(--font-inter), sans-serif;
 }
 
 .wrapper {
@@ -61,26 +63,25 @@ body {
   padding: 0 16px;
 }
 
-.main-box {
+.mainBox {
   flex: 1 1 auto;
   height: 100%;
   width: 100%;
-
   max-width: 1156px;
   margin: 0 auto;
   padding: 0 16px;
-
   display: flex;
   flex-direction: column;
-
 }
-.main-box__body{
+
+.mainBoxBody {
   flex: 1 1 auto;
   height: 100%;
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: 24px;
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     display: flex;
     flex-direction: column-reverse;
     flex: 1 1 auto;
@@ -92,11 +93,20 @@ body {
 
 .main {
   flex: 1 1 auto;
-  @media (max-width: 768px) {
+  display: flex;
+  flex-direction: column;
+
+  @media (width <= 768px) {
     flex: 1 1 auto;
   }
 }
 
 header {
   flex: 0 1 60px;
+}
+
+@media (width <= 768px) {
+  aside + div {
+    flex: 1 1 auto;
+  }
 }

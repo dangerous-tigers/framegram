@@ -1,0 +1,31 @@
+{
+  "header": {
+    "logIn": "Увайсці",
+    "logOut": "Выйсці",
+    "signUp": "Зарэгістравацца"
+  },
+  "sidebar": {
+    "feed": "Стужка",
+    "create": "Стварыць",
+    "myProfile": "Мой профіль",
+    "messenges": "Паведамленні",
+    "search": "Пошук",
+    "statistic": "Статыстыка",
+    "favorites": "Абранае",
+    "logOut": "Выйсці",
+    "logOutMessage": "Вы сапраўды хочаце выйсці з уліковага запісу {email}?",
+    "yes": "Так",
+    "no": "Не"
+  },
+  "login": {
+    "title": "Уваход",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Увядзіце пароль",
+    "forgotPassword": "Забылі пароль",
+    "signIn": "Увайсці",
+    "noAccount": "Няма акаўнта?",
+    "signUp": "Зарэгістравацца"
+  }
+}

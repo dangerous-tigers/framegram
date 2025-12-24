@@ -2,12 +2,14 @@ import s from './header.module.scss';
 import clsx from 'clsx';
 import { Logo } from '@/widgets/header/ui/Logo';
 import { Notifications } from '@/widgets/header/ui/Notifications';
+import { ToggleLocale } from '@/shared/components/toggleLocale/ToggleLocale';
+import { HeaderAuthButtons } from '@/widgets/header/ui/HeaderAuthButtons';
 
 type PropsHeader = {
   className?: string;
 };
 
-export const Header = (props: PropsHeader) => {
+export const Header = async (props: PropsHeader) => {
   const { className } = props;
 
   return (
@@ -16,17 +18,8 @@ export const Header = (props: PropsHeader) => {
         <div className={s.headerBody}>
           <Logo />
           <Notifications />
-          <select
-            name='ir'
-            id='ir'
-          >
-            <option value='ru'>RU</option>
-            <option value='en'>EN</option>
-          </select>
-          <div className={s.buttons}>
-            <button>Log in</button>
-            <button>Sign up</button>
-          </div>
+          <ToggleLocale />
+          <HeaderAuthButtons />
         </div>
       </div>
     </header>

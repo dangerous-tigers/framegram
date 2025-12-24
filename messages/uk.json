@@ -1,0 +1,31 @@
+{
+  "header": {
+    "logIn": "Увійти",
+    "logOut": "Вийти",
+    "signUp": "Зареєструватися"
+  },
+  "sidebar": {
+    "feed": "Стрічка",
+    "create": "Створити",
+    "myProfile": "Мій профіль",
+    "messenges": "Повідомлення",
+    "search": "Пошук",
+    "statistic": "Статистика",
+    "favorites": "Улюблене",
+    "logOut": "Вийти",
+    "logOutMessage": "Ви дійсно хочете вийти з облікового запису {email}?",
+    "yes": "Так",
+    "no": "Ні"
+  },
+  "login": {
+    "title": "Вхід",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введіть пароль",
+    "forgotPassword": "Забули пароль",
+    "signIn": "Увійти",
+    "noAccount": "Немає акаунта?",
+    "signUp": "Зареєструватися"
+  }
+}

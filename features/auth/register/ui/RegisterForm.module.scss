@@ -1,0 +1,133 @@
+.registerForm {
+  padding-top: 24px;
+  display: flex;
+  justify-content: center;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    padding: 23px 24px 24px;
+    background: var(--dark-500);
+    border: 1px solid var(--dark-300);
+    border-radius: 2px;
+    overflow-y: auto;
+    width: 378px;
+    max-height: calc(100vh - 60px);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 180%;
+  text-align: center;
+  color: var(--light-100);
+  margin-bottom: 13px;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 12px;
+  gap: 4px;
+
+  span {
+    font-size: 12px;
+  }
+
+  label {
+    display: inline-flex;
+  }
+}
+
+.btn {
+  margin-bottom: 18px;
+}
+
+.desc {
+  line-height: 150%;
+  text-align: center;
+  color: var(--light-100);
+  margin-bottom: 6px;
+}
+
+.linkCheckbox {
+  font-size: 12px;
+  line-height: 133%;
+  text-decoration: underline;
+  color: var(--primary-300);
+}
+
+.errorText {
+  font-size: var(--font-size-s);
+  color: var(--danger-500);
+  margin-top: -12px;
+  margin-bottom: 12px;
+}
+
+.link {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--primary-500);
+  padding: 6px 24px;
+  outline: none;
+  border: 2px solid transparent;
+  display: inline-grid;
+  place-items: center;
+
+  &:active {
+    color: var(--primary-700);
+  }
+
+  transition: all 0.3s ease;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--primary-100);
+    }
+  }
+
+  &:focus-visible {
+    border: 2px solid var(--primary-700);
+    border-radius: 2px;
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+
+  button {
+    display: inline-flex;
+    justify-content: center;
+  }
+}
+
+.btnModal {
+  margin-left: auto;
+}

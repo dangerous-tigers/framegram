@@ -9,9 +9,10 @@ type Props = {
   className?: string;
   isActive?: boolean;
   disabled?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 };
 export const SidebarItem = (props: Props) => {
-  const { children, Component, href, className, isActive, disabled } = props;
+  const { children, Component, href, className, isActive, disabled, onClick } = props;
 
   const classes = clsx(s.item, className, {
     [s.active]: isActive,
@@ -29,6 +30,19 @@ export const SidebarItem = (props: Props) => {
       </span>
     );
   }
+
+  if (onClick) {
+    return (
+      <span
+        className={classes}
+        onClick={onClick}
+        style={{ cursor: 'pointer' }}
+      >
+        {Component} {children}
+      </span>
+    );
+  }
+
   return (
     <Link
       href={href}

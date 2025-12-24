@@ -1,3 +1,36 @@
-export const Button = () => {
-  return <button>test</button>;
+'use client';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+import s from './Button.module.scss';
+import clsx from 'clsx';
+
+type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: ReactNode;
+  variant?: 'primary' | 'secondary' | 'outline' | 'text';
+  className?: string;
+  fullWidth?: boolean;
+};
+
+export const Button = ({
+  children,
+  disabled = false,
+  variant = 'primary',
+  type = 'button',
+  className,
+  onClick,
+  fullWidth = false,
+  ...props
+}: Props) => {
+  return (
+    <>
+      <button
+        disabled={disabled}
+        type={type}
+        onClick={onClick}
+        className={clsx(s.btn, s[`btn--${variant}`], fullWidth && s['btn--full_width'], className)}
+        {...props}
+      >
+        {children}
+      </button>
+    </>
+  );
 };
