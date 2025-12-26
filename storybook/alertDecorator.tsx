@@ -12,7 +12,7 @@ export const alertDecorator =
     });
 
     return (
-      <AlertProvider>
+      <AlertProvider isStories={true}>
         <Story />
       </AlertProvider>
     );
