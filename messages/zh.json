@@ -57,5 +57,11 @@
     "email": "邮箱格式应为 example@example.com",
     "emailExist": "此電子郵件地址對應的使用者不存在",
     "captcha": "请验证您不是机器人"
+  },
+  "deletePostModal": {
+    "title": "删除帖子",
+    "message": "您确定要删除此帖子吗",
+    "yes": "是的",
+    "no": "不"
   }
 }

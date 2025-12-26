@@ -1,10 +1,4 @@
 {
-  "header": {
-    "logIn": "Log in",
-    "logOut": "Log out",
-    "signUp": "Sign up"
-  },
-  "sidebar": {
     "feed": "Feed",
     "create": "Create",
     "myProfile": "My Profile",
@@ -16,52 +10,11 @@
     "logOutMessage": "Are you really want to log out of your account {email}?",
     "yes": "Yes",
     "no": "No",
-    "email": "Email"
-  },
-  "login": {
-    "title": "Sign In",
     "email": "Email",
-    "emailPlaceholder": "Epam@epam.com",
-    "password": "Password",
-    "passwordPlaceholder": "Enter your password",
-    "forgotPassword": "Forgot Password",
-    "signIn": "Sign In",
-    "noAccount": "Dont have an account?",
-    "signUp": "Sign Up"
-  },
-  "confirmEmail": {
-    "title": "Congratulations!",
-    "text": "Your email has been confirmed",
-    "logIn": "Log in"
-  },
-  "forgot": {
-    "title": "Forgot Password",
-    "email": "Email",
-    "emailPlaceholder": "Epam@epam.com",
-    "text": "Enter your email address and we will send you further instructions ",
-    "sendLink": "Send Link",
-    "backToSignIn": "Back to Sign In"
-  },
-  "newPassword": {
-    "title": "Create New Password",
-    "newPassword": "New Password",
-    "passwordConfirm": "Password confirmation",
-    "text": "Your password must be between 6 and 20 characters",
-    "createBtn": "Create New Password"
-  },
-  "resendLink": {
-    "title": "Email verification link expired",
-    "text": "Looks like the verification link has expired. Not to worry, we can send the link again",
-    "resendBtn": "Resend link"
-  },
-  "validateError": {
-    "minChars": "Minimum 6 characters",
-    "maxChars": "Maximum 20 characters",
-    "regExPassword": "The password must contain at least one number, one uppercase letter, and one lowercase letter. Special characters are allowed: ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ { | } ~",
-    "passwordMatch": "Passwords must match",
-    "passwordConfirm": "Please confirm your password",
-    "email": "The email must match the format example@example.com",
-    "emailExist": "User with this email does not exist",
-    "captcha": "Please verify that you are not a robot"
+    "deletePostModal": {
+      "title": "Delete Post",
+      "message": "Are you sure you want to delete this post?",
+      "yes": "Yes",
+      "no": "No"
+    }
   }
-}
