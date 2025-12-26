@@ -8,6 +8,8 @@
   padding: 24px 12px;
   position: relative;
   gap: 4px;
+  animation-duration: 1.4s;
+  animation-name: slidein;
 
   &[data-swipe='move'] {
     transform: translateX(var(--radix-toast-swipe-move-x));
@@ -20,6 +22,29 @@
 
   &[data-swipe='end'] {
     animation: slideRight 100ms ease-out;
+  }
+
+  @keyframes slidein {
+    0% {
+      transform: translateX(100%);
+    }
+
+    75% {
+      rotate: 0deg;
+    }
+
+    85% {
+      rotate: -14deg;
+    }
+
+    95% {
+      rotate: 20deg;
+    }
+
+    100% {
+      transform: translateX(0);
+      rotate: 0deg;
+    }
   }
 
   @keyframes slideRight {
