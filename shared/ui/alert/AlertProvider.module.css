@@ -1,9 +1,13 @@
 .viewPort {
   position: fixed;
   transform: translate(100%, -100px);
+  width: 100vw;
 }
 
-.viewPortStories {
-  position: fixed;
-  transform: translate(0%, 0%);
-}
+/* .viewPortStories { */
+
+/*  position: fixed; */
+
+/*  transform: translate(0%, 0%); */
+
+/* } */
