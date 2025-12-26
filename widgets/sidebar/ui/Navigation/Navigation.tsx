@@ -15,11 +15,13 @@ import {
   Search,
   TrendingUp,
 } from '@/assets/icons';
-import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
+import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
 import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
 import Link from 'next/link';
 import { LogoutModalWrapper } from '@/features/auth/logout/ui/LogoutModalWrapper';
 import { routes } from '@/shared/config/routes';
+import { CreatePostModal } from '@/features/post-create/ui/createPostModal/CreatePostModal';
+import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 
 type PropsNavigation = {
   className?: string;
@@ -31,44 +33,49 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const t = useTranslations('sidebar');
   const { show } = useLogoutModal();
 
+  const setStep = useCreatePostStore((s) => s.setStep);
+
   const navigationItems: NavigationItem[] = [
     { href: routes.feed, label: t('feed'), Component: HomeOutline },
-    { href: routes.create, label: t('create'), Component: PlusSquareOutline },
+    { label: t('create'), Component: PlusSquareOutline, as: 'button' },
     { href: routes.profile, label: t('myProfile'), Component: Person },
     { href: routes.messenger, label: t('messenges'), Component: MessageCircle },
     { href: routes.search, label: t('search'), Component: Search },
     { href: routes.statistics, label: t('statistic'), Component: TrendingUp },
     { href: routes.favorites, label: t('favorites'), Component: Bookmark },
-    { href: routes.empty, label: t('logOut'), Component: LogOut }, // Пустая строка для предотвращения навигации по умолчанию
+    { href: routes.empty, label: t('logOut'), Component: LogOut },
   ];
 
   return (
     <div className={clsx(s.navigation, className)}>
-      {navigationItems.map((item) => {
-        const { href, Component, label, disabled } = item;
+      <>
+        {' '}
+        {navigationItems.map((item) => {
+          const { href, Component, label, as = Link } = item;
 
-        if (href === routes.empty)
           return (
-            <ButtonComponent
+            <PolymorphicButton
+              as={as}
               key={label}
-              onClick={show}
+              href={href}
+              isActive={pathname === href}
+              variant='text'
+              className={s.item}
+              onClick={() => {
+                if (label === t('create')) {
+                  setStep('upload');
+                }
+                if (label === t('logOut')) {
+                  show();
+                }
+              }}
             >
               <Component /> {label}
-            </ButtonComponent>
+            </PolymorphicButton>
           );
-
-        return (
-          <ButtonComponent
-            as={Link}
-            key={label}
-            href={href}
-            disabled={disabled}
-            isActive={pathname === href}
-          >
-            <Component /> {label}
-          </ButtonComponent>
-        );
-      })}
+        })}
+      </>
+      <CreatePostModal />
       <LogoutModalWrapper />
     </div>
   );
