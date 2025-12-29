@@ -9,7 +9,7 @@ import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { LoginFormData, LoginSchema } from '../model/Login.schema';
 import { useLogin } from '../model/useLogin';
 import { useTranslations } from 'next-intl';
-import { handleGoogleLogin } from '../../google-oauth/googleOAuthButton';
+import { handleGoogleOAuth } from '@/features/auth';
 
 export function LoginForm() {
   const t = useTranslations('login');
@@ -37,7 +37,7 @@ export function LoginForm() {
               variant='text'
               fullWidth={false}
               className={styles.iconButton}
-              onClick={handleGoogleLogin}
+              onClick={handleGoogleOAuth}
             >
               <GoogleSvgrepoCom1
                 width={34}
