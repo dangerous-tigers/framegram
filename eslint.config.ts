@@ -3,6 +3,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import { defineConfig } from 'eslint/config';
+import unusedImports from 'eslint-plugin-unused-imports';
 
 export default defineConfig([
   // Игнорируемые файлы
@@ -20,6 +21,7 @@ export default defineConfig([
 
   {
     files: ['**/*.{js,mjs,ts,mts,cts,jsx,tsx}'],
+    plugins: { 'unused-imports': unusedImports },
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
