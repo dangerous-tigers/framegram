@@ -1,0 +1,137 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 24px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.right {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.likeButton {
+  background: none;
+  padding: 0;
+  color: var(--light-100);
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--danger-500);
+    transform: scale(1.1);
+  }
+}
+
+.heartIsLiked {
+  color: var(--danger-500);
+  transform: scale(1.1);
+}
+
+.planeButton {
+  background: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  color: var(--light-100);
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--primary-500);
+    transform: scale(1.1);
+  }
+}
+
+.saveButton {
+  background: none;
+  padding: 0;
+  color: var(--light-100);
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--primary-500);
+    transform: scale(1.1);
+  }
+}
+
+.bottom {
+  color: var(--light-900);
+  font-size: var(--font-size-xs);
+  padding: 8px 0;
+}
+
+.like {
+  color: var(--light-100);
+
+  span {
+    font-weight: 600;
+    color: var(--light-100);
+  }
+}
+
+.avatarWhoLikes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.avatar:nth-child(1) {
+  z-index: 3;
+  margin-left: 0;
+}
+
+.avatar:nth-child(2) {
+  z-index: 2;
+  margin-left: -20px;
+}
+
+.avatar:nth-child(3) {
+  z-index: 1;
+  margin-left: -20px;
+}
+
+.likesCount {
+  color: var(--light-100);
+  font-size: var(--font-size-m);
+
+  span {
+    color: var(--light-100);
+    font-weight: bold;
+  }
+}
+
+.beTheFirst {
+  color: var(--light-100);
+  font-size: var(--font-size-s);
+}
+
+.beTheFirstButton {
+  color: var(--light-500);
+  padding: 0;
+  font-size: var(--font-size-s);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,50 @@
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.userInfo {
+  display: flex;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.userName {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.postInfo {
+  max-width: 345px;
+  width: 100%;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.timeStamp {
+  font-size: var(--font-size-xs);
+  color: var(--light-900);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  color: var(--light-900);
+}
+
+.answer {
+  font-size: var(--font-size-s);
+  padding: 0;
+  color: var(--light-900);
+}
