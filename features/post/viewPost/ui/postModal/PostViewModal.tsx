@@ -1,5 +1,5 @@
 'use client';
-import { Modal } from '@/shared/ui';
+import { Modal, ModalHeaderWithClose } from '@/shared/ui';
 import { useRouter } from 'next/navigation';
 import { type Post } from '../../model/types';
 
@@ -13,6 +13,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
   const { user, isAuth, isLoading } = useAuth();
 
   const reset = useViewPostStore((state) => state.reset);
+  const isEdit = useViewPostStore((state) => state.isEdit);
 
   const router = useRouter();
   const handleClose = () => {
@@ -24,23 +25,38 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
     return null;
   }
 
+  const renderHeader = () => {
+    if (isEdit) {
+      return (
+        <ModalHeaderWithClose
+          title='Edit post'
+          onClose={handleClose}
+        />
+      );
+    }
+
+    if (isMobile) {
+      return (
+        <Header
+          avatar={post.avatarOwner}
+          userName={post.userName}
+          postOwnerId={post.ownerId}
+          userId={user?.userId}
+          isAuth={isAuth}
+        />
+      );
+    }
+
+    return null;
+  };
+
   return (
     <Modal
       size='xl'
       open={open}
       onOpenChange={handleClose}
       defaultOpen={defaultOpen}
-      header={
-        isMobile && (
-          <Header
-            avatar={post.avatarOwner}
-            userName={post.userName}
-            postOwnerId={post.ownerId}
-            userId={user?.userId}
-            isAuth={isAuth}
-          />
-        )
-      }
+      header={renderHeader()}
     >
       <PostContent
         post={post}

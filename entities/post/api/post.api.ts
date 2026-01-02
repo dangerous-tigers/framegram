@@ -14,4 +14,16 @@ export const postApi = {
     }
     return response.data;
   },
+  getPostByIdServer: async (id: number) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/${id}`, {
+      cache: 'no-store',
+      credentials: 'include',
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch post ${id}`);
+    }
+
+    return res.json();
+  },
 };
