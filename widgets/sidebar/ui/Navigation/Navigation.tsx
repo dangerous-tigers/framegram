@@ -22,6 +22,7 @@ import { LogoutModalWrapper } from '@/features/auth/logout/ui/LogoutModalWrapper
 import { routes } from '@/shared/config/routes';
 import { CreatePostModal } from '@/features/post-create/ui/createPostModal/CreatePostModal';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
+import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
 
 type PropsNavigation = {
   className?: string;
@@ -33,8 +34,6 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const t = useTranslations('sidebar');
   const { show } = useLogoutModal();
 
-  const setStep = useCreatePostStore((s) => s.setStep);
-
   const navigationItems: NavigationItem[] = [
     { href: routes.feed, label: t('feed'), Component: HomeOutline },
     { label: t('create'), Component: PlusSquareOutline, as: 'button' },
@@ -45,6 +44,16 @@ export const Navigation = ({ className }: PropsNavigation) => {
     { href: routes.favorites, label: t('favorites'), Component: Bookmark },
     { href: routes.empty, label: t('logOut'), Component: LogOut },
   ];
+
+  const setOpen = useCreatePostStore((s) => s.setOpen);
+  const setStep = useCreatePostStore((s) => s.setStep);
+
+  const createPostHandler = () => {
+    setStep('upload');
+    setOpen(true);
+  };
+
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <div className={clsx(s.navigation, className)}>
@@ -63,14 +72,14 @@ export const Navigation = ({ className }: PropsNavigation) => {
               className={s.item}
               onClick={() => {
                 if (label === t('create')) {
-                  setStep('upload');
+                  createPostHandler();
                 }
                 if (label === t('logOut')) {
                   show();
                 }
               }}
             >
-              <Component /> {label}
+              <Component /> {isMobile ? '' : label}
             </PolymorphicButton>
           );
         })}

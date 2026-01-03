@@ -1,44 +1,45 @@
 import { client } from '@/shared/api/client';
-import { useMutation } from '@tanstack/react-query';
+import { UploadPostImagesResponse } from '@/entities/post/model/postTypes';
 
-type UploadImageResponse = {
-  images: {
-    uploadId: string;
-    url: string;
-    width: number;
-    height: number;
-    fileSize: number;
-    createdAt: string;
-  }[];
-};
+// export const uploadPostImages = async (files: File[]) => {
+//   return client.POST('/posts/image', {
+//     body: {
+//       file: files, // Тут типизация не дает передать файл - там стоит String
+//     },
+//   });
+// };
 
-export const uploadPostImages = async (files: File[]) => {
+export async function uploadPostImages(files: File[]): Promise<{ data?: UploadPostImagesResponse; error?: unknown }> {
   const formData = new FormData();
 
   files.forEach((file) => {
     formData.append('file', file);
   });
 
-  const res = await client.POST('/posts/image', {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/image`, {
+    method: 'POST',
     body: formData,
+    credentials: 'include',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
   });
 
-  return res.data as UploadImageResponse;
-};
+  if (!res.ok) {
+    return { error: await res.json() };
+  }
 
-export const useCreatePostMutation = () => {
-  return useMutation({
-    mutationFn: async ({ files, description }: { files: File[]; description?: string }) => {
-      const uploadRes = await uploadPostImages(files);
+  const data: UploadPostImagesResponse = await res.json();
+  return { data };
+}
 
-      const uploadIds = uploadRes.images.map((img) => img.uploadId);
-
-      const postRes = await createPost({
-        description,
-        uploadIds,
-      });
-
-      return postRes.data;
+export const createPost = async (args: { description?: string; uploadIds: string[] }) => {
+  return client.POST('/posts', {
+    body: {
+      description: args.description,
+      childrenMetadata: args.uploadIds.map((id) => ({
+        uploadId: id,
+      })),
     },
   });
 };

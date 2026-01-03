@@ -1,13 +1,15 @@
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 import { Modal, ModalHeaderWithClose, ModalHeaderWithNext } from '@/shared/ui';
-import { UploadStep } from '@/features/post-create/ui/UploadStep/UploadStep';
-import { PublishStep } from '@/features/post-create/ui/PublishStep/PublishStep';
+import { UploadStep } from '@/features/post-create/ui/uploadStep/UploadStep';
+import { PublishStep } from '@/features/post-create/ui/publishStep/PublishStep';
 import { CropStep } from '@/features/post-create/ui/CropStep';
-import { FilterStep } from '@/features/post-create/ui/FilterStep';
+import { FilterStep } from '@/features/post-create/ui/filterStep/FilterStep';
 import { CreatePostStep } from '@/features/post-create/model/CreatePostType';
 import { useEffect, useState } from 'react';
 import { PolymorphicButton } from '@/shared/ui/buttonComponent';
 import s from './createPostModal.module.scss';
+import { useCreatePostMutation } from '@/entities/post-create/api/useCreatePostMutation';
+import { applyFilterToFile } from '@/shared/lib/image';
 
 export const CreatePostModal = () => {
   const step = useCreatePostStore((s) => s.step);
@@ -15,10 +17,37 @@ export const CreatePostModal = () => {
   const reset = useCreatePostStore((s) => s.reset);
 
   const [showCloseModal, setShowCloseModal] = useState(false);
+
   const [sizeModal, setSizeModal] = useState<'sm' | 'md' | 'lg' | 'xl' | undefined>('md');
 
+  const images = useCreatePostStore((s) => s.images);
+
+  const description = useCreatePostStore((s) => s.description);
+
+  const { mutate, isPending } = useCreatePostMutation();
+
+  const onPublish = async () => {
+    const filteredFiles = await Promise.all(images.map((img) => applyFilterToFile(img.file, img.filter)));
+
+    mutate(
+      {
+        files: filteredFiles,
+        description,
+      },
+      {
+        onSuccess: () => {
+          if (!isPending) {
+            reset();
+            setShowCloseModal(false);
+            setOpen(false);
+          }
+        },
+      },
+    );
+  };
+
   useEffect(() => {
-    if (step === 'publish') {
+    if (step === 'publish' || step === 'filter') {
       setSizeModal('xl');
     } else {
       setSizeModal('md'); // остальные шаги
@@ -28,17 +57,20 @@ export const CreatePostModal = () => {
   const discardHandler = async () => {
     await reset();
     setShowCloseModal(false);
-    setStep('');
+    setOpen(false);
   };
 
   const saveDraftHandler = () => {
     setShowCloseModal(false);
-    setStep('');
+    setOpen(false);
   };
 
   const closeHandler = () => {
     setShowCloseModal(true);
   };
+
+  const isOpen = useCreatePostStore((s) => s.isOpen);
+  const setOpen = useCreatePostStore((s) => s.setOpen);
 
   const getCurrentStep = (step: CreatePostStep) => {
     switch (step) {
@@ -73,8 +105,9 @@ export const CreatePostModal = () => {
           <ModalHeaderWithNext
             title='Publication'
             onBack={() => setStep('filter')}
-            onNext={() => setStep('')}
+            onNext={() => onPublish()}
             titleNext='Publish'
+            nextDisabled={isPending}
           />
         );
       }
@@ -85,15 +118,18 @@ export const CreatePostModal = () => {
     <>
       {/* ОСНОВНАЯ МОДАЛКА */}
       <Modal
+        className={s.rootBaseModal}
         size={sizeModal}
-        open={!!step}
-        onOpenChange={closeHandler}
+        open={isOpen}
+        onOpenChange={(open) => {
+          if (!open) closeHandler();
+        }}
         header={getCurrentStep(step)}
       >
         {step === 'upload' && <UploadStep />}
         {step === 'crop' && <CropStep />}
         {step === 'filter' && <FilterStep />}
-        {step === 'publish' && <PublishStep />}
+        {step === 'publish' && (isPending ? <p>Loading</p> : <PublishStep />)}
       </Modal>
 
       {/* МОДАЛКА ПОДТВЕРЖДЕНИЯ ЗАКРЫТИЯ */}

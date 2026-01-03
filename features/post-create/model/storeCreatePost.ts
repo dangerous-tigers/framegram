@@ -6,7 +6,7 @@ import type { DraftData } from './types';
 
 export type CreatePostStateType = {
   step: CreatePostStep;
-  images: UploadedImage[];
+  images: UploadedImage;
   activeImageIndex: number;
   description: string;
 
@@ -14,15 +14,18 @@ export type CreatePostStateType = {
   addImages: (files: File[]) => void;
   removeImage: (index: number) => void;
   setDescription: (value: string) => void;
+  setActiveImageIndex: (value: number) => void;
 
   hydrate: () => Promise<void>;
+  isHydrated: boolean;
   reset: () => Promise<void>;
+
+  isOpen: boolean;
+  setOpen: (value: boolean) => void;
+
+  setImageFilter: (index: number, filter: string) => void;
 };
 
-/**
- * ✅ ВАЖНО:
- * Забираем ТОЛЬКО данные, без функций
- */
 const pickDraft = (state: CreatePostStateType): DraftData => ({
   step: state.step,
   images: state.images,
@@ -39,14 +42,34 @@ export const useCreatePostStore = create<CreatePostStateType>()(
 
     hydrate: async () => {
       const draft = await loadDraft();
+
       if (draft) {
-        set(draft, false, 'createPost/hydrate');
+        set(
+          {
+            ...draft,
+            isHydrated: true,
+          },
+          false,
+          'createPost/hydrate',
+        );
+      } else {
+        set({ isHydrated: true }, false, 'createPost/hydrate');
       }
     },
 
-    setStep: (step) => {
+    setStep: async (step) => {
+      const draft = await loadDraft();
+
+      const isDraft = () => {
+        if (step === 'upload') {
+          return draft?.step || 'upload';
+        } else {
+          return step;
+        }
+      };
+
       set({ step }, false, 'createPost/setStep');
-      saveDraft(pickDraft({ ...get(), step }));
+      await saveDraft(pickDraft({ ...get(), step: isDraft() }));
     },
 
     addImages: (files) =>
@@ -79,11 +102,22 @@ export const useCreatePostStore = create<CreatePostStateType>()(
       saveDraft(pickDraft({ ...get(), description }));
     },
 
+    setActiveImageIndex: async (activeImageIndex) => {
+      set({ activeImageIndex }, false, 'createPost/setActiveImageIndex');
+
+      if (!get().isHydrated) return;
+
+      await saveDraft({
+        ...pickDraft(get()),
+        activeImageIndex,
+      });
+    },
+
     reset: async () => {
       await clearDraft();
       set(
         {
-          step: 'upload',
+          step: '',
           images: [],
           description: '',
           activeImageIndex: 0,
@@ -91,6 +125,21 @@ export const useCreatePostStore = create<CreatePostStateType>()(
         false,
         'createPost/reset',
       );
+    },
+
+    isOpen: false,
+    setOpen: (isOpen) => {
+      set({ isOpen }, false, 'createPost/setOpen');
+    },
+
+    //Добавление фильтра
+    setImageFilter: (index, filter) => {
+      set((state) => {
+        const images = [...state.images];
+        images[index] = { ...images[index], filter };
+        saveDraft(pickDraft({ ...state, images }));
+        return { images };
+      });
     },
   })),
 );

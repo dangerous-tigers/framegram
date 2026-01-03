@@ -11,3 +11,11 @@
   gap: 18px;
   padding: 20px 21px 36px;
 }
+
+.rootBaseModal {
+  overflow: hidden;
+
+  @media (width >=1000px) {
+    height: 564px;
+  }
+}
