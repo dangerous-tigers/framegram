@@ -2,9 +2,11 @@
 import { Comment, Actions, Publish, Header, Description, ActionsSkeleton, DescriptionSkeleton } from '../ui';
 import { Separator } from '@/shared/ui';
 
-import { useGetPostById, useGetPostComments, useViewPostStore } from '../../../model';
+import { useGetPostById, useViewPostStore } from '../../../model';
 import { type Post } from '../../../model/types';
 import s from './postContent.module.scss';
+import { useEffect, useRef } from 'react';
+import { useGetPostCommentsInfinity } from '../../../model/useGetPostCommentsInfinity';
 
 type Props = {
   post: Post;
@@ -16,8 +18,36 @@ type Props = {
 
 export function PostContent({ post, isAuth, userId, isMobile, isLoading }: Props) {
   const { data: clientPost } = useGetPostById(post.id);
-  const { data: comments, isLoading: isLoadingComments } = useGetPostComments({ postId: post.id });
   const isEdit = useViewPostStore((state) => state.isEdit);
+
+  const targetRef = useRef(null);
+
+  const {
+    comments,
+    isLoading: isLoadingComments,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetPostCommentsInfinity({
+    postId: post.id,
+  });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 1.0 },
+    );
+
+    if (targetRef.current) {
+      observer.observe(targetRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <div className={s.container}>
@@ -62,7 +92,7 @@ export function PostContent({ post, isAuth, userId, isMobile, isLoading }: Props
               {/*    COMMENTS      */}
               {isLoadingComments
                 ? Array.from({ length: 3 }).map((_, i) => <DescriptionSkeleton key={i} />)
-                : comments?.items?.map((comment) => (
+                : comments?.map((comment) => (
                     <Comment
                       key={comment.id}
                       comment={comment}
@@ -70,6 +100,7 @@ export function PostContent({ post, isAuth, userId, isMobile, isLoading }: Props
                       isAuth={isAuth}
                     />
                   ))}
+              <div ref={targetRef} />
             </div>
             {/*    ACTIONS       */}
             <Separator orientation='horizontal' />
