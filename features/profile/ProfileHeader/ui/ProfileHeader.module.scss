@@ -11,6 +11,16 @@
   flex-direction: column;
 }
 
+.profileButton {
+  @media screen and (width >= 768) {
+    height: 36px;
+  }
+
+  @media screen and (width <= 768) {
+    height: 48px;
+  }
+}
+
 .userInfo {
   width: 100%;
   display: flex;

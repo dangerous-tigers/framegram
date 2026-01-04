@@ -1,44 +1,42 @@
 'use client';
 import { Paid } from '@/assets/icons';
-import { PublicProfileViewModelResponse, UserProfileByIdWithPostsResponse } from '@/entities/profile';
-import { useMe } from '@/entities/user/model/useMe';
+import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
 import { routes } from '@/shared/config/routes';
 import { Button } from '@/shared/ui';
 import Link from 'next/link';
 import s from './ProfileHeader.module.scss';
 
 type Props = {
-  profileInformation: PublicProfileViewModelResponse;
-  profileData: UserProfileByIdWithPostsResponse;
+  isOwner: boolean;
+  hasPaymentSubscription: boolean;
+  profile: UserProfileByIdWithPostsResponse;
 };
 
-export const ProfileHeader = ({ profileInformation, profileData }: Props) => {
-  const { data: owner } = useMe();
-
+export const ProfileHeader = ({ isOwner, profile }: Props) => {
   return (
     <div className={s.profileWrapper}>
       <div className={s.profilePicture}>
         <img
-          src={profileInformation?.avatars?.[0]?.url}
-          alt={`${profileInformation.userName}'s profile picture`}
+          src={profile.avatars?.[0]?.url}
+          alt={`${profile.userName}'s profile picture`}
         />
         <div className={s.countersMobile}>
           <ul>
             <li>
               <Link href={'/publications'}>
-                {profileInformation.userMetadata.publications}
+                {profile.publicationsCount}
                 <span>Publications</span>
               </Link>
             </li>
             <li>
               <Link href={'/followers'}>
-                {profileInformation.userMetadata.followers}
+                {profile.followersCount}
                 <span>Followers</span>
               </Link>
             </li>
             <li>
               <Link href={'/following'}>
-                {profileInformation.userMetadata.following}
+                {profile.followingCount}
                 <span>Following</span>
               </Link>
             </li>
@@ -50,25 +48,28 @@ export const ProfileHeader = ({ profileInformation, profileData }: Props) => {
         <div className={s.userInfo}>
           <div className={s.userName}>
             <h2>
-              {profileInformation?.userName}
+              {profile.userName}
               <Paid />
+              {/* {profileInformation.hasPaymentSubscription && <Paid />} */}
             </h2>
-            {/* {profileInformation.hasPaymentSubscription && <Paid />} */}
             <div className={s.name}>
               <span>
                 Firsname LastName
-                {profileData.firstName} {profileData.lastName}
+                {profile?.firstName} {profile?.lastName}
               </span>
             </div>
           </div>
 
-          {owner?.userId === profileInformation.id ? (
-            <Button>
+          {isOwner ? (
+            <Button
+              className={s.profileButton}
+              variant='secondary'
+            >
               <Link href={routes.messenger}>Profile Settings</Link>
             </Button>
           ) : (
             <div className={s.buttonsBlock}>
-              {profileInformation.isFollowing ? (
+              {profile.isFollowing ? (
                 <Button>
                   <Link href={routes.messenger}>Unfollow</Link>
                 </Button>
@@ -88,19 +89,19 @@ export const ProfileHeader = ({ profileInformation, profileData }: Props) => {
           <ul>
             <li>
               <Link href={'/publications'}>
-                {profileInformation.userMetadata.publications}
+                {profile.publicationsCount}
                 <span>Publications</span>
               </Link>
             </li>
             <li>
               <Link href={'/followers'}>
-                {profileInformation.userMetadata.followers}
+                {profile.followersCount}
                 <span>Followers</span>
               </Link>
             </li>
             <li>
               <Link href={'/following'}>
-                {profileInformation.userMetadata.following}
+                {profile.followingCount}
                 <span>Following</span>
               </Link>
             </li>

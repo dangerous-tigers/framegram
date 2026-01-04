@@ -1,9 +1,9 @@
 'use client';
-import s from './navigation.module.scss';
-import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
 import { NavigationItem } from '@/widgets/sidebar/model/navigation';
+import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
+import s from './navigation.module.scss';
 
 import {
   Bookmark,
@@ -15,11 +15,12 @@ import {
   Search,
   TrendingUp,
 } from '@/assets/icons';
-import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
+import { useMe } from '@/entities/user/model/useMe';
 import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
-import Link from 'next/link';
 import { LogoutModalWrapper } from '@/features/auth/logout/ui/LogoutModalWrapper';
 import { routes } from '@/shared/config/routes';
+import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
+import Link from 'next/link';
 
 type PropsNavigation = {
   className?: string;
@@ -28,13 +29,17 @@ type PropsNavigation = {
 export const Navigation = ({ className }: PropsNavigation) => {
   const pathname = usePathname();
 
+  const {
+    data: { userId },
+  } = useMe();
+
   const t = useTranslations('sidebar');
   const { show } = useLogoutModal();
 
   const navigationItems: NavigationItem[] = [
     { href: routes.feed, label: t('feed'), Component: HomeOutline },
     { href: routes.create, label: t('create'), Component: PlusSquareOutline },
-    { href: routes.profile, label: t('myProfile'), Component: Person },
+    { href: `/profile/${userId}`, label: t('myProfile'), Component: Person },
     { href: routes.messenger, label: t('messenges'), Component: MessageCircle },
     { href: routes.search, label: t('search'), Component: Search },
     { href: routes.statistics, label: t('statistic'), Component: TrendingUp },
