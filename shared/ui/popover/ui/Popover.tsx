@@ -1,14 +1,7 @@
-import {
-  CopyOutline,
-  Edit2Outline,
-  MoreHorizontalOutline,
-  PersonAddOutline,
-  PersonRemoveOutline,
-  TrashOutline,
-} from '@/assets/icons';
+import { MoreHorizontalOutline } from '@/assets/icons';
 import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
 import * as PrimitivePopover from '@radix-ui/react-popover';
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import s from './Popover.module.scss';
 
 type Props = {
@@ -20,24 +13,14 @@ type Props = {
   follow?: () => void;
   unfollow?: () => void;
   copyLink?: () => void;
+  children: ReactNode;
 } & ComponentPropsWithoutRef<typeof PrimitivePopover.Root>;
 
-export const Popover = ({
-  open,
-  onOpenChange,
-  editPost,
-  removePost,
-  isOwner,
-  isAuthorized,
-  isFollow,
-  follow,
-  unfollow,
-  copyLink,
-}: Props) => {
+export const Popover = ({ open, onOpenChange, children }: Props) => {
   return (
     <PrimitivePopover.Root
-      onOpenChange={onOpenChange}
       open={open}
+      onOpenChange={onOpenChange}
     >
       <PrimitivePopover.Trigger asChild>
         <ButtonComponent
@@ -53,36 +36,9 @@ export const Popover = ({
           align='end'
           className={s.popoverContent}
           sideOffset={5}
+          asChild
         >
-          {isOwner && (
-            <>
-              <ButtonComponent>
-                <Edit2Outline onClick={editPost} /> Edit
-              </ButtonComponent>
-              <ButtonComponent>
-                <TrashOutline onClick={removePost} /> Delete
-              </ButtonComponent>
-              <ButtonComponent>
-                <CopyOutline onClick={copyLink} /> Copy link
-              </ButtonComponent>
-            </>
-          )}
-          {!isOwner && isAuthorized && (
-            <>
-              <ButtonComponent>
-                {isFollow ? <PersonRemoveOutline onClick={unfollow} /> : <PersonAddOutline onClick={follow} />}{' '}
-                {isFollow ? 'Unfollow' : 'Follow'}
-              </ButtonComponent>
-              <ButtonComponent>
-                <CopyOutline onClick={copyLink} /> Copy link
-              </ButtonComponent>
-            </>
-          )}
-          {!isAuthorized && (
-            <ButtonComponent>
-              <CopyOutline onClick={copyLink} /> Copy link
-            </ButtonComponent>
-          )}
+          <ul>{children}</ul>
         </PrimitivePopover.Content>
       </PrimitivePopover.Portal>
     </PrimitivePopover.Root>

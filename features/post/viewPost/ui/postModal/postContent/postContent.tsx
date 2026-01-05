@@ -1,12 +1,13 @@
 'use client';
-import { Comment, Actions, Publish, Header, Description, ActionsSkeleton, DescriptionSkeleton } from '../ui';
-import { Separator } from '@/shared/ui';
 
-import { useGetPostById, useViewPostStore } from '../../../model';
-import { type Post } from '../../../model/types';
-import s from './postContent.module.scss';
+import { EditMode } from '@/features/post/editPost/ui/editMode/EditMode';
+import { Separator } from '@/shared/ui';
 import { useEffect, useRef } from 'react';
-import { useGetPostCommentsInfinity } from '../../../model/useGetPostCommentsInfinity';
+import { Actions, ActionsSkeleton, Comment, Description, DescriptionSkeleton, Header, Publish } from '../ui';
+
+import { useGetPostById, useGetPostCommentsInfinity, useViewPostStore } from '@/features/post/viewPost/model';
+import { Post } from '@/features/post/viewPost/model/types';
+import s from './postContent.module.scss';
 
 type Props = {
   post: Post;
@@ -66,7 +67,12 @@ export function PostContent({ post, isAuth, userId, isMobile, isLoading }: Props
       {/* RIGHT SIDE */}
       <div className={s.right}>
         {isEdit ? (
-          <div>Edit</div>
+          <EditMode
+            profileImage={clientPost?.avatarOwner}
+            userName={clientPost?.userName}
+            description={clientPost?.description}
+            postId={post.id}
+          />
         ) : (
           <>
             {!isMobile && (

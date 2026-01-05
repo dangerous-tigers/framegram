@@ -1,18 +1,41 @@
 .popoverContent {
   outline: 1px solid var(--dark-100);
   background-color: var(--dark-500);
-  padding: 12px 12px 0;
+  padding: 12px;
+
+  // padding: 12px 12px 0;
   width: fit-content;
-  max-width: 144px;
+
+  // max-width: 144px;
   transform-origin: var(--radix-popover-content-transform-origin);
   animation: scaleIn 0.5s ease-out;
+  z-index: 1001;
 
-  & button:first-child {
+  & > ul {
+    :hover {
+      color: var(--primary-500);
+    }
+
+    :active {
+      color: var(--primary-100);
+    }
+  }
+
+  & > ul > li {
+    display: flex;
+    gap: 12px;
+  }
+
+  & ul > li:first-child {
     padding-bottom: 12px;
   }
 
-  & button:nth-child(n + 2) {
+  & ul > li:nth-child(n + 2) {
     padding-bottom: 12px;
+  }
+
+  & ul > li:last-child {
+    padding-bottom: 0;
   }
 }
 
