@@ -4,7 +4,7 @@ import { client } from '@/shared/api/client';
 import { Button } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Textarea } from '@/shared/ui/textarea';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ChangeEvent, useEffect, useState } from 'react';
 import s from './EditMode.module.scss';
 
@@ -26,6 +26,8 @@ export const EditMode = ({ profileImage, userName, description, postId }: Props)
     setValue(description);
   }, [description]);
 
+  const queryClient = useQueryClient();
+  queryClient.invalidateQueries({ queryKey: ['post'] });
   const saveChangesMutation = useMutation({
     mutationFn: async (value: string) => {
       const response = await client.PUT('/posts/{postId}', {
@@ -54,6 +56,7 @@ export const EditMode = ({ profileImage, userName, description, postId }: Props)
     },
     onSuccess: () => {
       setIsEdit(false);
+
       // Boom baby!
     },
     onSettled: () => {
