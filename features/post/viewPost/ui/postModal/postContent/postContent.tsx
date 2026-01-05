@@ -10,16 +10,18 @@ import { Post } from '@/features/post/viewPost/model/types';
 import s from './postContent.module.scss';
 
 type Props = {
-  post: Post;
+  initialPost: Post;
   userId: number;
   isMobile: boolean;
   isAuth: boolean;
   isLoading?: boolean;
 };
 
-export function PostContent({ post, isAuth, userId, isMobile, isLoading }: Props) {
-  const { data: clientPost } = useGetPostById(post.id);
+export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }: Props) {
+  const { data: clientPost } = useGetPostById(initialPost.id);
   const isEdit = useViewPostStore((state) => state.isEdit);
+
+  const post = clientPost ?? initialPost;
 
   const targetRef = useRef(null);
 
@@ -78,9 +80,9 @@ export function PostContent({ post, isAuth, userId, isMobile, isLoading }: Props
             {!isMobile && (
               <>
                 <Header
-                  avatar={post?.avatarOwner}
-                  userName={post?.userName}
-                  postOwnerId={post?.ownerId}
+                  avatar={post.avatarOwner}
+                  userName={post.userName}
+                  postOwnerId={post.ownerId}
                   userId={userId}
                   isAuth={isAuth}
                 />
@@ -90,10 +92,10 @@ export function PostContent({ post, isAuth, userId, isMobile, isLoading }: Props
             <Separator orientation='horizontal' />
             <div className={s.comments}>
               <Description
-                avatar={post?.avatarOwner ?? ''}
-                userName={post?.userName || ''}
-                text={post?.description || ''}
-                timeStamp={post?.createdAt || ''}
+                avatar={post.avatarOwner ?? ''}
+                userName={post.userName || ''}
+                text={post.description || ''}
+                timeStamp={post.createdAt || ''}
               />
               {/*    COMMENTS      */}
               {isLoadingComments
@@ -114,7 +116,7 @@ export function PostContent({ post, isAuth, userId, isMobile, isLoading }: Props
               <ActionsSkeleton />
             ) : (
               <Actions
-                isLiked={clientPost?.isLiked ?? false}
+                isLiked={post.isLiked ?? false}
                 likesCount={post.likesCount}
                 avatarWhoLikes={post.avatarWhoLikes}
                 isSaved={true}

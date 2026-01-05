@@ -59,7 +59,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
       header={renderHeader()}
     >
       <PostContent
-        post={post}
+        initialPost={post}
         userId={user?.userId}
         isAuth={isAuth}
         isMobile={isMobile}
