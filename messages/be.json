@@ -28,6 +28,28 @@
     "noAccount": "Няма акаўнта?",
     "signUp": "Зарэгістравацца"
   },
+  "register": {
+    "signUp": "Зарэгістравацца",
+    "signIn": "Увайсці",
+    "title": "Увайсці ў сістэму",
+    "Do you have an account?": "У вас ужо ёсць уліковы запіс?",
+    "Loading": "Загрузка...",
+    "I agree to the": "Я згаджаюся з",
+    "Terms of Service": "Умовамі карыстання",
+    "and": "і",
+    "Privacy Policy": "Палітыкай прыватнасці",
+    "Ok": "Добра",
+    "We have sent a link to confirm your email": "Мы адправілі спасылку для пацверджання вашай электроннай пошты",
+    "placeholder name": "Увядзіце імя карыстальніка",
+    "placeholder email": "Увядзіце адрас электроннай пошты",
+    "placeholder password": "Увядзіце пароль",
+    "placeholder passwordConfirm": "Паўторна ўвядзіце пароль",
+    "Email confirmation": "Пацверджанне электроннай пошты",
+    "name": "Імя карыстальніка",
+    "email": "Электронная пошта",
+    "password": "Пароль",
+    "passwordConfirm": "Пацверджанне пароля"
+  },
   "forgot": {
     "title": "Вярнуцца да ўваходу",
     "email": "Email",

@@ -1,0 +1,1 @@
+export { applyFilterToFile } from './applyFilterToFile';
