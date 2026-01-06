@@ -8,6 +8,7 @@ import { Answer } from '../answer/Answer';
 import { useState } from 'react';
 import { Button } from '@/shared/ui';
 import { useCommentAnswers, useViewPostStore } from '@/features/post/viewPost/model';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   comment: Comment;
@@ -24,6 +25,8 @@ export function Comment({ comment, postId, isAuth }: Props) {
     postId,
     openAnswer,
   });
+
+  const t = useTranslations('view-post');
 
   const handleAnswer = (id: number) => {
     alert('Answered by comment id: ' + id + ' by post id: ' + postId + ' by username: ' + comment.from.username);
@@ -71,7 +74,9 @@ export function Comment({ comment, postId, isAuth }: Props) {
             className={s.answerButton}
             onClick={() => setOpenAnswer((prev) => !prev)}
           >
-            {openAnswer ? `Hide Answers (${comment.answerCount})` : `Show Answers (${comment.answerCount})`}
+            {openAnswer
+              ? `${t('hideReplies')} (${comment.answerCount})`
+              : `${t('showReplies')} (${comment.answerCount})`}
           </Button>
         </div>
       )}

@@ -1,6 +1,9 @@
+'use client';
 import { Button } from '@/shared/ui';
 import s from './Description.module.scss';
 import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
+import { useTranslations } from 'next-intl';
+import { DescriptionInfo } from './DescriptionInfo';
 
 type Props = {
   avatar: string;
@@ -23,6 +26,7 @@ export function Description({
   isAnswer = false,
   onAnswerClick,
 }: Props) {
+  const t = useTranslations('view-post');
   return (
     <div className={s.description}>
       <div className={s.userInfo}>
@@ -34,13 +38,17 @@ export function Description({
           className={s.avatar}
         />
         <div className={s.postInfo}>
-          <span className={s.userName}>{userName}</span>
-          <span className={s.text}>{text}</span>
+          <DescriptionInfo
+            userName={userName}
+            text={text}
+          />
           <div className={s.footer}>
             <CompTimeAgo date={new Date(timeStamp)} />
             {isLikeCount && likeCount > 0 && (
               <>
-                <span className={s.likeCount}>Like: {likeCount}</span>
+                <span className={s.likeCount}>
+                  {t('likes')} {likeCount}
+                </span>
               </>
             )}
             {isAnswer && (
@@ -49,7 +57,7 @@ export function Description({
                 onClick={onAnswerClick}
                 className={s.answer}
               >
-                Answer
+                {t('reply')}
               </Button>
             )}
           </div>
