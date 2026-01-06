@@ -4,11 +4,13 @@ import { Button } from '@/shared/ui';
 import { useViewPostStore } from '@/features/post/viewPost/model/useViewPost.store';
 import { useEffect, useRef } from 'react';
 import { Close } from '@/assets/icons';
+import { useTranslations } from 'next-intl';
 export function Publish({ postId }: { postId: number }) {
   const type = useViewPostStore((state) => state.type);
   const commentUsername = useViewPostStore((state) => state.commentUsername);
   const setContent = useViewPostStore((state) => state.setContent);
   const reset = useViewPostStore((state) => state.reset);
+  const t = useTranslations('view-post');
 
   const { commentId, content } = useViewPostStore();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -75,7 +77,7 @@ export function Publish({ postId }: { postId: number }) {
           onClick={handlePublish}
           variant='text'
         >
-          Publish
+          {t('publish')}
         </Button>
       </div>
     </div>

@@ -63,5 +63,12 @@
     "email": "The email must match the format example@example.com",
     "emailExist": "User with this email does not exist",
     "captcha": "Please verify that you are not a robot"
+  },
+  "view-post": {
+    "likes": "Likes",
+    "reply": "Reply",
+    "showReplies": "Show replies",
+    "hideReplies": "Hide replies",
+    "publish": "Publish"
   }
 }

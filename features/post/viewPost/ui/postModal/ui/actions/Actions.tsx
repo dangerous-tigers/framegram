@@ -1,9 +1,11 @@
+'use client';
 import { HeartOutline, PaperPlaneOutline, BookmarkOutline, Heart, Bookmark } from '@/assets/icons';
 import s from './Actions.module.scss';
 import clsx from 'clsx';
 import { Button } from '@/shared/ui';
 import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
 import { formatLikes } from '@/shared/lib';
+import { useTranslations } from 'next-intl';
 
 export function Actions({
   isLiked,
@@ -20,6 +22,7 @@ export function Actions({
   avatarWhoLikes: string[];
   isLike: boolean;
 }) {
+  const t = useTranslations('view-post');
   return (
     <div className={s.container}>
       {isLike && (
@@ -63,7 +66,7 @@ export function Actions({
           ))}
           {likesCount > 0 ? (
             <p className={s.likesCount}>
-              {formatLikes(likesCount)} <span>{'"Like"'}</span>
+              {formatLikes(likesCount)} <span>{t('likes')}</span>
             </p>
           ) : (
             <div className={s.beTheFirst}>
@@ -73,7 +76,7 @@ export function Actions({
                 className={s.beTheFirstButton}
                 onClick={() => alert('like')}
               >
-                {'to "Like"'}
+                {t('likes')}
               </Button>
               !
             </div>
