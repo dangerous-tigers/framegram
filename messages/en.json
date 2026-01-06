@@ -29,6 +29,28 @@
     "noAccount": "Dont have an account?",
     "signUp": "Sign Up"
   },
+  "register": {
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "title": "Sign In",
+    "Do you have an account?": "Do you have an account?",
+    "Loading": "Loading...",
+    "I agree to the": "I agree to the",
+    "Terms of Service": "Terms of Service",
+    "and": "and",
+    "Privacy Policy": "Privacy Policy",
+    "Ok": "Ok",
+    "We have sent a link to confirm your email": "We have sent a link to confirm your email",
+    "placeholder name": "Enter the user's name",
+    "placeholder email": "Enter your email address",
+    "placeholder password": "Enter your password",
+    "placeholder passwordConfirm": "Enter your password confirmation",
+    "Email confirmation": "Email confirmation",
+    "name": "userName",
+    "email": "email",
+    "password": "password",
+    "passwordConfirm": "passwordConfirm"
+  },
   "confirmEmail": {
     "title": "Congratulations!",
     "text": "Your email has been confirmed",
