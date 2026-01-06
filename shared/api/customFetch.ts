@@ -4,12 +4,15 @@ let refreshPromise: Promise<string> | null = null;
 export async function customFetch(input: RequestInfo, init?: RequestInit) {
   const token = localStorage.getItem('accessToken');
 
+  const isFormData = init?.body instanceof FormData;
+
   const modifiedInit: RequestInit = {
     ...init,
     headers: {
-      'Content-Type': 'application/json',
       ...(init?.headers || {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      // Content-Type добавляем ТОЛЬКО если это НЕ FormData
+      ...(!isFormData ? { 'Content-Type': 'application/json' } : {}),
     },
     credentials: 'include',
   };
@@ -35,6 +38,7 @@ export async function customFetch(input: RequestInfo, init?: RequestInit) {
     headers: {
       ...(init?.headers || {}),
       Authorization: `Bearer ${newToken}`,
+      ...(!isFormData ? { 'Content-Type': 'application/json' } : {}),
     },
     credentials: 'include',
   };
