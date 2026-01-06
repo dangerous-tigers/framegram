@@ -3,3 +3,5 @@ export type Error = {
   error: string;
   messages: { message: string; field?: string }[];
 };
+
+export type Nullable<T> = T | null;

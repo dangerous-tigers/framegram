@@ -1,9 +1,9 @@
 'use client';
-import s from './navigation.module.scss';
-import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
 import { NavigationItem } from '@/widgets/sidebar/model/navigation';
+import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
+import s from './navigation.module.scss';
 
 import {
   Bookmark,
@@ -15,14 +15,15 @@ import {
   Search,
   TrendingUp,
 } from '@/assets/icons';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
+import { useMe } from '@/entities/user/model/useMe';
 import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
-import Link from 'next/link';
 import { LogoutModalWrapper } from '@/features/auth/logout/ui/LogoutModalWrapper';
-import { routes } from '@/shared/config/routes';
-import { CreatePostModal } from '@/features/post-create/ui/createPostModal/CreatePostModal';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
+import { CreatePostModal } from '@/features/post-create/ui/createPostModal/CreatePostModal';
+import { routes } from '@/shared/config/routes';
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
+import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
+import Link from 'next/link';
 
 type PropsNavigation = {
   className?: string;
@@ -31,6 +32,8 @@ type PropsNavigation = {
 export const Navigation = ({ className }: PropsNavigation) => {
   const pathname = usePathname();
 
+  const { data } = useMe();
+
   const t = useTranslations('sidebar');
   const { show } = useLogoutModal();
 
@@ -38,6 +41,8 @@ export const Navigation = ({ className }: PropsNavigation) => {
     { href: routes.feed, label: t('feed'), Component: HomeOutline },
     { label: t('create'), Component: PlusSquareOutline, as: 'button' },
     { href: routes.profile, label: t('myProfile'), Component: Person },
+    { href: routes.create, label: t('create'), Component: PlusSquareOutline },
+    { href: `/profile/${data?.userId}`, label: t('myProfile'), Component: Person },
     { href: routes.messenger, label: t('messenges'), Component: MessageCircle },
     { href: routes.search, label: t('search'), Component: Search },
     { href: routes.statistics, label: t('statistic'), Component: TrendingUp },
