@@ -59,27 +59,26 @@ export function Publish({ postId }: { postId: number }) {
             setContent(e.target.value);
           }}
         />
-        {type === 'answer' && (
-          <div className={s.atUsername}>
-            Answer to<span>{` @${commentUsername}`}</span>
-            <Button
-              variant='text'
-              className={s.closeButton}
-              onClick={() => reset()}
-            >
-              <Close />
-            </Button>
-          </div>
-        )}
-      </div>
-      <div>
         <Button
           onClick={handlePublish}
+          className={s.publishButton}
           variant='text'
         >
           {t('publish')}
         </Button>
       </div>
+      {type === 'answer' && (
+        <div className={s.atUsername}>
+          Answer to<span>{` @${commentUsername}`}</span>
+          <Button
+            variant='text'
+            className={s.closeButton}
+            onClick={() => reset()}
+          >
+            <Close />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

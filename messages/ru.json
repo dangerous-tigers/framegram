@@ -28,6 +28,28 @@
     "noAccount": "Нет аккаунта?",
     "signUp": "Зарегистрироваться"
   },
+  "register": {
+    "signUp": "Зарегистрироваться",
+    "signIn": "Войти",
+    "title": "Войти в систему",
+    "Do you have an account?": "У вас уже есть аккаунт?",
+    "Loading": "Загрузка...",
+    "I agree to the": "Я соглашаюсь с",
+    "Terms of Service": "Условиями обслуживания",
+    "and": "и",
+    "Privacy Policy": "Политикой конфиденциальности",
+    "Ok": "Ок",
+    "We have sent a link to confirm your email": "Мы отправили ссылку для подтверждения вашей электронной почты",
+    "placeholder name": "Введите имя пользователя",
+    "placeholder email": "Введите адрес электронной почты",
+    "placeholder password": "Введите пароль",
+    "placeholder passwordConfirm": "Повторно введите пароль",
+    "Email confirmation": "Подтверждение электронной почты",
+    "name": "Имя пользователя",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "passwordConfirm": "Подтверждение пароля"
+  },
   "forgot": {
     "title": "Забыли пароль",
     "email": "Email",
@@ -70,7 +92,8 @@
     "reply": "Ответить",
     "showReplies": "Показать ответы",
     "hideReplies": "Скрыть ответы",
-    "publish": "Опубликовать"
->>>>>>> FRAM-47-ViewPost
+    "publish": "Опубликовать",
+    "beTheFirstLikes": "Будь первым ",
+    "like": "Лайк!"
   }
 }
