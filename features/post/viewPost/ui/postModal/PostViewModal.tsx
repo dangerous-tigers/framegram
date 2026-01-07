@@ -41,7 +41,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
           avatar={post.avatarOwner}
           userName={post.userName}
           postOwnerId={post.ownerId}
-          userId={user?.userId}
+          userId={user?.userId || 0}
           isAuth={isAuth}
         />
       );
@@ -60,7 +60,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
     >
       <PostContent
         initialPost={post}
-        userId={user?.userId}
+        userId={user?.userId || post.ownerId}
         isAuth={isAuth}
         isMobile={isMobile}
         isLoading={isLoading}

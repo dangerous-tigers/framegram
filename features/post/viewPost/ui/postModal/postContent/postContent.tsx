@@ -7,6 +7,7 @@ import { type Post } from '../../../model/types';
 import s from './postContent.module.scss';
 import { useEffect, useRef } from 'react';
 import { useGetPostCommentsInfinity } from '../../../model/useGetPostCommentsInfinity';
+import { Swiper } from '@/shared/ui/swiper';
 
 type Props = {
   initialPost: Post;
@@ -54,17 +55,29 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
   return (
     <div className={s.container}>
       <div className={s.left}>
-        {/* LEFT SIDE */}
-        {!isLoading && post.images ? (
+        {post && post.images && !clientPost && (
           <img
             className={s.image}
-            src={post.images[0].url}
+            src={post.images[0]?.url ?? ''}
             alt='loader'
           />
-        ) : (
-          <div className={s.slider}>Slider</div>
+        )}
+        {clientPost && clientPost.images && (
+          <div>
+            <Swiper
+              slides={clientPost.images.map((image) => (
+                <img
+                  className={s.image}
+                  key={image.uploadId}
+                  src={image.url}
+                  alt='loader'
+                />
+              ))}
+            />
+          </div>
         )}
       </div>
+
       {/* RIGHT SIDE */}
       <div className={s.right}>
         {isEdit ? (
@@ -115,7 +128,7 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
                 avatarWhoLikes={post.avatarWhoLikes}
                 isSaved={true}
                 time={post?.createdAt || ''}
-                isLike={isAuth}
+                isAuth={isAuth}
               />
             )}
             {/*    PUBLISH      */}

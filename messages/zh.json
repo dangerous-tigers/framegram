@@ -85,6 +85,8 @@
     "reply": "回复",
     "showReplies": "显示回复",
     "hideReplies": "隐藏回复",
-    "publish": "发布"
+    "publish": "发布",
+    "beTheFirstLikes": "成为第一个 ",
+    "like": "点赞！"
   }
 }

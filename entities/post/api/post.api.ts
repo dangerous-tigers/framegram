@@ -1,4 +1,3 @@
-import { client } from '@/shared/api/client';
 import { UploadPostImagesResponse } from '@/entities/post/model/postTypes';
 
 // export const uploadPostImages = async (files: File[]) => {

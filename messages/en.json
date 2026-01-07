@@ -91,6 +91,8 @@
     "reply": "Reply",
     "showReplies": "Show replies",
     "hideReplies": "Hide replies",
-    "publish": "Publish"
+    "publish": "Publish",
+    "beTheFirstLikes": "Be the first ",
+    "like": "Like!"
   }
 }

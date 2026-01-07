@@ -85,6 +85,8 @@
     "reply": "Ответить",
     "showReplies": "Показать ответы",
     "hideReplies": "Скрыть ответы",
-    "publish": "Опубликовать"
+    "publish": "Опубликовать",
+    "beTheFirstLikes": "Будь первым ",
+    "like": "Лайк!"
   }
 }

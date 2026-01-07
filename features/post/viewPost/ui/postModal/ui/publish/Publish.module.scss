@@ -1,11 +1,14 @@
 .container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding: 0 24px;
+  margin: 12px 0;
 }
 
 .textareaWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
@@ -35,6 +38,11 @@
     text-decoration: underline;
     color: var(--light-100);
   }
+}
+
+.publishButton {
+  padding: 0;
+  cursor: pointer;
 }
 
 .closeButton {

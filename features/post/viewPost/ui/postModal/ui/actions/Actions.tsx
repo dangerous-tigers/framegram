@@ -13,19 +13,19 @@ export function Actions({
   time,
   likesCount,
   avatarWhoLikes,
-  isLike,
+  isAuth,
 }: {
   isLiked: boolean;
   isSaved: boolean;
   time: string;
   likesCount: number;
   avatarWhoLikes: string[];
-  isLike: boolean;
+  isAuth: boolean;
 }) {
   const t = useTranslations('view-post');
   return (
     <div className={s.container}>
-      {isLike && (
+      {isAuth && (
         <div className={s.top}>
           <div className={s.left}>
             <Button
@@ -64,21 +64,23 @@ export function Actions({
               className={s.avatar}
             />
           ))}
-          {likesCount > 0 ? (
+
+          {likesCount >= 0 && !isAuth && (
             <p className={s.likesCount}>
               {formatLikes(likesCount)} <span>{t('likes')}</span>
             </p>
-          ) : (
+          )}
+
+          {!likesCount && isAuth && (
             <div className={s.beTheFirst}>
-              {'Be the first '}
+              {t('beTheFirstLikes')}
               <Button
                 variant='text'
                 className={s.beTheFirstButton}
                 onClick={() => alert('like')}
               >
-                {t('likes')}
+                {t('like')}
               </Button>
-              !
             </div>
           )}
         </div>
