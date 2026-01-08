@@ -1,5 +1,19 @@
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+import { ProfileWrapper } from '@/features/profile/ProfileWrapper';
+export default async function ProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  return <div>Profile by user {id}</div>;
+  const getProfile = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/public-user/profile/${id}`);
+
+    return await response.json();
+  };
+
+  const { userName, hasPaymentSubscription } = await getProfile();
+
+  return (
+    <ProfileWrapper
+      userName={userName}
+      hasPaymentSubscription={hasPaymentSubscription}
+    />
+  );
 }
