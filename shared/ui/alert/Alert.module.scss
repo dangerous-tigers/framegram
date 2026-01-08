@@ -8,8 +8,8 @@
   padding: 24px 12px;
   position: relative;
   gap: 4px;
-  animation-duration: 1.4s;
-  animation-name: slidein;
+  animation: slidein 1.4s linear forwards;
+  opacity: 0.7;
 
   &[data-swipe='move'] {
     transform: translateX(var(--radix-toast-swipe-move-x));
@@ -26,24 +26,47 @@
 
   @keyframes slidein {
     0% {
-      transform: translateX(100%);
-    }
-
-    75% {
-      rotate: 0deg;
-    }
-
-    85% {
-      rotate: -14deg;
-    }
-
-    95% {
-      rotate: 20deg;
+      transform: translateX(0);
     }
 
     100% {
-      transform: translateX(0);
-      rotate: 0deg;
+      transform: translateX(200%);
+    }
+  }
+
+  @media (width <= 1400px) {
+    @keyframes slidein {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(90%);
+      }
+    }
+  }
+
+  @media (width <= 768px) {
+    @keyframes slidein {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(50%);
+      }
+    }
+  }
+
+  @media (width <= 576px) {
+    @keyframes slidein {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(20%);
+      }
     }
   }
 

@@ -31,7 +31,7 @@ type Props = {
  * - `label?` — метка над полем
  * - `error?` — сообщение об ошибке
  * - `classNameTarget?` — дополнительный CSS-класс для корня OverlayScrollbars
- * - `direction?` — направление изменения размера (например, `'vertical'`, `'horizontal'`, `'both'`)
+ * - `direction?` — направление изменения размера (например, `'vertical'`, `'horizontal'`, `'both', `'none'`)
  *
  * Наследует пропсы `<textarea>`.
  */
@@ -86,14 +86,16 @@ export const Textarea = (p: Props) => {
         className={clsx(s.overlayscrollbarsReact, classNameTarget, { [s.errorText]: hasError })}
         data-overlayscrollbars-initialize=''
       >
-        <div
-          className={s.resizeButton}
-          ref={handleRef}
-          style={{
-            cursor: cursorMap[direction],
-          }}
-          aria-hidden='true'
-        />
+        {direction !== 'none' && (
+          <div
+            className={s.resizeButton}
+            ref={handleRef}
+            style={{
+              cursor: cursorMap[direction],
+            }}
+            aria-hidden='true'
+          />
+        )}
         <div
           ref={viewportRef}
           data-overlayscrollbars-contents=''

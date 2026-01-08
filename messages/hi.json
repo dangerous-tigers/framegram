@@ -9,6 +9,73 @@
     "logOut": "लॉग आउट",
     "logOutMessage": "क्या आप वाकई अपने खाता {email} से लॉग आउट करना चाहते हैं?",
     "yes": "हां",
+    "no": "नहीं"
+  },
+  "login": {
+    "title": "साइन इन",
+    "email": "ईमेल",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "पासवर्ड",
+    "passwordPlaceholder": "अपना पासवर्ड दर्ज करें",
+    "forgotPassword": "पासवर्ड भूल गए",
+    "signIn": "साइन इन",
+    "noAccount": "कोई खाता नहीं है?",
+    "signUp": "साइन अप"
+  },
+  "register": {
+    "signUp": "साइन अप करें",
+    "signIn": "साइन इन करें",
+    "title": "साइन इन करें",
+    "Do you have an account?": "क्या आपके पास पहले से एक खाता है?",
+    "Loading": "लोड हो रहा है...",
+    "I agree to the": "मैं सहमत हूं",
+    "Terms of Service": "सेवा की शर्तों",
+    "and": "और",
+    "Privacy Policy": "गोपनीयता नीति",
+    "Ok": "ठीक है",
+    "We have sent a link to confirm your email": "हमने आपका ईमेल पुष्टि करने के लिए एक लिंक भेजा है",
+    "placeholder name": "उपयोगकर्ता का नाम दर्ज करें",
+    "placeholder email": "अपना ईमेल पता दर्ज करें",
+    "placeholder password": "अपना पासवर्ड दर्ज करें",
+    "placeholder passwordConfirm": "अपना पासवर्ड पुष्टि दर्ज करें",
+    "Email confirmation": "ईमेल पुष्टिकरण",
+    "name": "उपयोगकर्ता नाम",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "passwordConfirm": "पासवर्ड पुष्टि"
+  },
+  "forgot": {
+    "title": "साइन इन पर वापस जाएँ",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "text": "अपना ईमेल पता दर्ज करें और हम आपको आगे के निर्देश भेज देंगे।",
+    "sendLink": "लिंक भेजें",
+    "backToSignIn": "साइन इन पर वापस जाएँ"
+  },
+  "newPassword": {
+    "title": "नया पासवर्ड बनाएं",
+    "newPassword": "नया पासवर्ड",
+    "passwordConfirm": "पासवर्ड पुष्टि",
+    "text": "आपका पासवर्ड 6 से 20 अक्षरों के बीच होना चाहिए।",
+    "createBtn": "नया पासवर्ड बनाएं"
+  },
+  "resendLink": {
+    "title": "ईमेल सत्यापन लिंक की समय सीमा समाप्त हो गई है।",
+    "text": "लगता है सत्यापन लिंक की वैधता समाप्त हो गई है। चिंता न करें, हम लिंक दोबारा भेज सकते हैं।",
+    "resendBtn": "लिंक पुनः भेजें"
+  },
+  "validateError": {
+    "minChars": "न्यूनतम 6 अक्षर",
+    "maxChars": "अधिकतम 20 अक्षर",
+    "regExPassword": "पासवर्ड में कम से कम एक संख्या, एक अपरकेस अक्षर और एक लोअरकेस अक्षर होना चाहिए। विशेष वर्णों की अनुमति है: ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ { | } ~",
+    "passwordMatch": "पासवर्डों को मेल खाना चाहिए",
+    "passwordConfirm": "कृपया अपने पासवर्ड की पुष्टि करें",
+    "email": "ईमेल का प्रारूप example@example.com के अनुरूप होना चाहिए।",
+    "emailExist": "इस ईमेल पते वाला उपयोगकर्ता मौजूद नहीं है",
+    "captcha": "कृपया पुष्टि करें कि आप रोबोट नहीं हैं"
+  }
+}
+    "yes": "हां",
     "no": "नहीं",
     "deletePostModal": {
       "title": "पोस्ट हटाएं",
