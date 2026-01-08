@@ -1,5 +1,5 @@
 import { MoreHorizontalOutline } from '@/assets/icons';
-import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
+import { Button } from '@/shared/ui/button/Button';
 import * as PrimitivePopover from '@radix-ui/react-popover';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import s from './Popover.module.scss';
@@ -23,12 +23,13 @@ export const Popover = ({ open, onOpenChange, children }: Props) => {
       onOpenChange={onOpenChange}
     >
       <PrimitivePopover.Trigger asChild>
-        <ButtonComponent
+        <Button
+          variant='text'
           className={s.showMore}
           aria-label='Show More'
         >
           <MoreHorizontalOutline />
-        </ButtonComponent>
+        </Button>
       </PrimitivePopover.Trigger>
       <PrimitivePopover.Anchor />
       <PrimitivePopover.Portal>

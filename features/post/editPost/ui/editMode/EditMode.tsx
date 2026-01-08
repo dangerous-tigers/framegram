@@ -1,11 +1,14 @@
+import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
+import { ConfirmActionModalWrapper } from '@/features/post/editPost/ui/confirmActionModal/ConfirmActionModalWrapper';
 import { ProfileImage } from '@/features/post/viewPost';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { client } from '@/shared/api/client';
+import { TEXT_AREA_MAX_LENGTH } from '@/shared/constants/constants';
 import { Button } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Textarea } from '@/shared/ui/textarea';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import s from './EditMode.module.scss';
 
 type Props = {
@@ -15,19 +18,17 @@ type Props = {
   postId: number;
 };
 
-export const EditMode = ({ profileImage, userName, description, postId }: Props) => {
-  const { setIsEdit } = useViewPostStore();
+export const EditMode = ({ profileImage, userName, postId, description }: Props) => {
+  const { value, setValue } = useConfirmStore();
   const { show } = useAlertStore();
-
-  const [value, setValue] = useState<string | undefined>(undefined);
-  const textAreaMaxLenght = 500;
+  const { setIsEdit } = useViewPostStore();
 
   useEffect(() => {
     setValue(description);
-  }, [description]);
+  }, []);
 
   const queryClient = useQueryClient();
-  queryClient.invalidateQueries({ queryKey: ['post'] });
+
   const saveChangesMutation = useMutation({
     mutationFn: async (value: string) => {
       const response = await client.PUT('/posts/{postId}', {
@@ -56,7 +57,7 @@ export const EditMode = ({ profileImage, userName, description, postId }: Props)
     },
     onSuccess: () => {
       setIsEdit(false);
-
+      queryClient.invalidateQueries({ queryKey: ['post', postId] });
       // Boom baby!
     },
     onSettled: () => {
@@ -87,15 +88,17 @@ export const EditMode = ({ profileImage, userName, description, postId }: Props)
           onChange={onValueHandler}
         />
         <span className={s.textAreaLenght}>
-          {value?.length === undefined ? 0 : value?.length} / {textAreaMaxLenght}
+          {value?.length === undefined ? 0 : value?.length} / {TEXT_AREA_MAX_LENGTH}
         </span>
       </div>
       <Button
         variant='primary'
         onClick={saveChanges}
+        disabled={value !== undefined && value.length > TEXT_AREA_MAX_LENGTH}
       >
         Save changes
       </Button>
+      <ConfirmActionModalWrapper />
     </div>
   );
 };

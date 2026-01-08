@@ -80,13 +80,12 @@
     "emailExist": "Пользователь с таким адресом электронной почты не существует",
     "captcha": "Пожалуйста, подтвердите, что вы не робот"
   },
-<<<<<<< HEAD
     "confirmAction": {
     "yes": "Yes",
     "no": "No",
     "close": "Закрыть",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесенные вами изменения не будут сохранены."
-=======
+    },
   "view-post": {
     "likes": "Лайки",
     "reply": "Ответить",

@@ -1,9 +1,9 @@
 'use client';
-import { useConfirmModal } from '@/features/post/editPost/modal/useConfirmModal';
+import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { ConfirmActionModal } from '@/features/post/editPost/ui/confirmActionModal/ConfirmActionModal';
 
 export const ConfirmActionModalWrapper = () => {
-  const { open } = useConfirmModal();
+  const { open } = useConfirmStore();
 
   return open && <ConfirmActionModal open={open} />;
 };

@@ -3,7 +3,7 @@ import { Button } from '@/shared/ui';
 import { Modal } from '@/shared/ui/modal';
 import { useTranslations } from 'next-intl';
 
-import { useConfirmModal } from '@/features/post/editPost/modal/useConfirmModal';
+import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
 import s from './ConfirmActionModal.module.scss';
@@ -14,7 +14,7 @@ type Props = {
 
 export const ConfirmActionModal = ({ open }: Props) => {
   const t = useTranslations('confirmAction');
-  const { hide } = useConfirmModal();
+  const { hide } = useConfirmStore();
   const { setIsEdit } = useViewPostStore();
 
   const handleClose = () => {
