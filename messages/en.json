@@ -85,5 +85,20 @@
     "email": "The email must match the format example@example.com",
     "emailExist": "User with this email does not exist",
     "captcha": "Please verify that you are not a robot"
+  },
+  "confirmAction": {
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Do you really want to finish editing? If you close the changes you have made will not be saved."
+  },
+  "view-post": {
+    "likes": "Likes",
+    "reply": "Reply",
+    "showReplies": "Show replies",
+    "hideReplies": "Hide replies",
+    "publish": "Publish",
+    "beTheFirstLikes": "Be the first ",
+    "like": "Like!"
   }
 }
