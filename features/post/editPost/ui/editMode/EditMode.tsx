@@ -1,5 +1,5 @@
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
-import { ConfirmActionModalWrapper } from '@/features/post/editPost/ui/confirmActionModal/ConfirmActionModalWrapper';
+import { ConfirmActionModal } from '@/features/post/editPost/ui/confirmActionModal/ConfirmActionModal';
 import { ProfileImage } from '@/features/post/viewPost';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { client } from '@/shared/api/client';
@@ -22,6 +22,7 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
   const { value, setValue } = useConfirmStore();
   const { show } = useAlertStore();
   const { setIsEdit } = useViewPostStore();
+  const { open } = useConfirmStore();
 
   useEffect(() => {
     setValue(description);
@@ -98,7 +99,7 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
       >
         Save changes
       </Button>
-      <ConfirmActionModalWrapper />
+      {open && <ConfirmActionModal />}
     </div>
   );
 };

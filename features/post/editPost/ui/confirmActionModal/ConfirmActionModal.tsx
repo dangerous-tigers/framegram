@@ -8,13 +8,9 @@ import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
 import s from './ConfirmActionModal.module.scss';
 
-type Props = {
-  open: boolean;
-};
-
-export const ConfirmActionModal = ({ open }: Props) => {
+export const ConfirmActionModal = () => {
   const t = useTranslations('confirmAction');
-  const { hide } = useConfirmStore();
+  const { open, hide } = useConfirmStore();
   const { setIsEdit } = useViewPostStore();
 
   const handleClose = () => {
