@@ -5,7 +5,7 @@ type Severity = 'error' | 'success';
 type Variant = 'default' | 'filled' | 'outlined';
 
 const initialState = {
-  open: true,
+  open: false,
   error: null as Nullable<string>,
   description: null as Nullable<string>,
   variant: 'default' as Variant,

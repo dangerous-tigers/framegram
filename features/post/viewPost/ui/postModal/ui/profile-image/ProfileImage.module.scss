@@ -1,0 +1,17 @@
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.userName {
+  font-weight: 600;
+  margin-right: 5px;
+}
