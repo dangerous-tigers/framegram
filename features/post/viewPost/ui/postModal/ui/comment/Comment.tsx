@@ -26,7 +26,7 @@ export function Comment({ comment, postId, isAuth }: Props) {
     openAnswer,
   });
 
-  const t = useTranslations('view-post');
+  const t = useTranslations('viewPost');
 
   const handleAnswer = (id: number) => {
     alert('Answered by comment id: ' + id + ' by post id: ' + postId + ' by username: ' + comment.from.username);

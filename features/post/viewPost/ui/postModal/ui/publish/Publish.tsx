@@ -10,7 +10,7 @@ export function Publish({ postId }: { postId: number }) {
   const commentUsername = useViewPostStore((state) => state.commentUsername);
   const setContent = useViewPostStore((state) => state.setContent);
   const reset = useViewPostStore((state) => state.reset);
-  const t = useTranslations('view-post');
+  const t = useTranslations('viewPost');
 
   const { commentId, content } = useViewPostStore();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);

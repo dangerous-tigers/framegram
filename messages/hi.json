@@ -80,13 +80,15 @@
     "emailExist": "इस ईमेल पते वाला उपयोगकर्ता मौजूद नहीं है",
     "captcha": "कृपया पुष्टि करें कि आप रोबोट नहीं हैं"
   },
-  "view-post": {
+  "viewPost": {
     "likes": "लाइक्स",
     "reply": "जवाब दें",
     "showReplies": "जवाब दिखाएं",
     "hideReplies": "जवाब छुपाएं",
     "publish": "पब्लिश",
     "beTheFirstLikes": "पहले बनें ",
-    "like": "लाइक करें!"
+    "like": "लाइक करें!",
+    "noCommentsYet": "अभी तक कोई टिप्पणी नहीं.",
+    "beTheFirstToComment": "पहली टिप्पणी करें."
   }
 }

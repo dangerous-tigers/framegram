@@ -22,7 +22,7 @@ export function Actions({
   avatarWhoLikes: string[];
   isAuth: boolean;
 }) {
-  const t = useTranslations('view-post');
+  const t = useTranslations('viewPost');
   return (
     <div className={s.container}>
       {isAuth && (

@@ -9,6 +9,7 @@ import { useGetPostById, useGetPostCommentsInfinity, useViewPostStore } from '@/
 import { Post } from '@/features/post/viewPost/model/types';
 import { Swiper } from '@/shared/ui/swiper';
 import s from './postContent.module.scss';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   initialPost: Post;
@@ -21,6 +22,7 @@ type Props = {
 export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }: Props) {
   const { data: clientPost } = useGetPostById(initialPost.id);
   const isEdit = useViewPostStore((state) => state.isEdit);
+  const t = useTranslations('viewPost');
 
   const post = clientPost ?? initialPost;
 
@@ -103,26 +105,34 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
             )}
             {/* DESCRIPTION & COMMENTS */}
             <Separator orientation='horizontal' />
-            <div className={s.comments}>
-              <Description
-                avatar={post.avatarOwner ?? ''}
-                userName={post.userName || ''}
-                text={post.description || ''}
-                timeStamp={post.createdAt || ''}
-              />
-              {/*    COMMENTS      */}
-              {isLoadingComments
-                ? Array.from({ length: 3 }).map((_, i) => <DescriptionSkeleton key={i} />)
-                : comments?.map((comment) => (
-                    <Comment
-                      key={comment.id}
-                      comment={comment}
-                      postId={post.id}
-                      isAuth={isAuth}
-                    />
-                  ))}
-              <div ref={targetRef} />
-            </div>
+            {!post.description && !comments.length ? (
+              <div className={s.noComments}>
+                <h3>{t('noCommentsYet')}</h3>
+                <p>{t('beTheFirstToComment')}</p>
+              </div>
+            ) : (
+              <div className={s.comments}>
+                <Description
+                  avatar={post.avatarOwner ?? ''}
+                  userName={post.userName || ''}
+                  text={post.description || ''}
+                  timeStamp={post.createdAt || ''}
+                />
+                {/*    COMMENTS      */}
+                {isLoadingComments
+                  ? Array.from({ length: 3 }).map((_, i) => <DescriptionSkeleton key={i} />)
+                  : comments?.map((comment) => (
+                      <Comment
+                        key={comment.id}
+                        comment={comment}
+                        postId={post.id}
+                        isAuth={isAuth}
+                      />
+                    ))}
+                <div ref={targetRef} />
+              </div>
+            )}
+
             {/*    ACTIONS       */}
             <Separator orientation='horizontal' />
             {isLoading ? (
