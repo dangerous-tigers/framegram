@@ -1,52 +1,13 @@
-.profileWrapper {
-  padding-top: 36px;
-  display: flex;
-  gap: 38px;
-  margin-bottom: 48px;
-}
-
-.content {
-  display: flex;
-  gap: 20px;
-  flex-direction: column;
-}
-
-.profileButton {
-  @media screen and (width >= 768) {
-    height: 36px;
-  }
-
-  @media screen and (width <= 768) {
-    height: 48px;
-  }
-}
-
-.userInfo {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.userName {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  & > h2 {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 36px;
-    color: var(--light-100);
-    margin: 0;
-  }
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(4, auto);
+  padding: 36px 54px 48px 14px;
 }
 
 .profilePicture {
-  width: 100%;
+  grid-area: 1 / 1 / 4 / 2;
+  padding-right: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,46 +17,29 @@
   }
 }
 
-.buttonsBlock {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.userName {
+  grid-area: 1 / 2 / 2 / 3;
 
-.counters {
-  width: 100%;
-
-  & > ul {
+  h2 {
     display: flex;
     align-items: center;
-    gap: 88px;
-
-    & > li {
-      & > a {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-weight: 700;
-        font-size: var(--font-size-s);
-
-        & > span {
-          font-weight: 400;
-        }
-      }
-    }
-  }
-
-  @media screen and (width <= 768) {
-    display: none;
   }
 }
 
-.name {
-  font-weight: 600;
-  font-size: var(--font-size-xs);
+.buttonsBlock {
+  grid-area: 1 / 3 / 2 / 4;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 12px;
+
+  & > a {
+    width: fit-content;
+  }
 }
 
 .bio {
+  grid-area: 3 / 2 / 4 / 4;
   max-height: 72px;
   display: -webkit-box;
   line-clamp: 3;
@@ -110,41 +54,90 @@
   }
 }
 
-@media screen and (width <= 768px) {
-  .profilePicture {
+.counters {
+  grid-area: 2 / 2 / 3 / 3;
+
+  // width: 100%;
+  padding: 20px 0 24px;
+
+  & > ul {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    gap: 28px;
+    justify-content: space-between;
 
-    & > img {
-      width: 72px;
-      height: 72px;
-    }
-
-    & > .countersMobile {
-      & > ul {
+    & > li {
+      & > a {
         display: flex;
-        gap: 26px;
-        font-size: var(--font-size-xs);
+        flex-direction: column;
+        align-items: center;
+        font-weight: 700;
+        width: fit-content;
+        font-size: var(--font-size-s);
 
-        & > li > a {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+        & > span {
+          font-weight: 400;
         }
       }
     }
   }
+}
 
-  .profileWrapper {
-    flex-direction: column;
-    gap: 8px;
+@media screen and (width < 1200px) {
+  .container {
+    padding: 24px 4px 30px;
+    grid-template-columns: 204px auto;
+    grid-template-rows: repeat(4, auto);
   }
 
-  .userInfo {
+  .profilePicture {
+    padding: 0;
+    width: 128px;
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .counters {
+    padding: 0;
+    display: grid;
+    grid-area: 1 / 2 / 2 / 3;
+  }
+
+  .userName {
+    padding-top: 6px;
+    grid-area: 2 / 1 / 3 / 2;
+  }
+
+  .buttonsBlock {
+    padding: 18px 0;
+    grid-area: 3 / 1 / 4 / 3;
+    display: flex;
     flex-direction: column;
-    gap: 16px;
+
+    & > button {
+      width: 100%;
+    }
+
+    & > a {
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .bio {
+    grid-area: 4 / 1 / 5 /3;
+    padding-bottom: 30px;
+  }
+}
+
+@media screen and (width < 576px) {
+  .container {
+    padding: 24px 5px 30px;
+    grid-template-columns: 100px auto;
+    grid-template-rows: repeat(4, auto);
+  }
+
+  .profilePicture {
+    padding: 0;
+    width: 72px;
   }
 
   .buttonsBlock {
@@ -153,20 +146,10 @@
       height: 48px;
     }
 
-    flex-direction: column;
-  }
-
-  .countersMobile {
-    display: flex;
-  }
-
-  .counters {
-    display: none;
-  }
-}
-
-.countersMobile {
-  @media screen and (width >= 768) {
-    display: none;
+    & > a {
+      text-align: center;
+      width: 100%;
+      height: 48px;
+    }
   }
 }
