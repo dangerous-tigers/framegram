@@ -3,7 +3,7 @@ import {
   Edit2Outline,
   PersonAddOutline,
   PersonRemoveOutline,
-
+  TrashOutline,
 } from '@/assets/icons/components';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ProfileImage } from '@/features/post/viewPost/ui/postModal/ui/profile-image/ProfileImage';
@@ -11,7 +11,9 @@ import { Popover } from '@/shared/ui/popover';
 import clsx from 'clsx';
 import { useState } from 'react';
 import s from './Header.module.scss';
-import { PostDeleteButton } from '@/features/post/removePost/ui/PostDeleteButton';
+import { PostDeleteModal } from '@/features/post/removePost/ui/PostDeleteModal';
+import { useRemovePost } from '@/entities/post/model/useRemovePost';
+
 type Props = {
   avatar: string | undefined;
   userName: string | undefined;
@@ -26,6 +28,9 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
   const [open, setOpen] = useState<boolean>(false);
   const { setIsEdit } = useViewPostStore();
 
+  // Добавляем хук для удаления поста
+  const { mutate: removePost, isPending } = useRemovePost();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const isOwner = userId != null && postOwnerId != null && Number(userId) === Number(postOwnerId);
 
@@ -42,7 +47,6 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
     }
 
     if (isOwner) {
-
       return (
         <ul>
           <li onClick={editPost}>
@@ -50,9 +54,16 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
             <span>Edit</span>
           </li>
           {postId != null && typeof postId === 'number' && !isNaN(postId) && postId > 0 && (
-            <PostDeleteButton
-              postId={postId}
-            />
+            <li
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpen(false); // Закрываем поповер
+                setShowDeleteModal(true); // Показываем модалку подтверждения
+              }}
+            >
+              <TrashOutline />
+              <span>Delete</span>
+            </li>
           )}
           <li onClick={copyLink}>
             <CopyOutline />
@@ -86,22 +97,37 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
 
   const copyLink = () => {};
 
+  const handleDeleteConfirm = () => {
+    if (postId != null && typeof postId === 'number' && !isNaN(postId) && postId > 0) {
+      removePost(Number(postId));
+      setShowDeleteModal(false);
+    }
+  };
+
   return (
-    <div className={clsx(s.header, className)}>
-      <ProfileImage
-        avatar={avatar}
-        userName={userName}
-      />
-      <div className={s.headerActions}>
-        <Popover
-          open={open}
-          onOpenChange={() => setOpen(!open)}
-          isOwner={isOwner}
-          isAuthorized={isAuth}
-        >
-          {renderActions()}
-        </Popover>
+    <>
+      <div className={clsx(s.header, className)}>
+        <ProfileImage
+          avatar={avatar}
+          userName={userName}
+        />
+        <div className={s.headerActions}>
+          <Popover
+            open={open}
+            onOpenChange={() => setOpen(!open)}
+            isOwner={isOwner}
+            isAuthorized={isAuth}
+          >
+            {renderActions()}
+          </Popover>
+        </div>
       </div>
-    </div>
+      <PostDeleteModal
+        open={showDeleteModal}
+        onOpenChange={setShowDeleteModal}
+        onConfirm={handleDeleteConfirm}
+        isLoading={isPending}
+      />
+    </>
   );
 }
