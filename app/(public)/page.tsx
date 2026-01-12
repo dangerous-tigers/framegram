@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { routes } from '@/shared/config/routes';
+import { MainPage } from '@/widgets/mainPage/ui/MainPage';
 
 type PageProps = {
   searchParams: Promise<{ code?: string; email?: string }>;
@@ -12,5 +13,5 @@ export default async function Page({ searchParams }: PageProps) {
     redirect(`${routes.auth.confirmEmail}?code=${params.code}`);
   }
 
-  return <></>;
+  return <MainPage />;
 }
