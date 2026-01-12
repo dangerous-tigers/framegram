@@ -28,7 +28,6 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
   const [open, setOpen] = useState<boolean>(false);
   const { setIsEdit } = useViewPostStore();
 
-  // Добавляем хук для удаления поста
   const { mutate: removePost, isPending } = useRemovePost();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -57,8 +56,8 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
             <li
               onClick={(e) => {
                 e.stopPropagation();
-                setOpen(false); // Закрываем поповер
-                setShowDeleteModal(true); // Показываем модалку подтверждения
+                setOpen(false);
+                setShowDeleteModal(true);
               }}
             >
               <TrashOutline />

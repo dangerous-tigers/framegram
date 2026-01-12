@@ -24,7 +24,6 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
   const router = useRouter();
 
   if (!post) {
-    // Если пост не существует, закрываем модальное окно
     router.back();
     return null;
   }
