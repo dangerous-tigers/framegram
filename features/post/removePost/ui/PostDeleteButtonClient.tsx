@@ -14,30 +14,28 @@ type Props = {
 
 export const PostDeleteButtonClient = ({ postId, disabled }: Props) => {
   const [open, setOpen] = useState(false);
-  const { mutate: removePost, isPending, isError, error } = useRemovePost();
+  const { mutate: removePost, isPending } = useRemovePost();
   const t = useTranslations('deletePostModal');
 
   const handleDelete = () => {
-
     if (postId == null || isNaN(Number(postId)) || Number(postId) <= 0) {
-
       return;
     }
     removePost(Number(postId), {
-      onSuccess: (data) => {
-
+      onSuccess: () => {
         setOpen(false);
       },
-      onError: (err) => {
-
-      }
+      onError: () => {},
     });
   };
 
   return (
     <>
       <li
-        onClick={(e) => {e.stopPropagation(); setOpen(true);}}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen(true);
+        }}
         className={s.listItemStyle}
         style={{ cursor: 'pointer' }}
         aria-disabled={disabled || isPending}

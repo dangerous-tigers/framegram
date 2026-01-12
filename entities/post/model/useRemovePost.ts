@@ -10,23 +10,18 @@ export const useRemovePost = () => {
 
   return useMutation({
     mutationFn: (postId: number) => {
-
       if (!postId) {
         throw new Error('Post ID is required for deletion');
       }
       return postApi.deletePost(postId);
     },
-    onSuccess: (data, postId) => {
-
+    onSuccess: (_, postId) => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
       queryClient.invalidateQueries({ queryKey: ['post', postId] });
       queryClient.invalidateQueries({ queryKey: ['profile-posts'] });
-      
+
       router.push('/feed');
     },
-    onError: (error) => {
-      console.error('Error deleting post:', error);
-
-    }
+    onError: () => {},
   });
 };
