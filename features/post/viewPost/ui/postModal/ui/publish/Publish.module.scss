@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+  margin: 12px 0;
+}
+
+.textareaWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.textarea {
+  background: transparent;
+  box-shadow: none;
+  resize: none;
+  color: var(--light-100);
+  font-size: 16px;
+  line-height: 150%;
+  height: 30px;
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.atUsername {
+  color: var(--primary-500);
+  display: flex;
+
+  span {
+    text-decoration: underline;
+    color: var(--light-100);
+  }
+}
+
+.publishButton {
+  padding: 0;
+  cursor: pointer;
+}
+
+.closeButton {
+  cursor: pointer;
+  color: var(--light-100);
+  padding: 0;
+}

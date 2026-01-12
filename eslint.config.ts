@@ -20,6 +20,7 @@ export default defineConfig([
 
   {
     files: ['**/*.{js,mjs,ts,mts,cts,jsx,tsx}'],
+    plugins: {},
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
