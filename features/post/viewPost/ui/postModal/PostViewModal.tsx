@@ -60,6 +60,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
           postOwnerId={post.ownerId}
           userId={user?.userId || 0}
           isAuth={isAuth}
+          postId={post.id || 0}
         />
       );
     }
