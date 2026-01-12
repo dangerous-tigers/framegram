@@ -3,7 +3,7 @@ import {
   Edit2Outline,
   PersonAddOutline,
   PersonRemoveOutline,
-  TrashOutline,
+
 } from '@/assets/icons/components';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ProfileImage } from '@/features/post/viewPost/ui/postModal/ui/profile-image/ProfileImage';
@@ -11,6 +11,7 @@ import { Popover } from '@/shared/ui/popover';
 import clsx from 'clsx';
 import { useState } from 'react';
 import s from './Header.module.scss';
+import { PostDeleteButton } from '@/features/post/removePost/ui/PostDeleteButton';
 type Props = {
   avatar: string | undefined;
   userName: string | undefined;
@@ -18,13 +19,16 @@ type Props = {
   userId: number;
   isAuth: boolean;
   postOwnerId: number;
+  postId: number;
 };
 
-export function Header({ avatar, userName, postOwnerId, userId, isAuth, className }: Props) {
+export function Header({ avatar, userName, postOwnerId, userId, isAuth, className, postId }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const { setIsEdit } = useViewPostStore();
 
-  const isOwner = userId === postOwnerId;
+
+  const isOwner = userId != null && postOwnerId != null && Number(userId) === Number(postOwnerId);
+
   const isFollow = false;
 
   const renderActions = () => {
@@ -38,16 +42,18 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
     }
 
     if (isOwner) {
+
       return (
         <ul>
           <li onClick={editPost}>
             <Edit2Outline />
             <span>Edit</span>
           </li>
-          <li onClick={removePost}>
-            <TrashOutline />
-            <span>Delete</span>
-          </li>
+          {postId != null && typeof postId === 'number' && !isNaN(postId) && postId > 0 && (
+            <PostDeleteButton
+              postId={postId}
+            />
+          )}
           <li onClick={copyLink}>
             <CopyOutline />
             <span>Copy link</span>
@@ -73,8 +79,6 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
   const editPost = () => {
     setIsEdit(true);
   };
-
-  const removePost = () => {};
 
   const follow = () => {};
 

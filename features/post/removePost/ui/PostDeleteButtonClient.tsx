@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { PostDeleteModal } from './PostDeleteModal';
 import { useRemovePost } from '@/entities/post/model/useRemovePost';
-import { MoreHorizontal } from '@/assets/icons';
-import { Button } from '@/shared/ui/button/Button';
+import { TrashOutline } from '@/assets/icons';
+import { useTranslations } from 'next-intl';
+import s from './PostDeleteButtonClient.module.scss';
 
 type Props = {
   postId: number;
@@ -13,23 +14,37 @@ type Props = {
 
 export const PostDeleteButtonClient = ({ postId, disabled }: Props) => {
   const [open, setOpen] = useState(false);
-  const { mutate: removePost, isPending } = useRemovePost();
+  const { mutate: removePost, isPending, isError, error } = useRemovePost();
+  const t = useTranslations('deletePostModal');
 
   const handleDelete = () => {
-    removePost(postId);
-    setOpen(false);
+
+    if (postId == null || isNaN(Number(postId)) || Number(postId) <= 0) {
+
+      return;
+    }
+    removePost(Number(postId), {
+      onSuccess: (data) => {
+
+        setOpen(false);
+      },
+      onError: (err) => {
+
+      }
+    });
   };
 
   return (
     <>
-      <Button
-        variant='text'
-        onClick={() => setOpen(true)}
-        disabled={disabled || isPending}
-        style={{ padding: '8px' }}
+      <li
+        onClick={(e) => {e.stopPropagation(); setOpen(true);}}
+        className={s.listItemStyle}
+        style={{ cursor: 'pointer' }}
+        aria-disabled={disabled || isPending}
       >
-        <MoreHorizontal />
-      </Button>
+        <TrashOutline />
+        {t('delete')}
+      </li>
       <PostDeleteModal
         open={open}
         onOpenChange={setOpen}

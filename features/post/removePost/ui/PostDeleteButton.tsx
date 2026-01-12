@@ -5,6 +5,7 @@ type Props = {
   disabled?: boolean;
 };
 
+
 export const PostDeleteButton = ({ postId, disabled }: Props) => {
   return (
     <PostDeleteButtonClient

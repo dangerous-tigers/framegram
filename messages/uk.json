@@ -1,4 +1,5 @@
 {
+  "sidebar": {
     "feed": "Стрічка",
     "create": "Створити",
     "myProfile": "Мій профіль",
@@ -9,10 +10,7 @@
     "logOut": "Вийти",
     "logOutMessage": "Ви дійсно хочете вийти з облікового запису {email}?",
     "yes": "Так",
-    "no": "Ні"
-  },
-  "login": {
-    "title": "Вхід",
+    "no": "Ні",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "password": "Пароль",
@@ -44,6 +42,11 @@
     "password": "Пароль",
     "passwordConfirm": "Підтвердження пароля"
   },
+  "confirmEmail": {
+    "title": "Вітаємо!",
+    "text": "Вашу електронну пошту підтверджено",
+    "logIn": "Увійти"
+  },
   "forgot": {
     "title": "Забули пароль",
     "email": "Email",
@@ -74,6 +77,12 @@
     "emailExist": "Користувача з цією електронною адресою не існує",
     "captcha": "Будь ласка, підтвердіть, що ви не робот"
   },
+  "confirmAction": {
+    "yes": "Так",
+    "no": "Ні",
+    "close": "Закрити",
+    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Ви дійсно хочете завершити редагування? Якщо ви закриєте вікно редагування, зміни, внесені вами, не будуть збережені."
+  },
   "view-post": {
     "likes": "Вподобання",
     "reply": "Відповісти",
@@ -82,14 +91,12 @@
     "publish": "Опублікувати",
     "beTheFirstLikes": "Будь першим ",
     "like": "Вподобати!"
-  }
-}
+  },
+  "deletePostModal": {
+    "title": "Видалити пост",
+    "message": "Ви впевнені, що хочете видалити цей пост?",
     "yes": "Так",
     "no": "Ні",
-    "deletePostModal": {
-      "title": "Видалити пост",
-      "message": "Ви впевнені, що хочете видалити цей пост?",
-      "yes": "Так",
-      "no": "Ні"
-    }
+    "delete": "Видалити"
   }
+}

@@ -71,4 +71,45 @@ export const postApi = {
 
     return res.json();
   },
+  deletePost: async (id: number) => {
+
+    if (!id) {
+      throw new Error('Post ID is required for deletion');
+    }
+    try {
+
+      const token = localStorage.getItem('accessToken');
+      
+      if (!token) {
+        throw new Error('Access token not found');
+      }
+      
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.text();
+
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorData}`);
+      }
+      
+      // Для статуса 204 (No Content) не нужно парсить JSON
+      if (response.status === 204) {
+
+        return {};
+      }
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Exception during post deletion:', error);
+      throw error;
+    }
+  },
 };

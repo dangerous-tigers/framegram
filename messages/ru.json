@@ -1,4 +1,5 @@
 {
+  "sidebar": {
     "feed": "Лента",
     "create": "Создать",
     "myProfile": "Мой профиль",
@@ -41,6 +42,11 @@
     "password": "Пароль",
     "passwordConfirm": "Подтверждение пароля"
   },
+  "confirmEmail": {
+    "title": "Поздравляем!",
+    "text": "Ваш адрес электронной почты подтвержден",
+    "logIn": "Войти"
+  },
   "forgot": {
     "title": "Забыли пароль",
     "email": "Email",
@@ -71,12 +77,12 @@
     "emailExist": "Пользователь с таким адресом электронной почты не существует",
     "captcha": "Пожалуйста, подтвердите, что вы не робот"
   },
-    "confirmAction": {
-    "yes": "Yes",
-    "no": "No",
+  "confirmAction": {
+    "yes": "Да",
+    "no": "Нет",
     "close": "Закрыть",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесенные вами изменения не будут сохранены."
-    },
+  },
   "view-post": {
     "likes": "Лайки",
     "reply": "Ответить",
@@ -85,12 +91,12 @@
     "publish": "Опубликовать",
     "beTheFirstLikes": "Будь первым ",
     "like": "Лайк!"
+  },
+  "deletePostModal": {
+    "title": "Удалить пост",
+    "message": "Вы уверены, что хотите удалить этот пост?",
+    "yes": "Да",
+    "no": "Нет",
+    "delete": "Удалить"
   }
 }
-    "deletePostModal": {
-      "title": "Удалить пост",
-      "message": "Вы уверены, что хотите удалить этот пост?",
-      "yes": "Да",
-      "no": "Нет"
-    }
-  }

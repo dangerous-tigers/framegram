@@ -1,4 +1,5 @@
 {
+  "sidebar": {
     "feed": "फ़ीड",
     "create": "बनाएँ",
     "myProfile": "मेरी प्रोफ़ाइल",
@@ -9,10 +10,7 @@
     "logOut": "लॉग आउट",
     "logOutMessage": "क्या आप वाकई अपने खाता {email} से लॉग आउट करना चाहते हैं?",
     "yes": "हां",
-    "no": "नहीं"
-  },
-  "login": {
-    "title": "साइन इन",
+    "no": "नहीं",
     "email": "ईमेल",
     "emailPlaceholder": "Epam@epam.com",
     "password": "पासवर्ड",
@@ -44,8 +42,13 @@
     "password": "पासवर्ड",
     "passwordConfirm": "पासवर्ड पुष्टि"
   },
+  "confirmEmail": {
+    "title": "बधाई हो!",
+    "text": "आपका ईमेल पता पुष्टि कर दिया गया है",
+    "logIn": "लॉग इन करें"
+  },
   "forgot": {
-    "title": "साइन इन पर वापस जाएँ",
+    "title": "पासवर्ड भूल गए",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "text": "अपना ईमेल पता दर्ज करें और हम आपको आगे के निर्देश भेज देंगे।",
@@ -74,6 +77,12 @@
     "emailExist": "इस ईमेल पते वाला उपयोगकर्ता मौजूद नहीं है",
     "captcha": "कृपया पुष्टि करें कि आप रोबोट नहीं हैं"
   },
+  "confirmAction": {
+    "yes": "हां",
+    "no": "नहीं",
+    "close": "बंद करें",
+    "Do you really want to finish editing? If you close the changes you have made will not be saved": "क्या आप वास्तव में संपादन समाप्त करना चाहते हैं? यदि आप बंद करते हैं तो आपके द्वारा किए गए परिवर्तन सहेजे नहीं जाएंगे।"
+  },
   "view-post": {
     "likes": "लाइक्स",
     "reply": "जवाब दें",
@@ -82,14 +91,12 @@
     "publish": "पब्लिश",
     "beTheFirstLikes": "पहले बनें ",
     "like": "लाइक करें!"
-  }
-}
+  },
+  "deletePostModal": {
+    "title": "पोस्ट हटाएं",
+    "message": "क्या आप वाकई इस पोस्ट को हटाना चाहते हैं?",
     "yes": "हां",
     "no": "नहीं",
-    "deletePostModal": {
-      "title": "पोस्ट हटाएं",
-      "message": "क्या आप वाकई इस पोस्ट को हटाना चाहते हैं?",
-      "yes": "हां",
-      "no": "नहीं"
-    }
- }
+    "delete": "हटाएं"
+  }
+}
