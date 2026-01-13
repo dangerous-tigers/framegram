@@ -95,6 +95,10 @@
     "beTheFirstLikes": "Будь первым ",
     "like": "Лайк!",
     "noCommentsYet": "Комментариев пока нет.",
-    "beTheFirstToComment": "Будьте первым, кто оставит комментарий."
+    "beTheFirstToComment": "Будьте первым, кто оставит комментарий.",
+    "emptyFieldError": "Текстовое поле не может быть пустым",
+    "emptyAnswerError": "Ответ не может быть пустым",
+    "prefixWarning": "Внимание! Вы перешли в режим отправки комментария",
+    "commentPlaceholder": "Добавить комментарий..."
   }
 }

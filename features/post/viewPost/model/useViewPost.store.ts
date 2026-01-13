@@ -20,13 +20,16 @@ type State = {
   reset: () => void;
 };
 
-export const useViewPostStore = create<State>((set) => ({
-  type: 'comment',
+const initialState = {
+  type: 'comment' as PayloadType,
   isEdit: false,
   commentId: null,
   postId: null,
   content: '',
-  commentUsername: '',
+  commentUsername: null,
+};
+export const useViewPostStore = create<State>((set) => ({
+  ...initialState,
 
   setType: (type: PayloadType) => set({ type }),
   setIsEdit: (isEdit) => set({ isEdit }),
@@ -35,5 +38,5 @@ export const useViewPostStore = create<State>((set) => ({
   setContent: (content) => set({ content }),
   setComentUsername: (commentUsername) => set({ commentUsername }),
 
-  reset: () => set({ type: 'comment', commentId: null, postId: null, content: '', commentUsername: '' }),
+  reset: () => set(initialState),
 }));

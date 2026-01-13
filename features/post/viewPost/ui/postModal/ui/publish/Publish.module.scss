@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 95%;
 }
 
 .textarea {
@@ -19,7 +19,7 @@
   color: var(--light-100);
   font-size: 16px;
   line-height: 150%;
-  height: 30px;
+  height: 34px;
 
   &:focus {
     box-shadow: none;
@@ -43,6 +43,7 @@
 .publishButton {
   padding: 0;
   cursor: pointer;
+  margin-left: 12px;
 }
 
 .closeButton {

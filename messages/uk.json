@@ -89,6 +89,10 @@
     "beTheFirstLikes": "Будь першим ",
     "like": "Вподобати!",
     "noCommentsYet": "Коментарів ще немає.",
-    "beTheFirstToComment": "Будьте першим, хто залишить коментар."
+    "beTheFirstToComment": "Будьте першим, хто залишить коментар.",
+    "emptyFieldError": "Текстове поле не може бути порожнім",
+    "emptyAnswerError": "Відповідь не може бути порожньою",
+    "prefixWarning": "Увага! Ви перейшли в режим надсилання коментаря",
+    "commentPlaceholder": "Додати коментар..."
   }
 }

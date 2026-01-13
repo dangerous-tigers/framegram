@@ -89,6 +89,10 @@
     "beTheFirstLikes": "成为第一个 ",
     "like": "点赞！",
     "noCommentsYet": "暂无评论.",
-    "beTheFirstToComment": "成为第一个评论者."
+    "beTheFirstToComment": "成为第一个评论者.",
+    "emptyFieldError": "文本字段不能为空",
+    "emptyAnswerError": "回复不能为空",
+    "prefixWarning": "注意！您已切换到发表评论模式",
+    "commentPlaceholder": "添加评论..."
   }
 }
