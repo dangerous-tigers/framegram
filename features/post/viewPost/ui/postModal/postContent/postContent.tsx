@@ -48,18 +48,27 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
           />
         )}
         {clientPost && clientPost.images && (
-          <div>
-            <Swiper
-              slides={clientPost.images.map((image) => (
+          <Swiper
+            slides={clientPost.images.map((image) => (
+              <div
+                key={image.uploadId}
+                className={s.imageWrapper}
+              >
                 <img
                   className={s.image}
                   key={image.uploadId}
                   src={image.url}
                   alt='loader'
                 />
-              ))}
-            />
-          </div>
+                <img
+                  className={s.imagOverlay}
+                  key={image.uploadId}
+                  src={image.url}
+                  alt='loader'
+                />
+              </div>
+            ))}
+          />
         )}
       </div>
 
