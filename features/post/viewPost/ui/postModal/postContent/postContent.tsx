@@ -2,7 +2,6 @@
 
 import { EditMode } from '@/features/post/editPost/ui/editMode/EditMode';
 import { Separator } from '@/shared/ui';
-import { useEffect, useRef } from 'react';
 import { Actions, ActionsSkeleton, Comment, Description, DescriptionSkeleton, Header, Publish } from '../ui';
 
 import { useGetPostById, useGetPostCommentsInfinity, useViewPostStore } from '@/features/post/viewPost/model';
@@ -10,6 +9,7 @@ import { Post } from '@/features/post/viewPost/model/types';
 import { Swiper } from '@/shared/ui/swiper';
 import s from './postContent.module.scss';
 import { useTranslations } from 'next-intl';
+import { useIntersection } from '@/shared/lib/hooks';
 
 type Props = {
   initialPost: Post;
@@ -25,35 +25,17 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
   const t = useTranslations('viewPost');
 
   const post = clientPost ?? initialPost;
-
-  const targetRef = useRef(null);
-
   const {
     comments,
     isLoading: isLoadingComments,
     fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
   } = useGetPostCommentsInfinity({
     postId: post.id,
   });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 },
-    );
-
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+  const cursorRef = useIntersection(() => {
+    fetchNextPage();
+  });
 
   return (
     <div className={s.container}>
@@ -129,7 +111,7 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
                         isAuth={isAuth}
                       />
                     ))}
-                <div ref={targetRef} />
+                <div ref={cursorRef} />
               </div>
             )}
 

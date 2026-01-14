@@ -45,12 +45,6 @@ export function Publish({ postId }: { postId: number }) {
 
     if (type === 'answer' && !newValue.startsWith(ANSWER_PREFIX)) {
       setType('comment');
-      show({
-        error: t('prefixWarning'),
-        severity: 'error',
-        variant: 'default',
-        description: null,
-      });
       setContent('');
     }
   }
