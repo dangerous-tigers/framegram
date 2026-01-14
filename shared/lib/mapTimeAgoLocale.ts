@@ -11,7 +11,7 @@ export function mapTimeAgoLocale(locale: Locale): string {
     case 'hi':
       return 'hi';
     case 'be':
-      return 'ru'; // Нету Беларуской мовы в javascript-time-ago =( будет русский
+      return 'be';
     case 'en':
     default:
       return 'en';

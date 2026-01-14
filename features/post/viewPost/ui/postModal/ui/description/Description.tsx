@@ -26,7 +26,7 @@ export function Description({
   isAnswer = false,
   onAnswerClick,
 }: Props) {
-  const t = useTranslations('view-post');
+  const t = useTranslations('viewPost');
   return (
     <div className={s.description}>
       <div className={s.userInfo}>
