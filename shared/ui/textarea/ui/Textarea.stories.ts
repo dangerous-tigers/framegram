@@ -62,3 +62,9 @@ export const directionBoth: Story = {
     direction: 'both',
   },
 };
+
+export const directionNone: Story = {
+  args: {
+    direction: 'none',
+  },
+};

@@ -71,7 +71,7 @@
 }
 
 .triggerInnerSmall {
-  composes: triggerinner;
+  composes: triggerInner;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,7 +145,7 @@
 }
 
 .listItemText {
-  composes: listitem;
+  composes: listItem;
   height: fit-content;
   padding: 0;
 }
