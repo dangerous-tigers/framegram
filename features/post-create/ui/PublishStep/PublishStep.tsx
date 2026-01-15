@@ -1,12 +1,13 @@
+import Image from 'next/image';
+import { ChangeEvent } from 'react';
+
+import { useMe } from '@/entities/user/model/useMe';
+import { AddLocation } from '@/features/addLocation/ui/AddLocation';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 import s from '@/features/post-create/ui/publishStep/publishStep.module.scss';
-import { Swiper } from '@/shared/ui/swiper';
-import Image from 'next/image';
-import { Textarea } from '@/shared/ui/textarea';
-import { AddLocation } from '@/features/addLocation/ui/AddLocation';
-import { ChangeEvent } from 'react';
-import { useMe } from '@/entities/user/model/useMe';
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
+import { Swiper } from '@/shared/ui/swiper';
+import { Textarea } from '@/shared/ui/textarea';
 
 export const PublishStep = () => {
   const images = useCreatePostStore((s) => s.images);

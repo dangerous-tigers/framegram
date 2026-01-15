@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import s from './addLocation.module.scss';
-import { InputWithIcon } from '@/shared/ui/inputWithIcon';
-import { PinOutline } from '@/assets/icons';
 import debounce from 'lodash.debounce';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
+import s from './addLocation.module.scss';
+
+import { PinOutline } from '@/assets/icons';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
+import { InputWithIcon } from '@/shared/ui/inputWithIcon';
 
 type City = {
   id: string;

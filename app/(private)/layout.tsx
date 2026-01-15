@@ -1,9 +1,10 @@
 'use client';
-import { ReactNode } from 'react';
-import { useMe } from '@/entities/user/model/useMe';
 import { redirect } from 'next/navigation';
-import { routes } from '@/shared/config/routes';
+import { ReactNode } from 'react';
+
 import { AppShell } from '@/app/ui/AppShell';
+import { useMe } from '@/entities/user/model/useMe';
+import { routes } from '@/shared/config/routes';
 
 export default function PrivateLayout({
   children,

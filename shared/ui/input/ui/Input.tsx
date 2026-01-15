@@ -1,11 +1,11 @@
 'use client';
 
-import { ComponentPropsWithRef, useState } from 'react';
 import clsx from 'clsx';
-
-import { Search, EyeOutline, EyeOffOutline } from '@/assets/icons';
+import { ComponentPropsWithRef, useState } from 'react';
 
 import s from './Input.module.scss';
+
+import { Search, EyeOutline, EyeOffOutline } from '@/assets/icons';
 
 type Props = {
   type?: 'text' | 'password' | 'search' | 'email';

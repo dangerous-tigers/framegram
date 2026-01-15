@@ -1,5 +1,6 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
 import clsx from 'clsx';
+import { InputHTMLAttributes, ReactNode } from 'react';
+
 import s from './inputWithIcon.module.scss';
 
 type InputWithIconProps = InputHTMLAttributes<HTMLInputElement> & {

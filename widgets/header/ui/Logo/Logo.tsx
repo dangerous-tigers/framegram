@@ -1,7 +1,9 @@
-import { Framehublogo } from '@/assets/icons';
-import s from './logo.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
+
+import s from './logo.module.scss';
+
+import { Framehublogo } from '@/assets/icons';
 import { routes } from '@/shared/config/routes';
 
 type PropsLogo = {

@@ -1,3 +1,8 @@
+import clsx from 'clsx';
+import { useState } from 'react';
+
+import s from './Header.module.scss';
+
 import {
   CopyOutline,
   Edit2Outline,
@@ -8,9 +13,6 @@ import {
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ProfileImage } from '@/features/post/viewPost/ui/postModal/ui/profile-image/ProfileImage';
 import { Popover } from '@/shared/ui/popover';
-import clsx from 'clsx';
-import { useState } from 'react';
-import s from './Header.module.scss';
 type Props = {
   avatar: string | undefined;
   userName: string | undefined;

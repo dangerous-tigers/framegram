@@ -1,4 +1,5 @@
 import { openDB, IDBPDatabase } from 'idb';
+
 import { DraftData } from '@/features/post-create/model/types';
 
 const DB_NAME = 'create-post';

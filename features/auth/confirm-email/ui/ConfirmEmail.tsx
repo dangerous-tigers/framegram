@@ -1,13 +1,16 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useConfirmEmail } from '../model/useConfirmEmail';
-import { routes } from '@/shared/config/routes';
-import s from './confirmEmail.module.scss';
-import emailConfirmedIllustration from '@/assets/illustrations/confirm-email.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
+
+import { useConfirmEmail } from '../model/useConfirmEmail';
+
+import s from './confirmEmail.module.scss';
+
+import emailConfirmedIllustration from '@/assets/illustrations/confirm-email.svg';
+import { routes } from '@/shared/config/routes';
 
 type Props = {
   code: string;

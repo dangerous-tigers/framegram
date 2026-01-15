@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { ComponentPropsWithoutRef } from 'react';
+
 import s from './Skeleton.module.scss';
 
 type Props = {

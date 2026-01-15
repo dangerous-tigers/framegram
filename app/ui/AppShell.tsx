@@ -1,9 +1,10 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { Sidebar } from '@/widgets/sidebar';
-import { useMe } from '@/entities/user/model/useMe';
 import clsx from 'clsx';
+import { ReactNode } from 'react';
+
+import { useMe } from '@/entities/user/model/useMe';
+import { Sidebar } from '@/widgets/sidebar';
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { isSuccess } = useMe();
