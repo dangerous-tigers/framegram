@@ -1,9 +1,9 @@
 'use client';
 import { ReactNode } from 'react';
-import { Sidebar } from '@/widgets/sidebar';
 import { useMe } from '@/entities/user/model/useMe';
 import { redirect } from 'next/navigation';
 import { routes } from '@/shared/config/routes';
+import { AppShell } from '@/app/ui/AppShell';
 
 export default function PrivateLayout({
   children,
@@ -15,10 +15,5 @@ export default function PrivateLayout({
   if (isPending) return <div>loading...</div>;
 
   if (!isSuccess) return redirect(routes.auth.login);
-  return (
-    <div className='mainBoxBody'>
-      <Sidebar />
-      {children}
-    </div>
-  );
+  return <AppShell>{children}</AppShell>;
 }

@@ -37,9 +37,7 @@ export default async function RootLayout({
           <NextIntlClientProvider>
             <div className='wrapper'>
               <Header />
-              <div className='mainBox'>
-                <main className='main'>{children}</main>
-              </div>
+              {children}
             </div>
           </NextIntlClientProvider>
         </AppProviders>

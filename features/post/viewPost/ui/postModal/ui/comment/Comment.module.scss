@@ -1,0 +1,63 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  max-width: 100%;
+  width: 345px;
+}
+
+.likeButton {
+  width: 16px;
+  height: 16px;
+  background: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  color: var(--light-100);
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+    color: var(--danger-500);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.liked {
+  color: var(--danger-500);
+}
+
+.answers {
+  padding-left: 48px;
+}
+
+.answersToggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding-left: 48px;
+}
+
+.line {
+  width: 24px;
+  border-top: 2px solid var(--light-900);
+}
+
+.answerButton {
+  color: var(--light-900);
+  font-size: var(--font-size-xs);
+  padding: 0;
+}

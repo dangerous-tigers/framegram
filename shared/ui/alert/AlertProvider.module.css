@@ -1,0 +1,9 @@
+.viewPort {
+  position: fixed;
+  transform: translate(0, -100px);
+}
+
+.viewPortStories {
+  position: fixed;
+  transform: translate(0%, 0%);
+}

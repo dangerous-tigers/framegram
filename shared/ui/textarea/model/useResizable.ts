@@ -1,7 +1,7 @@
 // hooks/useResizable.ts
 import { useRef, useEffect } from 'react';
 
-type ResizeDirection = 'both' | 'horizontal' | 'vertical';
+type ResizeDirection = 'both' | 'horizontal' | 'vertical' | 'none';
 
 export type UseResizableOptions = {
   direction?: ResizeDirection;
@@ -36,6 +36,8 @@ export const useResizable = (options: UseResizableOptions = {}) => {
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing || !target) return;
+
+      if (direction === 'none') return;
 
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;

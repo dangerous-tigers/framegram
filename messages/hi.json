@@ -79,5 +79,20 @@
     "email": "ईमेल का प्रारूप example@example.com के अनुरूप होना चाहिए।",
     "emailExist": "इस ईमेल पते वाला उपयोगकर्ता मौजूद नहीं है",
     "captcha": "कृपया पुष्टि करें कि आप रोबोट नहीं हैं"
+  },
+  "viewPost": {
+    "likes": "लाइक्स",
+    "reply": "जवाब दें",
+    "showReplies": "जवाब दिखाएं",
+    "hideReplies": "जवाब छुपाएं",
+    "publish": "पब्लिश",
+    "beTheFirstLikes": "पहले बनें ",
+    "like": "लाइक करें!",
+    "noCommentsYet": "अभी तक कोई टिप्पणी नहीं.",
+    "beTheFirstToComment": "पहली टिप्पणी करें.",
+    "emptyFieldError": "टेक्स्ट फ़ील्ड खाली नहीं हो सकता",
+    "emptyAnswerError": "उत्तर खाली नहीं हो सकता",
+    "prefixWarning": "ध्यान दें! आप टिप्पणी भेजने के मोड में प्रवेश कर चुके हैं",
+    "commentPlaceholder": "टिप्पणी जोड़ें..."
   }
 }

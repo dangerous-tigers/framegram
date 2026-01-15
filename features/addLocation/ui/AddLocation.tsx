@@ -5,6 +5,7 @@ import s from './addLocation.module.scss';
 import { InputWithIcon } from '@/shared/ui/inputWithIcon';
 import { PinOutline } from '@/assets/icons';
 import debounce from 'lodash.debounce';
+import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 
 type City = {
   id: string;
@@ -28,6 +29,8 @@ export const AddLocation = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  const { show } = useAlertStore();
 
   const fetchCities = useMemo(
     () =>
@@ -59,7 +62,9 @@ export const AddLocation = () => {
           }));
           setCities(citiesData);
         } catch (err: unknown) {
-          if (err.name !== 'AbortError') alert(err);
+          if (err instanceof Error && err.name !== 'AbortError') {
+            show({ error: String(err), severity: 'error', description: String(err), variant: 'filled' });
+          }
         }
 
         return () => controller.abort();
