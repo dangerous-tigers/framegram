@@ -1,0 +1,24 @@
+.overlayScrollbars {
+  max-width: clamp(150px, 50vw, 298px);
+  width: fit-content;
+  padding: 0.75rem;
+}
+
+.overlayScrollbars::after {
+  content: '';
+  display: block;
+  width: 0.75rem;
+}
+
+.wrap {
+  display: flex;
+}
+
+.input {
+  padding: 0.75rem;
+
+  svg {
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
