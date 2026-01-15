@@ -28,6 +28,28 @@
     "noAccount": "Немає акаунта?",
     "signUp": "Зареєструватися"
   },
+  "register": {
+    "signUp": "Зареєструватися",
+    "signIn": "Увійти",
+    "title": "Увійти в систему",
+    "Do you have an account?": "У вас вже є обліковий запис?",
+    "Loading": "Завантаження...",
+    "I agree to the": "Я погоджуюсь з",
+    "Terms of Service": "Умовами використання",
+    "and": "та",
+    "Privacy Policy": "Політикою конфіденційності",
+    "Ok": "Добре",
+    "We have sent a link to confirm your email": "Ми надіслали посилання для підтвердження вашої електронної пошти",
+    "placeholder name": "Введіть ім'я користувача",
+    "placeholder email": "Введіть адресу електронної пошти",
+    "placeholder password": "Введіть пароль",
+    "placeholder passwordConfirm": "Повторно введіть пароль",
+    "Email confirmation": "Підтвердження електронної пошти",
+    "name": "Ім'я користувача",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "passwordConfirm": "Підтвердження пароля"
+  },
   "forgot": {
     "title": "Забули пароль",
     "email": "Email",
@@ -57,5 +79,20 @@
     "email": "Електронна адреса має відповідати формату example@example.com",
     "emailExist": "Користувача з цією електронною адресою не існує",
     "captcha": "Будь ласка, підтвердіть, що ви не робот"
+  },
+  "viewPost": {
+    "likes": "Вподобання",
+    "reply": "Відповісти",
+    "showReplies": "Показати відповіді",
+    "hideReplies": "Приховати відповіді",
+    "publish": "Опублікувати",
+    "beTheFirstLikes": "Будь першим ",
+    "like": "Вподобати!",
+    "noCommentsYet": "Коментарів ще немає.",
+    "beTheFirstToComment": "Будьте першим, хто залишить коментар.",
+    "emptyFieldError": "Текстове поле не може бути порожнім",
+    "emptyAnswerError": "Відповідь не може бути порожньою",
+    "prefixWarning": "Увага! Ви перейшли в режим надсилання коментаря",
+    "commentPlaceholder": "Додати коментар..."
   }
 }

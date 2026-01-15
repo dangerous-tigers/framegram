@@ -1,0 +1,164 @@
+.btn {
+  padding: 5px 24px;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  cursor: pointer;
+  transition:
+    border 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+@media screen and (width <= 578px) {
+  .btn {
+    width: 100%;
+  }
+}
+
+.btn[disabled],
+.disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* full width */
+.fullWidth {
+  width: 100%;
+}
+
+/* ========== VARIANTS ========== */
+
+.primary {
+  background-color: var(--primary-500);
+  color: var(--light-100);
+
+  &:focus-visible {
+    background: var(--primary-100);
+  }
+}
+
+@media (hover: hover) {
+  .primary:hover {
+    background-color: var(--primary-100);
+  }
+}
+
+.primary:active {
+  background-color: var(--primary-700);
+}
+
+.primary[disabled] {
+  background-color: var(--primary-900);
+}
+
+/* secondary */
+
+.secondary {
+  background-color: var(--dark-300);
+  color: var(--light-100);
+
+  &:focus-visible {
+    background: var(--dark-300);
+  }
+}
+
+@media (hover: hover) {
+  .secondary:hover {
+    background-color: var(--dark-100);
+    border-color: (--primary-300);
+  }
+}
+
+.secondary:active {
+  background-color: #212121;
+}
+
+.secondary[disabled] {
+  background-color: var(--dark-500);
+}
+
+/* outline */
+
+.outline {
+  border-color: var(--primary-500);
+  color: var(--primary-500);
+
+  &:focus-visible {
+    border-color: var(--primary-700);
+    color: var(--primary-700);
+  }
+}
+
+@media (hover: hover) {
+  .outline:hover {
+    border-color: var(--primary-100);
+    color: var(--primary-100);
+  }
+}
+
+.outline:active {
+  border-color: var(--primary-700);
+  color: var(--primary-700);
+}
+
+.outline[disabled] {
+  border-color: var(--primary-900);
+  color: var(--primary-900);
+}
+
+/* text */
+
+.text {
+  min-width: 0;
+  color: var(--primary-500);
+
+  &:focus-visible {
+    border: 2px solid var(--primary-700);
+    color: var(--primary-500);
+  }
+}
+
+@media (hover: hover) {
+  .text:hover {
+    color: var(--primary-100);
+  }
+}
+
+.text:active {
+  color: var(--primary-700);
+}
+
+.text[disabled] {
+  color: var(--primary-900);
+}
+
+.sm {
+  padding: 4px 16px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.md {
+  padding: 5px 24px; // уже совпадает с твоим базовым .btn
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+}
+
+.lg {
+  padding: 12px 32px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.active {
+  color: var(--primary-500) !important;
+
+  svg {
+    fill: var(--primary-500) !important;
+  }
+}

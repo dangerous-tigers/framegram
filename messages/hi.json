@@ -28,6 +28,28 @@
     "noAccount": "कोई खाता नहीं है?",
     "signUp": "साइन अप"
   },
+  "register": {
+    "signUp": "साइन अप करें",
+    "signIn": "साइन इन करें",
+    "title": "साइन इन करें",
+    "Do you have an account?": "क्या आपके पास पहले से एक खाता है?",
+    "Loading": "लोड हो रहा है...",
+    "I agree to the": "मैं सहमत हूं",
+    "Terms of Service": "सेवा की शर्तों",
+    "and": "और",
+    "Privacy Policy": "गोपनीयता नीति",
+    "Ok": "ठीक है",
+    "We have sent a link to confirm your email": "हमने आपका ईमेल पुष्टि करने के लिए एक लिंक भेजा है",
+    "placeholder name": "उपयोगकर्ता का नाम दर्ज करें",
+    "placeholder email": "अपना ईमेल पता दर्ज करें",
+    "placeholder password": "अपना पासवर्ड दर्ज करें",
+    "placeholder passwordConfirm": "अपना पासवर्ड पुष्टि दर्ज करें",
+    "Email confirmation": "ईमेल पुष्टिकरण",
+    "name": "उपयोगकर्ता नाम",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "passwordConfirm": "पासवर्ड पुष्टि"
+  },
   "forgot": {
     "title": "साइन इन पर वापस जाएँ",
     "email": "Email",
@@ -57,5 +79,20 @@
     "email": "ईमेल का प्रारूप example@example.com के अनुरूप होना चाहिए।",
     "emailExist": "इस ईमेल पते वाला उपयोगकर्ता मौजूद नहीं है",
     "captcha": "कृपया पुष्टि करें कि आप रोबोट नहीं हैं"
+  },
+  "viewPost": {
+    "likes": "लाइक्स",
+    "reply": "जवाब दें",
+    "showReplies": "जवाब दिखाएं",
+    "hideReplies": "जवाब छुपाएं",
+    "publish": "पब्लिश",
+    "beTheFirstLikes": "पहले बनें ",
+    "like": "लाइक करें!",
+    "noCommentsYet": "अभी तक कोई टिप्पणी नहीं.",
+    "beTheFirstToComment": "पहली टिप्पणी करें.",
+    "emptyFieldError": "टेक्स्ट फ़ील्ड खाली नहीं हो सकता",
+    "emptyAnswerError": "उत्तर खाली नहीं हो सकता",
+    "prefixWarning": "ध्यान दें! आप टिप्पणी भेजने के मोड में प्रवेश कर चुके हैं",
+    "commentPlaceholder": "टिप्पणी जोड़ें..."
   }
 }

@@ -20,6 +20,7 @@ export const Alert = () => {
         severity === 'success' && styles.success,
         severity === 'success' && variant === 'outlined' && styles.outlinedSuccess,
         severity === 'success' && variant === 'filled' && styles.filledSuccess,
+        'sssssssssssssssssssssssssssssss',
       )}
       defaultOpen
     >

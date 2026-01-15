@@ -2,7 +2,7 @@
 
 import { useOverlayScrollbars } from 'overlayscrollbars-react';
 
-import { ComponentPropsWithoutRef, useEffect, useRef } from 'react';
+import { ComponentPropsWithRef, useEffect, useRef } from 'react';
 import { useResizable, UseResizableOptions } from '../model/useResizable';
 
 import { ClickScrollPlugin, OverlayScrollbars } from 'overlayscrollbars';
@@ -23,7 +23,7 @@ type Props = {
   label?: string;
   error?: string;
   classNameTarget?: string;
-} & ComponentPropsWithoutRef<'textarea'> &
+} & ComponentPropsWithRef<'textarea'> &
   UseResizableOptions;
 
 /**
