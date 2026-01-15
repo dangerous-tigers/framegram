@@ -49,6 +49,7 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
         )}
         {clientPost && clientPost.images && (
           <Swiper
+            rootClassName={s.slider}
             slides={clientPost.images.map((image) => (
               <div
                 key={image.uploadId}
@@ -137,10 +138,10 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
               />
             )}
             {/*    PUBLISH      */}
-            {userId && (
+            {isAuth && (
               <>
                 <Separator orientation='horizontal' />
-                {isLoading ? <div>Loading...</div> : <Publish postId={post.id} />}
+                <Publish postId={post.id} />
               </>
             )}
           </>
