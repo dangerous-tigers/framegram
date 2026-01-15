@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+
 import { createPost, uploadPostImages } from '@/entities/post/api/post.api';
 
 export const useCreatePostMutation = () => {

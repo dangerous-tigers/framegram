@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs-vite';
+
 import { Skeleton } from './Skeleton';
 
 const meta = {

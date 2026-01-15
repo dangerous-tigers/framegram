@@ -1,6 +1,8 @@
 'use client';
-import s from './tabsClient.module.scss';
 import { Tabs } from 'radix-ui';
+
+import s from './tabsClient.module.scss';
+
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
 
 type PropsTabsClient = {

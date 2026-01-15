@@ -1,5 +1,6 @@
-import { ConfirmEmail } from '@/features/auth/confirm-email/ui/ConfirmEmail';
 import { notFound } from 'next/navigation';
+
+import { ConfirmEmail } from '@/features/auth/confirm-email/ui/ConfirmEmail';
 
 export default async function ConfirmEmailPage({
   searchParams,

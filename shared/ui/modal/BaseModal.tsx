@@ -1,6 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import styles from './BaseModal.module.scss';
 import type { ReactNode, ComponentPropsWithoutRef } from 'react';
+
+import styles from './BaseModal.module.scss';
 /**
  * @description Компонент модального окна
  * @see https://www.radix-ui.com/docs/primitives/components/dialog

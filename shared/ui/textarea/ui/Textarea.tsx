@@ -1,17 +1,17 @@
 'use client';
 
+import clsx from 'clsx';
+import { ClickScrollPlugin, OverlayScrollbars } from 'overlayscrollbars';
 import { useOverlayScrollbars } from 'overlayscrollbars-react';
-
 import { ComponentPropsWithRef, useEffect, useRef } from 'react';
+
 import { useResizable, UseResizableOptions } from '../model/useResizable';
 
-import { ClickScrollPlugin, OverlayScrollbars } from 'overlayscrollbars';
+import s from './Textarea.module.scss';
+
 import { osFieldPlugin } from '@/shared/ui/textarea/model/fieldPlugin';
 
 OverlayScrollbars.plugin([ClickScrollPlugin, osFieldPlugin]);
-
-import s from './Textarea.module.scss';
-import clsx from 'clsx';
 
 const cursorMap = {
   both: 'nwse-resize',

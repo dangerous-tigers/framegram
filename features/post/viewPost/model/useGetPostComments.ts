@@ -1,5 +1,6 @@
-import { client } from '@/shared/api/client';
 import { useQuery } from '@tanstack/react-query';
+
+import { client } from '@/shared/api/client';
 
 export function useGetPostComments({ postId }: { postId: number }) {
   return useQuery({

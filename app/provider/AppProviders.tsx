@@ -1,10 +1,11 @@
 'use client';
-import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactNode } from 'react';
+
+import { MeProvider } from '@/app/provider/me-provider';
 import { Alert } from '@/shared/ui/alert/Alert';
 import { AlertProvider } from '@/shared/ui/alert/AlertProvider';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { MeProvider } from '@/app/provider/me-provider';
 
 type Props = {
   children: ReactNode;

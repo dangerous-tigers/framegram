@@ -1,8 +1,9 @@
 import styles from './Pagination.module.scss';
+
 import { ArrowIosBack, ArrowIosForward } from '@/assets/icons/components';
-import { PaginationItem } from '@/shared/ui/pagination/paginationItem/PaginationItem';
 import { getPages } from '@/shared/ui/pagination/lib/getPages';
 import { pageSizeOptions } from '@/shared/ui/pagination/model/pageSizeOptions';
+import { PaginationItem } from '@/shared/ui/pagination/paginationItem/PaginationItem';
 import { Select } from '@/shared/ui/select/Select';
 
 type Props = {

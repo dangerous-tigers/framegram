@@ -1,16 +1,17 @@
 'use client';
-import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
-import { type Post } from '../../model/types';
+import { useRouter } from 'next/navigation';
 
+import { type Post } from '../../model/types';
+import { useViewPostStore } from '../../model/useViewPost.store';
+
+import { PostContent } from './postContent/postContent';
+import s from './PostViewModal.module.scss';
+import { Header } from './ui';
+
+import { Close } from '@/assets/icons';
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { useAuth, useMediaQuery } from '@/shared/lib/hooks';
-import { useRouter } from 'next/navigation';
-import { useViewPostStore } from '../../model/useViewPost.store';
-import { PostContent } from './postContent/postContent';
-import { Header } from './ui';
-import { Close } from '@/assets/icons';
-
-import s from './PostViewModal.module.scss';
+import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
 
 export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; defaultOpen?: boolean; post?: Post }) {
   const isMobile = useMediaQuery('(max-width: 768px)');

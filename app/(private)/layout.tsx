@@ -1,9 +1,10 @@
 'use client';
-import { ReactNode } from 'react';
-import { Sidebar } from '@/widgets/sidebar';
-import { useMe } from '@/entities/user/model/useMe';
 import { redirect } from 'next/navigation';
+import { ReactNode } from 'react';
+
+import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
+import { Sidebar } from '@/widgets/sidebar';
 
 export default function PrivateLayout({
   children,

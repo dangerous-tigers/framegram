@@ -1,15 +1,17 @@
 'use client';
 
-import { EditMode } from '@/features/post/editPost/ui/editMode/EditMode';
-import { Separator } from '@/shared/ui';
+import { useTranslations } from 'next-intl';
+
 import { Actions, ActionsSkeleton, Comment, Description, DescriptionSkeleton, Header, Publish } from '../ui';
 
+import s from './postContent.module.scss';
+
+import { EditMode } from '@/features/post/editPost/ui/editMode/EditMode';
 import { useGetPostById, useGetPostCommentsInfinity, useViewPostStore } from '@/features/post/viewPost/model';
 import { Post } from '@/features/post/viewPost/model/types';
-import { Swiper } from '@/shared/ui/swiper';
-import s from './postContent.module.scss';
-import { useTranslations } from 'next-intl';
 import { useIntersection } from '@/shared/lib/hooks';
+import { Separator } from '@/shared/ui';
+import { Swiper } from '@/shared/ui/swiper';
 
 type Props = {
   initialPost: Post;

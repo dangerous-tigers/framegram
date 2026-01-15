@@ -1,8 +1,11 @@
-import s from './Answer.module.scss';
+import clsx from 'clsx';
+
 import { Description } from '..';
 import { type Answer } from '../../../../model/types';
+
+import s from './Answer.module.scss';
+
 import { Heart, HeartOutline } from '@/assets/icons';
-import clsx from 'clsx';
 import { Button } from '@/shared/ui';
 
 type Props = {
