@@ -5,9 +5,15 @@ export default {
   plugins: ['stylelint-prettier'],
   ignoreFiles: ['**/_*.scss'],
   rules: {
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['global'],
+      },
+    ],
     'prettier/prettier': true,
     'no-descending-specificity': null,
-    'selector-class-pattern': '^[a-z][a-zA-Z0-9]+$',
+    'selector-class-pattern': ['^[a-z][a-zA-Z0-9]+$'],
     'keyframes-name-pattern': '^[a-z][a-zA-Z0-9]+$',
     'property-no-unknown': [true, { ignoreProperties: ['composes'] }],
   },

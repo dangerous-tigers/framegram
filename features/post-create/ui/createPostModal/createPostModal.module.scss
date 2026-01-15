@@ -1,0 +1,21 @@
+.btns {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.modalConfirmClose {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 21px 36px;
+}
+
+.rootBaseModal {
+  overflow: hidden;
+
+  @media (width >=1000px) {
+    height: 564px;
+  }
+}
