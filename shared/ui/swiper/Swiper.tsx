@@ -23,6 +23,7 @@ export const Swiper = ({
   withPagination = true,
   initialIndex = 0,
   onIndexChange,
+  rootClassName,
 }: AppSwiperProps) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -57,6 +58,7 @@ export const Swiper = ({
       )}
 
       <SwiperRoot
+        className={rootClassName}
         modules={[Navigation, Pagination, A11y, Keyboard]}
         slidesPerView={1}
         keyboard={{ enabled: true }}
