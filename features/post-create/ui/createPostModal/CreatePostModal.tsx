@@ -7,7 +7,7 @@ import { CreatePostStep } from '@/features/post-create/model/CreatePostType';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 import { CropStep } from '@/features/post-create/ui/CropStep';
 import { FilterStep } from '@/features/post-create/ui/filterStep/FilterStep';
-import { PublishStep } from '@/features/post-create/ui/publishStep/PublishStep';
+import { PublishStep } from '@/features/post-create/ui/PublishStep/PublishStep';
 import { UploadStep } from '@/features/post-create/ui/uploadStep/UploadStep';
 import { applyFilterToFile } from '@/shared/lib/image';
 import { Modal, ModalHeaderWithClose, ModalHeaderWithNext } from '@/shared/ui';
@@ -38,22 +38,18 @@ export const CreatePostModal = () => {
       },
       {
         onSuccess: () => {
-          if (!isPending) {
-            reset();
-            setShowCloseModal(false);
-            setOpen(false);
-          }
+          if (isPending) return;
+
+          reset();
+          setShowCloseModal(false);
+          setOpen(false);
         },
       },
     );
   };
 
   useEffect(() => {
-    if (step === 'publish' || step === 'filter') {
-      setSizeModal('xl');
-    } else {
-      setSizeModal('md'); // остальные шаги
-    }
+    setSizeModal(step === 'publish' || step === 'filter' ? 'xl' : 'md');
   }, [step]);
 
   const discardHandler = async () => {
@@ -107,7 +103,7 @@ export const CreatePostModal = () => {
           <ModalHeaderWithNext
             title='Publication'
             onBack={() => setStep('filter')}
-            onNext={() => onPublish()}
+            onNext={onPublish}
             titleNext='Publish'
             nextDisabled={isPending}
           />

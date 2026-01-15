@@ -15,7 +15,7 @@ type Props = {
   follow?: () => void;
   unfollow?: () => void;
   copyLink?: () => void;
-  children: ReactNode;
+  children?: ReactNode;
 } & ComponentPropsWithoutRef<typeof PrimitivePopover.Root>;
 
 export const Popover = ({ open, onOpenChange, children }: Props) => {

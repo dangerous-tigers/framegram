@@ -41,8 +41,6 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const navigationItems: NavigationItem[] = [
     { href: routes.feed, label: t('feed'), Component: HomeOutline },
     { label: t('create'), Component: PlusSquareOutline, as: 'button' },
-    { href: routes.profile, label: t('myProfile'), Component: Person },
-    { href: routes.create, label: t('create'), Component: PlusSquareOutline },
     { href: `/profile/${data?.userId}`, label: t('myProfile'), Component: Person },
     { href: routes.messenger, label: t('messenges'), Component: MessageCircle },
     { href: routes.search, label: t('search'), Component: Search },

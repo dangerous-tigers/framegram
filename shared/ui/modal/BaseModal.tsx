@@ -1,4 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
+import { DialogTitle } from '@radix-ui/react-dialog';
 import type { ReactNode, ComponentPropsWithoutRef } from 'react';
 
 import styles from './BaseModal.module.scss';
@@ -32,7 +33,11 @@ export const Modal = ({ header, children, size = 'md', showDivider = true, class
     <Dialog.Root {...rest}>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay} />
-        <Dialog.Content className={`${styles.content} ${sizeClass} ${className || ''}`}>
+        <Dialog.Content
+          aria-describedby={'modal'}
+          className={`${styles.content} ${sizeClass} ${className || ''}`}
+        >
+          <DialogTitle />
           {header && (
             <>
               <div className={styles.header}>{header}</div>

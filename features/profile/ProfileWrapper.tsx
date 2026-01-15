@@ -30,7 +30,7 @@ export const ProfileWrapper = ({ userName, hasPaymentSubscription }: Props) => {
 
   return (
     <Profile
-      isOwner={data.userId === profile?.data?.id}
+      isOwner={data?.userId === profile?.data?.id}
       profile={profile?.data}
       hasPaymentSubscription={hasPaymentSubscription}
     />

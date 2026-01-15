@@ -5,7 +5,7 @@ import { client } from '@/shared/api/client';
 //     body: {
 //       file: files, // Тут типизация не дает передать файл - там стоит String
 //     },
-//   });
+//   })
 // };
 
 export async function uploadPostImages(files: File[]): Promise<{ data?: UploadPostImagesResponse; error?: unknown }> {

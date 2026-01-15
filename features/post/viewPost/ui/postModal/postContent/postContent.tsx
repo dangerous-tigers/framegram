@@ -59,13 +59,11 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
               >
                 <img
                   className={s.image}
-                  key={image.uploadId}
                   src={image.url}
                   alt='loader'
                 />
                 <img
                   className={s.imagOverlay}
-                  key={image.uploadId}
                   src={image.url}
                   alt='loader'
                 />
