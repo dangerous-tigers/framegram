@@ -10,11 +10,6 @@ export default function PrivateLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  // try {
-  //   await getMeServer(); // проверка токена
-  // } catch {
-  //   redirect(routes.auth.login); // если токен нет или просрочен
-  // }
   const { isPending, isSuccess } = useMe();
 
   if (isPending) return <div>loading...</div>;

@@ -138,7 +138,7 @@ export const RegisterForm = () => {
             type={'submit'}
             disabled={isPending}
           >
-            {isPending ? t('Loading...') : t('signUp')}
+            {isPending ? t('Loading') : t('signUp')}
           </PolymorphicButton>
           <span className={s.desc}>{t('Do you have an account?')}</span>
           <PolymorphicButton

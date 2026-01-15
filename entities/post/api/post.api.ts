@@ -6,7 +6,7 @@ import { UploadPostImagesResponse } from '@/entities/post/model/postTypes';
 //     body: {
 //       file: files, // Тут типизация не дает передать файл - там стоит String
 //     },
-//   });
+//   })
 // };
 
 export async function uploadPostImages(files: File[]): Promise<{ data?: UploadPostImagesResponse; error?: unknown }> {

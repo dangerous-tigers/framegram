@@ -85,7 +85,7 @@ export function LoginForm() {
             <Button
               type='submit'
               variant='primary'
-              fullWidth={true}
+              fullWidth
               disabled={isPending}
             >
               {t('signIn')}
