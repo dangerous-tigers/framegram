@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+
 import { CreatePostStep, UploadedImage } from './CreatePostType';
 import { saveDraft, loadDraft, clearDraft } from './indexedDb';
 import type { DraftData } from './types';

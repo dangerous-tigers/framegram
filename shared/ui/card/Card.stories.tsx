@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/nextjs-vite';
+
 import { Card } from './index';
 
 const meta: Meta = {

@@ -1,5 +1,5 @@
-import { ComponentPropsWithoutRef } from 'react';
 import clsx from 'clsx';
+import { ComponentPropsWithoutRef } from 'react';
 
 import s from './Separator.module.scss';
 

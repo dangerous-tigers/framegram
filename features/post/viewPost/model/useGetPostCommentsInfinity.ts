@@ -1,5 +1,6 @@
-import { client } from '@/shared/api/client';
 import { useInfiniteQuery } from '@tanstack/react-query';
+
+import { client } from '@/shared/api/client';
 
 export function useGetPostCommentsInfinity({ postId }: { postId: number }) {
   const pageSize = 4;

@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+
+  .show {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    p:last-child{
+      margin-left: 9px;
+    }
+  }
+
+
+}

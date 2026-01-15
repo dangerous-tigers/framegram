@@ -1,14 +1,16 @@
 'use client';
 
-import s from './NewPasswordForm.module.scss';
-import { Input } from '@/shared/ui/input';
-import { Button } from '@/shared/ui/button/Button';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+
+import s from './NewPasswordForm.module.scss';
+
 import { createNewPasswordData, newPasswordSchema } from '@/features/auth/newPassword/model/NewPassword.schema';
 import { useNewPassword } from '@/features/auth/newPassword/model/UseNewPassword';
 import { useRecoveryParams } from '@/features/auth/newPassword/model/useRecoveryParams';
-import { useTranslations } from 'next-intl';
+import { Button } from '@/shared/ui/button/Button';
+import { Input } from '@/shared/ui/input';
 
 export const CreateNewPasswordForm = () => {
   const t = useTranslations('newPassword');

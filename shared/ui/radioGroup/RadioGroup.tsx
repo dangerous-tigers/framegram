@@ -1,7 +1,9 @@
 import { RadioGroup } from 'radix-ui';
+
 import s from './RadioGroup.module.scss';
-import { RadioGroupItem } from '@/shared/ui/radioGroup/RadioGroupItem/RadioGroupItem';
+
 import { RadioGroupProps } from '@/shared/ui/radioGroup/RadioGroup.types';
+import { RadioGroupItem } from '@/shared/ui/radioGroup/RadioGroupItem/RadioGroupItem';
 
 export const RadioButtonGroup = ({ required = true, items, ariaLabel }: RadioGroupProps) => {
   return (

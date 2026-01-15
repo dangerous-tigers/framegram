@@ -1,10 +1,12 @@
 'use client';
-import { IMAGE_FILTERS } from '@/shared/config/filters';
-import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 import clsx from 'clsx';
-import { Swiper } from '@/shared/ui/swiper';
-import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
+
 import s from './filters.module.scss';
+
+import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
+import { IMAGE_FILTERS } from '@/shared/config/filters';
+import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
+import { Swiper } from '@/shared/ui/swiper';
 
 type FilterGridType = {
   className?: string;

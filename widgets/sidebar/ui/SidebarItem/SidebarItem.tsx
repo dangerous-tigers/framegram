@@ -1,6 +1,7 @@
-import s from './sidebarItem.module.scss';
-import Link from 'next/link';
 import clsx from 'clsx';
+import Link from 'next/link';
+
+import s from './sidebarItem.module.scss';
 
 type Props = {
   children: React.ReactNode;

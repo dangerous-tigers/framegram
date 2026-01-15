@@ -1,18 +1,17 @@
 'use client';
 
-import { useRef } from 'react';
-import { Swiper as SwiperRoot, SwiperSlide } from 'swiper/react';
-import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
-import type { Swiper as SwiperInstance } from 'swiper';
-
 import clsx from 'clsx';
-import s from './swiper.module.scss';
-
+import { useRef } from 'react';
+import type { Swiper as SwiperInstance } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
+import { Swiper as SwiperRoot, SwiperSlide } from 'swiper/react';
 
+import s from './swiper.module.scss';
 import type { AppSwiperProps } from './types';
+
 import { ArrowIosBackOutline, ArrowIosForwardOutline } from '@/assets/icons';
 
 export const Swiper = ({
