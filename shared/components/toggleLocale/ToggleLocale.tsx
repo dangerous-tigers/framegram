@@ -1,11 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useTransition } from 'react';
 
-import { useLocale } from 'next-intl';
-import { setUserLocaleCookie } from '@/services/locale';
 import { defaultLocale, localeOptions } from '@/i18n/config';
+import { setUserLocaleCookie } from '@/services/locale';
 import { Select } from '@/shared/ui/select/Select';
 
 export function ToggleLocale() {

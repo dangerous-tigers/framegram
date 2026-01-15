@@ -1,10 +1,12 @@
 'use client';
-import { FilterGrid } from '@/features/post-create/ui/filterStep/FilterGrid';
-import { Swiper } from '@/shared/ui/swiper';
 import Image from 'next/image';
-import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
+
 import s from './filters.module.scss';
+
+import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
+import { FilterGrid } from '@/features/post-create/ui/filterStep/FilterGrid';
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
+import { Swiper } from '@/shared/ui/swiper';
 
 export const FilterStep = () => {
   const isMobile = useMediaQuery('(max-width: 999px)');

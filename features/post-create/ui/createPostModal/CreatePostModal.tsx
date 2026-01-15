@@ -1,15 +1,17 @@
+import { useEffect, useState } from 'react';
+
+import s from './createPostModal.module.scss';
+
+import { useCreatePostMutation } from '@/entities/post-create/api/useCreatePostMutation';
+import { CreatePostStep } from '@/features/post-create/model/CreatePostType';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
-import { Modal, ModalHeaderWithClose, ModalHeaderWithNext } from '@/shared/ui';
-import { UploadStep } from '@/features/post-create/ui/uploadStep/UploadStep';
-import { PublishStep } from '@/features/post-create/ui/publishStep/PublishStep';
 import { CropStep } from '@/features/post-create/ui/CropStep';
 import { FilterStep } from '@/features/post-create/ui/filterStep/FilterStep';
-import { CreatePostStep } from '@/features/post-create/model/CreatePostType';
-import { useEffect, useState } from 'react';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent';
-import s from './createPostModal.module.scss';
-import { useCreatePostMutation } from '@/entities/post-create/api/useCreatePostMutation';
+import { PublishStep } from '@/features/post-create/ui/PublishStep/PublishStep';
+import { UploadStep } from '@/features/post-create/ui/uploadStep/UploadStep';
 import { applyFilterToFile } from '@/shared/lib/image';
+import { Modal, ModalHeaderWithClose, ModalHeaderWithNext } from '@/shared/ui';
+import { PolymorphicButton } from '@/shared/ui/buttonComponent';
 
 export const CreatePostModal = () => {
   const step = useCreatePostStore((s) => s.step);
@@ -36,22 +38,18 @@ export const CreatePostModal = () => {
       },
       {
         onSuccess: () => {
-          if (!isPending) {
-            reset();
-            setShowCloseModal(false);
-            setOpen(false);
-          }
+          if (isPending) return;
+
+          reset();
+          setShowCloseModal(false);
+          setOpen(false);
         },
       },
     );
   };
 
   useEffect(() => {
-    if (step === 'publish' || step === 'filter') {
-      setSizeModal('xl');
-    } else {
-      setSizeModal('md'); // остальные шаги
-    }
+    setSizeModal(step === 'publish' || step === 'filter' ? 'xl' : 'md');
   }, [step]);
 
   const discardHandler = async () => {
@@ -105,7 +103,7 @@ export const CreatePostModal = () => {
           <ModalHeaderWithNext
             title='Publication'
             onBack={() => setStep('filter')}
-            onNext={() => onPublish()}
+            onNext={onPublish}
             titleNext='Publish'
             nextDisabled={isPending}
           />

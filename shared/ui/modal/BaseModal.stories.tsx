@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import { fn } from 'storybook/test';
 import * as Dialog from '@radix-ui/react-dialog';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { ArrowIosBackOutline } from '@/assets/icons';
+import { useState } from 'react';
+import { fn } from 'storybook/test';
+
 import { Modal, type Props } from './BaseModal';
+import styles from './ModalHeader.module.scss';
 import { ModalHeaderWithClose } from './ModalHeaderWithClose';
 import { ModalHeaderWithNext } from './ModalHeaderWithNext';
-import styles from './ModalHeader.module.scss';
+
+import { ArrowIosBackOutline } from '@/assets/icons';
 
 const meta = {
   title: 'ui/modal/Modal',

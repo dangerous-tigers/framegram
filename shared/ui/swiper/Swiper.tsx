@@ -1,18 +1,17 @@
 'use client';
 
-import { useRef } from 'react';
-import { Swiper as SwiperRoot, SwiperSlide } from 'swiper/react';
-import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
-import type { Swiper as SwiperInstance } from 'swiper';
-
 import clsx from 'clsx';
-import s from './swiper.module.scss';
-
+import { useRef } from 'react';
+import type { Swiper as SwiperInstance } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
+import { Swiper as SwiperRoot, SwiperSlide } from 'swiper/react';
 
+import s from './swiper.module.scss';
 import type { AppSwiperProps } from './types';
+
 import { ArrowIosBackOutline, ArrowIosForwardOutline } from '@/assets/icons';
 
 export const Swiper = ({
@@ -23,6 +22,7 @@ export const Swiper = ({
   withPagination = true,
   initialIndex = 0,
   onIndexChange,
+  rootClassName,
 }: AppSwiperProps) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -57,6 +57,7 @@ export const Swiper = ({
       )}
 
       <SwiperRoot
+        className={rootClassName}
         modules={[Navigation, Pagination, A11y, Keyboard]}
         slidesPerView={1}
         keyboard={{ enabled: true }}

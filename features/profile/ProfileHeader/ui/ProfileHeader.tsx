@@ -1,11 +1,13 @@
 'use client';
+import Link from 'next/link';
+
+import s from './ProfileHeader.module.scss';
+
 import { Paid } from '@/assets/icons';
 import profile_img_placeholder from '@/assets/illustrations/avatar-placeholder.png';
 import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
 import { routes } from '@/shared/config/routes';
 import { PolymorphicButton } from '@/shared/ui/buttonComponent';
-import Link from 'next/link';
-import s from './ProfileHeader.module.scss';
 
 type Props = {
   isOwner: boolean;

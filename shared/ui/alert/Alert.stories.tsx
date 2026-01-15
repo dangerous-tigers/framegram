@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/nextjs-vite';
+
 import { Alert } from '@/shared/ui/alert/Alert';
 import { alertDecorator } from '@/storybook/alertDecorator';
 

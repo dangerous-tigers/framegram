@@ -1,8 +1,9 @@
 'use client';
-import { NavigationItem } from '@/widgets/sidebar/model/navigation';
 import clsx from 'clsx';
-import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+
 import s from './navigation.module.scss';
 
 import {
@@ -23,7 +24,7 @@ import { CreatePostModal } from '@/features/post-create/ui/createPostModal/Creat
 import { routes } from '@/shared/config/routes';
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
 import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
-import Link from 'next/link';
+import { NavigationItem } from '@/widgets/sidebar/model/navigation';
 
 type PropsNavigation = {
   className?: string;
@@ -40,8 +41,6 @@ export const Navigation = ({ className }: PropsNavigation) => {
   const navigationItems: NavigationItem[] = [
     { href: routes.feed, label: t('feed'), Component: HomeOutline },
     { label: t('create'), Component: PlusSquareOutline, as: 'button' },
-    { href: routes.profile, label: t('myProfile'), Component: Person },
-    { href: routes.create, label: t('create'), Component: PlusSquareOutline },
     { href: `/profile/${data?.userId}`, label: t('myProfile'), Component: Person },
     { href: routes.messenger, label: t('messenges'), Component: MessageCircle },
     { href: routes.search, label: t('search'), Component: Search },

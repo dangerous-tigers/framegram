@@ -1,7 +1,8 @@
 import * as Toast from '@radix-ui/react-toast';
-import { ReactNode } from 'react';
-import s from './AlertProvider.module.css';
 import clsx from 'clsx';
+import { ReactNode } from 'react';
+
+import s from './AlertProvider.module.css';
 
 type Props = {
   children?: ReactNode;
