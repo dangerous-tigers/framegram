@@ -1,6 +1,8 @@
-import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
-import s from './DescriptionSkeleton.module.scss';
 import clsx from 'clsx';
+
+import s from './DescriptionSkeleton.module.scss';
+
+import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 
 export function DescriptionSkeleton() {
   return (

@@ -1,5 +1,5 @@
-import { ComponentProps, forwardRef } from 'react';
 import { clsx } from 'clsx';
+import { ComponentProps, forwardRef } from 'react';
 
 type CardProps = ComponentProps<'div'>;
 

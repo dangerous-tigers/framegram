@@ -1,11 +1,13 @@
 'use client';
-import { HeartOutline, PaperPlaneOutline, BookmarkOutline, Heart, Bookmark } from '@/assets/icons';
-import s from './Actions.module.scss';
 import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
+
+import s from './Actions.module.scss';
+
+import { HeartOutline, PaperPlaneOutline, BookmarkOutline, Heart, Bookmark } from '@/assets/icons';
+import { formatLikes } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
-import { formatLikes } from '@/shared/lib';
-import { useTranslations } from 'next-intl';
 
 export function Actions({
   isLiked,
@@ -22,7 +24,7 @@ export function Actions({
   avatarWhoLikes: string[];
   isAuth: boolean;
 }) {
-  const t = useTranslations('view-post');
+  const t = useTranslations('viewPost');
   return (
     <div className={s.container}>
       {isAuth && (

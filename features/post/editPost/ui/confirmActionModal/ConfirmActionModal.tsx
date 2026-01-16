@@ -1,12 +1,13 @@
 'use client';
-import { Button } from '@/shared/ui';
-import { Modal } from '@/shared/ui/modal';
 import { useTranslations } from 'next-intl';
+
+import s from './ConfirmActionModal.module.scss';
 
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { useViewPostStore } from '@/features/post/viewPost/model';
+import { Button } from '@/shared/ui';
+import { Modal } from '@/shared/ui/modal';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
-import s from './ConfirmActionModal.module.scss';
 
 export const ConfirmActionModal = () => {
   const t = useTranslations('confirmAction');

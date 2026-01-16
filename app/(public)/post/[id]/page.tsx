@@ -1,6 +1,7 @@
+import { notFound } from 'next/navigation';
+
 import { postApi } from '@/entities/post/api/post.api';
 import { PostViewModal } from '@/features/post/viewPost';
-import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   try {

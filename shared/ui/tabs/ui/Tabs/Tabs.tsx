@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import { TabsClient } from '@/shared/ui/tabs/ui/TabsClient';
 
 type PropsTabs = {

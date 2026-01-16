@@ -1,0 +1,41 @@
+.button {
+  font-size: 14px;
+  line-height: 171%;
+  border-radius: 2px;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: grid;
+  place-items: center;
+  transition: all 0.3s;
+  background: var(--dark-700);
+  color: var(--light-100);
+  cursor: pointer;
+  border-color: transparent;
+
+  &.active {
+    background: var(--light-100);
+    color: var(--dark-900);
+
+    &:hover {
+      color: inherit;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:hover {
+    background: var(--dark-500);
+  }
+
+  &:focus {
+    outline: 2px solid var(--primary-700);
+  }
+
+  &:disabled {
+    color: var(--dark-100);
+    cursor: default;
+  }
+}

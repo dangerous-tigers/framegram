@@ -83,14 +83,20 @@
     "close": "Close",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "Do you really want to finish editing? If you close the changes you have made will not be saved."
   },
-  "view-post": {
+  "viewPost": {
     "likes": "Likes",
     "reply": "Reply",
     "showReplies": "Show replies",
     "hideReplies": "Hide replies",
     "publish": "Publish",
     "beTheFirstLikes": "Be the first ",
-    "like": "Like!"
+    "like": "Like!",
+    "noCommentsYet": "No comments yet.",
+    "beTheFirstToComment": "Be the first to comment.",
+    "emptyFieldError": "Text field cannot be empty",
+    "emptyAnswerError": "Answer cannot be empty",
+    "prefixWarning": "Attention! You have switched to comment submission mode",
+    "commentPlaceholder": "Add a Comment..."
   },
   "deletePostModal": {
     "title": "Delete Post",

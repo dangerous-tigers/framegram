@@ -1,3 +1,8 @@
+import clsx from 'clsx';
+import { useState } from 'react';
+
+import s from './Header.module.scss';
+
 import {
   CopyOutline,
   Edit2Outline,
@@ -5,14 +10,11 @@ import {
   PersonRemoveOutline,
   TrashOutline,
 } from '@/assets/icons/components';
+import { useRemovePost } from '@/entities/post/model/useRemovePost';
+import { PostDeleteModal } from '@/features/post/removePost/ui/PostDeleteModal';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ProfileImage } from '@/features/post/viewPost/ui/postModal/ui/profile-image/ProfileImage';
 import { Popover } from '@/shared/ui/popover';
-import clsx from 'clsx';
-import { useState } from 'react';
-import s from './Header.module.scss';
-import { PostDeleteModal } from '@/features/post/removePost/ui/PostDeleteModal';
-import { useRemovePost } from '@/entities/post/model/useRemovePost';
 
 type Props = {
   avatar: string | undefined;

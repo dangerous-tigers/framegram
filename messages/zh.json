@@ -83,14 +83,20 @@
     "close": "关闭",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "您真的想结束编辑吗？如果您关闭，您所做的更改将不会被保存。"
   },
-  "view-post": {
+  "viewPost": {
     "likes": "点赞",
     "reply": "回复",
     "showReplies": "显示回复",
     "hideReplies": "隐藏回复",
     "publish": "发布",
     "beTheFirstLikes": "成为第一个 ",
-    "like": "点赞！"
+    "like": "点赞！",
+    "noCommentsYet": "暂无评论.",
+    "beTheFirstToComment": "成为第一个评论者.",
+    "emptyFieldError": "文本字段不能为空",
+    "emptyAnswerError": "回复不能为空",
+    "prefixWarning": "注意！您已切换到发表评论模式",
+    "commentPlaceholder": "添加评论..."
   },
   "deletePostModal": {
     "title": "删除帖子",

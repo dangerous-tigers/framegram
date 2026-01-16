@@ -83,14 +83,20 @@
     "close": "Закрыць",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы сапраўды хочаце скончыць рэдагаванне? Калі вы закрыеце акно рэдагавання, унесеныя вамі змены не будуць захаваны."
   },
-  "view-post": {
+  "viewPost": {
     "likes": "Лайкі",
     "reply": "Адказаць",
     "showReplies": "Паказаць адказы",
     "hideReplies": "Схаваць адказы",
     "publish": "Адправіць",
     "beTheFirstLikes": "Будзь першым, хто паставіць ",
-    "like": "Лайк!"
+    "like": "Лайк!",
+    "noCommentsYet": "Каментарыяў яшчэ няма.",
+    "beTheFirstToComment": "Будзьце першымі, хто пакіне каментарый.",
+    "emptyFieldError": "Тэкставае поле не можа быць пустым",
+    "emptyAnswerError": "Адказ не можа быць пустым",
+    "prefixWarning": "Увага! Вы перайшлі ў рэжым адпраўкі каментара",
+    "commentPlaceholder": "Дадаць каментар..."
   },
   "deletePostModal": {
     "title": "Выдаліць пост",

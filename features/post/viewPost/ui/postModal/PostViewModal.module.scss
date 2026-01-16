@@ -1,27 +1,14 @@
-.modal {
+.closeButton {
   position: absolute;
+  top: -30px;
+  right: -30px;
+  color: var(--ligth-100);
+  padding: 0;
+  width: 30px;
+  height: 30px;
 
-  &::after {
-    content: 'x';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-  }
-}
-
-.modal {
-  position: absolute;
-
-  &::after {
-    content: 'x';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
+  @media (width <= 768px) {
+    top: -25px;
+    right: -25px;
   }
 }

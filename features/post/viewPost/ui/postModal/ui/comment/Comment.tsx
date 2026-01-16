@@ -1,14 +1,17 @@
 'use client';
-import { Heart, HeartOutline } from '@/assets/icons';
-import { type Comment } from '../../../../model/types';
-import s from './Comment.module.scss';
 import clsx from 'clsx';
-import { Description } from '..';
-import { Answer } from '../answer/Answer';
-import { useState } from 'react';
-import { Button } from '@/shared/ui';
-import { useCommentAnswers, useViewPostStore } from '@/features/post/viewPost/model';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+
+import { Description } from '..';
+import { type Comment } from '../../../../model/types';
+import { Answer } from '../answer/Answer';
+
+import s from './Comment.module.scss';
+
+import { Heart, HeartOutline } from '@/assets/icons';
+import { useCommentAnswers, useViewPostStore } from '@/features/post/viewPost/model';
+import { Button } from '@/shared/ui';
 
 type Props = {
   comment: Comment;
@@ -26,7 +29,7 @@ export function Comment({ comment, postId, isAuth }: Props) {
     openAnswer,
   });
 
-  const t = useTranslations('view-post');
+  const t = useTranslations('viewPost');
 
   const handleAnswer = (id: number) => {
     alert('Answered by comment id: ' + id + ' by post id: ' + postId + ' by username: ' + comment.from.username);

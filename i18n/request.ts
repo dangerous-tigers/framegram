@@ -1,6 +1,8 @@
 import { getRequestConfig } from 'next-intl/server';
-import { getUserLocaleAcceptLanguage, getUserLocaleCookie } from '@/services/locale';
+
 import { defaultLocale, locales } from './config';
+
+import { getUserLocaleAcceptLanguage, getUserLocaleCookie } from '@/services/locale';
 
 const isSupported = (locale: string | undefined) => (locales.find((item) => item === locale) ? locale : undefined);
 

@@ -1,5 +1,6 @@
-import s from '@/shared/ui/radioGroup/RadioGroup.module.scss';
 import { Label, RadioGroup } from 'radix-ui';
+
+import s from '@/shared/ui/radioGroup/RadioGroup.module.scss';
 import { RadioGroupItemProps } from '@/shared/ui/radioGroup/RadioGroup.types';
 
 export const RadioGroupItem = ({ value, label, disabled }: RadioGroupItemProps) => {

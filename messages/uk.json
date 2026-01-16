@@ -83,14 +83,20 @@
     "close": "Закрити",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "Ви дійсно хочете завершити редагування? Якщо ви закриєте вікно редагування, зміни, внесені вами, не будуть збережені."
   },
-  "view-post": {
+  "viewPost": {
     "likes": "Вподобання",
     "reply": "Відповісти",
     "showReplies": "Показати відповіді",
     "hideReplies": "Приховати відповіді",
     "publish": "Опублікувати",
     "beTheFirstLikes": "Будь першим ",
-    "like": "Вподобати!"
+    "like": "Вподобати!",
+    "noCommentsYet": "Коментарів ще немає.",
+    "beTheFirstToComment": "Будьте першим, хто залишить коментар.",
+    "emptyFieldError": "Текстове поле не може бути порожнім",
+    "emptyAnswerError": "Відповідь не може бути порожньою",
+    "prefixWarning": "Увага! Ви перейшли в режим надсилання коментаря",
+    "commentPlaceholder": "Додати коментар..."
   },
   "deletePostModal": {
     "title": "Видалити пост",
