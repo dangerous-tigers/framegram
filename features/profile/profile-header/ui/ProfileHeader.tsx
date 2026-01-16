@@ -6,33 +6,35 @@ import s from './ProfileHeader.module.scss';
 import { Paid } from '@/assets/icons';
 import profile_img_placeholder from '@/assets/illustrations/avatar-placeholder.png';
 import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
+import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 
 type Props = {
-  isOwner: boolean;
   hasPaymentSubscription: boolean;
   profile: UserProfileByIdWithPostsResponse;
 };
 
-export const ProfileHeader = ({ isOwner, profile }: Props) => {
+export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
+  const { data } = useMe();
+
+  const isOwner = data?.userId === profile.id;
+
   return (
     <div className={s.container}>
       <div className={s.profilePicture}>
         <img
-          src={!profile.avatars.length ? profile_img_placeholder.src : profile.avatars?.[0]?.url}
+          src={profile.avatars?.[0]?.url ?? profile_img_placeholder.src}
           alt={`${profile.userName}'s profile picture`}
         />
       </div>
       <div className={s.userName}>
         <h2>
           {profile.userName}
-          <Paid />
-          {/* {profileInformation.hasPaymentSubscription && <Paid />} */}
+          {hasPaymentSubscription && <Paid />}
         </h2>
         <div className={s.name}>
           <span>
-            FirstName LastName
             {profile?.firstName} {profile?.lastName}
           </span>
         </div>
@@ -60,7 +62,7 @@ export const ProfileHeader = ({ isOwner, profile }: Props) => {
         </ul>
       </div>
       <div className={s.buttonsBlock}>
-        {isOwner ? (
+        {isOwner && (
           <PolymorphicButton
             className={s.profileButton}
             variant='secondary'
@@ -69,11 +71,14 @@ export const ProfileHeader = ({ isOwner, profile }: Props) => {
           >
             Profile Settings
           </PolymorphicButton>
-        ) : profile.isFollowing ? (
-          <PolymorphicButton>Unfollow</PolymorphicButton>
-        ) : (
+        )}
+        {!isOwner && (
           <>
-            <PolymorphicButton>Follow</PolymorphicButton>
+            {!profile.isFollowing ? (
+              <PolymorphicButton>Follow</PolymorphicButton>
+            ) : (
+              <PolymorphicButton>Unfollow</PolymorphicButton>
+            )}
             <PolymorphicButton
               variant={'secondary'}
               as={Link}
@@ -86,13 +91,7 @@ export const ProfileHeader = ({ isOwner, profile }: Props) => {
       </div>
 
       <div className={s.bio}>
-        {/* <p>{profileInformation.aboutMe}</p> */}
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint recusandae illum explicabo, reiciendis molestias
-          consequuntur et doloribus! Sed, delectus doloremque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Inventore quo magnam dolorum, vel nulla nam iusto repellendus vero dolorem nemo neque aliquam dicta voluptatem
-          doloremque deserunt similique voluptas! Asperiores, expedita!
-        </p>
+        <p>{profile.aboutMe}</p>
       </div>
     </div>
   );

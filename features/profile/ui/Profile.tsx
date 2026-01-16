@@ -1,18 +1,17 @@
-'use client';
+import s from './Profile.module.scss';
+
 import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
-import { ProfileHeader } from '@/features/profile/ProfileHeader/ui/ProfileHeader';
+import { ProfileHeader } from '@/features/profile/profile-header/ui/ProfileHeader';
 
 type Props = {
-  isOwner: boolean;
   profile: UserProfileByIdWithPostsResponse;
   hasPaymentSubscription: boolean;
 };
 
-export const Profile = ({ profile, hasPaymentSubscription, isOwner }: Props) => {
+export const Profile = ({ profile, hasPaymentSubscription }: Props) => {
   return (
-    <div>
+    <div className={s.container}>
       <ProfileHeader
-        isOwner={isOwner}
         profile={profile}
         hasPaymentSubscription={hasPaymentSubscription}
       />
