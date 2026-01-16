@@ -1,20 +1,22 @@
 import s from './Profile.module.scss';
 
-import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
-import { ProfileHeader } from '@/features/profile/profile-header/ui/ProfileHeader';
+import { PostViewModel, UserProfileByIdWithPostsResponse } from '@/entities/profile';
+import { Posts, ProfileHeader } from '@/features/profile';
 
 type Props = {
   profile: UserProfileByIdWithPostsResponse;
+  items: PostViewModel[];
   hasPaymentSubscription: boolean;
 };
 
-export const Profile = ({ profile, hasPaymentSubscription }: Props) => {
+export const Profile = ({ profile, items, hasPaymentSubscription }: Props) => {
   return (
     <div className={s.container}>
       <ProfileHeader
         profile={profile}
         hasPaymentSubscription={hasPaymentSubscription}
       />
+      <Posts items={items} />
     </div>
   );
 };
