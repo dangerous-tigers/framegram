@@ -1,172 +1,104 @@
-.profileWrapper {
-  padding-top: 36px;
+.profileHeader {
   display: flex;
-  gap: 38px;
-  margin-bottom: 48px;
-}
+  gap: 1.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border-divider);
+  background-color: var(--color-background-secondary);
 
-.content {
-  display: flex;
-  gap: 20px;
-  flex-direction: column;
-}
+  .avatarSection {
+    flex-shrink: 0;
 
-.profileButton {
-  @media screen and (width >= 768) {
-    height: 36px;
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-border-divider);
+    }
+
+    .defaultAvatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: var(--color-primary-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--color-primary-500);
+      border: 2px solid var(--color-border-divider);
+    }
   }
 
-  @media screen and (width <= 768) {
-    height: 48px;
-  }
-}
-
-.userInfo {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.userName {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  & > h2 {
+  .infoSection {
+    flex: 1;
     display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 36px;
-    color: var(--light-100);
-    margin: 0;
-  }
-}
+    flex-direction: column;
+    justify-content: center;
 
-.profilePicture {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    .userName {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--color-text-primary);
+      margin-bottom: 0.25rem;
+    }
 
-  & > img {
-    border-radius: 50%;
-  }
-}
+    .firstNameLastName {
+      font-size: 1.1rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+    }
 
-.buttonsBlock {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+    .aboutMe {
+      color: var(--color-text-primary);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
 
-.counters {
-  width: 100%;
+    .metadata {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
 
-  & > ul {
-    display: flex;
-    align-items: center;
-    gap: 88px;
-
-    & > li {
-      & > a {
+      .metadataItem {
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-weight: 700;
-        font-size: var(--font-size-s);
 
-        & > span {
-          font-weight: 400;
+        .count {
+          font-weight: bold;
+          font-size: 1.1rem;
+          color: var(--color-text-primary);
+        }
+
+        .label {
+          font-size: 0.8rem;
+          color: var(--color-text-secondary);
         }
       }
     }
-  }
 
-  @media screen and (width <= 768) {
-    display: none;
-  }
-}
-
-.name {
-  font-weight: 600;
-  font-size: var(--font-size-xs);
-}
-
-.bio {
-  max-height: 72px;
-  display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-
-  & > p {
-    font-size: var(--font-size-m);
-    font-weight: 400;
-    color: var(--light-100);
+    .additionalInfo {
+      p {
+        margin: 0.25rem 0;
+        font-size: 0.9rem;
+        color: var(--color-text-secondary);
+      }
+    }
   }
 }
 
-@media screen and (width <= 768px) {
-  .profilePicture {
-    display: flex;
-    justify-content: flex-start;
+@media (max-width: 768px) {
+  .profileHeader {
+    flex-direction: column;
     align-items: center;
-    gap: 28px;
+    text-align: center;
 
-    & > img {
-      width: 72px;
-      height: 72px;
-    }
-
-    & > .countersMobile {
-      & > ul {
-        display: flex;
-        gap: 26px;
-        font-size: var(--font-size-xs);
-
-        & > li > a {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+    .infoSection {
+      .metadata {
+        justify-content: center;
       }
     }
-  }
-
-  .profileWrapper {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .userInfo {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .buttonsBlock {
-    & > button {
-      width: 100%;
-      height: 48px;
-    }
-
-    flex-direction: column;
-  }
-
-  .countersMobile {
-    display: flex;
-  }
-
-  .counters {
-    display: none;
-  }
-}
-
-.countersMobile {
-  @media screen and (width >= 768) {
-    display: none;
   }
 }
