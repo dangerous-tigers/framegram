@@ -69,37 +69,37 @@ export const postApi = {
 
     return res.json();
   },
+  getPostsByUser: async (userId: number, endCursorPostId: number = 0) => {
+    const response = await client.GET('/posts/user/{userId}/{endCursorPostId}', {
+      params: {
+        path: {
+          userId,
+          endCursorPostId,
+        },
+      },
+    });
+    if (response.error) {
+      throw response.error;
+    }
+    return response.data;
+  },
   deletePost: async (id: number) => {
     if (!id) {
       throw new Error('Post ID is required for deletion');
     }
-    const token = localStorage.getItem('accessToken');
 
-    if (!token) {
-      throw new Error('Access token not found');
-    }
-
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+    const response = await client.DELETE('/posts/{postId}', {
+      params: {
+        path: {
+          postId: id,
+        },
       },
-      credentials: 'include',
     });
 
-    if (!response.ok) {
-      const errorData = await response.text();
-
-      throw new Error(`HTTP error! status: ${response.status}, message: ${errorData}`);
+    if (response.error) {
+      throw response.error;
     }
 
-    // Для статуса 204 (No Content) не нужно парсить JSON
-    if (response.status === 204) {
-      return {};
-    }
-    const data = await response.json();
-
-    return data;
+    return response.data;
   },
 };

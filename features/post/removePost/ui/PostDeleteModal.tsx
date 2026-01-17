@@ -1,5 +1,6 @@
-import { Modal, ModalHeaderWithClose, Button } from '@/shared/ui';
 import { useTranslations } from 'next-intl';
+
+import { Modal, ModalHeaderWithClose, Button } from '@/shared/ui';
 
 type Props = {
   open: boolean;

@@ -33,7 +33,7 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
   const { mutate: removePost, isPending } = useRemovePost();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const isOwner = userId != null && postOwnerId != null && Number(userId) === Number(postOwnerId);
+  const isOwner = userId === postOwnerId;
 
   const isFollow = false;
 
@@ -54,18 +54,10 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
             <Edit2Outline />
             <span>Edit</span>
           </li>
-          {postId != null && typeof postId === 'number' && !isNaN(postId) && postId > 0 && (
-            <li
-              onClick={(e) => {
-                e.stopPropagation();
-                setOpen(false);
-                setShowDeleteModal(true);
-              }}
-            >
-              <TrashOutline />
-              <span>Delete</span>
-            </li>
-          )}
+          <li onClick={handleDeleteClick}>
+            <TrashOutline />
+            <span>Delete</span>
+          </li>
           <li onClick={copyLink}>
             <CopyOutline />
             <span>Copy link</span>
@@ -98,11 +90,15 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
 
   const copyLink = () => {};
 
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setOpen(false);
+    setShowDeleteModal(true);
+  };
+
   const handleDeleteConfirm = () => {
-    if (postId != null && typeof postId === 'number' && !isNaN(postId) && postId > 0) {
-      removePost(Number(postId));
-      setShowDeleteModal(false);
-    }
+    removePost(postId);
+    setShowDeleteModal(false);
   };
 
   return (
@@ -123,12 +119,14 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
           </Popover>
         </div>
       </div>
-      <PostDeleteModal
-        open={showDeleteModal}
-        onOpenChange={setShowDeleteModal}
-        onConfirm={handleDeleteConfirm}
-        isLoading={isPending}
-      />
+      {showDeleteModal && (
+        <PostDeleteModal
+          open={showDeleteModal}
+          onOpenChange={setShowDeleteModal}
+          onConfirm={handleDeleteConfirm}
+          isLoading={isPending}
+        />
+      )}
     </>
   );
 }
