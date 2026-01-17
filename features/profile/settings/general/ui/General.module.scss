@@ -1,0 +1,81 @@
+.container {
+  padding-top: 48px;
+  display: grid;
+  grid-template-columns: 202px 1fr;
+  column-gap: 30px;
+}
+
+.download {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.required {
+  position: fixed;
+  transform: translate(75px, 0);
+  color: var(--danger-500);
+}
+
+.profileImage {
+  p {
+    width: 192px;
+    height: 192px;
+    border-radius: 50%;
+  }
+
+  div {
+    width: 202px;
+
+    button {
+      display: none;
+
+      // border-color: var(--primary-500);
+      // color: var(--primary-500);
+
+      // @media (hover: hover) {
+      //   &:hover {
+      //     border-color: var(--primary-100);
+      //     color: var(--primary-100);
+      //   }
+      // }
+
+      // &:active {
+      //   border-color: var(--primary-700);
+      //   color: var(--primary-700);
+      // }
+
+      // /* Пока что оставлю закоментированную, не очень работает на пк с :active */
+
+      // /* &:focus {
+      //           border-color: var(--primary-700);
+      //           color: var(--primary-700);
+      //         } */
+
+      // &[disabled] {
+      //   border-color: var(--primary-900);
+      //   color: var(--primary-900);
+      // }
+    }
+  }
+}
+
+.label {
+  font-weight: 400;
+  font-style: var(--font-size-s);
+  line-height: 24px;
+  color: var(--light-900);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
