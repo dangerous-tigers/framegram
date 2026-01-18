@@ -37,11 +37,17 @@ export const Modal = ({ header, children, size = 'md', showDivider = true, class
           aria-describedby={'modal'}
           className={`${styles.content} ${sizeClass} ${className || ''}`}
         >
+          <Dialog.Description aria-describedby={'modal'} />
           <DialogTitle />
           {header && (
             <>
               <div className={styles.header}>{header}</div>
-              {showDivider && <div className={styles.divider} />}
+              {showDivider && (
+                <div
+                  data-testid='divider'
+                  className={styles.divider}
+                />
+              )}
             </>
           )}
 
