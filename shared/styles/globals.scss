@@ -58,7 +58,7 @@ body {
 }
 
 .container {
-  max-width: 1156px;
+  max-width: 1188px;
   margin: 0 auto;
   padding: 0 16px;
 }
@@ -67,7 +67,7 @@ body {
   flex: 1 1 auto;
   height: 100%;
   width: 100%;
-  max-width: 1156px;
+  max-width: 1188px;
   margin: 0 auto;
   padding: 0 16px;
   display: flex;
@@ -78,9 +78,9 @@ body {
   flex: 1 1 auto;
   height: 100%;
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 156px 1fr;
   gap: 24px;
-  max-width: 1156px;
+  max-width: 1188px;
 
   @media (width <= 768px) {
     display: flex;

@@ -6,7 +6,7 @@ import s from './../../styles/styles.module.scss';
 
 import { ArrowBackOutline } from '@/assets/icons';
 import { routes } from '@/shared/config/routes';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
 
 export function TermsOfService() {
   return (

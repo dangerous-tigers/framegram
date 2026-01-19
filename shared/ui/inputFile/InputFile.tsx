@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import s from './inputFile.module.scss';
 
 import { ImageOutline } from '@/assets/icons';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
 
 type Props = {
   onSelect: (files: File[]) => void;
