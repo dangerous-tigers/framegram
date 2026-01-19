@@ -1,3 +1,5 @@
+'use client';
+
 import { memo, Ref, useEffect } from 'react';
 import clsx from 'clsx';
 import type { DraggableSyntheticListeners } from '@dnd-kit/core';
@@ -5,7 +7,7 @@ import type { Transform } from '@dnd-kit/utilities';
 
 import { Handle, Remove } from './components';
 
-import img from '@/assets/images/image-test.png';
+//import img from '@/assets/images/image-test.png';
 
 import s from './Item.module.scss';
 import Image from 'next/image';
@@ -23,7 +25,7 @@ export type Props = {
   isLastItem?: boolean;
   transition?: string | null;
   wrapperStyle?: React.CSSProperties;
-  value: React.ReactNode;
+  value: string;
   onRemove(): void;
   ref?: React.Ref<HTMLLIElement>;
 };
@@ -42,7 +44,7 @@ export const Item = memo(
     transition,
     transform,
     isLastItem,
-    /*  value, */
+    value,
     wrapperStyle,
     ref,
     ...props
@@ -88,7 +90,7 @@ export const Item = memo(
           {...props}
         >
           <Image
-            src={img}
+            src={value}
             alt=''
             width={80}
             height={82}

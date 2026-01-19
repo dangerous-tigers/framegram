@@ -21,7 +21,7 @@ export const PopoverContent = (p: Props) => {
         <motion.div
           className={clsx(s.root, position === 'topRight' ? s.topRight : s.topLeft, className)}
           initial={{ opacity: 0, y: -2 }}
-          animate={{ opacity: 1, y: 2 }}
+          animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -2 }}
           transition={{
             opacity: { type: 'spring', duration: 0.4 },

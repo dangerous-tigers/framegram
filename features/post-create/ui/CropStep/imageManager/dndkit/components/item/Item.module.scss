@@ -31,6 +31,8 @@ $focused-outline-color: #4c9ffe;
 }
 
 .wrapper {
+  min-width: 5rem;
+  height: 5.125rem;
   box-sizing: border-box;
   transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0) scaleX(var(--scale-x, 1))
     scaleY(var(--scale-y, 1));
@@ -47,7 +49,7 @@ $focused-outline-color: #4c9ffe;
     --box-shadow: $box-shadow;
     --box-shadow-picked-up: $box-shadow-border, -1px 0 15px 0 rgb(34 33 81 / 1%), 0px 15px 15px 0 rgb(34 33 81 / 25%);
 
-    z-index: 999;
+    z-index: 2003;
   }
 }
 
@@ -70,8 +72,6 @@ $focused-outline-color: #4c9ffe;
   white-space: nowrap;
   transform: scale(var(--scale, 1));
   transition: box-shadow 200ms cubic-bezier(0.18, 0.67, 0.6, 1.22);
-  width: 5rem;
-  height: 5.125rem;
   overflow: hidden;
 
   &:focus-visible {

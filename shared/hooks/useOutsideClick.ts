@@ -6,25 +6,23 @@ import { useRef, useEffect, RefObject } from 'react';
  * @returns ref, который нужно передать в элемент
  */
 export const useOutsideClick = <T extends HTMLElement = HTMLElement>(callback: () => void): RefObject<T | null> => {
-  const containerRef = useRef<T | null>(null);
+  const ref = useRef<T | null>(null);
 
   useEffect(() => {
-    const handleClick = (event: MouseEvent | TouchEvent) => {
+    const handler = (event: Event) => {
       const target = event.target as Node;
 
-      if (containerRef.current && !containerRef.current.contains(target)) {
+      if (ref.current && !ref.current.contains(target)) {
         callback();
       }
     };
 
-    document.addEventListener('mousedown', handleClick);
-    document.addEventListener('touchstart', handleClick);
+    document.addEventListener('pointerdown', handler, true);
 
     return () => {
-      document.removeEventListener('mousedown', handleClick);
-      document.addEventListener('touchstart', handleClick);
+      document.removeEventListener('pointerdown', handler, true);
     };
   }, [callback]);
 
-  return containerRef;
+  return ref;
 };

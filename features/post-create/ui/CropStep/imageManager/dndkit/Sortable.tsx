@@ -17,16 +17,23 @@ import {
   useSensors,
   defaultDropAnimationSideEffects,
 } from '@dnd-kit/core';
-import { arrayMove, useSortable, SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable';
+import { useSortable, SortableContext, horizontalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 import { Item, List } from './components';
 
 import s from './Sortable.module.scss';
-import { PlusCircleOutline } from '@/assets/icons';
+import { UploadedImage } from '@/features/post-create/model/CreatePostType';
+import { Upload } from '../upload/upload';
+
+export interface ImageItem {
+  id: number;
+  file: File;
+  preview: string;
+  filter?: string;
+}
 
 export interface Props {
-  reorderItems?: typeof arrayMove;
   style?: React.CSSProperties;
   wrapperStyle?(args: {
     active: Pick<Active, 'id'> | null;
@@ -34,6 +41,8 @@ export interface Props {
     isDragging: boolean;
     id: UniqueIdentifier;
   }): React.CSSProperties;
+  images: UploadedImage;
+  setImages: (images: UploadedImage) => void;
 }
 
 const dropAnimationConfig: DropAnimation = {
@@ -47,17 +56,39 @@ const dropAnimationConfig: DropAnimation = {
 };
 
 export const Sortable = (p: Props) => {
-  const { wrapperStyle = () => ({}) } = p;
+  const { wrapperStyle = () => ({}), images, setImages } = p;
 
+  // State
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-  const [items, setItems] = useState<UniqueIdentifier[]>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-
-  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor), useSensor(KeyboardSensor));
   const isFirstAnnouncement = useRef(true);
-  const getIndex = (id: UniqueIdentifier) => items.indexOf(id);
+
+  // Sensors for drag interaction
+  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor), useSensor(KeyboardSensor));
+
+  // Helper functions
+  const getIndex = (id: UniqueIdentifier) => images.findIndex((item) => item.id === id);
   const activeIndex = activeId != null ? getIndex(activeId) : -1;
-  const handleRemove = (id: UniqueIdentifier) =>
-    setItems((items: UniqueIdentifier[]) => items.filter((item) => item !== id));
+
+  const handleRemove = (id: UniqueIdentifier) => {
+    setImages(images.filter((item) => item.id !== id));
+  };
+
+  const handleDragStart = (activeId: UniqueIdentifier | null) => {
+    if (activeId) {
+      setActiveId(activeId);
+    }
+  };
+
+  const handleDragEnd = (overId: UniqueIdentifier | null) => {
+    setActiveId(null);
+
+    if (!overId) return;
+
+    const overIndex = getIndex(overId);
+    if (activeIndex !== overIndex) {
+      setImages(arrayMove(images, activeIndex, overIndex));
+    }
+  };
 
   useEffect(() => {
     if (activeId == null) {
@@ -69,27 +100,12 @@ export const Sortable = (p: Props) => {
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
-      onDragStart={({ active }) => {
-        if (!active) {
-          return;
-        }
-
-        setActiveId(active.id);
-      }}
-      onDragEnd={({ over }) => {
-        setActiveId(null);
-
-        if (over) {
-          const overIndex = getIndex(over.id);
-          if (activeIndex !== overIndex) {
-            setItems((items) => arrayMove(items, activeIndex, overIndex));
-          }
-        }
-      }}
+      onDragStart={({ active }) => handleDragStart(active?.id ?? null)}
+      onDragEnd={({ over }) => handleDragEnd(over?.id ?? null)}
       onDragCancel={() => setActiveId(null)}
     >
       <SortableContext
-        items={items}
+        items={images}
         strategy={horizontalListSortingStrategy}
       >
         <div className={s.wrap}>
@@ -100,38 +116,41 @@ export const Sortable = (p: Props) => {
               },
             }}
             className={s.overlayScrollbars}
-            defer
           >
             <List className={s.list}>
-              {items.map((value, index) => (
+              {images.map((item, index) => (
                 <SortableItem
-                  key={value}
-                  id={value}
+                  key={item.id}
+                  id={item.id}
                   index={index}
-                  isLastItem={items.length < 2}
+                  isLastItem={images.length < 2}
                   onRemove={handleRemove}
                   wrapperStyle={undefined}
+                  value={item.preview}
                   useDragOverlay
                 />
               ))}
             </List>
           </OverlayScrollbarsComponent>
           <div className={s.input}>
-            <PlusCircleOutline />
+            <Upload />
           </div>
         </div>
       </SortableContext>
 
       {createPortal(
-        <DragOverlay dropAnimation={dropAnimationConfig}>
+        <DragOverlay
+          style={{ zIndex: '2003' }}
+          dropAnimation={dropAnimationConfig}
+        >
           {activeId != null ? (
             <Item
-              value={items[activeIndex]}
+              value={images[activeIndex].preview}
               wrapperStyle={wrapperStyle({
                 active: { id: activeId },
                 index: activeIndex,
                 isDragging: true,
-                id: items[activeIndex],
+                id: images[activeIndex].id,
               })}
               onRemove={() => {}}
               dragOverlay
@@ -151,9 +170,18 @@ interface SortableItemProps {
   onRemove(id: UniqueIdentifier): void;
   wrapperStyle: Props['wrapperStyle'];
   isLastItem?: boolean;
+  value: string;
 }
 
-export const SortableItem = ({ id, index, onRemove, isLastItem, useDragOverlay, wrapperStyle }: SortableItemProps) => {
+export const SortableItem = ({
+  id,
+  index,
+  onRemove,
+  isLastItem,
+  value,
+  useDragOverlay,
+  wrapperStyle,
+}: SortableItemProps) => {
   const {
     active,
     attributes,
@@ -171,7 +199,7 @@ export const SortableItem = ({ id, index, onRemove, isLastItem, useDragOverlay, 
   return (
     <Item
       ref={setNodeRef}
-      value={id}
+      value={value}
       dragging={isDragging}
       sorting={isSorting}
       handleProps={{

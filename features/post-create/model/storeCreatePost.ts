@@ -12,6 +12,7 @@ export type CreatePostStateType = {
 
   setStep: (step: CreatePostStep) => void;
   addImages: (files: File[]) => void;
+  setImages: (images: UploadedImage) => void;
   removeImage: (index: number) => void;
   setDescription: (value: string) => void;
   setActiveImageIndex: (value: number) => void;
@@ -77,10 +78,19 @@ export const useCreatePostStore = create<CreatePostStateType>()(
         const images = [
           ...state.images,
           ...files.slice(0, 10 - state.images.length).map((file) => ({
+            id: crypto.randomUUID(),
             file,
             preview: URL.createObjectURL(file),
           })),
         ];
+
+        saveDraft(pickDraft({ ...state, images }));
+        return { images };
+      }),
+
+    setImages: (newImages) =>
+      set((state) => {
+        const images = [...newImages];
 
         saveDraft(pickDraft({ ...state, images }));
         return { images };
