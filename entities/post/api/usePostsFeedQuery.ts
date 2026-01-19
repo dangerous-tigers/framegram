@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react';
-import { getPostsFeed, GetPostsFeedParams } from './postsFeed.api';
+
+import { getPostsFeed } from './postsFeed.api';
+
 import { PostViewModel } from '@/shared/api/schema.d.ts';
 
 export const usePostsFeedQuery = (initialPageSize: number = 10) => {
@@ -13,12 +15,12 @@ export const usePostsFeedQuery = (initialPageSize: number = 10) => {
   const fetchInitialData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
-      const data = await getPostsFeed({ 
-        pageSize: initialPageSize 
+      const data = await getPostsFeed({
+        pageSize: initialPageSize,
       });
-      
+
       setPosts(data.items || []);
       setHasNext(data.hasNext);
       setEndCursor(data.endCursorPostId ? Number(data.endCursorPostId) : null);
@@ -31,17 +33,17 @@ export const usePostsFeedQuery = (initialPageSize: number = 10) => {
 
   const fetchMoreData = useCallback(async () => {
     if (!hasNext || isLoadingMore) return;
-    
+
     setIsLoadingMore(true);
     setError(null);
-    
+
     try {
-      const data = await getPostsFeed({ 
+      const data = await getPostsFeed({
         pageSize: initialPageSize,
-        endCursorPostId: endCursor ? endCursor : undefined
+        endCursorPostId: endCursor ? endCursor : undefined,
       });
-      
-      setPosts(prev => [...prev, ...(data.items || [])]);
+
+      setPosts((prev) => [...prev, ...(data.items || [])]);
       setHasNext(data.hasNext);
       setEndCursor(data.endCursorPostId ? Number(data.endCursorPostId) : null);
     } catch (err) {
@@ -67,6 +69,6 @@ export const usePostsFeedQuery = (initialPageSize: number = 10) => {
     error,
     fetchInitialData,
     fetchMoreData,
-    refetch
+    refetch,
   };
 };
