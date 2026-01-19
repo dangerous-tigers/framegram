@@ -1,4 +1,9 @@
 {
+  "header": {
+    "logIn": "Увійти",
+    "logOut": "Вийти",
+    "signUp": "Зареєструватися"
+  },
   "sidebar": {
     "feed": "Стрічка",
     "create": "Створити",
@@ -11,6 +16,17 @@
     "logOutMessage": "Ви дійсно хочете вийти з облікового запису {email}?",
     "yes": "Так",
     "no": "Ні",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введіть пароль",
+    "forgotPassword": "Забули пароль",
+    "signIn": "Увійти",
+    "noAccount": "Немає акаунта?",
+    "signUp": "Зареєструватися"
+  },
+  "login": {
+    "title": "Увійти в систему",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "password": "Пароль",

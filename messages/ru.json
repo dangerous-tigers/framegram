@@ -1,4 +1,9 @@
 {
+  "header": {
+    "logIn": "Войти",
+    "logOut": "Выйти",
+    "signUp": "Зарегистрироваться"
+  },
   "sidebar": {
     "feed": "Лента",
     "create": "Создать",
@@ -11,6 +16,17 @@
     "logOutMessage": "Вы действительно хотите выйти из аккаунта {email}?",
     "yes": "Да",
     "no": "Нет",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "forgotPassword": "Забыли пароль",
+    "signIn": "Войти",
+    "noAccount": "Нет аккаунта?",
+    "signUp": "Зарегистрироваться"
+  },
+  "login": {
+    "title": "Войти в систему",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "password": "Пароль",
@@ -83,7 +99,7 @@
     "close": "Закрыть",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесенные вами изменения не будут сохранены."
   },
-  "view-post": {
+  "viewPost": {
     "likes": "Лайки",
     "reply": "Ответить",
     "showReplies": "Показать ответы",
