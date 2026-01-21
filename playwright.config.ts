@@ -2,9 +2,9 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './',
-  testMatch: '**/*.e2e.spec.{js,ts,tsx}',
+  testMatch: '**/*.e2e.{js,ts,tsx}',
 
-  testIgnore: ['node_modules/**', 'dist/**', '.next/**', 'build/**', '**/node_modules/**'],
+  testIgnore: ['node_modules/**', 'dist/**', '.next/**', 'build/**', '**/node_modules/**', '**/*.test.ts'],
 
   timeout: 30_000,
   use: {
@@ -20,8 +20,17 @@ export default defineConfig({
 
   projects: [
     {
+      name: 'setup',
+      testMatch: '**/*.e2e.setup.ts',
+    },
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testMatch: '**/*.e2e.{js,ts,tsx}',
     },
   ],
 });

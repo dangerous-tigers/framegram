@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
     globals: true,
-    exclude: ['node_modules/**', '**/test/**', '**/*.e2e.spec.{ts,tsx}'],
+    exclude: ['node_modules/**', '**/*.e2e.{ts,tsx}'],
   },
 });
