@@ -4,17 +4,6 @@
     "logOut": "लॉग आउट",
     "signUp": "साइन अप करें"
   },
-  "login": {
-    "title": "साइन इन करें",
-    "email": "ईमेल",
-    "emailPlaceholder": "Epam@epam.com",
-    "password": "पासवर्ड",
-    "passwordPlaceholder": "अपना पासवर्ड दर्ज करें",
-    "forgotPassword": "पासवर्ड भूल गए",
-    "signIn": "साइन इन",
-    "noAccount": "कोई खाता नहीं है?",
-    "signUp": "साइन अप"
-  },
   "sidebar": {
     "feed": "फ़ीड",
     "create": "बनाएँ",
@@ -27,6 +16,17 @@
     "logOutMessage": "क्या आप वाकई अपने खाता {email} से लॉग आउट करना चाहते हैं?",
     "yes": "हां",
     "no": "नहीं",
+    "email": "ईमेल",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "पासवर्ड",
+    "passwordPlaceholder": "अपना पासवर्ड दर्ज करें",
+    "forgotPassword": "पासवर्ड भूल गए",
+    "signIn": "साइन इन",
+    "noAccount": "कोई खाता नहीं है?",
+    "signUp": "साइन अप"
+  },
+  "login": {
+    "title": "साइन इन करें",
     "email": "ईमेल",
     "emailPlaceholder": "Epam@epam.com",
     "password": "पासवर्ड",
