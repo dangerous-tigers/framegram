@@ -25,46 +25,33 @@
 }
 
 .profileImage {
+  position: relative;
+
   p {
     width: 192px;
     height: 192px;
     border-radius: 50%;
   }
 
+  img {
+    border-radius: 50%;
+  }
+
   div {
     width: 202px;
-
-    button {
-      display: none;
-
-      // border-color: var(--primary-500);
-      // color: var(--primary-500);
-
-      // @media (hover: hover) {
-      //   &:hover {
-      //     border-color: var(--primary-100);
-      //     color: var(--primary-100);
-      //   }
-      // }
-
-      // &:active {
-      //   border-color: var(--primary-700);
-      //   color: var(--primary-700);
-      // }
-
-      // /* Пока что оставлю закоментированную, не очень работает на пк с :active */
-
-      // /* &:focus {
-      //           border-color: var(--primary-700);
-      //           color: var(--primary-700);
-      //         } */
-
-      // &[disabled] {
-      //   border-color: var(--primary-900);
-      //   color: var(--primary-900);
-      // }
-    }
+    gap: 24px;
   }
+}
+
+.drag {
+  border-radius: 2px;
+  width: 222px;
+  height: 228px;
+  background: var(--dark-500);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  margin-bottom: 60px;
 }
 
 .label {

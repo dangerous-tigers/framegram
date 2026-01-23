@@ -1,20 +1,20 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import s from './General.module.scss';
 
+import { ImageOutline } from '@/assets/icons';
 import { UpdateProfileUser } from '@/entities/profile';
 import { profileApi } from '@/entities/profile/api/profile.api';
+import { ImageUpload } from '@/features/profile/settings/general/ui/ImageUpload';
 import { generalSettingsSchema } from '@/features/profile/settings/model/generalSettingsSchema';
-import { client } from '@/shared/api/client';
 import { CatPreloader } from '@/shared/components/catPreloader/CatPreloader';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Input } from '@/shared/ui/input';
-import { InputFile } from '@/shared/ui/inputFile';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 import { type Option, Select } from '@/shared/ui/select/Select';
 import { Separator } from '@/shared/ui/separator/Separator';
@@ -30,6 +30,9 @@ const COUNTRY: Option[] = [
 ];
 
 export const General = () => {
+  const queryClient = useQueryClient();
+  const { show } = useAlertStore();
+
   const {
     isPending,
     data: general,
@@ -39,7 +42,28 @@ export const General = () => {
     queryFn: () => profileApi.getProfile(),
   });
 
-  const { show } = useAlertStore();
+  const updateProfile = useMutation({
+    mutationFn: profileApi.updateProfile,
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: ['general'],
+      });
+      show({
+        error: null,
+        description: 'Your settings are saved!',
+        variant: 'default',
+        severity: 'success',
+      });
+    },
+    onError: () => {
+      show({
+        error: null,
+        description: 'Error! Server is not available!',
+        variant: 'default',
+        severity: 'error',
+      });
+    },
+  });
 
   const {
     control,
@@ -81,46 +105,33 @@ export const General = () => {
   if (isPending) return <CatPreloader />;
 
   const onSubmit: SubmitHandler<UpdateProfileUser> = (data) => {
-    client
-      .PUT('/users/profile', {
-        body: {
-          userName: data.userName,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          city: data.city,
-          country: data.country,
-          region: data.region,
-          dateOfBirth: data.dateOfBirth,
-          aboutMe: data.aboutMe,
-        },
-      })
-      .then(() =>
-        show({
-          error: null,
-          description: 'Your settings are saved!',
-          variant: 'default',
-          severity: 'success',
-        }),
-      )
-      .catch(() => {
-        show({
-          error: null,
-          description: 'Error! Server is not available!',
-          variant: 'default',
-          severity: 'error',
-        });
-      });
+    updateProfile.mutate(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={s.container}>
         <div className={s.download}>
-          <InputFile
+          <ImageUpload
             className={s.profileImage}
-            onSelect={() => alert('photo')}
-          />
-          <PolymorphicButton variant='outline'>Select photo</PolymorphicButton>
+            accept='image/png,image/jpeg'
+            onSelect={() => alert('upload photo')}
+          >
+            {!general?.avatars ? (
+              <span className={s.drag}>
+                <ImageOutline
+                  width={36}
+                  height={36}
+                />
+              </span>
+            ) : (
+              <img
+                src={general.avatars[0].url}
+                alt='profile photo'
+              />
+            )}
+            <PolymorphicButton variant='outline'>Select Image</PolymorphicButton>
+          </ImageUpload>
         </div>
         <div className={s.information}>
           <span className={s.required}>*</span>
@@ -209,7 +220,7 @@ export const General = () => {
       <div className={s.buttons}>
         <PolymorphicButton
           type='submit'
-          disabled={disabled}
+          disabled={!!disabled}
         >
           Save
         </PolymorphicButton>
