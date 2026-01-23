@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { MouseEventHandler, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import s from './ConfirmActionModal.module.scss';
 
@@ -17,13 +17,11 @@ export const ConfirmActionModal = ({ children, confirmCallback }: Props) => {
   const t = useTranslations('confirmActions');
   const { open, hide } = useConfirmStore();
 
-  const handleClose: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
+  const handleClose = () => {
     hide();
   };
 
-  const handleConfirm: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
+  const handleConfirm = () => {
     confirmCallback();
     hide();
   };

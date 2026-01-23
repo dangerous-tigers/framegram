@@ -64,8 +64,8 @@ export const General = () => {
     },
     onError: () => {
       show({
-        error: null,
-        description: 'Error! Server is not available!',
+        error: 'Error! Server is not available!',
+        description: null,
         variant: 'default',
         severity: 'error',
       });
@@ -95,7 +95,7 @@ export const General = () => {
     register,
     setValue,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<UpdateProfileUser>({
     defaultValues: {
       userName: '',
@@ -107,22 +107,16 @@ export const General = () => {
       dateOfBirth: '',
       aboutMe: '',
     },
-    mode: 'onSubmit',
+    mode: 'onChange',
     resolver: zodResolver(generalSettingsSchema),
   });
-
-  const disabled =
-    errors.userName?.message ||
-    errors.firstName?.message ||
-    errors.lastName?.message ||
-    errors.aboutMe?.message ||
-    errors.dateOfBirth?.message;
 
   useEffect(() => {
     setValue('firstName', general?.firstName ?? '');
     setValue('lastName', general?.lastName ?? '');
     setValue('userName', general?.userName ?? '');
     setValue('aboutMe', general?.aboutMe ?? '');
+    setValue('dateOfBirth', general?.dateOfBirth?.split('T')[0] ?? '');
     setValue('country', general?.country ?? '');
     setValue('city', general?.city ?? '');
   }, [isSuccess]);
@@ -182,13 +176,13 @@ export const General = () => {
                 />
               </span>
             )}
-            {open && (
-              <ConfirmActionModal confirmCallback={() => deletePhoto.mutate()}>
-                <span>{t('deletePhoto')}</span>
-              </ConfirmActionModal>
-            )}
             <PolymorphicButton variant='outline'>Select Image</PolymorphicButton>
           </ImageUpload>
+          {open && (
+            <ConfirmActionModal confirmCallback={() => deletePhoto.mutate()}>
+              <span>{t('deletePhoto')}</span>
+            </ConfirmActionModal>
+          )}
         </div>
         <div className={s.information}>
           <span className={s.required}>*</span>
@@ -277,9 +271,9 @@ export const General = () => {
       <div className={s.buttons}>
         <PolymorphicButton
           type='submit'
-          disabled={!!disabled}
+          disabled={!isValid || updateProfile.isPending}
         >
-          Save
+          {updateProfile.isPending ? 'Saving...' : 'Save'}
         </PolymorphicButton>
       </div>
     </form>
