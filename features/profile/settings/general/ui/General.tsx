@@ -2,17 +2,18 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import s from './General.module.scss';
 
-import { ImageOutline } from '@/assets/icons';
+import { CloseOutline, ImageOutline } from '@/assets/icons';
 import { UpdateProfileUser } from '@/entities/profile';
 import { profileApi } from '@/entities/profile/api/profile.api';
 import { ImageUpload } from '@/features/profile/settings/general/ui/ImageUpload';
 import { generalSettingsSchema } from '@/features/profile/settings/model/generalSettingsSchema';
 import { CatPreloader } from '@/shared/components/catPreloader/CatPreloader';
+import { validateImage } from '@/shared/lib/file/validateImage';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Input } from '@/shared/ui/input';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
@@ -65,6 +66,24 @@ export const General = () => {
     },
   });
 
+  const uploadPhoto = useMutation({
+    mutationFn: profileApi.uploadPhoto,
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: ['general'],
+      });
+    },
+  });
+
+  const deletePhoto = useMutation({
+    mutationFn: profileApi.deletePhoto,
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: ['general'],
+      });
+    },
+  });
+
   const {
     control,
     register,
@@ -108,6 +127,22 @@ export const General = () => {
     updateProfile.mutate(data);
   };
 
+  const handleUploadPhoto = (files: File[]) => {
+    files.forEach(validateImage);
+    const file = files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    uploadPhoto.mutate(formData);
+  };
+
+  const handleRemovePhoto: MouseEventHandler<HTMLSpanElement> = (event) => {
+    event.stopPropagation();
+    deletePhoto.mutate();
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={s.container}>
@@ -115,9 +150,9 @@ export const General = () => {
           <ImageUpload
             className={s.profileImage}
             accept='image/png,image/jpeg'
-            onSelect={() => alert('upload photo')}
+            onSelect={handleUploadPhoto}
           >
-            {!general?.avatars ? (
+            {!general?.avatars[0] ? (
               <span className={s.drag}>
                 <ImageOutline
                   width={36}
@@ -130,6 +165,15 @@ export const General = () => {
                 alt='profile photo'
               />
             )}
+            <span
+              className={s.cross}
+              onClick={handleRemovePhoto}
+            >
+              <CloseOutline
+                width={16}
+                height={16}
+              />
+            </span>
             <PolymorphicButton variant='outline'>Select Image</PolymorphicButton>
           </ImageUpload>
         </div>

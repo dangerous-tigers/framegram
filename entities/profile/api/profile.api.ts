@@ -20,4 +20,26 @@ export const profileApi = {
     }
     return response.data;
   },
+  uploadPhoto: async (formData: FormData) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/users/profile/avatar`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('error');
+    }
+
+    return response.json();
+  },
+  deletePhoto: async () => {
+    const response = await client.DELETE('/users/profile/avatar', {});
+    if (response.error) {
+      throw response.error;
+    }
+    return response.data;
+  },
 };
