@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { MouseEventHandler, useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -10,9 +11,11 @@ import s from './General.module.scss';
 import { CloseOutline, ImageOutline } from '@/assets/icons';
 import { UpdateProfileUser } from '@/entities/profile';
 import { profileApi } from '@/entities/profile/api/profile.api';
+import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { ImageUpload } from '@/features/profile/settings/general/ui/ImageUpload';
 import { generalSettingsSchema } from '@/features/profile/settings/model/generalSettingsSchema';
 import { CatPreloader } from '@/shared/components/catPreloader/CatPreloader';
+import { ConfirmActionModal } from '@/shared/components/confirmActionModal';
 import { validateImage } from '@/shared/lib/file/validateImage';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Input } from '@/shared/ui/input';
@@ -33,6 +36,9 @@ const COUNTRY: Option[] = [
 export const General = () => {
   const queryClient = useQueryClient();
   const { show } = useAlertStore();
+  const { show: showActionModal, open } = useConfirmStore();
+
+  const t = useTranslations('confirmActions');
 
   const {
     isPending,
@@ -139,8 +145,8 @@ export const General = () => {
   };
 
   const handleRemovePhoto: MouseEventHandler<HTMLSpanElement> = (event) => {
+    showActionModal();
     event.stopPropagation();
-    deletePhoto.mutate();
   };
 
   return (
@@ -165,15 +171,22 @@ export const General = () => {
                 alt='profile photo'
               />
             )}
-            <span
-              className={s.cross}
-              onClick={handleRemovePhoto}
-            >
-              <CloseOutline
-                width={16}
-                height={16}
-              />
-            </span>
+            {general?.avatars[0] && (
+              <span
+                className={s.cross}
+                onClick={handleRemovePhoto}
+              >
+                <CloseOutline
+                  width={16}
+                  height={16}
+                />
+              </span>
+            )}
+            {open && (
+              <ConfirmActionModal confirmCallback={() => deletePhoto.mutate()}>
+                <span>{t('deletePhoto')}</span>
+              </ConfirmActionModal>
+            )}
             <PolymorphicButton variant='outline'>Select Image</PolymorphicButton>
           </ImageUpload>
         </div>
