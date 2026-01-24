@@ -1,11 +1,11 @@
 import { UploadPostImagesResponse } from '@/entities/post/model/postTypes';
-
+import { client } from '@/shared/api/client';
 // export const uploadPostImages = async (files: File[]) => {
 //   return client.POST('/posts/image', {
 //     body: {
 //       file: files, // Тут типизация не дает передать файл - там стоит String
 //     },
-//   });
+//   })
 // };
 
 export async function uploadPostImages(files: File[]): Promise<{ data?: UploadPostImagesResponse; error?: unknown }> {
@@ -42,8 +42,6 @@ export const createPost = async (args: { description?: string; uploadIds: string
     },
   });
 };
-
-import { client } from '@/shared/api/client';
 
 export const postApi = {
   getPostById: async ({ id }: { id: number }) => {

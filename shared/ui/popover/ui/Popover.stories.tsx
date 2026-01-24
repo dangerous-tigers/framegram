@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-
-import { boolean } from 'zod';
 import { useState } from 'react';
+import { boolean } from 'zod';
+
 import { Popover } from '@/shared/ui/popover';
 
 const meta = {

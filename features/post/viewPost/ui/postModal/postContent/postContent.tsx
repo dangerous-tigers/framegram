@@ -1,14 +1,17 @@
 'use client';
 
-import { EditMode } from '@/features/post/editPost/ui/editMode/EditMode';
-import { Separator } from '@/shared/ui';
-import { useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
+
 import { Actions, ActionsSkeleton, Comment, Description, DescriptionSkeleton, Header, Publish } from '../ui';
 
+import s from './postContent.module.scss';
+
+import { EditMode } from '@/features/post/editPost/ui/editMode/EditMode';
 import { useGetPostById, useGetPostCommentsInfinity, useViewPostStore } from '@/features/post/viewPost/model';
 import { Post } from '@/features/post/viewPost/model/types';
+import { useIntersection } from '@/shared/lib/hooks';
+import { Separator } from '@/shared/ui';
 import { Swiper } from '@/shared/ui/swiper';
-import s from './postContent.module.scss';
 
 type Props = {
   initialPost: Post;
@@ -21,37 +24,20 @@ type Props = {
 export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }: Props) {
   const { data: clientPost } = useGetPostById(initialPost.id);
   const isEdit = useViewPostStore((state) => state.isEdit);
+  const t = useTranslations('viewPost');
 
   const post = clientPost ?? initialPost;
-
-  const targetRef = useRef(null);
-
   const {
     comments,
     isLoading: isLoadingComments,
     fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
   } = useGetPostCommentsInfinity({
     postId: post.id,
   });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 },
-    );
-
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+  const cursorRef = useIntersection(() => {
+    fetchNextPage();
+  });
 
   return (
     <div className={s.container}>
@@ -64,18 +50,26 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
           />
         )}
         {clientPost && clientPost.images && (
-          <div>
-            <Swiper
-              slides={clientPost.images.map((image) => (
+          <Swiper
+            rootClassName={s.slider}
+            slides={clientPost.images.map((image) => (
+              <div
+                key={image.uploadId}
+                className={s.imageWrapper}
+              >
                 <img
                   className={s.image}
-                  key={image.uploadId}
                   src={image.url}
                   alt='loader'
                 />
-              ))}
-            />
-          </div>
+                <img
+                  className={s.imagOverlay}
+                  src={image.url}
+                  alt='loader'
+                />
+              </div>
+            ))}
+          />
         )}
       </div>
 
@@ -103,26 +97,34 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
             )}
             {/* DESCRIPTION & COMMENTS */}
             <Separator orientation='horizontal' />
-            <div className={s.comments}>
-              <Description
-                avatar={post.avatarOwner ?? ''}
-                userName={post.userName || ''}
-                text={post.description || ''}
-                timeStamp={post.createdAt || ''}
-              />
-              {/*    COMMENTS      */}
-              {isLoadingComments
-                ? Array.from({ length: 3 }).map((_, i) => <DescriptionSkeleton key={i} />)
-                : comments?.map((comment) => (
-                    <Comment
-                      key={comment.id}
-                      comment={comment}
-                      postId={post.id}
-                      isAuth={isAuth}
-                    />
-                  ))}
-              <div ref={targetRef} />
-            </div>
+            {!post.description && !comments.length ? (
+              <div className={s.noComments}>
+                <h3>{t('noCommentsYet')}</h3>
+                <p>{t('beTheFirstToComment')}</p>
+              </div>
+            ) : (
+              <div className={s.comments}>
+                <Description
+                  avatar={post.avatarOwner ?? ''}
+                  userName={post.userName || ''}
+                  text={post.description || ''}
+                  timeStamp={post.createdAt || ''}
+                />
+                {/*    COMMENTS      */}
+                {isLoadingComments
+                  ? Array.from({ length: 3 }).map((_, i) => <DescriptionSkeleton key={i} />)
+                  : comments?.map((comment) => (
+                      <Comment
+                        key={comment.id}
+                        comment={comment}
+                        postId={post.id}
+                        isAuth={isAuth}
+                      />
+                    ))}
+                <div ref={cursorRef} />
+              </div>
+            )}
+
             {/*    ACTIONS       */}
             <Separator orientation='horizontal' />
             {isLoading ? (
@@ -138,10 +140,10 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
               />
             )}
             {/*    PUBLISH      */}
-            {userId && (
+            {isAuth && (
               <>
                 <Separator orientation='horizontal' />
-                {isLoading ? <div>Loading...</div> : <Publish postId={post.id} />}
+                <Publish postId={post.id} />
               </>
             )}
           </>

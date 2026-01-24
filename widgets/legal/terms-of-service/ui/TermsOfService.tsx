@@ -1,10 +1,12 @@
 'use client';
 
+import Link from 'next/link';
+
 import s from './../../styles/styles.module.scss';
+
+import { ArrowBackOutline } from '@/assets/icons';
 import { routes } from '@/shared/config/routes';
 import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
-import Link from 'next/link';
-import { ArrowBackOutline } from '@/assets/icons';
 
 export function TermsOfService() {
   return (

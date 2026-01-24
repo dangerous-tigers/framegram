@@ -80,19 +80,25 @@
     "emailExist": "Пользователь с таким адресом электронной почты не существует",
     "captcha": "Пожалуйста, подтвердите, что вы не робот"
   },
-    "confirmAction": {
+  "confirmAction": {
     "yes": "Yes",
     "no": "No",
     "close": "Закрыть",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесенные вами изменения не будут сохранены."
-    },
-  "view-post": {
+  },
+  "viewPost": {
     "likes": "Лайки",
     "reply": "Ответить",
     "showReplies": "Показать ответы",
     "hideReplies": "Скрыть ответы",
     "publish": "Опубликовать",
     "beTheFirstLikes": "Будь первым ",
-    "like": "Лайк!"
+    "like": "Лайк!",
+    "noCommentsYet": "Комментариев пока нет.",
+    "beTheFirstToComment": "Будьте первым, кто оставит комментарий.",
+    "emptyFieldError": "Текстовое поле не может быть пустым",
+    "emptyAnswerError": "Ответ не может быть пустым",
+    "prefixWarning": "Внимание! Вы перешли в режим отправки комментария",
+    "commentPlaceholder": "Добавить комментарий..."
   }
 }

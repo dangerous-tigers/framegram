@@ -15,4 +15,5 @@ export type AppSwiperProps = {
 
   /** коллбек при смене активного слайда */
   onIndexChange?: (index: number) => void;
+  rootClassName?: string;
 };

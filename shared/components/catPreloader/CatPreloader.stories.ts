@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+
 import { CatPreloader } from './CatPreloader';
 
 const meta = {

@@ -1,7 +1,8 @@
 'use client';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import s from './Button.module.scss';
 import clsx from 'clsx';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+
+import s from './Button.module.scss';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;

@@ -1,8 +1,10 @@
-import { MoreHorizontalOutline } from '@/assets/icons';
-import { Button } from '@/shared/ui/button/Button';
 import * as PrimitivePopover from '@radix-ui/react-popover';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
+
 import s from './Popover.module.scss';
+
+import { MoreHorizontalOutline } from '@/assets/icons';
+import { Button } from '@/shared/ui/button/Button';
 
 type Props = {
   editPost?: () => void;
@@ -13,7 +15,7 @@ type Props = {
   follow?: () => void;
   unfollow?: () => void;
   copyLink?: () => void;
-  children: ReactNode;
+  children?: ReactNode;
 } & ComponentPropsWithoutRef<typeof PrimitivePopover.Root>;
 
 export const Popover = ({ open, onOpenChange, children }: Props) => {

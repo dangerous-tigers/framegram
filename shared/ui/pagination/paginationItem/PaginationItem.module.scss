@@ -1,4 +1,4 @@
-.button{
+.button {
   font-size: 14px;
   line-height: 171%;
   border-radius: 2px;
@@ -13,24 +13,28 @@
   cursor: pointer;
   border-color: transparent;
 
-  &.active{
-    background:  var(--light-100);
+  &.active {
+    background: var(--light-100);
     color: var(--dark-900);
-    &:hover{
+
+    &:hover {
       color: inherit;
     }
-    &:focus{
+
+    &:focus {
       outline: none;
     }
-
   }
-  &:hover{
+
+  &:hover {
     background: var(--dark-500);
   }
-  &:focus{
+
+  &:focus {
     outline: 2px solid var(--primary-700);
   }
-  &:disabled{
+
+  &:disabled {
     color: var(--dark-100);
     cursor: default;
   }

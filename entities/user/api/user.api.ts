@@ -1,5 +1,5 @@
-import { customFetch } from '@/shared/api/customFetch';
 import { User } from '@/entities/user/model/types';
+import { customFetch } from '@/shared/api/customFetch';
 
 export const userApi = {
   async me(): Promise<User> {

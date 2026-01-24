@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+
 import { routes } from '@/shared/config/routes';
 import { MainPage } from '@/widgets/mainPage/ui/MainPage';
 

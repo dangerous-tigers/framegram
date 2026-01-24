@@ -1,10 +1,13 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import s from './addLocation.module.scss';
-import { InputWithIcon } from '@/shared/ui/inputWithIcon';
-import { PinOutline } from '@/assets/icons';
 import debounce from 'lodash.debounce';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
+import s from './addLocation.module.scss';
+
+import { PinOutline } from '@/assets/icons';
+import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
+import { InputWithIcon } from '@/shared/ui/inputWithIcon';
 
 type City = {
   id: string;
@@ -28,6 +31,8 @@ export const AddLocation = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  const { show } = useAlertStore();
 
   const fetchCities = useMemo(
     () =>
@@ -59,7 +64,9 @@ export const AddLocation = () => {
           }));
           setCities(citiesData);
         } catch (err: unknown) {
-          if (err.name !== 'AbortError') alert(err);
+          if (err instanceof Error && err.name !== 'AbortError') {
+            show({ error: String(err), severity: 'error', description: String(err), variant: 'filled' });
+          }
         }
 
         return () => controller.abort();

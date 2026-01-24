@@ -1,5 +1,5 @@
-import { client } from '@/shared/api/client';
 import { RegisterRequest } from '@/features/auth/register/api/register.types';
+import { client } from '@/shared/api/client';
 
 export const registerApi = async (data: RegisterRequest) => {
   const response = await client.POST('/auth/registration', {

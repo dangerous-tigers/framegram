@@ -1,14 +1,14 @@
+import { Inter } from 'next/font/google';
+
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-
-import type { ReactNode } from 'react';
-
-import '../shared/styles/globals.scss';
-import { Header } from '@/widgets/header/ui/Header';
-import { AppProviders } from '@/app/provider/AppProviders';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
-import { GoogleAnalytics } from '@next/third-parties/google';
-import { Inter } from 'next/font/google';
+import type { ReactNode } from 'react';
+
+import { AppProviders } from '@/app/provider/AppProviders';
+import { Header } from '@/widgets/header/ui/Header';
+import '../shared/styles/globals.scss';
 
 export const metadata: Metadata = {
   title: 'Framegram',
@@ -37,9 +37,7 @@ export default async function RootLayout({
           <NextIntlClientProvider>
             <div className='wrapper'>
               <Header />
-              <div className='mainBox'>
-                <main className='main'>{children}</main>
-              </div>
+              {children}
             </div>
           </NextIntlClientProvider>
         </AppProviders>
