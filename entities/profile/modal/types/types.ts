@@ -80,3 +80,28 @@ export type PostsByUserId = {
   items: PostViewModel[];
   totalUsers: number;
 };
+
+export type UpdateProfileUser = {
+  userName: string;
+  firstName: string;
+  lastName: string;
+  city: string;
+  country: string;
+  region: string;
+  dateOfBirth: string;
+  aboutMe: Nullable<string>;
+};
+export type ProfileSettingsViewModel = {
+  id: number;
+  userName: string;
+  firstName: Nullable<string>;
+  lastName: Nullable<string>;
+
+  city: Nullable<string>;
+  country: Nullable<string>;
+  region: Nullable<string>;
+  dateOfBirth: Nullable<string>;
+  aboutMe: Nullable<string>;
+  avatars: AvatarView[];
+  createdAt?: string;
+};

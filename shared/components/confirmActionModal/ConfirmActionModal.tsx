@@ -1,26 +1,31 @@
 'use client';
+
 import { useTranslations } from 'next-intl';
+import { MouseEventHandler, ReactNode } from 'react';
 
 import s from './ConfirmActionModal.module.scss';
 
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
-import { useViewPostStore } from '@/features/post/viewPost/model';
-import { Button } from '@/shared/ui';
-import { Modal } from '@/shared/ui/modal';
-import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
+import { Button } from '@/shared/ui/button/Button';
+import { Modal, ModalHeaderWithClose } from '@/shared/ui/modal';
 
-export const ConfirmActionModal = () => {
-  const t = useTranslations('confirmAction');
+type Props = {
+  children: ReactNode;
+  confirmCallback: () => void;
+};
+export const ConfirmActionModal = ({ children, confirmCallback }: Props) => {
+  const t = useTranslations('confirmActions');
   const { open, hide } = useConfirmStore();
-  const { setIsEdit } = useViewPostStore();
 
-  const handleClose = () => {
+  const handleClose: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
     hide();
   };
 
-  const handleConfirm = () => {
+  const handleConfirm: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+    confirmCallback();
     hide();
-    setIsEdit(false);
   };
 
   return (
@@ -31,14 +36,12 @@ export const ConfirmActionModal = () => {
       header={
         <ModalHeaderWithClose
           title={t('close')}
-          onClose={handleClose}
+          onClose={() => handleClose}
         />
       }
     >
       <div className={s.modalContent}>
-        <span>
-          {t('Do you really want to finish editing? If you close the changes you have made will not be saved')}
-        </span>
+        {children}
         <div className={s.buttonContainer}>
           <Button
             fullWidth
