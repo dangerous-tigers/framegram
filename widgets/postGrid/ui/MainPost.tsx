@@ -38,8 +38,8 @@ export const MainPost = ({ post, expanded, toggleExpanded }: Props) => {
       <div className={clsx(expanded ? s.swiperSmall : s.swiperLarge)}>
         <Swiper
           modules={[Navigation, Pagination]}
-          navigation
-          pagination={{ clickable: true }}
+          navigation={post.images.length > 1}
+          pagination={post.images.length > 1 ? { clickable: true } : false}
           spaceBetween={10}
           slidesPerView={1}
           className={s.postSlider}

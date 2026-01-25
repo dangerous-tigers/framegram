@@ -95,13 +95,18 @@
   transform: translateX(-50%) !important;
   border-radius: 2px;
   max-width: 78px;
-  background: var(--dark-300);
-  opacity: 0.5;
+  background: rgba($color: #333, $alpha: 50%);
 }
 
 :global(.swiper-pagination-bullet) {
   height: 6px;
   width: 6px;
   background: var(--light-100);
+  opacity: 1;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  opacity: 1;
+  background: var(--primary-500);
 }
 /* stylelint-enable selector-class-pattern */
