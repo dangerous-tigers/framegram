@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 import styles from './feed-layout.module.scss';
 
-import { ProfileHeader } from '@/features/profile/ProfileHeader/ui/ProfileHeader';
+import { ProfileHeader } from '@/features/profile/profile-header/ui/ProfileHeader';
 import { Sidebar } from '@/widgets/sidebar';
 
 export default function FeedLayout({
