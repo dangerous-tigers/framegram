@@ -1,8 +1,33 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .active {
+    .postImage {
+      height: 120px;
+    }
+  }
+}
+
 .postsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(234px, 1fr));
   gap: 12px;
-  margin-top: 36px;
+  padding: 36px 0 117px;
+}
+
+.swiperSmall {
+  img {
+    height: 120px;
+    object-fit: cover;
+  }
+}
+
+.swiperLarge {
+  img {
+    height: 240px;
+  }
 }
 
 .postImage {
@@ -10,14 +35,12 @@
   height: 100%;
   max-height: 240px;
   object-fit: cover;
-  object-position: top;
 }
 
 .postInfoTop {
   display: flex;
   align-items: center;
   gap: 18px;
-  margin: 12px 0;
 }
 
 .postAvatar {
@@ -32,9 +55,25 @@
   font-size: 16px;
   line-height: 150%;
   color: var(--light-100);
+  cursor: pointer;
+  transition: color 0.2s;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--primary-500);
+    }
+  }
 }
 
-/* :global(.swiper-button-next),
+.postData {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 133%;
+  color: var(--light-900);
+}
+
+/* stylelint-disable selector-class-pattern */
+:global(.swiper-button-next),
 :global(.swiper-button-prev) {
   color: var(--light-100);
 }
@@ -64,4 +103,5 @@
   height: 6px;
   width: 6px;
   background: var(--light-100);
-} */
+}
+/* stylelint-enable selector-class-pattern */

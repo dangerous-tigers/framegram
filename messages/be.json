@@ -94,5 +94,10 @@
     "emptyAnswerError": "Адказ не можа быць пустым",
     "prefixWarning": "Увага! Вы перайшлі ў рэжым адпраўкі каментара",
     "commentPlaceholder": "Дадаць каментар..."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Зарэгістраваныя карыстальнікі",
+    "ShowMore": "Паказаць больш",
+    "Hide": "Схаваць"
   }
 }

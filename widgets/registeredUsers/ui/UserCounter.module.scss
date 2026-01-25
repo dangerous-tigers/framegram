@@ -9,6 +9,11 @@
   padding: 0.75rem 1.5rem;
   background: var(--dark-500);
 
+  @media screen and (width <= 578px) {
+    justify-content: center;
+    text-align: center;
+  }
+
   .title {
     font-weight: 700;
     font-size: 1.125rem;

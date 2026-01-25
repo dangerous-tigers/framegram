@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
 
 import s from './UserCounter.module.scss';
 
@@ -7,11 +8,12 @@ type Props = {
 };
 
 export const UserCounter = ({ count = 0 }: Props) => {
+  const t = useTranslations('mainPagePost');
   const countArray = count.toString().padStart(6, '0').split('');
 
   return (
     <div className={clsx(s.userCounter)}>
-      <p className={clsx(s.title)}>Registered users:</p>
+      <p className={clsx(s.title)}>{t('RegisteredUsers')}:</p>
       <div className={clsx(s.counter)}>
         {countArray.map((digit, index) => (
           <span

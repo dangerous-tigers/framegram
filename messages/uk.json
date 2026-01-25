@@ -94,5 +94,10 @@
     "emptyAnswerError": "Відповідь не може бути порожньою",
     "prefixWarning": "Увага! Ви перейшли в режим надсилання коментаря",
     "commentPlaceholder": "Додати коментар..."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Зареєстровані користувачі",
+    "ShowMore": "Показати більше",
+    "Hide": "Сховати"
   }
 }

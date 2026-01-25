@@ -94,5 +94,10 @@
     "emptyAnswerError": "回复不能为空",
     "prefixWarning": "注意！您已切换到发表评论模式",
     "commentPlaceholder": "添加评论..."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "註冊用戶",
+    "ShowMore": "顯示更多",
+    "Hide": "隱藏"
   }
 }
