@@ -14,11 +14,15 @@ export const MainPage = () => {
   const { data: posts } = useQuery({
     queryKey: postKeys.last,
     queryFn: getLastPosts,
+    refetchInterval: 60000,
+    refetchIntervalInBackground: true,
   });
 
   const { data: users } = useQuery({
     queryKey: publicUserKeys.all,
     queryFn: getTotalUsers,
+    refetchInterval: 60000,
+    refetchIntervalInBackground: true,
   });
 
   return (
