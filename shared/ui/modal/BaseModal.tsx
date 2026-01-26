@@ -49,6 +49,7 @@ export const Modal = ({
           aria-describedby={'modal'}
           className={`${styles.content} ${sizeClass} ${className || ''}`}
         >
+          <Dialog.Description id='modal' />
           <DialogTitle />
           {header && (
             <>
