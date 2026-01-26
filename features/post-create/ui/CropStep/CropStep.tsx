@@ -48,11 +48,15 @@ export const CropStep = () => {
         withNavigation={!isMobile}
       />
       <div className={s.cropSetting}>
-        <div className={s.cropSettingDiv}>
-          <Size />
-          <Rate />
+        <div>
+          <div className={s.cropSettingDiv}>
+            <Size />
+            <Rate />
+          </div>
         </div>
-        <ImageManager />
+        <div>
+          <ImageManager />
+        </div>
       </div>
     </div>
   );
