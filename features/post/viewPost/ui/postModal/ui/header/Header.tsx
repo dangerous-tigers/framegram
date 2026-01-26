@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import s from './Header.module.scss';
@@ -11,9 +12,10 @@ import {
   TrashOutline,
 } from '@/assets/icons/components';
 import { useRemovePost } from '@/entities/post/model/useRemovePost';
-import { PostDeleteModal } from '@/features/post/removePost/ui/PostDeleteModal';
+import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ProfileImage } from '@/features/post/viewPost/ui/postModal/ui/profile-image/ProfileImage';
+import { ConfirmActionModal } from '@/shared/components/confirmActionModal';
 import { Popover } from '@/shared/ui/popover';
 
 type Props = {
@@ -30,12 +32,36 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
   const [open, setOpen] = useState<boolean>(false);
   const { setIsEdit } = useViewPostStore();
 
-  const { mutate: removePost, isPending } = useRemovePost();
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { mutate: removePost, isPending, isSuccess } = useRemovePost();
+  const { open: confirmModal, show, hide } = useConfirmStore();
 
   const isOwner = userId === postOwnerId;
 
+  const t = useTranslations('confirmActions');
+
   const isFollow = false;
+
+  const editPost = () => {
+    setIsEdit(true);
+  };
+
+  const follow = () => {};
+
+  const unfollow = () => {};
+
+  const copyLink = () => {};
+
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    show();
+  };
+
+  const handleDeleteConfirm = () => {
+    removePost(postId);
+    if (isSuccess) {
+      hide();
+    }
+  };
 
   const renderActions = () => {
     if (!isAuth) {
@@ -80,27 +106,6 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
     );
   };
 
-  const editPost = () => {
-    setIsEdit(true);
-  };
-
-  const follow = () => {};
-
-  const unfollow = () => {};
-
-  const copyLink = () => {};
-
-  const handleDeleteClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setOpen(false);
-    setShowDeleteModal(true);
-  };
-
-  const handleDeleteConfirm = () => {
-    removePost(postId);
-    setShowDeleteModal(false);
-  };
-
   return (
     <>
       <div className={clsx(s.header, className)}>
@@ -119,13 +124,13 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
           </Popover>
         </div>
       </div>
-      {showDeleteModal && (
-        <PostDeleteModal
-          open={showDeleteModal}
-          onOpenChange={setShowDeleteModal}
-          onConfirm={handleDeleteConfirm}
-          isLoading={isPending}
-        />
+      {confirmModal && (
+        <ConfirmActionModal
+          isPending={isPending}
+          confirmCallback={() => handleDeleteConfirm()}
+        >
+          <span>{t('deletePost')}</span>
+        </ConfirmActionModal>
       )}
     </>
   );

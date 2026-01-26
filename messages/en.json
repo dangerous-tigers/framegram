@@ -8,7 +8,7 @@
     "feed": "Feed",
     "create": "Create",
     "myProfile": "My Profile",
-    "messenges": "Messenges",
+    "messenges" : "Messenges",
     "search": "Search",
     "statistic": "Statistics",
     "favorites": "Favorites",
@@ -97,6 +97,7 @@
     "yes": "Yes",
     "no": "No",
     "close": "Close",
+    "deletePost": "Do you really want delete post?",
     "closeEditMode": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
     "deletePhoto" : "Do you really want to delete your profile photo?"
   },

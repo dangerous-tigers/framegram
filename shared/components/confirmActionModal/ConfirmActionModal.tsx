@@ -11,9 +11,10 @@ import { Modal, ModalHeaderWithClose } from '@/shared/ui/modal';
 
 type Props = {
   children: ReactNode;
+  isPending?: boolean;
   confirmCallback: () => void;
 };
-export const ConfirmActionModal = ({ children, confirmCallback }: Props) => {
+export const ConfirmActionModal = ({ children, isPending, confirmCallback }: Props) => {
   const t = useTranslations('confirmActions');
   const { open, hide } = useConfirmStore();
 
@@ -43,6 +44,7 @@ export const ConfirmActionModal = ({ children, confirmCallback }: Props) => {
         <div className={s.buttonContainer}>
           <Button
             fullWidth
+            disabled={isPending}
             variant='outline'
             onClick={handleClose}
           >
@@ -50,6 +52,7 @@ export const ConfirmActionModal = ({ children, confirmCallback }: Props) => {
           </Button>
           <Button
             fullWidth
+            disabled={isPending}
             variant='primary'
             onClick={handleConfirm}
           >
