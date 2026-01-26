@@ -1,14 +1,13 @@
-import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
-import { Swiper } from '@/shared/ui/swiper';
 import Image from 'next/image';
 
 import s from './CropStep.module.css';
-
-import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
-
 import { ImageManager } from './imageManager';
 import { Rate } from './rate';
 import { Size } from './size';
+
+import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
+import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
+import { Swiper } from '@/shared/ui/swiper';
 
 export const CropStep = () => {
   const images = useCreatePostStore((s) => s.images);

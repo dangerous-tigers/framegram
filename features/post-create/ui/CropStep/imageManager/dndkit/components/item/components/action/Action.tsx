@@ -1,7 +1,7 @@
 'use cliet';
 
-import React, { ComponentPropsWithRef, CSSProperties } from 'react';
 import clsx from 'clsx';
+import React, { ComponentPropsWithRef, CSSProperties } from 'react';
 
 import s from './Action.module.scss';
 

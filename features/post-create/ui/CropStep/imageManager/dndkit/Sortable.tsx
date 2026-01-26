@@ -1,8 +1,5 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-
 import {
   Active,
   closestCenter,
@@ -19,12 +16,15 @@ import {
 } from '@dnd-kit/core';
 import { useSortable, SortableContext, horizontalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+
+import { Upload } from '../upload/upload';
 
 import { Item, List } from './components';
-
 import s from './Sortable.module.scss';
+
 import { UploadedImage } from '@/features/post-create/model/CreatePostType';
-import { Upload } from '../upload/upload';
 
 export interface ImageItem {
   id: number;

@@ -1,7 +1,8 @@
 'use client';
 
-import { MaximizeOutline } from '@/assets/icons';
 import Popover from '../components/Popover';
+
+import { MaximizeOutline } from '@/assets/icons';
 
 export const Size = () => {
   return (

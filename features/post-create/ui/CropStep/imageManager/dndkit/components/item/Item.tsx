@@ -1,16 +1,13 @@
 'use client';
 
-import { memo, Ref, useEffect } from 'react';
-import clsx from 'clsx';
 import type { DraggableSyntheticListeners } from '@dnd-kit/core';
 import type { Transform } from '@dnd-kit/utilities';
+import clsx from 'clsx';
+import Image from 'next/image';
+import { memo, Ref, useEffect } from 'react';
 
 import { Handle, Remove } from './components';
-
-//import img from '@/assets/images/image-test.png';
-
 import s from './Item.module.scss';
-import Image from 'next/image';
 
 export type Props = {
   dragOverlay?: boolean;

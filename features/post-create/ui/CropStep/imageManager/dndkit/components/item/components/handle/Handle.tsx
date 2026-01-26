@@ -1,7 +1,8 @@
 'use client';
 
-import { Move } from '@/assets/icons';
 import { Action, ActionProps } from '../action';
+
+import { Move } from '@/assets/icons';
 
 export const Handle = (props: ActionProps) => {
   return (

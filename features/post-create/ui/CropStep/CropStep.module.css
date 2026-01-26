@@ -23,6 +23,10 @@
 }
 
 .swiperMain {
+  :global(.swiper-pagination-bullet) {
+    z-index: 2000000;
+  }
+
   :global(.swiper-slide) {
     position: relative !important;
     height: 501px !important;

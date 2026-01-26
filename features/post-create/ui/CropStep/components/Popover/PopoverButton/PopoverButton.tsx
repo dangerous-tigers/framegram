@@ -2,8 +2,9 @@
 
 import clsx from 'clsx';
 import { motion } from 'motion/react';
-import { usePopoverContext } from '../PopoverProvider';
 import { ComponentPropsWithRef, useCallback } from 'react';
+
+import { usePopoverContext } from '../PopoverProvider';
 
 import s from './PopoverButton.module.scss';
 
