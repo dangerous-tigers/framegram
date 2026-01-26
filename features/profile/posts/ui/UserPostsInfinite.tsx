@@ -1,67 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React, { useCallback } from 'react';
 
 import s from './UserPostsInfinite.module.scss';
 
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
-
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-
-    return () => {
-      window.removeEventListener('resize', checkIsMobile);
-    };
-  }, []);
-
-  return isMobile;
-};
-
-import { useUserPostsQuery } from '@/entities/post/api/useUserPostsQuery';
+import { useUserPostsInfiniteQuery } from '@/entities/post/api/useUserPostsInfiniteQuery';
 import { PostViewModel } from '@/entities/profile';
+import { useIntersection } from '@/shared/lib/hooks/useIntersection';
 import { Button } from '@/shared/ui/button/Button';
 import { Card } from '@/shared/ui/card/Card';
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 
 type Props = {
   userId: string;
-};
-
-const useDebouncedInView = (delay = 150) => {
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: false,
-    rootMargin: '100px',
-  });
-
-  const [debouncedInView, setDebouncedInView] = useState(false);
-  const debounceRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-
-    debounceRef.current = setTimeout(() => {
-      setDebouncedInView(inView);
-    }, delay);
-
-    return () => {
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-      }
-    };
-  }, [inView, delay]);
-
-  return { ref, inView: debouncedInView };
 };
 
 const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
@@ -82,58 +34,39 @@ const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
 PostItem.displayName = 'PostItem';
 
 export const UserPostsInfinite = ({ userId }: Props) => {
-  const { posts, hasNext, isLoading, isLoadingMore, error, fetchInitialData, fetchMoreData, refetch } =
-    useUserPostsQuery({
-      userId,
-      initialPageSize: 12,
-    });
+  const { posts, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isOver } = useUserPostsInfiniteQuery(
+    { userId },
+  );
 
-  const { ref, inView } = useDebouncedInView(150);
-  const isMobile = useIsMobile();
+  // Создаем ref для хранения актуальных значений
+  const intersectionDataRef = React.useRef({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  });
 
-  useEffect(() => {
-    fetchInitialData();
-  }, [userId, fetchInitialData]);
+  // Обновляем ref при каждом рендере
+  intersectionDataRef.current = {
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  };
 
-  useEffect(() => {
-    const shouldLoadMore = () => {
-      if (!inView || !hasNext || isLoadingMore) return false;
+  const cursorRef = useIntersection(() => {
+    const {
+      hasNextPage: currentHasNextPage,
+      isFetchingNextPage: currentIsFetchingNextPage,
+      fetchNextPage: currentFetchNextPage,
+    } = intersectionDataRef.current;
 
-      if (isMobile) return true;
-
-      if (typeof window !== 'undefined') {
-        return window.innerHeight >= document.documentElement.scrollHeight;
-      }
-
-      return false;
-    };
-
-    if (shouldLoadMore()) {
-      fetchMoreData();
+    if (currentHasNextPage && !currentIsFetchingNextPage) {
+      currentFetchNextPage();
     }
-  }, [inView, hasNext, isLoadingMore, fetchMoreData, isMobile]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const viewportHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      const remainingScroll = documentHeight - (scrollTop + viewportHeight);
-      const shouldLoadMore = remainingScroll < viewportHeight;
-
-      if (shouldLoadMore && hasNext && !isLoadingMore) {
-        fetchMoreData();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasNext, isLoadingMore, fetchMoreData]);
+  });
 
   const handleRetry = useCallback(() => {
-    refetch();
-  }, [refetch]);
+    window.location.reload();
+  }, []);
 
   if (error) {
     return (
@@ -178,7 +111,7 @@ export const UserPostsInfinite = ({ userId }: Props) => {
         </div>
       )}
 
-      {isLoadingMore && (
+      {isFetchingNextPage && (
         <div className={s.loadingMoreContainer}>
           {Array.from({ length: 5 }).map((_, index) => (
             <Card
@@ -193,11 +126,9 @@ export const UserPostsInfinite = ({ userId }: Props) => {
         </div>
       )}
 
-      {!isLoading && !isLoadingMore && !hasNext && posts.length > 0 && (
-        <div className={s.endMessage}>Вы достигли конца ленты</div>
-      )}
+      {isOver && <div className={s.endMessage}>Вы достигли конца ленты</div>}
 
-      <div ref={ref} />
+      <div ref={cursorRef} />
     </ul>
   );
 };

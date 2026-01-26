@@ -14,7 +14,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
   return (
     <Profile
       profile={profileByUserName}
-      userId={id}
+      userId={getProfileByUserId.userName}
     />
   );
 }
