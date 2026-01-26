@@ -1,0 +1,58 @@
+.userCounter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+  padding: 0.75rem 1.5rem;
+  background: var(--dark-500);
+
+  @media screen and (width <= 578px) {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 133%;
+    color: var(--light-100);
+  }
+
+  .counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border: 1px solid var(--dark-300);
+    border-radius: 2px;
+    background: var(--dark-700);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 133%;
+    text-align: center;
+    color: var(--light-100);
+  }
+
+  .number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: content-box;
+    width: 24px;
+    height: 24px;
+    padding: 0 3px;
+    border-right: 1px solid var(--dark-300);
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+      border-right: none;
+    }
+  }
+}

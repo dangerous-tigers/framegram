@@ -106,5 +106,10 @@
     "emptyAnswerError": "Answer cannot be empty",
     "prefixWarning": "Attention! You have switched to comment submission mode",
     "commentPlaceholder": "Add a Comment..."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Registered users",
+    "ShowMore": "Show more",
+    "Hide": "Hide"
   }
 }
