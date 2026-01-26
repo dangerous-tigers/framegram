@@ -7,6 +7,16 @@
   min-height: 100%;
   border-right: 1px solid var(--dark-300);
 
+  & > a {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  & > button {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   @media (width <= 768px) {
     flex-direction: row;
     align-items: center;
