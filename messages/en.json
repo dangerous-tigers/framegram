@@ -107,5 +107,11 @@
     "prefixWarning": "Attention! You have switched to comment submission mode",
     "commentPlaceholder": "Add a Comment...",
     "noLikesYet": "No likes yet."
+    "commentPlaceholder": "Add a Comment..."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Registered users",
+    "ShowMore": "Show more",
+    "Hide": "Hide"
   }
 }

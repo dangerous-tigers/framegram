@@ -95,5 +95,11 @@
     "prefixWarning": "ध्यान दें! आप टिप्पणी भेजने के मोड में प्रवेश कर चुके हैं",
     "commentPlaceholder": "टिप्पणी जोड़ें...",
     "noLikesYet": "अभी तक कोई लाइक नहीं."
+    "commentPlaceholder": "टिप्पणी जोड़ें..."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "पंजीकृत उपयोगकर्ता",
+    "ShowMore": "और दिखाएँ",
+    "Hide": "छिपाना"
   }
 }

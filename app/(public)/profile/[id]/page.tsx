@@ -1,19 +1,25 @@
-import { ProfileWrapper } from '@/features/profile/ProfileWrapper';
+import { PostsByUserId, PublicProfileViewModelResponse } from '@/entities/profile';
+import { Profile } from '@/features/profile';
+
 export default async function ProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  const getProfile = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/public-user/profile/${id}`);
+  const [getPostByUser, getProfileByUserId] = await Promise.all<
+    [Promise<PostsByUserId>, Promise<PublicProfileViewModelResponse>]
+  >([
+    fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/user/${id}/?pageSize=${12}`).then((res) => res.json()),
+    fetch(`${process.env.NEXT_PUBLIC_BASEURL}/public-user/profile/${id}`).then((res) => res.json()),
+  ]);
 
-    return await response.json();
-  };
-
-  const { userName, hasPaymentSubscription } = await getProfile();
+  const profileByUserName = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/users/${getProfileByUserId.userName}`).then(
+    (res) => res.json(),
+  );
 
   return (
-    <ProfileWrapper
-      userName={userName}
-      hasPaymentSubscription={hasPaymentSubscription}
+    <Profile
+      items={getPostByUser.items}
+      profile={profileByUserName}
+      hasPaymentSubscription={getProfileByUserId.hasPaymentSubscription}
     />
   );
 }

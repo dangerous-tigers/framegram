@@ -1,0 +1,17 @@
+.text {
+  font-size: 14px;
+}
+
+.showMoreBtn {
+  margin-left: 5px;
+  text-decoration: underline;
+  color: var(--primary-500);
+  cursor: pointer;
+  transition: color 0.2s;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--primary-100);
+    }
+  }
+}

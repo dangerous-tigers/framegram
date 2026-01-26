@@ -11,7 +11,7 @@ import { PublishStep } from '@/features/post-create/ui/PublishStep/PublishStep';
 import { UploadStep } from '@/features/post-create/ui/uploadStep/UploadStep';
 import { applyFilterToFile } from '@/shared/lib/image';
 import { Modal, ModalHeaderWithClose, ModalHeaderWithNext } from '@/shared/ui';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 
 export const CreatePostModal = () => {
   const step = useCreatePostStore((s) => s.step);

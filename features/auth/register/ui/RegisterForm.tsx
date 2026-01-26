@@ -15,9 +15,9 @@ import { RegisterRequestDto } from '@/features/auth/register/model/register.type
 import { routes } from '@/shared/config/routes';
 import { Modal, ModalHeaderWithClose } from '@/shared/ui';
 import { Button } from '@/shared/ui/button/Button';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent';
 import { FieldCheckbox } from '@/shared/ui/fieldCheckbox/FieldCheckbox';
 import { FieldInput } from '@/shared/ui/fieldInput/FieldInput';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 
 export const RegisterForm = () => {
   const t = useTranslations('register');
