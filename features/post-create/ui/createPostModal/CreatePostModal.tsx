@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
+import { CropStep } from '../CropStep/CropStep';
+
 import s from './createPostModal.module.scss';
 
 import { useCreatePostMutation } from '@/entities/post-create/api/useCreatePostMutation';
 import { CreatePostStep } from '@/features/post-create/model/CreatePostType';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
-import { CropStep } from '@/features/post-create/ui/CropStep';
 import { FilterStep } from '@/features/post-create/ui/filterStep/FilterStep';
 import { PublishStep } from '@/features/post-create/ui/PublishStep/PublishStep';
 import { UploadStep } from '@/features/post-create/ui/uploadStep/UploadStep';
