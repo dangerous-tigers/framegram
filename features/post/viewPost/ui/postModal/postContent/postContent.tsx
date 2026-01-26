@@ -76,6 +76,7 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
       </div>
 
       {/* RIGHT SIDE */}
+
       <div className={s.right}>
         {isEdit ? (
           <EditMode

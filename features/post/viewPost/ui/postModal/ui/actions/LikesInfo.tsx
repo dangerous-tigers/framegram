@@ -6,7 +6,15 @@ import s from './LikesInfo.module.scss';
 import { formatLikes } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
-export function LikesInfo({ likesCount, isAuth }: { likesCount: number; isAuth: boolean }) {
+export function LikesInfo({
+  likesCount,
+  isAuth,
+  handleLikesClick,
+}: {
+  likesCount: number;
+  isAuth: boolean;
+  handleLikesClick?: () => void;
+}) {
   const t = useTranslations('viewPost');
   if (likesCount > 0) {
     return (
@@ -22,6 +30,7 @@ export function LikesInfo({ likesCount, isAuth }: { likesCount: number; isAuth: 
         {t('beTheFirstLikes')}
         <Button
           variant='text'
+          onClick={handleLikesClick}
           className={s.beTheFirstButton}
         >
           {t('like')}

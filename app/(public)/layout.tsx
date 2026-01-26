@@ -6,8 +6,8 @@ export default function PublicLayout({ children, modal }: { children: ReactNode;
   return (
     <AppShell>
       <>
-        {modal}
         {children}
+        {modal}
       </>
     </AppShell>
   );

@@ -68,6 +68,7 @@ export function Actions({
           <LikesInfo
             likesCount={likesCount}
             isAuth={isAuth}
+            handleLikesClick={() => alert('show likes')}
           />
         </div>
         <CompTimeAgo date={new Date(time)} />
