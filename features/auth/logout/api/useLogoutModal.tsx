@@ -1,5 +1,5 @@
 import { useLogout } from '@/features/auth/logout/api/logout.api';
-import { useModalStore } from '@/shared/ui/buttonComponent/model/button-store';
+import { useModalStore } from '@/shared/ui/polymorphic-button/model/button-store';
 
 export const useLogoutModal = () => {
   const { open, show, hide } = useModalStore();

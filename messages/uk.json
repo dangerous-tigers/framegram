@@ -112,13 +112,12 @@
     "emptyFieldError": "Текстове поле не може бути порожнім",
     "emptyAnswerError": "Відповідь не може бути порожньою",
     "prefixWarning": "Увага! Ви перейшли в режим надсилання коментаря",
-    "commentPlaceholder": "Додати коментар..."
+    "commentPlaceholder": "Додати коментар...",
+    "noLikesYet": "Лайків поки що немає."
   },
-  "deletePostModal": {
-    "title": "Видалити пост",
-    "message": "Ви впевнені, що хочете видалити цей пост?",
-    "yes": "Так",
-    "no": "Ні",
-    "delete": "Видалити"
+  "mainPagePost": {
+    "RegisteredUsers": "Зареєстровані користувачі",
+    "ShowMore": "Показати більше",
+    "Hide": "Сховати"
   }
 }

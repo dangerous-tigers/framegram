@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react';
 
-import s from './ButtonComponent.module.scss';
+import s from './PolymorphicButton.module.scss';
 
 type Variant = 'primary' | 'secondary' | 'outline' | 'text';
 type Size = 'sm' | 'md' | 'lg';

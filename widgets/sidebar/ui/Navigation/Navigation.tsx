@@ -23,7 +23,7 @@ import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost
 import { CreatePostModal } from '@/features/post-create/ui/createPostModal/CreatePostModal';
 import { routes } from '@/shared/config/routes';
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
 import { NavigationItem } from '@/widgets/sidebar/model/navigation';
 
 type PropsNavigation = {
@@ -62,7 +62,6 @@ export const Navigation = ({ className }: PropsNavigation) => {
   return (
     <div className={clsx(s.navigation, className)}>
       <>
-        {' '}
         {navigationItems.map((item) => {
           const { href, Component, label, as = Link } = item;
 

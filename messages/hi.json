@@ -112,13 +112,12 @@
     "emptyFieldError": "टेक्स्ट फ़ील्ड खाली नहीं हो सकता",
     "emptyAnswerError": "उत्तर खाली नहीं हो सकता",
     "prefixWarning": "ध्यान दें! आप टिप्पणी भेजने के मोड में प्रवेश कर चुके हैं",
-    "commentPlaceholder": "टिप्पणी जोड़ें..."
+    "commentPlaceholder": "टिप्पणी जोड़ें...",
+    "noLikesYet": "अभी तक कोई लाइक नहीं."
   },
-  "deletePostModal": {
-    "title": "पोस्ट हटाएं",
-    "message": "क्या आप वाकई इस पोस्ट को हटाना चाहते हैं?",
-    "yes": "हां",
-    "no": "नहीं",
-    "delete": "हटाएं"
+  "mainPagePost": {
+    "RegisteredUsers": "पंजीकृत उपयोगकर्ता",
+    "ShowMore": "और दिखाएँ",
+    "Hide": "छिपाना"
   }
 }

@@ -52,6 +52,8 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
         {clientPost && clientPost.images && (
           <Swiper
             rootClassName={s.slider}
+            withNavigation={clientPost.images.length > 1}
+            withPagination={clientPost.images.length > 1}
             slides={clientPost.images.map((image) => (
               <div
                 key={image.uploadId}
@@ -74,6 +76,7 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
       </div>
 
       {/* RIGHT SIDE */}
+
       <div className={s.right}>
         {isEdit ? (
           <EditMode

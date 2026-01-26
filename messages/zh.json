@@ -112,13 +112,12 @@
     "emptyFieldError": "文本字段不能为空",
     "emptyAnswerError": "回复不能为空",
     "prefixWarning": "注意！您已切换到发表评论模式",
-    "commentPlaceholder": "添加评论..."
+    "commentPlaceholder": "添加评论...",
+    "noLikesYet": "暂无点赞."
   },
-  "deletePostModal": {
-    "title": "删除帖子",
-    "message": "您确定要删除此帖子吗？",
-    "yes": "是",
-    "no": "否",
-    "delete": "删除"
+  "mainPagePost": {
+    "RegisteredUsers": "註冊用戶",
+    "ShowMore": "顯示更多",
+    "Hide": "隱藏"
   }
 }

@@ -78,6 +78,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
       onOpenChange={handleClose}
       defaultOpen={defaultOpen}
       header={renderHeader()}
+      portal={false}
     >
       {!isEdit && (
         <Button
