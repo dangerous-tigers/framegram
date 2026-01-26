@@ -4,7 +4,7 @@ import { ChangeEvent } from 'react';
 import { useMe } from '@/entities/user/model/useMe';
 import { AddLocation } from '@/features/addLocation/ui/AddLocation';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
-import s from '@/features/post-create/ui/publishStep/publishStep.module.scss';
+import s from '@/features/post-create/ui/PublishStep/publishStep.module.scss';
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
 import { Swiper } from '@/shared/ui/swiper';
 import { Textarea } from '@/shared/ui/textarea';
