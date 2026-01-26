@@ -93,11 +93,12 @@
     "emailExist": "User with this email does not exist",
     "captcha": "Please verify that you are not a robot"
   },
-  "confirmAction": {
+  "confirmActions": {
     "yes": "Yes",
     "no": "No",
     "close": "Close",
-    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Do you really want to finish editing? If you close the changes you have made will not be saved."
+    "closeEditMode": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
+    "deletePhoto" : "Do you really want to delete your profile photo?"
   },
   "viewPost": {
     "likes": "Likes",

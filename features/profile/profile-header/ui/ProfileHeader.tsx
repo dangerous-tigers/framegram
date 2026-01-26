@@ -67,12 +67,12 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
             className={s.profileButton}
             variant='secondary'
             as={Link}
-            href={'profile/settings'}
+            href={'/profile/settings'}
           >
             Profile Settings
           </PolymorphicButton>
         )}
-        {!isOwner && (
+        {!isOwner && data?.userId && (
           <>
             {!profile.isFollowing ? (
               <PolymorphicButton>Follow</PolymorphicButton>
