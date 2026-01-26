@@ -93,7 +93,8 @@
     "emptyFieldError": "Тэкставае поле не можа быць пустым",
     "emptyAnswerError": "Адказ не можа быць пустым",
     "prefixWarning": "Увага! Вы перайшлі ў рэжым адпраўкі каментара",
-    "commentPlaceholder": "Дадаць каментар..."
+    "commentPlaceholder": "Дадаць каментар...",
+    "noLikesYet": "Лайкаў яшчэ няма."
   },
   "mainPagePost": {
     "RegisteredUsers": "Зарэгістраваныя карыстальнікі",

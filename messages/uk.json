@@ -93,7 +93,8 @@
     "emptyFieldError": "Текстове поле не може бути порожнім",
     "emptyAnswerError": "Відповідь не може бути порожньою",
     "prefixWarning": "Увага! Ви перейшли в режим надсилання коментаря",
-    "commentPlaceholder": "Додати коментар..."
+    "commentPlaceholder": "Додати коментар...",
+    "noLikesYet": "Лайків поки що немає."
   },
   "mainPagePost": {
     "RegisteredUsers": "Зареєстровані користувачі",
