@@ -15,10 +15,18 @@
     "logOut": "Выйти",
     "logOutMessage": "Вы действительно хотите выйти из аккаунта {email}?",
     "yes": "Да",
-    "no": "Нет"
+    "no": "Нет",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "forgotPassword": "Забыли пароль",
+    "signIn": "Войти",
+    "noAccount": "Нет аккаунта?",
+    "signUp": "Зарегистрироваться"
   },
   "login": {
-    "title": "Вход",
+    "title": "Войти в систему",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "password": "Пароль",
@@ -49,6 +57,11 @@
     "email": "Электронная почта",
     "password": "Пароль",
     "passwordConfirm": "Подтверждение пароля"
+  },
+  "confirmEmail": {
+    "title": "Поздравляем!",
+    "text": "Ваш адрес электронной почты подтвержден",
+    "logIn": "Войти"
   },
   "forgot": {
     "title": "Забыли пароль",
@@ -81,8 +94,8 @@
     "captcha": "Пожалуйста, подтвердите, что вы не робот"
   },
   "confirmAction": {
-    "yes": "Yes",
-    "no": "No",
+    "yes": "Да",
+    "no": "Нет",
     "close": "Закрыть",
     "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесенные вами изменения не будут сохранены."
   },
@@ -99,6 +112,12 @@
     "emptyFieldError": "Текстовое поле не может быть пустым",
     "emptyAnswerError": "Ответ не может быть пустым",
     "prefixWarning": "Внимание! Вы перешли в режим отправки комментария",
-    "commentPlaceholder": "Добавить комментарий..."
+    "commentPlaceholder": "Добавить комментарий...",
+    "noLikesYet": "Лайков пока нет."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Зарегистрированные пользователи",
+    "ShowMore": "Показать подробнее",
+    "Hide": "Скрыть"
   }
 }

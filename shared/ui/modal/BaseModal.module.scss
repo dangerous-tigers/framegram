@@ -39,15 +39,6 @@
   }
 }
 
-.header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 24px;
-  flex-shrink: 0;
-}
-
 .body {
   font-size: var(--font-size-m);
   overflow-y: auto;

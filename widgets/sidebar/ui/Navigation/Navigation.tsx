@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
-import s from './Navigation.module.scss';
+import s from './navigation.module.scss';
 
 import {
   Bookmark,

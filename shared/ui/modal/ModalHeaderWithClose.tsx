@@ -15,7 +15,7 @@ export const ModalHeaderWithClose = ({
   onKeyPress?: (e: KeyboardEvent) => void;
 }) => {
   return (
-    <>
+    <div className={styles.header}>
       <Dialog.Title asChild>
         <h2 className={styles.title}>{title}</h2>
       </Dialog.Title>
@@ -28,6 +28,6 @@ export const ModalHeaderWithClose = ({
       >
         <Close />
       </Dialog.Close>
-    </>
+    </div>
   );
 };

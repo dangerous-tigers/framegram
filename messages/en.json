@@ -16,7 +16,14 @@
     "logOutMessage": "Are you really want to log out of your account {email}?",
     "yes": "Yes",
     "no": "No",
-    "email": "Email"
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot Password",
+    "signIn": "Sign In",
+    "noAccount": "Dont have an account?",
+    "signUp": "Sign Up"
   },
   "login": {
     "title": "Sign In",
@@ -106,8 +113,12 @@
     "emptyFieldError": "Text field cannot be empty",
     "emptyAnswerError": "Answer cannot be empty",
     "prefixWarning": "Attention! You have switched to comment submission mode",
-    "commentPlaceholder": "Add a Comment..."
+    "commentPlaceholder": "Add a Comment...",
+    "noLikesYet": "No likes yet."
   },
-  "settings": {
+  "mainPagePost": {
+    "RegisteredUsers": "Registered users",
+    "ShowMore": "Show more",
+    "Hide": "Hide"
   }
 }
