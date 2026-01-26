@@ -95,6 +95,7 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
                   postOwnerId={post.ownerId}
                   userId={userId}
                   isAuth={isAuth}
+                  postId={post.id || 0}
                 />
               </>
             )}

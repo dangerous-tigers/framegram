@@ -15,10 +15,18 @@
     "logOut": "Вийти",
     "logOutMessage": "Ви дійсно хочете вийти з облікового запису {email}?",
     "yes": "Так",
-    "no": "Ні"
+    "no": "Ні",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введіть пароль",
+    "forgotPassword": "Забули пароль",
+    "signIn": "Увійти",
+    "noAccount": "Немає акаунта?",
+    "signUp": "Зареєструватися"
   },
   "login": {
-    "title": "Вхід",
+    "title": "Увійти в систему",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "password": "Пароль",
@@ -50,6 +58,11 @@
     "password": "Пароль",
     "passwordConfirm": "Підтвердження пароля"
   },
+  "confirmEmail": {
+    "title": "Вітаємо!",
+    "text": "Вашу електронну пошту підтверджено",
+    "logIn": "Увійти"
+  },
   "forgot": {
     "title": "Забули пароль",
     "email": "Email",
@@ -79,6 +92,12 @@
     "email": "Електронна адреса має відповідати формату example@example.com",
     "emailExist": "Користувача з цією електронною адресою не існує",
     "captcha": "Будь ласка, підтвердіть, що ви не робот"
+  },
+  "confirmAction": {
+    "yes": "Так",
+    "no": "Ні",
+    "close": "Закрити",
+    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Ви дійсно хочете завершити редагування? Якщо ви закриєте вікно редагування, зміни, внесені вами, не будуть збережені."
   },
   "viewPost": {
     "likes": "Вподобання",

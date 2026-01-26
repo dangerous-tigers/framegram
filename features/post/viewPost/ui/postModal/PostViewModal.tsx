@@ -28,6 +28,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
   const router = useRouter();
 
   if (!post) {
+    router.back();
     return null;
   }
 
@@ -62,6 +63,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
           postOwnerId={post.ownerId}
           userId={user?.userId || 0}
           isAuth={isAuth}
+          postId={post.id || 0}
         />
       );
     }

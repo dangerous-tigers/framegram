@@ -15,10 +15,18 @@
     "logOut": "Выйсці",
     "logOutMessage": "Вы сапраўды хочаце выйсці з уліковага запісу {email}?",
     "yes": "Так",
-    "no": "Не"
+    "no": "Не",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Увядзіце пароль",
+    "forgotPassword": "Забылі пароль",
+    "signIn": "Увайсці",
+    "noAccount": "Няма акаўнта?",
+    "signUp": "Зарэгістравацца"
   },
   "login": {
-    "title": "Уваход",
+    "title": "Увайсці ў сістэму",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "password": "Пароль",
@@ -50,8 +58,13 @@
     "password": "Пароль",
     "passwordConfirm": "Пацверджанне пароля"
   },
+  "confirmEmail": {
+    "title": "Віншаванні!",
+    "text": "Ваш адрас электроннай пошты пацверджаны",
+    "logIn": "Увайсці"
+  },
   "forgot": {
-    "title": "Вярнуцца да ўваходу",
+    "title": "Забылі пароль",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "text": "Увядзіце свой адрас электроннай пошты, і мы дашлем вам далейшыя інструкцыі",
@@ -80,6 +93,12 @@
     "emailExist": "Карыстальнік з гэтым адрасам электроннай пошты не існуе",
     "captcha": "Калі ласка, пацвердзіце, што вы не робат"
   },
+  "confirmAction": {
+    "yes": "Так",
+    "no": "Не",
+    "close": "Закрыць",
+    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы сапраўды хочаце скончыць рэдагаванне? Калі вы закрыеце акно рэдагавання, унесеныя вамі змены не будуць захаваны."
+  },
   "viewPost": {
     "likes": "Лайкі",
     "reply": "Адказаць",
@@ -87,7 +106,7 @@
     "hideReplies": "Схаваць адказы",
     "publish": "Адправіць",
     "beTheFirstLikes": "Будзь першым, хто паставіць ",
-    "like": "Лайк!",
+    "like": "Лайк!",
     "noCommentsYet": "Каментарыяў яшчэ няма.",
     "beTheFirstToComment": "Будзьце першымі, хто пакіне каментарый.",
     "emptyFieldError": "Тэкставае поле не можа быць пустым",

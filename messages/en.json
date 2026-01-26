@@ -16,7 +16,14 @@
     "logOutMessage": "Are you really want to log out of your account {email}?",
     "yes": "Yes",
     "no": "No",
-    "email": "Email"
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot Password",
+    "signIn": "Sign In",
+    "noAccount": "Dont have an account?",
+    "signUp": "Sign Up"
   },
   "login": {
     "title": "Sign In",
