@@ -93,6 +93,7 @@
     "emptyFieldError": "टेक्स्ट फ़ील्ड खाली नहीं हो सकता",
     "emptyAnswerError": "उत्तर खाली नहीं हो सकता",
     "prefixWarning": "ध्यान दें! आप टिप्पणी भेजने के मोड में प्रवेश कर चुके हैं",
-    "commentPlaceholder": "टिप्पणी जोड़ें..."
+    "commentPlaceholder": "टिप्पणी जोड़ें...",
+    "noLikesYet": "अभी तक कोई लाइक नहीं."
   }
 }

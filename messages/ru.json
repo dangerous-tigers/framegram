@@ -99,6 +99,7 @@
     "emptyFieldError": "Текстовое поле не может быть пустым",
     "emptyAnswerError": "Ответ не может быть пустым",
     "prefixWarning": "Внимание! Вы перешли в режим отправки комментария",
-    "commentPlaceholder": "Добавить комментарий..."
+    "commentPlaceholder": "Добавить комментарий...",
+    "noLikesYet": "Лайков пока нет."
   }
 }
