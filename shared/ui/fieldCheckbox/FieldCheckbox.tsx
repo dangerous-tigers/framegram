@@ -1,5 +1,6 @@
 import { JSX, memo } from 'react';
 import { useController, Control, FieldValues, FieldPath } from 'react-hook-form';
+
 import { Checkbox } from '@/shared/ui';
 
 type Props<T extends FieldValues> = {

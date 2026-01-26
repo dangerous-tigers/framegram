@@ -1,17 +1,17 @@
 'use client';
 
+import clsx from 'clsx';
+import { ClickScrollPlugin, OverlayScrollbars } from 'overlayscrollbars';
 import { useOverlayScrollbars } from 'overlayscrollbars-react';
+import { ComponentPropsWithRef, useEffect, useRef } from 'react';
 
-import { ComponentPropsWithoutRef, useEffect, useRef } from 'react';
 import { useResizable, UseResizableOptions } from '../model/useResizable';
 
-import { ClickScrollPlugin, OverlayScrollbars } from 'overlayscrollbars';
+import s from './Textarea.module.scss';
+
 import { osFieldPlugin } from '@/shared/ui/textarea/model/fieldPlugin';
 
 OverlayScrollbars.plugin([ClickScrollPlugin, osFieldPlugin]);
-
-import s from './Textarea.module.scss';
-import clsx from 'clsx';
 
 const cursorMap = {
   both: 'nwse-resize',
@@ -23,7 +23,7 @@ type Props = {
   label?: string;
   error?: string;
   classNameTarget?: string;
-} & ComponentPropsWithoutRef<'textarea'> &
+} & ComponentPropsWithRef<'textarea'> &
   UseResizableOptions;
 
 /**
@@ -31,7 +31,7 @@ type Props = {
  * - `label?` — метка над полем
  * - `error?` — сообщение об ошибке
  * - `classNameTarget?` — дополнительный CSS-класс для корня OverlayScrollbars
- * - `direction?` — направление изменения размера (например, `'vertical'`, `'horizontal'`, `'both'`)
+ * - `direction?` — направление изменения размера (например, `'vertical'`, `'horizontal'`, `'both', `'none'`)
  *
  * Наследует пропсы `<textarea>`.
  */
@@ -86,14 +86,16 @@ export const Textarea = (p: Props) => {
         className={clsx(s.overlayscrollbarsReact, classNameTarget, { [s.errorText]: hasError })}
         data-overlayscrollbars-initialize=''
       >
-        <div
-          className={s.resizeButton}
-          ref={handleRef}
-          style={{
-            cursor: cursorMap[direction],
-          }}
-          aria-hidden='true'
-        />
+        {direction !== 'none' && (
+          <div
+            className={s.resizeButton}
+            ref={handleRef}
+            style={{
+              cursor: cursorMap[direction],
+            }}
+            aria-hidden='true'
+          />
+        )}
         <div
           ref={viewportRef}
           data-overlayscrollbars-contents=''

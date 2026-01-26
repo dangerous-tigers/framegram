@@ -1,7 +1,8 @@
-import { AlertProvider } from '@/shared/ui/alert/AlertProvider';
 import { Meta, type StoryObj } from '@storybook/nextjs-vite';
-import { alertDecorator } from '@/storybook/alertDecorator';
+
 import { Alert } from '@/shared/ui/alert/Alert';
+import { AlertProvider } from '@/shared/ui/alert/AlertProvider';
+import { alertDecorator } from '@/storybook/alertDecorator';
 
 const meta = {
   component: AlertProvider,

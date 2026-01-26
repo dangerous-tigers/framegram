@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  max-width: 100%;
+  width: 345px;
+}
+
+.likeButton {
+  width: 16px;
+  height: 16px;
+  background: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  color: var(--light-100);
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+    color: var(--danger-500);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.liked {
+  color: var(--danger-500);
+}

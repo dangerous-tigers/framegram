@@ -1,7 +1,9 @@
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
-import styles from './Checkbox.module.scss';
-import { CheckboxSelected } from '@/assets/icons';
 import { ComponentPropsWithoutRef } from 'react';
+
+import styles from './Checkbox.module.scss';
+
+import { CheckboxSelected } from '@/assets/icons';
 
 /**
  * checked - состояние чекбокса

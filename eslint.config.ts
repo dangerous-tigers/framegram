@@ -1,8 +1,11 @@
 import js from '@eslint/js';
+import { defineConfig } from 'eslint/config';
+import pluginImport from 'eslint-plugin-import';
+import pluginPrettier from 'eslint-plugin-prettier';
+import pluginReact from 'eslint-plugin-react';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // Игнорируемые файлы
@@ -20,7 +23,14 @@ export default defineConfig([
 
   {
     files: ['**/*.{js,mjs,ts,mts,cts,jsx,tsx}'],
+    settings: {
+      react: {
+        version: 'detect', // автоматически определяет версию React из node_modules
+      },
+    },
+    plugins: { import: pluginImport, prettier: pluginPrettier, 'unused-imports': unusedImports },
     rules: {
+      'unused-imports/no-unused-imports': 'error',
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
       'react/prop-types': 'off',
@@ -37,6 +47,51 @@ export default defineConfig([
       'no-debugger': 'error',
       quotes: ['error', 'single'],
       'comma-dangle': ['error', 'always-multiline'],
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          pathGroups: [
+            { pattern: '*.module.scss', group: 'sibling', position: 'after' },
+            { pattern: 'components', group: 'internal' },
+            { pattern: 'common', group: 'internal' },
+            { pattern: 'routes/**', group: 'internal' },
+            { pattern: 'assets/**', group: 'internal', position: 'after' },
+            { pattern: 'next/font/**', group: 'external', position: 'before' },
+          ],
+          pathGroupsExcludedImportTypes: ['internal'],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+        // 'error',
+        // {
+        //   groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index'],
+        //   pathGroups: [
+        //     { pattern: '*.module.scss', group: 'sibling', position: 'after' },
+        //     { pattern: 'components', group: 'internal' },
+        //     { pattern: 'common', group: 'internal' },
+        //     { pattern: 'routes/**', group: 'internal' },
+        //     { pattern: 'assets/**', group: 'internal', position: 'after' },
+        //     { pattern: 'next/font/**', group: 'external', position: 'before' },
+        //   ],
+        //   pathGroupsExcludedImportTypes: ['internal'],
+        //   alphabetize: { order: 'asc', caseInsensitive: true },
+        // },
+      ],
+      // 'import/order': [
+      //   'error',
+      //   {
+      //     groups: [['builtin', 'external'], ['internal', 'sibling', 'parent'], 'index'],
+      //     // alphabetize: {
+      //     //   order: 'asc',
+      //     //   caseInsensitive: true,
+      //     // },
+      //   },
+      // ],
+      // 'prettier/prettier': ['error'],
     },
     languageOptions: {
       globals: {

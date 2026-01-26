@@ -1,20 +1,23 @@
 'use client';
-import s from './RegisterForm.module.scss';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { type RegisterFormValues, registerSchema } from '../model/register.schema';
 import { useRegisterMutation } from '../model/useRegister';
-import { Button } from '@/shared/ui/button/Button';
+
+import s from './RegisterForm.module.scss';
+
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { RegisterRequestDto } from '@/features/auth/register/model/register.types';
-import { FieldInput } from '@/shared/ui/fieldInput/FieldInput';
-import { FieldCheckbox } from '@/shared/ui/fieldCheckbox/FieldCheckbox';
-import Link from 'next/link';
 import { routes } from '@/shared/config/routes';
 import { Modal, ModalHeaderWithClose } from '@/shared/ui';
-import { useState } from 'react';
+import { Button } from '@/shared/ui/button/Button';
 import { PolymorphicButton } from '@/shared/ui/buttonComponent';
-import { useTranslations } from 'next-intl';
+import { FieldCheckbox } from '@/shared/ui/fieldCheckbox/FieldCheckbox';
+import { FieldInput } from '@/shared/ui/fieldInput/FieldInput';
 
 export const RegisterForm = () => {
   const t = useTranslations('register');
@@ -138,7 +141,7 @@ export const RegisterForm = () => {
             type={'submit'}
             disabled={isPending}
           >
-            {isPending ? t('Loading...') : t('signUp')}
+            {isPending ? t('Loading') : t('signUp')}
           </PolymorphicButton>
           <span className={s.desc}>{t('Do you have an account?')}</span>
           <PolymorphicButton

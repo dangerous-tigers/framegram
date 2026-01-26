@@ -1,9 +1,10 @@
 'use client';
 
-import * as React from 'react';
+import clsx from 'clsx';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import type { OverlayScrollbarsComponentProps } from 'overlayscrollbars-react';
-import clsx from 'clsx';
+import * as React from 'react';
+
 import 'overlayscrollbars/overlayscrollbars.css';
 import styles from './ScrollArea.module.scss';
 

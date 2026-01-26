@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+
 import { Notifications } from './Notifications';
 
 const meta: Meta<typeof Notifications> = {
