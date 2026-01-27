@@ -5,10 +5,11 @@ import { useState } from 'react';
 
 import s from './PostsGrid.module.scss';
 
+import { Post } from '@/entities/post/model/types';
+import { MainPost } from '@/widgets/postGrid/ui/MainPost';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { MainPost, Post } from '@/widgets/postGrid/ui/MainPost';
 
 type Props = {
   posts?: Post[];
@@ -18,7 +19,7 @@ export const PostsGrid = ({ posts }: Props) => {
   if (!posts?.length) return null;
   const [expandedPosts, setExpandedPosts] = useState<Record<string, boolean>>({});
 
-  const toggleExpanded = (postId: string) => {
+  const toggleExpanded = (postId: number) => {
     setExpandedPosts((prev) => ({
       ...prev,
       [postId]: !prev[postId],
