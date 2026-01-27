@@ -70,7 +70,7 @@ export type PostViewModel = {
   };
   likesCount: number;
   isLiked: boolean;
-  example: true;
+  example?: true;
   avatarWhoLikes: string[];
 };
 
