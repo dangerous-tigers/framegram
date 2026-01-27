@@ -34,9 +34,8 @@ const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
 PostItem.displayName = 'PostItem';
 
 export const UserPostsInfinite = ({ userId }: Props) => {
-  const { posts, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isOver } = useUserPostsInfiniteQuery(
-    { userId },
-  );
+  const { posts, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isOver, isFetching } =
+    useUserPostsInfiniteQuery({ userId });
 
   // Создаем ref для хранения актуальных значений
   const intersectionDataRef = React.useRef({
@@ -79,10 +78,27 @@ export const UserPostsInfinite = ({ userId }: Props) => {
     );
   }
 
-  if (!isLoading && posts.length === 0) {
+  if (!isLoading && !isFetching && posts.length === 0) {
     return (
       <div className={s.emptyContainer}>
         <p>У пользователя пока нет постов</p>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className={s.loadingInitialContainer}>
+        {Array.from({ length: 8 }).map((_, index) => (
+          <Card
+            key={`initial-skeleton-${index}`}
+            className={s.postCard}
+          >
+            <div className={s.postImageContainer}>
+              <Skeleton className={s.imageSkeleton} />
+            </div>
+          </Card>
+        ))}
       </div>
     );
   }
@@ -95,39 +111,18 @@ export const UserPostsInfinite = ({ userId }: Props) => {
           post={item}
         />
       ))}
-
-      {isLoading && posts.length === 0 && (
-        <div className={s.loadingInitialContainer}>
-          {Array.from({ length: 12 }).map((_, index) => (
-            <Card
-              key={`initial-skeleton-${index}`}
-              className={s.postCard}
-            >
-              <div className={s.postImageContainer}>
-                <Skeleton className={s.imageSkeleton} />
-              </div>
-            </Card>
-          ))}
-        </div>
-      )}
-
-      {isFetchingNextPage && (
-        <div className={s.loadingMoreContainer}>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <Card
-              key={`more-skeleton-${index}`}
-              className={s.postCard}
-            >
-              <div className={s.postImageContainer}>
-                <Skeleton className={s.imageSkeleton} />
-              </div>
-            </Card>
-          ))}
-        </div>
-      )}
-
       {isOver && <div className={s.endMessage}>Вы достигли конца ленты</div>}
-
+      {isFetchingNextPage &&
+        Array.from({ length: 4 }).map((_, index) => (
+          <Card
+            key={`more-skeleton-${index}`}
+            className={s.postCard}
+          >
+            <div className={s.postImageContainer}>
+              <Skeleton className={s.imageSkeleton} />
+            </div>
+          </Card>
+        ))}
       <div ref={cursorRef} />
     </ul>
   );

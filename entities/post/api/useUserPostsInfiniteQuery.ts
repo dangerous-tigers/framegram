@@ -1,11 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { client } from '@/shared/api/client';
+import { PORTION_POSTS } from '@/shared/constants/constants';
 
 export function useUserPostsInfiniteQuery({ userId }: { userId: string }) {
-  const pageSize = 12;
-
-  const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+  const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfiniteQuery({
     queryKey: ['user-posts', userId],
     queryFn: async ({ pageParam = 1 }) => {
       // Используем маршрут /posts/{param} с username и pageNumber
@@ -15,7 +14,7 @@ export function useUserPostsInfiniteQuery({ userId }: { userId: string }) {
             param: userId, // Используем userId как строку (это username)
           },
           query: {
-            pageSize: pageSize,
+            pageSize: PORTION_POSTS,
             pageNumber: pageParam,
           },
         },
@@ -25,7 +24,7 @@ export function useUserPostsInfiniteQuery({ userId }: { userId: string }) {
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const currentPage = allPages.length;
-      const pageSize = lastPage?.pageSize || 12;
+      const pageSize = PORTION_POSTS || lastPage?.pageSize;
       const totalCount = lastPage?.totalCount || 0;
       const currentPageItemsCount = lastPage?.items?.length || 0;
 
@@ -52,6 +51,7 @@ export function useUserPostsInfiniteQuery({ userId }: { userId: string }) {
   return {
     posts,
     isLoading,
+    isFetching,
     error,
     fetchNextPage,
     hasNextPage,
