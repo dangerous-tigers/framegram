@@ -1,9 +1,11 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 import { CropStep } from '../CropStep/CropStep';
 
 import s from './createPostModal.module.scss';
 
+import { postKeys } from '@/entities/post/queries';
 import { useCreatePostMutation } from '@/entities/post-create/api/useCreatePostMutation';
 import { CreatePostStep } from '@/features/post-create/model/CreatePostType';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
@@ -18,7 +20,7 @@ export const CreatePostModal = () => {
   const step = useCreatePostStore((s) => s.step);
   const setStep = useCreatePostStore((s) => s.setStep);
   const reset = useCreatePostStore((s) => s.reset);
-
+  const queryClient = useQueryClient();
   const [showCloseModal, setShowCloseModal] = useState(false);
 
   const [sizeModal, setSizeModal] = useState<'sm' | 'md' | 'lg' | 'xl' | undefined>('md');
@@ -44,6 +46,8 @@ export const CreatePostModal = () => {
           reset();
           setShowCloseModal(false);
           setOpen(false);
+
+          queryClient.invalidateQueries({ queryKey: postKeys.last });
         },
       },
     );
@@ -65,7 +69,11 @@ export const CreatePostModal = () => {
   };
 
   const closeHandler = () => {
-    setShowCloseModal(true);
+    if (images.length > 0) {
+      setShowCloseModal(true);
+    } else {
+      setOpen(false);
+    }
   };
 
   const isOpen = useCreatePostStore((s) => s.isOpen);
@@ -128,7 +136,7 @@ export const CreatePostModal = () => {
         {step === 'upload' && <UploadStep />}
         {step === 'crop' && <CropStep />}
         {step === 'filter' && <FilterStep />}
-        {step === 'publish' && (isPending ? <p>Loading</p> : <PublishStep />)}
+        {step === 'publish' && <PublishStep />}
       </Modal>
 
       {/* МОДАЛКА ПОДТВЕРЖДЕНИЯ ЗАКРЫТИЯ */}
@@ -139,7 +147,9 @@ export const CreatePostModal = () => {
         header={
           <ModalHeaderWithClose
             title='Сlose'
-            onClose={() => setShowCloseModal(false)}
+            onClose={() => {
+              setShowCloseModal(false);
+            }}
           />
         }
       >
