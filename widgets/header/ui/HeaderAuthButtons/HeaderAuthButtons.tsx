@@ -1,10 +1,12 @@
 'use client';
-import s from './headerAuthButtons.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { routes } from '@/shared/config/routes';
 import { useTranslations } from 'next-intl';
+
+import s from './headerAuthButtons.module.scss';
+
 import { useMe } from '@/entities/user/model/useMe';
+import { routes } from '@/shared/config/routes';
 
 type PropsHeaderAuthButtons = {
   className?: string;

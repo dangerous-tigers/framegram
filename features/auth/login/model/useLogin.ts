@@ -1,7 +1,9 @@
-import { client } from '@/shared/api/client';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+
 import { LoginFormData } from './Login.schema';
+
+import { client } from '@/shared/api/client';
 import { parseJwt } from '@/shared/lib/parseJwt';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 

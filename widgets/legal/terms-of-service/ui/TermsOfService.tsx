@@ -1,22 +1,25 @@
 'use client';
 
-import s from './../../styles/styles.module.scss';
-import { routes } from '@/shared/config/routes';
-import { ButtonComponent } from '@/shared/ui/buttonComponent/ButtonComponent';
 import Link from 'next/link';
+
+import s from './../../styles/styles.module.scss';
+
 import { ArrowBackOutline } from '@/assets/icons';
+import { routes } from '@/shared/config/routes';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
 
 export function TermsOfService() {
   return (
     <article>
       <div className={s.body}>
-        <ButtonComponent
+        <PolymorphicButton
           as={Link}
+          variant='text'
           href={routes.auth.registration}
           className={s.backLink}
         >
           <ArrowBackOutline /> Back to Sign Up
-        </ButtonComponent>
+        </PolymorphicButton>
         <h1 className={s.title}>Terms of Service</h1>
         <div className={s.content}>
           <p>

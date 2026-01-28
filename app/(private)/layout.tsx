@@ -1,8 +1,10 @@
 'use client';
-import { ReactNode } from 'react';
-import { Sidebar } from '@/widgets/sidebar';
-import { useMe } from '@/entities/user/model/useMe';
 import { redirect } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { ReactNode } from 'react';
+
+import { AppShell } from '@/app/ui/AppShell';
+import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
 
 export default function PrivateLayout({
@@ -10,20 +12,17 @@ export default function PrivateLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  // try {
-  //   await getMeServer(); // проверка токена
-  // } catch {
-  //   redirect(routes.auth.login); // если токен нет или просрочен
-  // }
   const { isPending, isSuccess } = useMe();
+  const pathname = usePathname();
 
   if (isPending) return <div>loading...</div>;
 
   if (!isSuccess) return redirect(routes.auth.login);
-  return (
-    <div className='mainBoxBody'>
-      <Sidebar />
-      {children}
-    </div>
-  );
+
+  // Для страницы feed используем специальный layout с боковыми панелями
+  if (pathname === '/feed') {
+    return <>{children}</>;
+  }
+
+  return <AppShell>{children}</AppShell>;
 }

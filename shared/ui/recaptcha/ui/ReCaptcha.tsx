@@ -1,9 +1,11 @@
 'use client';
+import clsx from 'clsx';
 import Script from 'next/script';
 import { useEffect, useRef } from 'react';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormTrigger } from 'react-hook-form';
+
 import styles from './ReCaptcha.module.scss';
-import clsx from 'clsx';
+
 import { ForgotPasswordData } from '@/features/auth/ForgotPassword/model/ForgotPassword.schema';
 
 type Props = {

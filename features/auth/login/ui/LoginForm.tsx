@@ -1,14 +1,18 @@
 'use client';
-import Link from 'next/link';
-import styles from './LoginForm.module.scss';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from '@/shared/ui/input';
-import { Button } from '@/shared/ui/button/Button';
-import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+
 import { LoginFormData, LoginSchema } from '../model/Login.schema';
 import { useLogin } from '../model/useLogin';
-import { useTranslations } from 'next-intl';
+
+import styles from './LoginForm.module.scss';
+
+import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
+import { handleGoogleOAuth } from '@/features/auth';
+import { Button } from '@/shared/ui/button/Button';
+import { Input } from '@/shared/ui/input';
 
 export function LoginForm() {
   const t = useTranslations('login');
@@ -36,7 +40,7 @@ export function LoginForm() {
               variant='text'
               fullWidth={false}
               className={styles.iconButton}
-              onClick={() => alert('click Google!')}
+              onClick={handleGoogleOAuth}
             >
               <GoogleSvgrepoCom1
                 width={34}
@@ -85,7 +89,7 @@ export function LoginForm() {
             <Button
               type='submit'
               variant='primary'
-              fullWidth={true}
+              fullWidth
               disabled={isPending}
             >
               {t('signIn')}

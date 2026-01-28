@@ -1,0 +1,25 @@
+.likesCount {
+  color: var(--light-100);
+  font-size: var(--font-size-m);
+
+  span {
+    color: var(--light-100);
+    font-weight: bold;
+  }
+}
+
+.beTheFirst {
+  color: var(--light-100);
+  font-size: var(--font-size-s);
+}
+
+.beTheFirstButton {
+  color: var(--light-500);
+  padding: 0;
+  font-size: var(--font-size-s);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

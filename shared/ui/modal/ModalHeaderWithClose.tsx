@@ -1,7 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import styles from './ModalHeader.module.scss';
-import { Close } from '@/assets/icons';
 import type { KeyboardEvent } from 'react';
+
+import styles from './ModalHeader.module.scss';
+
+import { Close } from '@/assets/icons';
 
 export const ModalHeaderWithClose = ({
   title,
@@ -13,7 +15,7 @@ export const ModalHeaderWithClose = ({
   onKeyPress?: (e: KeyboardEvent) => void;
 }) => {
   return (
-    <>
+    <div className={styles.header}>
       <Dialog.Title asChild>
         <h2 className={styles.title}>{title}</h2>
       </Dialog.Title>
@@ -26,6 +28,6 @@ export const ModalHeaderWithClose = ({
       >
         <Close />
       </Dialog.Close>
-    </>
+    </div>
   );
 };

@@ -33,6 +33,7 @@
   --dark-100: #4c4c4c;
   --dark-300: #333;
   --dark-500: #171717;
+  --dark-500-rgb: 23, 23, 23;
   --dark-700: #0d0d0d;
   --dark-900: #000;
 }
@@ -58,7 +59,7 @@ body {
 }
 
 .container {
-  max-width: 1156px;
+  max-width: 1188px;
   margin: 0 auto;
   padding: 0 16px;
 }
@@ -67,7 +68,7 @@ body {
   flex: 1 1 auto;
   height: 100%;
   width: 100%;
-  max-width: 1156px;
+  max-width: 1188px;
   margin: 0 auto;
   padding: 0 16px;
   display: flex;
@@ -78,8 +79,9 @@ body {
   flex: 1 1 auto;
   height: 100%;
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 156px 1fr;
   gap: 24px;
+  max-width: 1188px;
 
   @media (width <= 768px) {
     display: flex;

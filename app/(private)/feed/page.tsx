@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>feed</div>;
+  return <span>feed</span>;
 }

@@ -1,7 +1,8 @@
 'use client';
-import { ReactNode } from 'react';
-import { useMe } from '@/entities/user/model/useMe';
 import { redirect } from 'next/navigation';
+import { ReactNode } from 'react';
+
+import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
 
 export default function AuthLayout({

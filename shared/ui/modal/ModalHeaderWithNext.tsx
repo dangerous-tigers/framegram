@@ -1,7 +1,10 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import styles from './ModalHeader.module.scss';
-import { ArrowIosBackOutline } from '@/assets/icons';
+
 import { Button } from '../button/Button';
+
+import styles from './ModalHeader.module.scss';
+
+import { ArrowIosBackOutline } from '@/assets/icons';
 
 type Props = {
   title: string;
@@ -13,7 +16,7 @@ type Props = {
 
 export const ModalHeaderWithNext = ({ title, titleNext = 'Next', onBack, onNext, nextDisabled = false }: Props) => {
   return (
-    <>
+    <div className={styles.header}>
       <button
         className={styles.iconButton}
         onClick={onBack}
@@ -33,6 +36,6 @@ export const ModalHeaderWithNext = ({ title, titleNext = 'Next', onBack, onNext,
       >
         {titleNext}
       </Button>
-    </>
+    </div>
   );
 };

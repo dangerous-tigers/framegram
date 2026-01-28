@@ -1,8 +1,12 @@
 import * as Toast from '@radix-ui/react-toast';
+import clsx from 'clsx';
 import { ReactNode } from 'react';
+
+import s from './AlertProvider.module.css';
 
 type Props = {
   children?: ReactNode;
+  isStories?: boolean;
   duration?: number;
   swipeDirection?: 'right' | 'left' | 'up' | 'down';
   swipeThreshold?: number;
@@ -10,7 +14,13 @@ type Props = {
 
 const hotkey = 'F8';
 
-export const AlertProvider = ({ children, duration = 5000, swipeDirection = 'right', swipeThreshold = 50 }: Props) => {
+export const AlertProvider = ({
+  children,
+  duration = 5000,
+  swipeDirection = 'right',
+  swipeThreshold = 50,
+  isStories = false,
+}: Props) => {
   return (
     <Toast.Provider
       swipeDirection={swipeDirection}
@@ -19,6 +29,7 @@ export const AlertProvider = ({ children, duration = 5000, swipeDirection = 'rig
     >
       {children}
       <Toast.Viewport
+        className={clsx(s.viewPort, isStories && s.viewPortStories)}
         hotkey={[hotkey]}
         label={`Notifications (${hotkey})`}
       />

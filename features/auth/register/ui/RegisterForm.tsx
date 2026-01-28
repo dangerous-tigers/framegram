@@ -1,20 +1,26 @@
 'use client';
-import s from './RegisterForm.module.scss';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { type RegisterFormValues, registerSchema } from '../model/register.schema';
 import { useRegisterMutation } from '../model/useRegister';
-import { Button } from '@/shared/ui/button/Button';
+
+import s from './RegisterForm.module.scss';
+
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { RegisterRequestDto } from '@/features/auth/register/model/register.types';
-import { FieldInput } from '@/shared/ui/fieldInput/FieldInput';
-import { FieldCheckbox } from '@/shared/ui/fieldCheckbox/FieldCheckbox';
-import Link from 'next/link';
 import { routes } from '@/shared/config/routes';
 import { Modal, ModalHeaderWithClose } from '@/shared/ui';
-import { useState } from 'react';
+import { Button } from '@/shared/ui/button/Button';
+import { FieldCheckbox } from '@/shared/ui/fieldCheckbox/FieldCheckbox';
+import { FieldInput } from '@/shared/ui/fieldInput/FieldInput';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 
 export const RegisterForm = () => {
+  const t = useTranslations('register');
   const { mutate, isPending } = useRegisterMutation();
   const { handleSubmit, control, formState } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -54,25 +60,19 @@ export const RegisterForm = () => {
       <div className={s.registerForm__body}>
         <h1 className={s.title}>Sign Up</h1>
         <div className={s.socials}>
-          <Button
-            variant={'text'}
-            fullWidth={false}
-          >
+          <PolymorphicButton variant={'text'}>
             <GoogleSvgrepoCom1
               width={36}
               height={36}
             />
-          </Button>
-          <Button
-            variant={'text'}
-            fullWidth={false}
-          >
+          </PolymorphicButton>
+          <PolymorphicButton variant={'text'}>
             <GithubSvgrepoCom31
               width={36}
               height={36}
               color={'var(--light-100)'}
             />
-          </Button>
+          </PolymorphicButton>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -82,32 +82,32 @@ export const RegisterForm = () => {
             <FieldInput
               name='userName'
               control={control}
-              label='Username'
-              placeholder='Введите имя пользователя'
+              label={t('name')}
+              placeholder={t('placeholder name')}
             />
 
             <FieldInput
               name='email'
               control={control}
               type='email'
-              label='Email'
-              placeholder='Введите email'
+              label={t('email')}
+              placeholder={t('placeholder email')}
             />
 
             <FieldInput
               name='password'
               control={control}
               type='password'
-              label='Password'
-              placeholder='Введите пароль'
+              label={t('password')}
+              placeholder={t('placeholder password')}
             />
 
             <FieldInput
               name='passwordConfirm'
               control={control}
               type='password'
-              label='Password confirmation'
-              placeholder='Подтвердите пароль'
+              label={t('passwordConfirm')}
+              placeholder={t('placeholder passwordConfirm')}
             />
           </div>
           <div className={s.checkbox}>
@@ -117,39 +117,41 @@ export const RegisterForm = () => {
               label={''}
             />
             <span>
-              I agree to the{' '}
+              {t('I agree to the')}{' '}
               <Link
                 className={s.linkCheckbox}
                 href={routes.legal.terms}
               >
-                Terms of Service
+                {t('Terms of Service')}
               </Link>{' '}
-              and{' '}
+              {t('and')}{' '}
               <Link
                 href={routes.legal.policy}
                 className={s.linkCheckbox}
               >
-                Privacy Policy
+                {t('Privacy Policy')}
               </Link>
             </span>
           </div>
           {formState.errors.terms && <p className={s.errorText}>{formState.errors.terms.message}</p>}
 
-          <Button
+          <PolymorphicButton
             className={s.btn}
             fullWidth={false}
             type={'submit'}
             disabled={isPending}
           >
-            {isPending ? 'Loading...' : 'Sign Up'}
-          </Button>
-          <span className={s.desc}>{'Do you have an account?'}</span>
-          <Link
+            {isPending ? t('Loading') : t('signUp')}
+          </PolymorphicButton>
+          <span className={s.desc}>{t('Do you have an account?')}</span>
+          <PolymorphicButton
+            as={Link}
             href={routes.auth.login}
             className={s.link}
+            variant={'text'}
           >
-            {'Sign In'}
-          </Link>
+            {t('signIn')}
+          </PolymorphicButton>
         </form>
       </div>
       <Modal
@@ -158,20 +160,22 @@ export const RegisterForm = () => {
         size='sm'
         header={
           <ModalHeaderWithClose
-            title='Email confirmation'
+            title={t('Email confirmation')}
             onClose={() => setOnOpenModal(false)}
           />
         }
       >
         <div className={s.modal}>
-          <div>We have sent a link to confirm your email {successEmail}</div>
+          <div>
+            {t('We have sent a link to confirm your email')} {successEmail}
+          </div>
 
           <Button
             className={s.btnModal}
             fullWidth={false}
             onClick={() => setOnOpenModal(false)}
           >
-            Ok
+            {t('Ok')}
           </Button>
         </div>
       </Modal>

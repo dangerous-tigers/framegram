@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { action } from 'storybook/actions';
+
 import { Button } from '@/shared/ui/button/Button';
 
 const meta: Meta<typeof Button> = {

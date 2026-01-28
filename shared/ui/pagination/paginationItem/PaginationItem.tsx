@@ -1,6 +1,7 @@
-import styles from './PaginationItem.module.scss';
-import { ReactNode } from 'react';
 import clsx from 'clsx';
+import { ReactNode } from 'react';
+
+import styles from './PaginationItem.module.scss';
 
 type Props = {
   children?: ReactNode;

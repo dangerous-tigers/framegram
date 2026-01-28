@@ -1,6 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import styles from './BaseModal.module.scss';
+import { DialogTitle } from '@radix-ui/react-dialog';
 import type { ReactNode, ComponentPropsWithoutRef } from 'react';
+import React from 'react';
+
+import styles from './BaseModal.module.scss';
 /**
  * @description Компонент модального окна
  * @see https://www.radix-ui.com/docs/primitives/components/dialog
@@ -22,16 +25,32 @@ export type Props = {
     | 'lg' // Размер для followers
     | 'xl'; // Размер для filters/publication
   showDivider?: boolean; // Рaзделитель
+  portal?: boolean; // Использовать портал
 } & ComponentPropsWithoutRef<typeof Dialog.Root>;
 
-export const Modal = ({ header, children, size = 'md', showDivider = true, className, ...rest }: Props) => {
+export const Modal = ({
+  header,
+  children,
+  size = 'md',
+  showDivider = true,
+  className,
+  portal = true,
+  ...rest
+}: Props) => {
   const sizeClass = styles[`content--${size}`] || '';
+
+  const DialogPortal = portal ? Dialog.Portal : React.Fragment;
 
   return (
     <Dialog.Root {...rest}>
-      <Dialog.Portal>
+      <DialogPortal>
         <Dialog.Overlay className={styles.overlay} />
-        <Dialog.Content className={`${styles.content} ${sizeClass} ${className || ''}`}>
+        <Dialog.Content
+          aria-describedby={'modal'}
+          className={`${styles.content} ${sizeClass} ${className || ''}`}
+        >
+          <Dialog.Description id='modal' />
+          <DialogTitle />
           {header && (
             <>
               <div className={styles.header}>{header}</div>
@@ -41,7 +60,7 @@ export const Modal = ({ header, children, size = 'md', showDivider = true, class
 
           <div className={styles.body}>{children}</div>
         </Dialog.Content>
-      </Dialog.Portal>
+      </DialogPortal>
     </Dialog.Root>
   );
 };

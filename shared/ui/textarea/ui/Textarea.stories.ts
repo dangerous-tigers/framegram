@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+
 import { Textarea } from './Textarea';
 
 // Определяем типы для Storybook
@@ -60,5 +61,11 @@ export const Disabled: Story = {
 export const directionBoth: Story = {
   args: {
     direction: 'both',
+  },
+};
+
+export const directionNone: Story = {
+  args: {
+    direction: 'none',
   },
 };

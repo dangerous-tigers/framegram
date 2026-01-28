@@ -1,0 +1,100 @@
+.container {
+  padding-top: 48px;
+  display: grid;
+  grid-template-columns: 202px 1fr;
+  column-gap: 30px;
+}
+
+.download {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.required {
+  position: fixed;
+  transform: translate(75px, 0);
+  color: var(--danger-500);
+}
+
+.profileImage {
+  position: relative;
+
+  .cross {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--danger-500);
+    position: absolute;
+    border: 4px solid var(--dark-700);
+    transform: translate(225%, 15%);
+    transition: transform 0.3s ease;
+
+    & > :hover {
+      scale: 1.3;
+    }
+  }
+
+  .drag {
+    border-radius: 50%;
+    width: 192;
+    height: 192px;
+    background: var(--dark-500);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+
+  div {
+    width: 202px;
+    gap: 24px;
+  }
+}
+
+.label {
+  font-weight: 400;
+  font-style: var(--font-size-s);
+  line-height: 24px;
+  color: var(--light-900);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.separator {
+  margin: 24px 0;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-bottom: 26px;
+}
+
+.birthday {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  input {
+    width: 100%;
+  }
+}

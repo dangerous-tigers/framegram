@@ -15,10 +15,7 @@
     "logOut": "Выйсці",
     "logOutMessage": "Вы сапраўды хочаце выйсці з уліковага запісу {email}?",
     "yes": "Так",
-    "no": "Не"
-  },
-  "login": {
-    "title": "Уваход",
+    "no": "Не",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "password": "Пароль",
@@ -28,8 +25,46 @@
     "noAccount": "Няма акаўнта?",
     "signUp": "Зарэгістравацца"
   },
+  "login": {
+    "title": "Увайсці ў сістэму",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Увядзіце пароль",
+    "forgotPassword": "Забылі пароль",
+    "signIn": "Увайсці",
+    "noAccount": "Няма акаўнта?",
+    "signUp": "Зарэгістравацца"
+  },
+  "register": {
+    "signUp": "Зарэгістравацца",
+    "signIn": "Увайсці",
+    "title": "Увайсці ў сістэму",
+    "Do you have an account?": "У вас ужо ёсць уліковы запіс?",
+    "Loading": "Загрузка...",
+    "I agree to the": "Я згаджаюся з",
+    "Terms of Service": "Умовамі карыстання",
+    "and": "і",
+    "Privacy Policy": "Палітыкай прыватнасці",
+    "Ok": "Добра",
+    "We have sent a link to confirm your email": "Мы адправілі спасылку для пацверджання вашай электроннай пошты",
+    "placeholder name": "Увядзіце імя карыстальніка",
+    "placeholder email": "Увядзіце адрас электроннай пошты",
+    "placeholder password": "Увядзіце пароль",
+    "placeholder passwordConfirm": "Паўторна ўвядзіце пароль",
+    "Email confirmation": "Пацверджанне электроннай пошты",
+    "name": "Імя карыстальніка",
+    "email": "Электронная пошта",
+    "password": "Пароль",
+    "passwordConfirm": "Пацверджанне пароля"
+  },
+  "confirmEmail": {
+    "title": "Віншаванні!",
+    "text": "Ваш адрас электроннай пошты пацверджаны",
+    "logIn": "Увайсці"
+  },
   "forgot": {
-    "title": "Вярнуцца да ўваходу",
+    "title": "Забылі пароль",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "text": "Увядзіце свой адрас электроннай пошты, і мы дашлем вам далейшыя інструкцыі",
@@ -57,5 +92,32 @@
     "email": "Электронная пошта павінна адпавядаць фармату example@example.com",
     "emailExist": "Карыстальнік з гэтым адрасам электроннай пошты не існуе",
     "captcha": "Калі ласка, пацвердзіце, што вы не робат"
+  },
+  "confirmAction": {
+    "yes": "Так",
+    "no": "Не",
+    "close": "Закрыць",
+    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы сапраўды хочаце скончыць рэдагаванне? Калі вы закрыеце акно рэдагавання, унесеныя вамі змены не будуць захаваны."
+  },
+  "viewPost": {
+    "likes": "Лайкі",
+    "reply": "Адказаць",
+    "showReplies": "Паказаць адказы",
+    "hideReplies": "Схаваць адказы",
+    "publish": "Адправіць",
+    "beTheFirstLikes": "Будзь першым, хто паставіць ",
+    "like": "Лайк!",
+    "noCommentsYet": "Каментарыяў яшчэ няма.",
+    "beTheFirstToComment": "Будзьце першымі, хто пакіне каментарый.",
+    "emptyFieldError": "Тэкставае поле не можа быць пустым",
+    "emptyAnswerError": "Адказ не можа быць пустым",
+    "prefixWarning": "Увага! Вы перайшлі ў рэжым адпраўкі каментара",
+    "commentPlaceholder": "Дадаць каментар...",
+    "noLikesYet": "Лайкаў яшчэ няма."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Зарэгістраваныя карыстальнікі",
+    "ShowMore": "Паказаць больш",
+    "Hide": "Схаваць"
   }
 }

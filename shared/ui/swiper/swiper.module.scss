@@ -1,0 +1,39 @@
+/* stylelint-disable selector-class-pattern */
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  :global(.swiper-pagination-bullet) {
+    background-color: #ccc;
+    opacity: 1;
+    border-color: var(--light-100);
+    transition: all 0.3s ease;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background-color: var(--primary-500);
+  }
+
+  :global(.swiper-button-prev),
+  :global(.swiper-button-next) {
+    background: var(--dark-500);
+    opacity: 0.7;
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    color: var(--light-100);
+
+    svg {
+      width: 7px;
+      height: 14px;
+      fill: var(--light-100);
+    }
+
+    &:hover {
+      color: var(--primary-500);
+      background: var(--dark-500);
+      opacity: 1;
+    }
+  }
+}

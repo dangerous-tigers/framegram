@@ -8,7 +8,7 @@
     "feed": "Feed",
     "create": "Create",
     "myProfile": "My Profile",
-    "messenges": "Messenges",
+    "messenges" : "Messenges",
     "search": "Search",
     "statistic": "Statistics",
     "favorites": "Favorites",
@@ -16,7 +16,14 @@
     "logOutMessage": "Are you really want to log out of your account {email}?",
     "yes": "Yes",
     "no": "No",
-    "email": "Email"
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot Password",
+    "signIn": "Sign In",
+    "noAccount": "Dont have an account?",
+    "signUp": "Sign Up"
   },
   "login": {
     "title": "Sign In",
@@ -28,6 +35,28 @@
     "signIn": "Sign In",
     "noAccount": "Dont have an account?",
     "signUp": "Sign Up"
+  },
+  "register": {
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "title": "Sign In",
+    "Do you have an account?": "Do you have an account?",
+    "Loading": "Loading...",
+    "I agree to the": "I agree to the",
+    "Terms of Service": "Terms of Service",
+    "and": "and",
+    "Privacy Policy": "Privacy Policy",
+    "Ok": "Ok",
+    "We have sent a link to confirm your email": "We have sent a link to confirm your email",
+    "placeholder name": "Enter the user's name",
+    "placeholder email": "Enter your email address",
+    "placeholder password": "Enter your password",
+    "placeholder passwordConfirm": "Enter your password confirmation",
+    "Email confirmation": "Email confirmation",
+    "name": "userName",
+    "email": "email",
+    "password": "password",
+    "passwordConfirm": "passwordConfirm"
   },
   "confirmEmail": {
     "title": "Congratulations!",
@@ -63,5 +92,34 @@
     "email": "The email must match the format example@example.com",
     "emailExist": "User with this email does not exist",
     "captcha": "Please verify that you are not a robot"
+  },
+  "confirmActions": {
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "deletePost": "Do you really want delete post?",
+    "closeEditMode": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
+    "deletePhoto" : "Do you really want to delete your profile photo?"
+  },
+  "viewPost": {
+    "likes": "Likes",
+    "reply": "Reply",
+    "showReplies": "Show replies",
+    "hideReplies": "Hide replies",
+    "publish": "Publish",
+    "beTheFirstLikes": "Be the first ",
+    "like": "Like!",
+    "noCommentsYet": "No comments yet.",
+    "beTheFirstToComment": "Be the first to comment.",
+    "emptyFieldError": "Text field cannot be empty",
+    "emptyAnswerError": "Answer cannot be empty",
+    "prefixWarning": "Attention! You have switched to comment submission mode",
+    "commentPlaceholder": "Add a Comment...",
+    "noLikesYet": "No likes yet."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Registered users",
+    "ShowMore": "Show more",
+    "Hide": "Hide"
   }
 }

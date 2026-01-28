@@ -1,6 +1,8 @@
 import * as Toast from '@radix-ui/react-toast';
-import styles from './Alert.module.scss';
 import clsx from 'clsx';
+
+import styles from './Alert.module.scss';
+
 import { CloseOutline } from '@/assets/icons';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 
@@ -20,6 +22,7 @@ export const Alert = () => {
         severity === 'success' && styles.success,
         severity === 'success' && variant === 'outlined' && styles.outlinedSuccess,
         severity === 'success' && variant === 'filled' && styles.filledSuccess,
+        'sssssssssssssssssssssssssssssss',
       )}
       defaultOpen
     >

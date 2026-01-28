@@ -1,4 +1,5 @@
 import s from './sidebar.module.scss';
+
 import { Navigation } from '@/widgets/sidebar/ui/Navigation';
 
 export const Sidebar = () => {
