@@ -18,10 +18,8 @@ export const useRemovePost = () => {
       }
       return postApi.deletePost(postId);
     },
-    onSuccess: (_, postId) => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
-      queryClient.invalidateQueries({ queryKey: ['post', postId] });
-      queryClient.invalidateQueries({ queryKey: ['profile-posts'] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user-posts'] });
 
       router.back();
     },
