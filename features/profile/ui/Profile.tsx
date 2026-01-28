@@ -9,13 +9,17 @@ import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
 
 type Props = {
   profile: UserProfileByIdWithPostsResponse;
+  hasPaymentSubscription: boolean;
   userId: string;
 };
 
-export const Profile = ({ profile, userId }: Props) => {
+export const Profile = ({ profile, userId, hasPaymentSubscription }: Props) => {
   return (
     <div className={s.container}>
-      <ProfileHeader profile={profile} />
+      <ProfileHeader
+        profile={profile}
+        hasPaymentSubscription={hasPaymentSubscription}
+      />
       <UserPostsInfinite userId={userId} />
     </div>
   );

@@ -14,6 +14,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
   return (
     <Profile
       profile={profileByUserName}
+      hasPaymentSubscription={getProfileByUserId.hasPaymentSubscription}
       userId={getProfileByUserId.userName}
     />
   );
