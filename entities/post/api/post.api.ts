@@ -58,7 +58,7 @@ export const postApi = {
     return response.data;
   },
   getPostByIdServer: async (id: number) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/id/${id}`, {
       cache: 'no-store',
       credentials: 'include',
     });

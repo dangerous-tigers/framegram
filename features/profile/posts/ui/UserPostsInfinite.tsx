@@ -21,7 +21,10 @@ const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
     key={post.id}
     className={s.postItem}
   >
-    <Link href={`/post/${post.id}`}>
+    <Link
+      href={`?postId=${post.id}`}
+      scroll={false}
+    >
       <img
         src={post.images?.[0]?.url}
         alt={`post image by id ${post.images?.[0]?.uploadId}`}

@@ -1,19 +1,23 @@
 'use client';
 
+
 import { UserPostsInfinite } from '../posts/ui/UserPostsInfinite';
 import { ProfileHeader } from '../profile-header/ui/ProfileHeader';
 
 import s from './Profile.module.scss';
 
 import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
+import { PostViewModal } from '@/features/post/viewPost';
+import { Post } from '@/features/post/viewPost/model/types';
 
 type Props = {
   profile: UserProfileByIdWithPostsResponse;
   hasPaymentSubscription: boolean;
   userId: string;
+  post?: Post | null;
 };
 
-export const Profile = ({ profile, userId, hasPaymentSubscription }: Props) => {
+export const Profile = ({ profile, userId, hasPaymentSubscription, post }: Props) => {
   return (
     <div className={s.container}>
       <ProfileHeader
@@ -21,6 +25,13 @@ export const Profile = ({ profile, userId, hasPaymentSubscription }: Props) => {
         hasPaymentSubscription={hasPaymentSubscription}
       />
       <UserPostsInfinite userId={userId} />
+      {post && (
+        <PostViewModal
+          open
+          defaultOpen
+          post={post}
+        />
+      )}
     </div>
   );
 };

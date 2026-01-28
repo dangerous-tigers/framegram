@@ -34,7 +34,11 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
 
   const handleClose = () => {
     if (!isEdit) {
-      router.back();
+      if (typeof window !== 'undefined' && window.history.length <= 1) {
+        router.push(`/profile/${post.ownerId}`);
+      } else {
+        router.back();
+      }
       reset();
     }
     if (isEdit && value !== post.description) {

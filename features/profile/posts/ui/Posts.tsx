@@ -9,7 +9,10 @@ export const Posts = ({ items }: { items: PostViewModel[] }) => {
     <ul className={s.container}>
       {items?.map((item) => (
         <li key={item?.id}>
-          <Link href={`/post/${item.id}`}>
+          <Link
+            href={`?postId=${item.id}`}
+            scroll={false}
+          >
             <img
               src={item.images && item?.images[0]?.url}
               alt={`post image by id ${item?.images[0]?.uploadId}`}

@@ -109,7 +109,7 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
             ) : (
               <div className={s.comments}>
                 <Description
-                  avatar={post.avatarOwner ?? ''}
+                  avatar={post.avatarOwner}
                   userName={post.userName || ''}
                   text={post.description || ''}
                   timeStamp={post.createdAt || ''}
@@ -138,7 +138,7 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
                 isLiked={post.isLiked ?? false}
                 likesCount={post.likesCount}
                 avatarWhoLikes={post.avatarWhoLikes}
-                isSaved={true}
+                isSaved
                 time={post?.createdAt || ''}
                 isAuth={isAuth}
               />

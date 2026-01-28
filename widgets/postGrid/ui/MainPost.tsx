@@ -22,7 +22,7 @@ export const MainPost = ({ post, expanded, toggleExpanded }: Props) => {
       className={clsx(s.post)}
     >
       <div className={clsx(expanded ? s.swiperSmall : s.swiperLarge)}>
-        <Link href={`/post/${post.id}`}>
+        <Link href={`/profile/${post.ownerId}?postId=${post.id}`}>
           <Swiper
             modules={[Navigation, Pagination]}
             navigation={post.images.length > 1}
