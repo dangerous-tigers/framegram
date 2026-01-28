@@ -1,61 +1,49 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { Post } from '@/entities/post/model/types';
 import { TruncatedDescription } from '@/entities/post/ui/TruncatedDescription';
 import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
 import s from '@/widgets/postGrid/ui/PostsGrid.module.scss';
 
-type PostImage = {
-  url: string;
-};
-
-export type Post = {
-  id: string;
-  userName: string;
-  description: string;
-  createdAt: string;
-  images: PostImage[];
-  avatarOwner: string | null;
-};
-
 type Props = {
   post: Post;
   expanded?: boolean;
-  toggleExpanded: (id: string) => void;
+  toggleExpanded: (id: number) => void;
 };
 
 export const MainPost = ({ post, expanded, toggleExpanded }: Props) => {
-  const router = useRouter();
-
   return (
     <article
       key={post.id}
       className={clsx(s.post)}
     >
       <div className={clsx(expanded ? s.swiperSmall : s.swiperLarge)}>
-        <Swiper
-          modules={[Navigation, Pagination]}
-          navigation={post.images.length > 1}
-          pagination={post.images.length > 1 ? { clickable: true } : false}
-          spaceBetween={10}
-          slidesPerView={1}
-          className={s.postSlider}
-        >
-          {post.images.map((img, idx) => (
-            <SwiperSlide key={idx}>
-              <Image
-                src={img.url}
-                alt={post.description || 'Post image'}
-                width={300}
-                height={300}
-                className={clsx(s.postImage)}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <Link href={`/post/${post.id}`}>
+          <Swiper
+            modules={[Navigation, Pagination]}
+            navigation={post.images.length > 1}
+            pagination={post.images.length > 1 ? { clickable: true } : false}
+            spaceBetween={10}
+            slidesPerView={1}
+            className={s.postSlider}
+          >
+            {post.images.map((img, idx) => (
+              <SwiperSlide key={idx}>
+                <Image
+                  src={img.url}
+                  alt={post.description || 'Post image'}
+                  width={300}
+                  height={300}
+                  className={clsx(s.postImage)}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Link>
       </div>
 
       <div className={clsx(s.postInfoTop)}>
@@ -66,12 +54,9 @@ export const MainPost = ({ post, expanded, toggleExpanded }: Props) => {
             className={clsx(s.postAvatar)}
           />
         )}
-        <p
-          className={clsx(s.postName)}
-          onClick={() => router.push(`/post/${post.id}`)}
-        >
-          {post.userName}
-        </p>
+        <Link href={`/profile/${post.ownerId}`}>
+          <p className={clsx(s.postName)}>{post.userName}</p>
+        </Link>
       </div>
 
       <p className={clsx(s.postData)}>

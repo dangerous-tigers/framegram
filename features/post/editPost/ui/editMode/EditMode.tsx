@@ -34,7 +34,7 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
 
   const queryClient = useQueryClient();
 
-  const saveChangesMutation = useMutation({
+  const { mutate: saveChangesMutation, isPending } = useMutation({
     mutationFn: async (value: string) => {
       const response = await client.PUT('/posts/{postId}', {
         body: {
@@ -76,7 +76,7 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
 
   const saveChanges = () => {
     if (value !== undefined) {
-      saveChangesMutation.mutate(value);
+      saveChangesMutation(value);
     }
   };
 
@@ -104,7 +104,10 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
         Save changes
       </Button>
       {open && (
-        <ConfirmActionModal confirmCallback={() => setIsEdit(false)}>
+        <ConfirmActionModal
+          isPending={isPending}
+          confirmCallback={() => setIsEdit(false)}
+        >
           <span>{t('closeEditMode')}</span>
         </ConfirmActionModal>
       )}
