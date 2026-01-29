@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { userApi } from '@/entities/user/api/user.api';
-import { User } from '@/entities/user/model/types';
+import { client } from '@/shared/api/client';
 
 export const useMe = () => {
-  return useQuery<User>({
+  return useQuery({
     queryKey: ['me'],
-    queryFn: userApi.me,
-    retry: false,
+    queryFn: async () => {
+      const clientResponce = await client.GET('/auth/me');
+      return clientResponce.data;
+    },
+    retry: 0,
+    staleTime: 0,
   });
 };
