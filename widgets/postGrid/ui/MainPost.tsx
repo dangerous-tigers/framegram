@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Post } from '@/entities/post/model/types';
 import { TruncatedDescription } from '@/entities/post/ui/TruncatedDescription';
+import { PostViewModel } from '@/entities/profile';
 import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
 import s from '@/widgets/postGrid/ui/PostsGrid.module.scss';
 
 type Props = {
-  post: Post;
+  post: PostViewModel;
   expanded?: boolean;
   toggleExpanded: (id: number) => void;
 };
