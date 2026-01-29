@@ -123,7 +123,8 @@
   "error404": {
     "title": "404 - 找不到页面",
     "description": "您查找的页面不存在或已被移动。",
-    "backToHome": "回到首页"
+    "backToHome": "回到首页",
+    "goBack": "返回"
   },
   "errorPage": {
     "title": "糟糕！出错了",

@@ -125,7 +125,8 @@
   "error404": {
     "title": "Oops! Page not found",
     "description": "The page you are looking for doesn't exist or has been moved.",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "goBack": "Go Back"
   },
   "errorPage": {
     "title": "Oops! Something went wrong",
