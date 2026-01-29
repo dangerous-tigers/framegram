@@ -121,5 +121,16 @@
     "RegisteredUsers": "Registered users",
     "ShowMore": "Show more",
     "Hide": "Hide"
+  },
+  "error404": {
+    "title": "Oops! Page not found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "backToHome": "Back to Home"
+  },
+  "errorPage": {
+    "title": "Oops! Something went wrong",
+    "description": "We encountered an unexpected error. Please try again or return to the main page.",
+    "tryAgain": "Try again",
+    "backToHome": "Back to Home"
   }
 }

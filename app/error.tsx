@@ -1,21 +1,40 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-// В пропсах еще есть error - если вдруг будет нужен
+import { useTranslations } from 'next-intl';
+
+import s from './error-not-found.module.scss';
+
+import { Catpreloader } from '@/assets/icons';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
+
 export default function Error({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  const t = useTranslations('errorPage');
   const router = useRouter();
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={() => {
-          reset();
-          router.refresh();
-        }}
-      >
-        Try again
-      </button>
+    <div className={s.root}>
+      <Catpreloader className={s.icon} />
+      <h1>{t('title')}</h1>
+      <p>{t('description')}</p>
+      <div className={s.actions}>
+        <PolymorphicButton
+          onClick={() => {
+            reset();
+            router.refresh();
+          }}
+        >
+          {t('tryAgain')}
+        </PolymorphicButton>
+        <PolymorphicButton
+          as={Link}
+          href='/'
+          variant='outline'
+        >
+          {t('backToHome')}
+        </PolymorphicButton>
+      </div>
     </div>
   );
 }
