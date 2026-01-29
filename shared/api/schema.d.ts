@@ -1132,7 +1132,7 @@ export interface components {
       /** @example 100 */
       totalCount: number;
       /** @example 100 */
-      notReadCount?: number;
+      totalUsers?: number;
     };
     /** @enum {string} */
     MessageType: 'TEXT' | 'IMAGE' | 'VOICE';

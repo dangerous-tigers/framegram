@@ -1,7 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
 
-import { type Post } from '../../model/types';
 import { useViewPostStore } from '../../model/useViewPost.store';
 
 import { PostContent } from './postContent/postContent';
@@ -9,11 +8,20 @@ import s from './PostViewModal.module.scss';
 import { Header } from './ui';
 
 import { Close } from '@/assets/icons';
+import { PostViewModel } from '@/entities/profile';
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { useAuth, useMediaQuery } from '@/shared/lib/hooks';
 import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
 
-export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; defaultOpen?: boolean; post?: Post }) {
+export function PostViewModal({
+  open,
+  defaultOpen,
+  post,
+}: {
+  open?: boolean;
+  defaultOpen?: boolean;
+  post?: PostViewModel;
+}) {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { user, isAuth, isLoading } = useAuth();
 

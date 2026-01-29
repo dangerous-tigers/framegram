@@ -6,7 +6,7 @@ import React, { useCallback } from 'react';
 import s from './UserPostsInfinite.module.scss';
 
 import { useUserPostsInfiniteQuery } from '@/entities/post/api/useUserPostsInfiniteQuery';
-import { PostViewModel } from '@/entities/profile';
+import { PostsByUserId, PostViewModel } from '@/entities/profile';
 import { useIntersection } from '@/shared/lib/hooks/useIntersection';
 import { Button } from '@/shared/ui/button/Button';
 import { Card } from '@/shared/ui/card/Card';
@@ -14,6 +14,7 @@ import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 
 type Props = {
   userId: string;
+  firstBatchOfPosts: PostsByUserId;
 };
 
 const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
@@ -36,9 +37,9 @@ const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
 
 PostItem.displayName = 'PostItem';
 
-export const UserPostsInfinite = ({ userId }: Props) => {
+export const UserPostsInfinite = ({ userId, firstBatchOfPosts }: Props) => {
   const { posts, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isOver, isFetching } =
-    useUserPostsInfiniteQuery({ userId });
+    useUserPostsInfiniteQuery({ userId, firstBatchOfPosts });
 
   // Создаем ref для хранения актуальных значений
   const intersectionDataRef = React.useRef({

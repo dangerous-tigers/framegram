@@ -6,8 +6,8 @@ export const useMe = () => {
   return useQuery({
     queryKey: ['me'],
     queryFn: async () => {
-      const clientResponce = await client.GET('/auth/me');
-      return clientResponce.data;
+      const clientResponse = await client.GET('/auth/me');
+      return clientResponse.data;
     },
     retry: 0,
     staleTime: 0,
