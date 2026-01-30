@@ -19,4 +19,5 @@ export const routes = {
   search: '/search',
   statistics: '/statistics',
   favorites: '/favorites',
+  notAuth: '/not-auth',
 } as const;

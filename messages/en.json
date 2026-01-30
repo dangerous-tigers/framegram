@@ -133,5 +133,11 @@
     "description": "We encountered an unexpected error. Please try again or return to the main page.",
     "tryAgain": "Try again",
     "backToHome": "Back to Home"
+  },
+  "notAuth": {
+    "title": "Authorization Required",
+    "description": "You need to log in to access this page.",
+    "login": "Log in",
+    "backToHome": "Back to Home"
   }
 }

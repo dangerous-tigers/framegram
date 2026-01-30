@@ -1,17 +1,17 @@
 'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
-import s from './error-not-found.module.scss';
+import s from '../error-not-found.module.scss';
 
 import { Catpreloader } from '@/assets/icons';
+import { routes } from '@/shared/config/routes';
 import { Card } from '@/shared/ui/card';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
 
-export default function NotFound() {
-  const t = useTranslations('error404');
-  const router = useRouter();
+export default function NotAuthPage() {
+  const t = useTranslations('notAuth');
 
   return (
     <div className={s.root}>
@@ -21,15 +21,16 @@ export default function NotFound() {
         <p>{t('description')}</p>
         <div className={s.actions}>
           <PolymorphicButton
-            variant='outline'
-            onClick={() => router.back()}
+            as={Link}
+            href={routes.auth.login}
           >
-            {t('goBack')}
+            {t('login')}
           </PolymorphicButton>
 
           <PolymorphicButton
             as={Link}
             href='/'
+            variant='outline'
           >
             {t('backToHome')}
           </PolymorphicButton>

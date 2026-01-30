@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 
 import { AppShell } from '@/app/ui/AppShell';
 import { useMe } from '@/entities/user/model/useMe';
+import { CatPreloader } from '@/shared/components/catPreloader/CatPreloader';
 import { routes } from '@/shared/config/routes';
 
 export default function PrivateLayout({
@@ -15,9 +16,9 @@ export default function PrivateLayout({
   const { isPending, isSuccess } = useMe();
   const pathname = usePathname();
 
-  if (isPending) return <div>loading...</div>;
+  if (isPending) return <CatPreloader />;
 
-  if (!isSuccess) return redirect(routes.auth.login);
+  if (!isSuccess) return redirect(routes.notAuth);
 
   // Для страницы feed используем специальный layout с боковыми панелями
   if (pathname === '/feed') {
