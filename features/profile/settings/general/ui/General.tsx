@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { MouseEventHandler, useEffect } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import s from './General.module.scss';
 
@@ -20,18 +20,8 @@ import { validateImage } from '@/shared/lib/file/validateImage';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Input } from '@/shared/ui/input';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
-import { type Option, Select } from '@/shared/ui/select/Select';
 import { Separator } from '@/shared/ui/separator/Separator';
 import { Textarea } from '@/shared/ui/textarea';
-
-const CITY: Option[] = [
-  { value: 'Minsk', label: 'Minsk' },
-  { value: 'Kiev', label: 'Kiev' },
-];
-const COUNTRY: Option[] = [
-  { value: 'USA', label: 'USA' },
-  { value: 'Belarus', label: 'Belarus' },
-];
 
 export const General = () => {
   const queryClient = useQueryClient();
@@ -91,7 +81,6 @@ export const General = () => {
   });
 
   const {
-    control,
     register,
     setValue,
     handleSubmit,
@@ -219,46 +208,6 @@ export const General = () => {
               {...register('dateOfBirth')}
               style={{ color: 'var(--light-100)' }}
             />
-          </div>
-          <div className={s.location}>
-            <div>
-              <span className={s.label}>Select your country</span>
-              <Controller
-                name='country'
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                    width={'358px'}
-                    options={COUNTRY}
-                    variant='default'
-                    disabled={false}
-                    placeholder={'Country'}
-                  />
-                )}
-              />
-            </div>
-            <div>
-              <span className={s.label}>Select your city</span>
-              <Controller
-                name='city'
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                    width={'358px'}
-                    options={CITY}
-                    variant='default'
-                    disabled={false}
-                    placeholder={'City'}
-                  />
-                )}
-              />
-            </div>
           </div>
           <Textarea
             error={errors.aboutMe?.message}

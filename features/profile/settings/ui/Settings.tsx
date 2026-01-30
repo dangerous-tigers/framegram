@@ -1,7 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import s from './Settings.module.scss';
 
+import { ArrowBackOutline } from '@/assets/icons';
 import { AccountManagement, Devices, General, Payments } from '@/features/profile/settings';
 import { Tabs } from '@/shared/ui/tabs/ui/Tabs';
 
@@ -13,9 +16,18 @@ const TABS = [
 ];
 
 export const Settings = () => {
+  const router = useRouter();
+
   return (
     <div className={s.container}>
-      <Tabs tabs={TABS} />
+      <div className={s.title}>
+        <ArrowBackOutline onClick={router.back} />
+        <h2>Settings</h2>
+      </div>
+      <Tabs
+        tabs={TABS}
+        className={s.tabs}
+      />
     </div>
   );
 };
