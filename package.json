@@ -67,7 +67,7 @@
     "@storybook/addon-docs": "10.1.10",
     "@storybook/addon-onboarding": "10.1.10",
     "@storybook/nextjs-vite": "10.1.10",
-    "@storybook/react": "^10.1.10",
+    "@storybook/react": "10.1.10",
     "@tanstack/react-query-devtools": "^5.91.1",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "20",
