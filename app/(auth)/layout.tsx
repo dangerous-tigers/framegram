@@ -1,19 +1,17 @@
 'use client';
 import { ReactNode } from 'react';
-import { redirect } from 'next/navigation';
 
 import { useMe } from '@/entities/user/model/useMe';
-import { routes } from '@/shared/config/routes';
+import { CatPreloader } from '@/shared/components/catPreloader/CatPreloader';
 
 export default function AuthLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const { isPending, isSuccess } = useMe();
+  const { isPending } = useMe();
 
-  if (isPending) return <div>loading...</div>;
+  if (isPending) return <CatPreloader />;
 
-  if (isSuccess) return redirect(routes.feed);
   return <>{children}</>;
 }

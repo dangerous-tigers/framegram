@@ -9,7 +9,7 @@ import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
 
 import { useViewPostStore } from '../../model/useViewPost.store';
 
-import { PostContent } from './postContent/postContent';
+import { PostContent } from './postContent/PostContent';
 import { Header } from './ui';
 
 import s from './PostViewModal.module.scss';

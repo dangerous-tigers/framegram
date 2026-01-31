@@ -11,7 +11,7 @@ import { Swiper } from '@/shared/ui/swiper';
 
 import { Actions, ActionsSkeleton, Comment, Description, DescriptionSkeleton, Header, Publish } from '../ui';
 
-import s from './postContent.module.scss';
+import s from './PostContent.module.scss';
 
 type Props = {
   initialPost: Post;

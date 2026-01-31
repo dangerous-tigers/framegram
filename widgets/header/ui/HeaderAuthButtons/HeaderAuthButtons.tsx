@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 
@@ -17,11 +18,15 @@ export const HeaderAuthButtons = (props: PropsHeaderAuthButtons) => {
 
   const t = useTranslations('header');
 
-  const { isLoading, data: user } = useMe();
+  const { isLoading, data } = useMe();
+  const path = usePathname();
 
   if (isLoading) return null;
+  if (data) return null;
 
-  if (user) return null;
+  if (path === routes.auth.login) {
+    return null;
+  }
 
   return (
     <div className={clsx(s.headerAuthButtons, className)}>

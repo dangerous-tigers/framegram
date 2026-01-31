@@ -13,6 +13,7 @@ export const routes = {
   },
   empty: '',
   feed: '/feed',
+  main: '/',
   create: '/create',
   profile: '/profile',
   messenger: '/messenger',
