@@ -1,15 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-
-import s from './ResendLink.module.scss';
 
 import resendLinkIllustration from '@/assets/illustrations/Rafiki.svg';
 import { UseResendLink } from '@/features/auth/resetLink/model/ResendLink';
 import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
+
+import s from './ResendLink.module.scss';
 
 export const ResendLink = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);

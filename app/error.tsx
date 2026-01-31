@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
-import s from './error-not-found.module.scss';
-
 import { Catpreloader } from '@/assets/icons';
 import { Card } from '@/shared/ui/card';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
+
+import s from './error-not-found.module.scss';
 
 export default function Error({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   const t = useTranslations('errorPage');

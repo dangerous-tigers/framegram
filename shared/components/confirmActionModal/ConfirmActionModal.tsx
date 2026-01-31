@@ -1,13 +1,13 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { ReactNode } from 'react';
-
-import s from './ConfirmActionModal.module.scss';
+import { useTranslations } from 'next-intl';
 
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { Button } from '@/shared/ui/button/Button';
 import { Modal, ModalHeaderWithClose } from '@/shared/ui/modal';
+
+import s from './ConfirmActionModal.module.scss';
 
 type Props = {
   children: ReactNode;

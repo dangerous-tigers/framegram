@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 
-import s from './../../styles/styles.module.scss';
-
 import { ArrowBackOutline } from '@/assets/icons';
 import { routes } from '@/shared/config/routes';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
+
+import s from './../../styles/styles.module.scss';
 
 export function TermsOfService() {
   return (

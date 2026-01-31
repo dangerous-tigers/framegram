@@ -1,6 +1,6 @@
-import s from './ProfileImage.module.scss';
-
 import placeholderAvatar from '@/assets/illustrations/avatar-placeholder.png';
+
+import s from './ProfileImage.module.scss';
 
 type Props = {
   avatar: string | undefined;

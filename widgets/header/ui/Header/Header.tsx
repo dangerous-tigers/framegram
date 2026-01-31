@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 
-import s from './header.module.scss';
-
 import { ToggleLocale } from '@/shared/components/toggleLocale/ToggleLocale';
 import { HeaderAuthButtons } from '@/widgets/header/ui/HeaderAuthButtons';
 import { Logo } from '@/widgets/header/ui/Logo';
 import { Notifications } from '@/widgets/header/ui/Notifications';
+
+import s from './header.module.scss';
 
 type PropsHeader = {
   className?: string;

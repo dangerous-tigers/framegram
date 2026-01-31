@@ -1,7 +1,8 @@
+import React from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+
 import * as Dialog from '@radix-ui/react-dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
-import type { ReactNode, ComponentPropsWithoutRef } from 'react';
-import React from 'react';
 
 import styles from './BaseModal.module.scss';
 /**

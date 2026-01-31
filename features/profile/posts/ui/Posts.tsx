@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import s from './Posts.module.scss';
-
 import { PostViewModel } from '@/entities/profile';
+
+import s from './Posts.module.scss';
 
 export const Posts = ({ items }: { items: PostViewModel[] }) => {
   return (

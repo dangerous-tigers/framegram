@@ -1,7 +1,6 @@
 import createClient, { Middleware } from 'openapi-fetch';
 
 //import { useAlertStore } from '../ui/alert/model/alert-store';
-
 import type { paths } from './schema';
 
 let refreshPromise: Promise<void> | null = null;

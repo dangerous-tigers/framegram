@@ -1,10 +1,10 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import s from './LikesInfo.module.scss';
-
 import { formatLikes } from '@/shared/lib';
 import { Button } from '@/shared/ui';
+
+import s from './LikesInfo.module.scss';
 
 export function LikesInfo({
   likesCount,

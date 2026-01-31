@@ -1,11 +1,11 @@
 'use client';
 import clsx from 'clsx';
 
-import s from './MainPage.module.scss';
-
 import { PostViewModel } from '@/entities/profile';
 import { PostsGrid } from '@/widgets/postGrid';
 import { UserCounter } from '@/widgets/registeredUsers/ui/userCounter';
+
+import s from './MainPage.module.scss';
 
 type Props = {
   usersTotalCount: number;

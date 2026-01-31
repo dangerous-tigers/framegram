@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import Link from 'next/link';
-
-import s from './logo.module.scss';
+import clsx from 'clsx';
 
 import { Framehublogo } from '@/assets/icons';
 import { routes } from '@/shared/config/routes';
+
+import s from './logo.module.scss';
 
 type PropsLogo = {
   className?: string;

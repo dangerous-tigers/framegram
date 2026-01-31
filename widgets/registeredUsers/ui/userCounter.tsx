@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
+import clsx from 'clsx';
 
 import s from './UserCounter.module.scss';
 

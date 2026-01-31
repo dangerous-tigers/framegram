@@ -1,6 +1,6 @@
 'use client';
-import clsx from 'clsx';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import clsx from 'clsx';
 
 import s from './Button.module.scss';
 

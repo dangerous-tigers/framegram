@@ -1,7 +1,6 @@
 'use client';
-import { redirect } from 'next/navigation';
-import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
+import { redirect, usePathname } from 'next/navigation';
 
 import { AppShell } from '@/app/ui/AppShell';
 import { useMe } from '@/entities/user/model/useMe';

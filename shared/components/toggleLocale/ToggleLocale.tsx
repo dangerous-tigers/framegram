@@ -1,8 +1,8 @@
 'use client';
 
+import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
-import { useTransition } from 'react';
 
 import { defaultLocale, localeOptions } from '@/i18n/config';
 import { setUserLocaleCookie } from '@/services/locale';

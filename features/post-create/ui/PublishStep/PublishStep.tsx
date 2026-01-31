@@ -1,16 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import { ChangeEvent } from 'react';
+import Image from 'next/image';
 
 import avatarPlaceholder from '@/assets/illustrations/avatar-placeholder.png';
 import { profileApi } from '@/entities/profile/api/profile.api';
 import { useMe } from '@/entities/user/model/useMe';
 import { AddLocation } from '@/features/addLocation/ui/AddLocation';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
-import s from '@/features/post-create/ui/PublishStep/publishStep.module.scss';
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
 import { Swiper } from '@/shared/ui/swiper';
 import { Textarea } from '@/shared/ui/textarea';
+import { useQuery } from '@tanstack/react-query';
+
+import s from '@/features/post-create/ui/PublishStep/publishStep.module.scss';
 
 export const PublishStep = () => {
   const images = useCreatePostStore((s) => s.images);

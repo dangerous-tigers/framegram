@@ -1,13 +1,13 @@
 'use client';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-
-import s from './LogoutModal.module.scss';
+import { useTranslations } from 'next-intl';
 
 import { useLogoutModal } from '@/features/auth/logout/api/useLogoutModal';
 import { Button } from '@/shared/ui';
 import { Modal } from '@/shared/ui/modal';
 import { ModalHeaderWithClose } from '@/shared/ui/modal/ModalHeaderWithClose';
+
+import s from './LogoutModal.module.scss';
 
 type Props = {
   open: boolean;

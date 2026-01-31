@@ -1,8 +1,7 @@
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
-
 import { PostsByUserId } from '@/entities/profile';
 import { client } from '@/shared/api/client';
 import { PORTION_POSTS } from '@/shared/constants/constants';
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 export function useUserPostsInfiniteQuery({
   userId,

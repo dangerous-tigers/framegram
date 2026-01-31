@@ -1,12 +1,8 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useTranslations } from 'next-intl';
 import { MouseEventHandler, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-import s from './General.module.scss';
 
 import { CloseOutline, ImageOutline } from '@/assets/icons';
 import { UpdateProfileUser } from '@/entities/profile';
@@ -22,6 +18,10 @@ import { Input } from '@/shared/ui/input';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 import { Separator } from '@/shared/ui/separator/Separator';
 import { Textarea } from '@/shared/ui/textarea';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
+import s from './General.module.scss';
 
 export const General = () => {
   const queryClient = useQueryClient();

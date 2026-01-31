@@ -1,12 +1,12 @@
 'use client';
 
+import { PostsByUserId, PostViewModel, UserProfileByIdWithPostsResponse } from '@/entities/profile';
+import { PostViewModal } from '@/features/post/viewPost';
+
 import { UserPostsInfinite } from '../posts/ui/UserPostsInfinite';
 import { ProfileHeader } from '../profile-header/ui/ProfileHeader';
 
 import s from './Profile.module.scss';
-
-import { PostsByUserId, PostViewModel, UserProfileByIdWithPostsResponse } from '@/entities/profile';
-import { PostViewModal } from '@/features/post/viewPost';
 
 type Props = {
   profile: UserProfileByIdWithPostsResponse;

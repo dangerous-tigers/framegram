@@ -1,12 +1,13 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import s from './Description.module.scss';
-import { DescriptionInfo } from './DescriptionInfo';
-
 import placeholderAvatar from '@/assets/illustrations/avatar-placeholder.png';
 import { Button } from '@/shared/ui';
 import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
+
+import { DescriptionInfo } from './DescriptionInfo';
+
+import s from './Description.module.scss';
 
 type Props = {
   avatar: string;

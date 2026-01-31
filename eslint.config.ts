@@ -1,11 +1,13 @@
-import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import pluginImport from 'eslint-plugin-import';
 import pluginPrettier from 'eslint-plugin-prettier';
 import pluginReact from 'eslint-plugin-react';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+
+import js from '@eslint/js';
 
 export default defineConfig([
   // Игнорируемые файлы
@@ -27,8 +29,18 @@ export default defineConfig([
       react: {
         version: 'detect', // автоматически определяет версию React из node_modules
       },
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
     },
-    plugins: { import: pluginImport, prettier: pluginPrettier, 'unused-imports': unusedImports },
+    plugins: {
+      import: pluginImport,
+      prettier: pluginPrettier,
+      'simple-import-sort': simpleImportSort,
+      'unused-imports': unusedImports,
+    },
     rules: {
       'unused-imports/no-unused-imports': 'error',
       'react/react-in-jsx-scope': 'off',
@@ -47,51 +59,53 @@ export default defineConfig([
       'no-debugger': 'error',
       quotes: ['error', 'single'],
       'comma-dangle': ['error', 'always-multiline'],
-      'import/order': [
+      // 'max-lines': ['warn', 250],
+      'max-len': [
         'error',
         {
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-          pathGroups: [
-            { pattern: '*.module.scss', group: 'sibling', position: 'after' },
-            { pattern: 'components', group: 'internal' },
-            { pattern: 'common', group: 'internal' },
-            { pattern: 'routes/**', group: 'internal' },
-            { pattern: 'assets/**', group: 'internal', position: 'after' },
-            { pattern: 'next/font/**', group: 'external', position: 'before' },
-          ],
-          pathGroupsExcludedImportTypes: ['internal'],
-          'newlines-between': 'always',
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: true,
-          },
+          code: 120,
+          ignoreUrls: true,
+          ignoreStrings: true,
+          ignoreComments: true,
         },
-        // 'error',
-        // {
-        //   groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index'],
-        //   pathGroups: [
-        //     { pattern: '*.module.scss', group: 'sibling', position: 'after' },
-        //     { pattern: 'components', group: 'internal' },
-        //     { pattern: 'common', group: 'internal' },
-        //     { pattern: 'routes/**', group: 'internal' },
-        //     { pattern: 'assets/**', group: 'internal', position: 'after' },
-        //     { pattern: 'next/font/**', group: 'external', position: 'before' },
-        //   ],
-        //   pathGroupsExcludedImportTypes: ['internal'],
-        //   alphabetize: { order: 'asc', caseInsensitive: true },
-        // },
       ],
-      // 'import/order': [
-      //   'error',
-      //   {
-      //     groups: [['builtin', 'external'], ['internal', 'sibling', 'parent'], 'index'],
-      //     // alphabetize: {
-      //     //   order: 'asc',
-      //     //   caseInsensitive: true,
-      //     // },
-      //   },
-      // ],
-      // 'prettier/prettier': ['error'],
+      'import/no-unresolved': 'error',
+
+      // циклические зависимости
+      'import/no-cycle': 'error',
+
+      // защита архитектурных границ
+      'import/no-internal-modules': 'off',
+      'import/order': 'off',
+      'import/first': 'error',
+      'import/no-duplicates': 'error',
+      'import/newline-after-import': ['error', { count: 1 }],
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [
+            // node builtin
+            ['^node:'],
+            // `react` first, `next` second, then packages starting with a character
+            ['^react$', '^next', '^[a-z]'],
+            // Packages starting with `@`
+            ['^@'],
+            // Packages starting with `~`
+            ['^~'],
+            // Imports starting with `../`
+            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+            // Imports starting with `./`
+            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+            // Style imports
+            ['^.+\\.s?css$'],
+            // Side effect imports
+            ['^\\u0000'],
+          ],
+        },
+      ],
+
+      'simple-import-sort/exports': 'error',
+      'prettier/prettier': ['error'],
     },
     languageOptions: {
       globals: {

@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
-import s from '../error-not-found.module.scss';
-
 import { Catpreloader } from '@/assets/icons';
 import { routes } from '@/shared/config/routes';
 import { Card } from '@/shared/ui/card';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
+
+import s from '../error-not-found.module.scss';
 
 export default function NotAuthPage() {
   const t = useTranslations('notAuth');

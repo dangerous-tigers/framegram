@@ -2,11 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 
-import s from './Settings.module.scss';
-
 import { ArrowBackOutline } from '@/assets/icons';
 import { AccountManagement, Devices, General, Payments } from '@/features/profile/settings';
 import { Tabs } from '@/shared/ui/tabs/ui/Tabs';
+
+import s from './Settings.module.scss';
 
 const TABS = [
   { value: 'general', label: 'General', content: <General /> },

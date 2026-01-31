@@ -1,9 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-
-import { CropStep } from '../CropStep/CropStep';
-
-import s from './createPostModal.module.scss';
 
 import { postKeys } from '@/entities/post/queries';
 import { useCreatePostMutation } from '@/entities/post-create/api/useCreatePostMutation';
@@ -15,6 +10,11 @@ import { UploadStep } from '@/features/post-create/ui/uploadStep/UploadStep';
 import { applyFilterToFile } from '@/shared/lib/image';
 import { Modal, ModalHeaderWithClose, ModalHeaderWithNext } from '@/shared/ui';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { CropStep } from '../CropStep/CropStep';
+
+import s from './createPostModal.module.scss';
 
 export const CreatePostModal = () => {
   const step = useCreatePostStore((s) => s.step);

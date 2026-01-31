@@ -1,6 +1,6 @@
 'use client';
-import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
+import { redirect } from 'next/navigation';
 
 import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';

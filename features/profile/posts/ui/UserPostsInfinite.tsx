@@ -1,9 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import React, { useCallback } from 'react';
-
-import s from './UserPostsInfinite.module.scss';
+import Link from 'next/link';
 
 import { useUserPostsInfiniteQuery } from '@/entities/post/api/useUserPostsInfiniteQuery';
 import { PostsByUserId, PostViewModel } from '@/entities/profile';
@@ -11,6 +9,8 @@ import { useIntersection } from '@/shared/lib/hooks/useIntersection';
 import { Button } from '@/shared/ui/button/Button';
 import { Card } from '@/shared/ui/card/Card';
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
+
+import s from './UserPostsInfinite.module.scss';
 
 type Props = {
   userId: string;

@@ -1,12 +1,13 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState } from 'react';
-
-import s from './PostsGrid.module.scss';
+import clsx from 'clsx';
 
 import { PostViewModel } from '@/entities/profile';
 import { MainPost } from '@/widgets/postGrid/ui/MainPost';
+
+import s from './PostsGrid.module.scss';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';

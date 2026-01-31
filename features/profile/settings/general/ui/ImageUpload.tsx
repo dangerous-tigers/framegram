@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import React, { ReactNode, useRef, useState } from 'react';
+import clsx from 'clsx';
 
 import s from './ImageUpload.module.scss';
 

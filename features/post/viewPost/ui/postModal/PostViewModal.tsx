@@ -1,17 +1,18 @@
 'use client';
 import { useRouter } from 'next/navigation';
 
-import { useViewPostStore } from '../../model/useViewPost.store';
-
-import { PostContent } from './postContent/postContent';
-import s from './PostViewModal.module.scss';
-import { Header } from './ui';
-
 import { Close } from '@/assets/icons';
 import { PostViewModel } from '@/entities/profile';
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { useAuth, useMediaQuery } from '@/shared/lib/hooks';
 import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
+
+import { useViewPostStore } from '../../model/useViewPost.store';
+
+import { PostContent } from './postContent/postContent';
+import { Header } from './ui';
+
+import s from './PostViewModal.module.scss';
 
 export function PostViewModal({
   open,
