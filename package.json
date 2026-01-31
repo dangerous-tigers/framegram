@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:production": "npm run build"
+    "build:production": "npm run build",
     "format": "prettier --write .",
     "start": "next start",
     "lint": "npx eslint",
