@@ -3,6 +3,7 @@ export { Checkbox } from './checkbox/Checkbox';
 export { Modal } from './modal';
 export { ModalHeaderWithClose } from './modal';
 export { ModalHeaderWithNext } from './modal';
+export { RadioButtonGroup } from './radioGroup/RadioGroup';
 export { Recaptcha } from './recaptcha/ui/ReCaptcha';
 export { Separator } from './separator/Separator';
 export { Skeleton } from './skeleton/Skeleton';

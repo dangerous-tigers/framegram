@@ -137,5 +137,39 @@
     "description": "您需要登录才能访问此页面。",
     "login": "登录",
     "backToHome": "回到首页"
+  },
+  "profile": {
+    "settings": {
+      "title": "设置",
+      "general": "常规",
+      "devices": "设备",
+      "accountManagement": "账户管理",
+      "payments": "支付",
+      "successTitle": "成功",
+      "errorTitle": "错误",
+      "successMessage": "支付成功！",
+      "errorMessage": "交易失败。请联系支持团队",
+      "backToPayment": "返回支付"
+    },
+    "subscriptions": {
+      "currentSubscription": "当前订阅：",
+      "expireAt": "到期时间",
+      "nextPayment": "下次支付",
+      "autoRenewal": "自动续费",
+      "accountType": "账户类型：",
+      "changeSubscription": "更改订阅：",
+      "personal": "个人",
+      "business": "企业",
+      "days": "{count} 天",
+      "weekly": "{count} 天",
+      "monthly": "月",
+      "per": "每",
+      "or": "或",
+      "createPayment": "创建支付",
+      "autoRenewalModalText": "此次支付将启用自动续费。您可以随时在个人资料设置中关闭",
+      "paymentCanceled": "自动续费已取消",
+      "comingSoon": "即将推出",
+      "disabled": "已禁用"
+    }
   }
 }

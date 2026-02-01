@@ -137,5 +137,39 @@
     "description": "Для доступу до цієї сторінки необхідно увійти в систему.",
     "login": "Увійти",
     "backToHome": "Повернутися на головну"
+  },
+  "profile": {
+    "settings": {
+      "title": "Налаштування",
+      "general": "Загальні",
+      "devices": "Пристрої",
+      "accountManagement": "Керування акаунтом",
+      "payments": "Платежі",
+      "successTitle": "Успіх",
+      "errorTitle": "Помилка",
+      "successMessage": "Платіж успішно виконано!",
+      "errorMessage": "Транзакція не вдалася. Будь ласка, зверніться до служби підтримки",
+      "backToPayment": "Повернутися до оплати"
+    },
+    "subscriptions": {
+      "currentSubscription": "Поточна підписка:",
+      "expireAt": "Діє до",
+      "nextPayment": "Наступний платіж",
+      "autoRenewal": "Автопродовження",
+      "accountType": "Тип акаунту:",
+      "changeSubscription": "Змінити підписку:",
+      "personal": "Особистий",
+      "business": "Бізнес",
+      "days": "{count} день",
+      "weekly": "{count} днів",
+      "monthly": "місяць",
+      "per": "за",
+      "or": "або",
+      "createPayment": "Створити платіж",
+      "autoRenewalModalText": "Автопродовження буде увімкнено з цим платежем. Ви можете вимкнути його в налаштуваннях профілю",
+      "paymentCanceled": "Автопродовження скасовано",
+      "comingSoon": "Незабаром",
+      "disabled": "Вимкнено"
+    }
   }
 }

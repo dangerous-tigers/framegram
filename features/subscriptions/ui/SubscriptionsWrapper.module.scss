@@ -1,0 +1,49 @@
+.container {
+  padding: 12px 0;
+}
+
+.currentContent {
+  display: flex;
+  gap: 45px;
+}
+
+.currentHeader {
+  & p {
+    color: var(--light-900);
+    font-size: var(--font-size-s);
+  }
+
+  & span {
+    font-weight: 600;
+    font-size: var(--font-size-s);
+  }
+}
+
+.paymentMethods {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.iconBtn {
+  background-color: transparent;
+  padding: 0;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 36px 24px;
+}
+
+.modalText {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}

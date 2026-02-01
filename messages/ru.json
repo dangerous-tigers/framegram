@@ -137,5 +137,39 @@
     "description": "Для доступа к этой странице необходимо войти в систему.",
     "login": "Войти",
     "backToHome": "Вернуться на главную"
+  },
+  "profile": {
+    "settings": {
+      "title": "Настройки",
+      "general": "Общие",
+      "devices": "Устройства",
+      "accountManagement": "Управление аккаунтом",
+      "payments": "Платежи",
+      "successTitle": "Успех",
+      "errorTitle": "Ошибка",
+      "successMessage": "Платеж прошел успешно!",
+      "errorMessage": "Транзакция не удалась. Пожалуйста, напишите в службу поддержки",
+      "backToPayment": "Вернуться к оплате"
+    },
+    "subscriptions": {
+      "currentSubscription": "Текущая подписка:",
+      "expireAt": "Истекает",
+      "nextPayment": "Следующий платеж",
+      "autoRenewal": "Автопродление",
+      "accountType": "Тип аккаунта:",
+      "changeSubscription": "Изменить подписку:",
+      "personal": "Личный",
+      "business": "Бизнес",
+      "days": "{count} дн.",
+      "weekly": "{count} дн.",
+      "monthly": "мес.",
+      "per": "за",
+      "or": "или",
+      "createPayment": "Создать платеж",
+      "autoRenewalModalText": "С этим платежом будет включено автопродление. Вы можете отключить его в любое время в настройках профиля",
+      "paymentCanceled": "Автопродление отменено",
+      "comingSoon": "Скоро будет",
+      "disabled": "Отключено"
+    }
   }
 }

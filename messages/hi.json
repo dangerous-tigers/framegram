@@ -137,5 +137,39 @@
     "description": "इस पृष्ठ तक पहुँचने के लिए आपको लॉग इन करना होगा।",
     "login": "लॉग इन करें",
     "backToHome": "होम पर वापस जाएं"
+  },
+  "profile": {
+    "settings": {
+      "title": "सेटिंग्स",
+      "general": "सामान्य",
+      "devices": "डिवाइस",
+      "accountManagement": "खाता प्रबंधन",
+      "payments": "भुगतान",
+      "successTitle": "सफलता",
+      "errorTitle": "त्रुटि",
+      "successMessage": "भुगतान सफल रहा!",
+      "errorMessage": "लेन-देन विफल रहा। कृपया सहायता से संपर्क करें",
+      "backToPayment": "भुगतान पर वापस जाएं"
+    },
+    "subscriptions": {
+      "currentSubscription": "वर्तमान सदस्यता:",
+      "expireAt": "समाप्ति तिथि",
+      "nextPayment": "अगला भुगतान",
+      "autoRenewal": "स्वचालित नवीनीकरण",
+      "accountType": "खाते का प्रकार:",
+      "changeSubscription": "सदस्यता बदलें:",
+      "personal": "व्यक्तिगत",
+      "business": "व्यवसाय",
+      "days": "{count} दिन",
+      "weekly": "{count} दिन",
+      "monthly": "महीना",
+      "per": "प्रति",
+      "or": "या",
+      "createPayment": "भुगतान बनाएँ",
+      "autoRenewalModalText": "इस भुगतान के साथ ऑटो-रिन्यू सक्षम होगा। आप इसे प्रोफ़ाइल सेटिंग्स में कभी भी बंद कर सकते हैं",
+      "paymentCanceled": "ऑटो रिन्यू रद्द किया गया",
+      "comingSoon": "जल्द आ रहा है",
+      "disabled": "अक्षम"
+    }
   }
 }

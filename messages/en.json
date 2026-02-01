@@ -8,7 +8,7 @@
     "feed": "Feed",
     "create": "Create",
     "myProfile": "My Profile",
-    "messenges" : "Messenges",
+    "messenges": "Messenges",
     "search": "Search",
     "statistic": "Statistics",
     "favorites": "Favorites",
@@ -99,7 +99,7 @@
     "close": "Close",
     "deletePost": "Do you really want delete post?",
     "closeEditMode": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
-    "deletePhoto" : "Do you really want to delete your profile photo?"
+    "deletePhoto": "Do you really want to delete your profile photo?"
   },
   "viewPost": {
     "likes": "Likes",
@@ -139,5 +139,39 @@
     "description": "You need to log in to access this page.",
     "login": "Log in",
     "backToHome": "Back to Home"
+  },
+  "profile": {
+    "settings": {
+      "title": "Settings",
+      "general": "General",
+      "devices": "Devices",
+      "accountManagement": "Account Management",
+      "payments": "Payments",
+      "successTitle": "Success",
+      "errorTitle": "Error",
+      "successMessage": "Payment was successful!",
+      "errorMessage": "Transaction failed. Please, write to support",
+      "backToPayment": "Back to payment"
+    },
+    "subscriptions": {
+      "currentSubscription": "Current Subscription:",
+      "expireAt": "Expire at",
+      "nextPayment": "Next payment",
+      "autoRenewal": "Auto-Renewal",
+      "accountType": "Account type:",
+      "changeSubscription": "Change your subscription:",
+      "personal": "Personal",
+      "business": "Business",
+      "days": "{count} Day",
+      "weekly": "{count} Day",
+      "monthly": "month",
+      "per": "per",
+      "or": "or",
+      "createPayment": "Create payment",
+      "autoRenewalModalText": "Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings",
+      "paymentCanceled": "Auto renewal canceled",
+      "comingSoon": "Coming soon",
+      "disabled": "Disabled"
+    }
   }
 }
