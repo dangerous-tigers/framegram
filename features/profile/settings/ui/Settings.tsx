@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { ArrowBackOutline } from '@/assets/icons';
+import { useMe } from '@/entities/user/model/useMe';
 import { AccountManagement, Devices, General, Payments } from '@/features/profile/settings';
 import { Tabs } from '@/shared/ui/tabs/ui/Tabs';
 
@@ -18,10 +19,17 @@ const TABS = [
 export const Settings = () => {
   const router = useRouter();
 
+  const { data } = useMe();
+
+  const handleBack = () => {
+    router.replace(`/profile/${data?.userId}`);
+    router.refresh();
+  };
+
   return (
     <div className={s.container}>
       <div className={s.title}>
-        <ArrowBackOutline onClick={router.back} />
+        <ArrowBackOutline onClick={handleBack} />
         <h2>Settings</h2>
       </div>
       <Tabs
