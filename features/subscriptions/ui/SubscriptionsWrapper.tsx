@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons';
+import { formatDate } from '@/shared/lib';
 import { Button, Checkbox, Modal, ModalHeaderWithClose, RadioButtonGroup } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 
@@ -14,18 +16,22 @@ import s from './SubscriptionsWrapper.module.scss';
 
 export function SubscriptionsWrapper() {
   const t = useTranslations('profile.subscriptions');
+  const tModal = useTranslations('profile.settings');
   const { show } = useAlertStore();
   const { data: subscription } = useGetMySubscription();
   const createSubscription = useSubscription();
   const cancelAutoRenewal = useCancelAutoRenewal();
+  const params = useSearchParams();
+  const router = useRouter();
 
   const lastSubscription = subscription?.data.at(-1);
   const isSubscriptionActive = lastSubscription && new Date(lastSubscription.endDateOfSubscription) > new Date();
 
   const [autoRenewal, setAutoRenewal] = useState(subscription?.hasAutoRenewal || false);
+  const [openModal, setOpenModal] = useState<null | 'success' | 'error'>(null);
+  const [paymentModal, setPaymentModal] = useState<null | 'stripe' | 'paypal'>(null);
   const [accountType, setAccountType] = useState('personal');
   const [costType, setCostType] = useState('10');
-  const [paymentModal, setPaymentModal] = useState<null | 'stripe' | 'paypal'>(null);
   const [iAgree, setIAgree] = useState(false);
 
   const ACCOUNT_TYPE = [
@@ -67,10 +73,14 @@ export function SubscriptionsWrapper() {
     }
   }, [subscription]);
 
-  function formatDate(date: string | undefined) {
-    if (!date) return '—';
-    return new Date(date).toLocaleDateString();
-  }
+  useEffect(() => {
+    if (params.get('success')) {
+      setOpenModal('success');
+    }
+    if (params.get('error')) {
+      setOpenModal('error');
+    }
+  }, [params]);
 
   function handleSubscribe() {
     if (paymentModal === 'stripe') {
@@ -78,7 +88,7 @@ export function SubscriptionsWrapper() {
         paymentType: 'STRIPE' as PaymentType,
         typeSubscription: COST_TYPE.find((item) => item.value === costType)?.typeSubscription as SubscriptionType,
         amount: Number(costType),
-        baseUrl: `${window.location}/profile/settings`,
+        baseUrl: `${window.location}`,
       });
     } else {
       show({
@@ -95,6 +105,11 @@ export function SubscriptionsWrapper() {
       cancelAutoRenewal.mutate();
     }
     setAutoRenewal((prev) => !prev);
+  }
+
+  function handleModalClose() {
+    setOpenModal(null);
+    router.replace('/profile/settings?tab=account-management');
   }
 
   return (
@@ -178,6 +193,32 @@ export function SubscriptionsWrapper() {
               </Button>
             </div>
           </div>
+        </Modal>
+      )}
+
+      {openModal && (
+        <Modal
+          open={!!openModal}
+          onOpenChange={handleModalClose}
+          header={
+            <ModalHeaderWithClose
+              title={openModal === 'success' ? tModal('successTitle') : tModal('errorTitle')}
+              onClose={handleModalClose}
+            />
+          }
+        >
+          {openModal === 'success' && (
+            <div className={s.modalContent}>
+              {tModal('successMessage')}
+              <Button onClick={handleModalClose}>OK</Button>
+            </div>
+          )}
+          {openModal === 'error' && (
+            <div className={s.modalContent}>
+              {tModal('errorMessage')}
+              <Button onClick={handleModalClose}>{tModal('backToPayment')}</Button>
+            </div>
+          )}
         </Modal>
       )}
     </div>

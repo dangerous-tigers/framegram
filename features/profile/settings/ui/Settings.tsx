@@ -1,22 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { ArrowBackOutline } from '@/assets/icons';
+import { useMe } from '@/entities/user/model/useMe';
 import { AccountManagement, Devices, General, Payments } from '@/features/profile/settings';
-import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
 import { Tabs } from '@/shared/ui/tabs/ui/Tabs';
 
 import s from './Settings.module.scss';
 
 export const Settings = () => {
   const t = useTranslations('profile.settings');
-  const [openModal, setOpenModal] = useState<null | 'success' | 'error'>(null);
-  const router = useRouter();
-  const params = useSearchParams();
-
   const TABS = [
     { value: 'general', label: t('general'), content: <General /> },
     { value: 'devices', label: t('devices'), content: <Devices /> },
@@ -24,55 +19,40 @@ export const Settings = () => {
     { value: 'payments', label: t('payments'), content: <Payments /> },
   ];
 
-  useEffect(() => {
-    if (params.get('success')) {
-      setOpenModal('success');
-    }
-    if (params.get('error')) {
-      setOpenModal('error');
-    }
-  }, [params]);
+  const router = useRouter();
+  const params = useSearchParams();
 
-  function handleModalClose() {
-    setOpenModal(null);
-    router.push('/profile/settings');
-  }
+  const { data } = useMe();
+
+  const activeTab = params.get('tab');
+
+  const handleBack = () => {
+    router.replace(`/profile/${data?.userId}`);
+    router.refresh();
+  };
+
+  const activeTabIndex = TABS.find((item) => item.value === activeTab);
+
+  const handleTabChange = (tabValue: string) => {
+    const tab = new URLSearchParams(params);
+    tab.set('tab', tabValue);
+    router.replace(`?${tab}`);
+  };
+
   return (
     <div className={s.container}>
       <div className={s.title}>
+        <ArrowBackOutline onClick={handleBack} />
+        <h2>Settings</h2>
         <ArrowBackOutline onClick={router.back} />
         <h2>{t('title')}</h2>
       </div>
       <Tabs
         tabs={TABS}
+        handleTabChange={handleTabChange}
+        defaultValue={activeTabIndex?.value}
         className={s.tabs}
       />
-
-      {openModal && (
-        <Modal
-          open={!!openModal}
-          onOpenChange={handleModalClose}
-          header={
-            <ModalHeaderWithClose
-              title={openModal === 'success' ? t('successTitle') : t('errorTitle')}
-              onClose={handleModalClose}
-            />
-          }
-        >
-          {openModal === 'success' && (
-            <div className={s.modalContent}>
-              {t('successMessage')}
-              <Button onClick={handleModalClose}>OK</Button>
-            </div>
-          )}
-          {openModal === 'error' && (
-            <div className={s.modalContent}>
-              {t('errorMessage')}
-              <Button onClick={handleModalClose}>{t('backToPayment')}</Button>
-            </div>
-          )}
-        </Modal>
-      )}
     </div>
   );
 };

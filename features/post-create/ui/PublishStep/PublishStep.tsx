@@ -2,14 +2,13 @@ import { ChangeEvent } from 'react';
 import Image from 'next/image';
 
 import avatarPlaceholder from '@/assets/illustrations/avatar-placeholder.png';
-import { profileApi } from '@/entities/profile/api/profile.api';
+import { useGetProfile } from '@/entities/profile/model';
 import { useMe } from '@/entities/user/model/useMe';
 import { AddLocation } from '@/features/addLocation/ui/AddLocation';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 import { useMediaQuery } from '@/shared/lib/hooks/useMediaQuery';
 import { Swiper } from '@/shared/ui/swiper';
 import { Textarea } from '@/shared/ui/textarea';
-import { useQuery } from '@tanstack/react-query';
 
 import s from '@/features/post-create/ui/PublishStep/publishStep.module.scss';
 
@@ -27,10 +26,7 @@ export const PublishStep = () => {
   };
 
   const { data: user } = useMe();
-  const { data: profile } = useQuery({
-    queryKey: ['general'],
-    queryFn: () => profileApi.getProfile(),
-  });
+  const { data: profile } = useGetProfile();
 
   const isMobile = useMediaQuery('(max-width: 999px)');
   const ifMoreOneSlide = images.length > 1;
