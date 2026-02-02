@@ -24,7 +24,8 @@ import s from './General.module.scss';
 export const General = () => {
   const { show: showActionModal, open } = useConfirmStore();
 
-  const t = useTranslations('confirmActions');
+  const tGeneral = useTranslations('profile.settings.general');
+  const tAction = useTranslations('confirmActions');
 
   const { isPending, isSuccess, data } = useGetProfile();
   const updateProfile = useUpdateProfile();
@@ -120,12 +121,12 @@ export const General = () => {
               variant='outline'
               onClick={(e) => e.preventDefault()}
             >
-              Select Image
+              {tGeneral('selectImage')}
             </PolymorphicButton>
           </ImageUpload>
           {open && (
             <ConfirmActionModal confirmCallback={() => removePhoto.mutate()}>
-              <span>{t('deletePhoto')}</span>
+              <span>{tAction('deletePhoto')}</span>
             </ConfirmActionModal>
           )}
         </div>
@@ -133,14 +134,14 @@ export const General = () => {
           <span className={s.required}>*</span>
           <Input
             error={errors.userName?.message}
-            label={'User Name'}
+            label={tGeneral('userName')}
             {...register('userName')}
           />
           <div>
             <span className={s.required}>*</span>
             <Input
               error={errors.firstName?.message}
-              label={'First Name'}
+              label={tGeneral('firstName')}
               {...register('firstName', { required: true })}
             />
           </div>
@@ -148,7 +149,7 @@ export const General = () => {
             <span className={s.required}>*</span>
             <Input
               error={errors.lastName?.message}
-              label={'Last Name'}
+              label={tGeneral('lastName')}
               {...register('lastName', { required: true })}
             />
           </div>
@@ -157,7 +158,7 @@ export const General = () => {
               className={s.label}
               htmlFor='date'
             >
-              Date of birthday
+              {tGeneral('birthday')}
             </label>
             <input
               type='date'
@@ -167,7 +168,7 @@ export const General = () => {
           </div>
           <Textarea
             error={errors.aboutMe?.message}
-            label='About me'
+            label={tGeneral('aboutMe')}
             {...register('aboutMe')}
           />
         </div>
@@ -178,7 +179,7 @@ export const General = () => {
           type='submit'
           disabled={!isValid || updateProfile.isPending}
         >
-          {updateProfile.isPending ? 'Saving...' : 'Save'}
+          {updateProfile.isPending ? tGeneral('saving') : tGeneral('save')}
         </PolymorphicButton>
       </div>
     </form>
