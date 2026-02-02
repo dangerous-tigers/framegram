@@ -67,7 +67,7 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
             className={s.profileButton}
             variant='secondary'
             as={Link}
-            href={'/profile/settings'}
+            href={'/profile/settings?tab=general'}
           >
             Profile Settings
           </PolymorphicButton>

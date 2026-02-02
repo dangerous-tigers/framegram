@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { ArrowBackOutline } from '@/assets/icons';
 import { useMe } from '@/entities/user/model/useMe';
@@ -18,12 +18,23 @@ const TABS = [
 
 export const Settings = () => {
   const router = useRouter();
+  const params = useSearchParams();
 
   const { data } = useMe();
+
+  const activeTab = params.get('tab');
 
   const handleBack = () => {
     router.replace(`/profile/${data?.userId}`);
     router.refresh();
+  };
+
+  const activeTabIndex = TABS.find((item) => item.value === activeTab);
+
+  const handleTabChange = (tabValue: string) => {
+    const tab = new URLSearchParams(params);
+    tab.set('tab', tabValue);
+    router.replace(`?${tab}`);
   };
 
   return (
@@ -34,6 +45,8 @@ export const Settings = () => {
       </div>
       <Tabs
         tabs={TABS}
+        handleTabChange={handleTabChange}
+        defaultValue={activeTabIndex?.value}
         className={s.tabs}
       />
     </div>
