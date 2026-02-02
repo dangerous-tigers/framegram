@@ -1,11 +1,31 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-
+import { PostsByUserId } from '@/entities/profile';
 import { client } from '@/shared/api/client';
 import { PORTION_POSTS } from '@/shared/constants/constants';
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
-export function useUserPostsInfiniteQuery({ userId }: { userId: string }) {
+export function useUserPostsInfiniteQuery({
+  userId,
+  firstBatchOfPosts,
+}: {
+  userId: string;
+  firstBatchOfPosts: PostsByUserId;
+}) {
+  const initialData: InfiniteData<PostsByUserId, number> = {
+    pages: [
+      {
+        totalCount: firstBatchOfPosts.totalCount, // ⚠ если знаешь реальный totalCount — подставь его
+        pageSize: PORTION_POSTS,
+        totalUsers: firstBatchOfPosts.totalUsers,
+        items: firstBatchOfPosts.items,
+      },
+    ],
+    pageParams: [1],
+  };
+
   const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfiniteQuery({
     queryKey: ['user-posts', userId],
+    initialData,
+    initialPageParam: 1,
     queryFn: async ({ pageParam = 1 }) => {
       // Используем маршрут /posts/{param} с username и pageNumber
       const response = await client.GET('/posts/{param}', {
@@ -21,7 +41,6 @@ export function useUserPostsInfiniteQuery({ userId }: { userId: string }) {
       });
       return response.data;
     },
-    initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const currentPage = allPages.length;
       const pageSize = PORTION_POSTS || lastPage?.pageSize;

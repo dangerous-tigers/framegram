@@ -1,15 +1,15 @@
 'use client';
 
-import clsx from 'clsx';
 import { ComponentPropsWithoutRef, useState } from 'react';
+import clsx from 'clsx';
+
+import { useOutsideClick } from '@/shared/hooks/useOutsideClick';
 
 import { PopoverButton } from '../PopoverButton/PopoverButton';
 import { PopoverContent } from '../PopoverContent/PopoverContent';
 import { PopoverContext } from '../PopoverProvider';
 
 import s from './Popover.module.scss';
-
-import { useOutsideClick } from '@/shared/hooks/useOutsideClick';
 
 type Props = ComponentPropsWithoutRef<'div'>;
 

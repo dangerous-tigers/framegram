@@ -1,8 +1,8 @@
 'use client';
 
+import { ComponentPropsWithRef } from 'react';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
-import { ComponentPropsWithRef } from 'react';
 
 import { usePopoverContext } from '../PopoverProvider';
 

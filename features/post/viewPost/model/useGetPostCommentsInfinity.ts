@@ -1,7 +1,6 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-
 import { client } from '@/shared/api/client';
 import { PORTION_COMMENTS } from '@/shared/constants/constants';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export function useGetPostCommentsInfinity({ postId }: { postId: number }) {
   const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({

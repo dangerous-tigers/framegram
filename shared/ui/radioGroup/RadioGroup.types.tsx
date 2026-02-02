@@ -1,5 +1,5 @@
-import { RadioGroup } from 'radix-ui';
 import { ComponentPropsWithoutRef } from 'react';
+import { RadioGroup } from 'radix-ui';
 
 type RadioOption = {
   value: string;

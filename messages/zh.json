@@ -93,11 +93,12 @@
     "emailExist": "此电子邮件地址对应的用户不存在",
     "captcha": "请验证您不是机器人"
   },
-  "confirmAction": {
+  "confirmActions": {
     "yes": "是",
     "no": "否",
     "close": "关闭",
-    "Do you really want to finish editing? If you close the changes you have made will not be saved": "您真的想结束编辑吗？如果您关闭，您所做的更改将不会被保存。"
+    "closeEditMode": "您确定要结束编辑吗？如果关闭，您所做的更改将不会被保存。",
+    "deletePhoto": "您确定要删除您的头像吗？"
   },
   "viewPost": {
     "likes": "点赞",
@@ -119,5 +120,44 @@
     "RegisteredUsers": "註冊用戶",
     "ShowMore": "顯示更多",
     "Hide": "隱藏"
+  },
+  "error404": {
+    "title": "404 - 找不到页面",
+    "description": "您查找的页面不存在或已被移动。",
+    "backToHome": "回到首页",
+    "goBack": "返回"
+  },
+  "errorPage": {
+    "title": "糟糕！出错了",
+    "description": "发生了意外错误。请稍后再试。",
+    "tryAgain": "重试",
+    "backToHome": "回到首页"
+  },
+  "notAuth": {
+    "title": "需要授权",
+    "description": "您需要登录才能访问此页面。",
+    "login": "登录",
+    "backToHome": "回到首页"
+  },
+  "profile": {
+    "settings": {
+      "general": {
+        "lastName": "姓",
+        "firstName": "名",
+        "userName": "用户名",
+        "birthday": "出生日期",
+        "aboutMe": "关于我",
+        "selectImage": "选择图片",
+        "save": "保存",
+        "saving": "正在保存…"
+  }
+  },
+  "publications": "帖子",
+  "followers": "关注者",
+  "following": "正在关注",
+  "profileSettings": "设置",
+  "follow": "关注",
+  "unfollow": "取消关注",
+  "sendMessage": "发送消息"
   }
 }

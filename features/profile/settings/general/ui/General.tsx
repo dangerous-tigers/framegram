@@ -1,97 +1,38 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useTranslations } from 'next-intl';
 import { MouseEventHandler, useEffect } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-
-import s from './General.module.scss';
+import { useTranslations } from 'next-intl';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { CloseOutline, ImageOutline } from '@/assets/icons';
 import { UpdateProfileUser } from '@/entities/profile';
-import { profileApi } from '@/entities/profile/api/profile.api';
+import { useGetProfile, useRemovePhoto, useUpdateProfile, useUploadPhoto } from '@/entities/profile/model';
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { ImageUpload } from '@/features/profile/settings/general/ui/ImageUpload';
 import { generalSettingsSchema } from '@/features/profile/settings/model/generalSettingsSchema';
 import { CatPreloader } from '@/shared/components/catPreloader/CatPreloader';
 import { ConfirmActionModal } from '@/shared/components/confirmActionModal';
 import { validateImage } from '@/shared/lib/file/validateImage';
-import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Input } from '@/shared/ui/input';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
-import { type Option, Select } from '@/shared/ui/select/Select';
 import { Separator } from '@/shared/ui/separator/Separator';
 import { Textarea } from '@/shared/ui/textarea';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-const CITY: Option[] = [
-  { value: 'Minsk', label: 'Minsk' },
-  { value: 'Kiev', label: 'Kiev' },
-];
-const COUNTRY: Option[] = [
-  { value: 'USA', label: 'USA' },
-  { value: 'Belarus', label: 'Belarus' },
-];
+import s from './General.module.scss';
 
 export const General = () => {
-  const queryClient = useQueryClient();
-  const { show } = useAlertStore();
   const { show: showActionModal, open } = useConfirmStore();
 
-  const t = useTranslations('confirmActions');
+  const tGeneral = useTranslations('profile.settings.general');
+  const tAction = useTranslations('confirmActions');
+
+  const { isPending, isSuccess, data } = useGetProfile();
+  const updateProfile = useUpdateProfile();
+  const uploadPhoto = useUploadPhoto();
+  const removePhoto = useRemovePhoto();
 
   const {
-    isPending,
-    data: general,
-    isSuccess,
-  } = useQuery({
-    queryKey: ['general'],
-    queryFn: () => profileApi.getProfile(),
-  });
-
-  const updateProfile = useMutation({
-    mutationFn: profileApi.updateProfile,
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: ['general'],
-      });
-      show({
-        error: null,
-        description: 'Your settings are saved!',
-        variant: 'default',
-        severity: 'success',
-      });
-    },
-    onError: () => {
-      show({
-        error: 'Error! Server is not available!',
-        description: null,
-        variant: 'default',
-        severity: 'error',
-      });
-    },
-  });
-
-  const uploadPhoto = useMutation({
-    mutationFn: profileApi.uploadPhoto,
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: ['general'],
-      });
-    },
-  });
-
-  const deletePhoto = useMutation({
-    mutationFn: profileApi.deletePhoto,
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: ['general'],
-      });
-    },
-  });
-
-  const {
-    control,
     register,
     setValue,
     handleSubmit,
@@ -112,13 +53,13 @@ export const General = () => {
   });
 
   useEffect(() => {
-    setValue('firstName', general?.firstName ?? '');
-    setValue('lastName', general?.lastName ?? '');
-    setValue('userName', general?.userName ?? '');
-    setValue('aboutMe', general?.aboutMe ?? '');
-    setValue('dateOfBirth', general?.dateOfBirth?.split('T')[0] ?? '');
-    setValue('country', general?.country ?? '');
-    setValue('city', general?.city ?? '');
+    setValue('firstName', data?.firstName ?? '');
+    setValue('lastName', data?.lastName ?? '');
+    setValue('userName', data?.userName ?? '');
+    setValue('aboutMe', data?.aboutMe ?? '');
+    setValue('dateOfBirth', data?.dateOfBirth?.split('T')[0] ?? '');
+    setValue('country', data?.country ?? '');
+    setValue('city', data?.city ?? '');
   }, [isSuccess]);
 
   if (isPending) return <CatPreloader />;
@@ -152,7 +93,7 @@ export const General = () => {
             accept='image/png,image/jpeg'
             onSelect={handleUploadPhoto}
           >
-            {!general?.avatars[0] ? (
+            {!data?.avatars[0] ? (
               <span className={s.drag}>
                 <ImageOutline
                   width={36}
@@ -161,11 +102,11 @@ export const General = () => {
               </span>
             ) : (
               <img
-                src={general.avatars[0].url}
+                src={data.avatars[0].url}
                 alt='profile photo'
               />
             )}
-            {general?.avatars[0] && (
+            {data?.avatars[0] && (
               <span
                 className={s.cross}
                 onClick={handleRemovePhoto}
@@ -176,11 +117,16 @@ export const General = () => {
                 />
               </span>
             )}
-            <PolymorphicButton variant='outline'>Select Image</PolymorphicButton>
+            <PolymorphicButton
+              variant='outline'
+              onClick={(e) => e.preventDefault()}
+            >
+              {tGeneral('selectImage')}
+            </PolymorphicButton>
           </ImageUpload>
           {open && (
-            <ConfirmActionModal confirmCallback={() => deletePhoto.mutate()}>
-              <span>{t('deletePhoto')}</span>
+            <ConfirmActionModal confirmCallback={() => removePhoto.mutate()}>
+              <span>{tAction('deletePhoto')}</span>
             </ConfirmActionModal>
           )}
         </div>
@@ -188,14 +134,14 @@ export const General = () => {
           <span className={s.required}>*</span>
           <Input
             error={errors.userName?.message}
-            label={'User Name'}
+            label={tGeneral('userName')}
             {...register('userName')}
           />
           <div>
             <span className={s.required}>*</span>
             <Input
               error={errors.firstName?.message}
-              label={'First Name'}
+              label={tGeneral('firstName')}
               {...register('firstName', { required: true })}
             />
           </div>
@@ -203,7 +149,7 @@ export const General = () => {
             <span className={s.required}>*</span>
             <Input
               error={errors.lastName?.message}
-              label={'Last Name'}
+              label={tGeneral('lastName')}
               {...register('lastName', { required: true })}
             />
           </div>
@@ -212,7 +158,7 @@ export const General = () => {
               className={s.label}
               htmlFor='date'
             >
-              Date of birthday
+              {tGeneral('birthday')}
             </label>
             <input
               type='date'
@@ -220,49 +166,9 @@ export const General = () => {
               style={{ color: 'var(--light-100)' }}
             />
           </div>
-          <div className={s.location}>
-            <div>
-              <span className={s.label}>Select your country</span>
-              <Controller
-                name='country'
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                    width={'358px'}
-                    options={COUNTRY}
-                    variant='default'
-                    disabled={false}
-                    placeholder={'Country'}
-                  />
-                )}
-              />
-            </div>
-            <div>
-              <span className={s.label}>Select your city</span>
-              <Controller
-                name='city'
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                    width={'358px'}
-                    options={CITY}
-                    variant='default'
-                    disabled={false}
-                    placeholder={'City'}
-                  />
-                )}
-              />
-            </div>
-          </div>
           <Textarea
             error={errors.aboutMe?.message}
-            label='About me'
+            label={tGeneral('aboutMe')}
             {...register('aboutMe')}
           />
         </div>
@@ -273,7 +179,7 @@ export const General = () => {
           type='submit'
           disabled={!isValid || updateProfile.isPending}
         >
-          {updateProfile.isPending ? 'Saving...' : 'Save'}
+          {updateProfile.isPending ? tGeneral('saving') : tGeneral('save')}
         </PolymorphicButton>
       </div>
     </form>

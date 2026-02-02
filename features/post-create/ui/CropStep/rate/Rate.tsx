@@ -1,8 +1,8 @@
 'use client';
 
-import Popover from '../components/Popover';
-
 import { ExpandOutline } from '@/assets/icons';
+
+import Popover from '../components/Popover';
 
 export const Rate = () => {
   return (

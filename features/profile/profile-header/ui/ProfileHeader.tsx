@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
-
-import s from './ProfileHeader.module.scss';
+import { useTranslations } from 'next-intl';
 
 import { Paid } from '@/assets/icons';
 import profile_img_placeholder from '@/assets/illustrations/avatar-placeholder.png';
@@ -10,12 +9,16 @@ import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 
+import s from './ProfileHeader.module.scss';
+
 type Props = {
   hasPaymentSubscription: boolean;
   profile: UserProfileByIdWithPostsResponse;
 };
 
 export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
+  const t = useTranslations('profile');
+
   const { data } = useMe();
 
   const isOwner = data?.userId === profile.id;
@@ -44,19 +47,19 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
           <li>
             <Link href={'/publications'}>
               {profile.publicationsCount}
-              <span>Publications</span>
+              <span>{t('publications')}</span>
             </Link>
           </li>
           <li>
             <Link href={'/followers'}>
               {profile.followersCount}
-              <span>Followers</span>
+              <span>{t('followers')}</span>
             </Link>
           </li>
           <li>
             <Link href={'/following'}>
               {profile.followingCount}
-              <span>Following</span>
+              <span>{t('following')}</span>
             </Link>
           </li>
         </ul>
@@ -67,24 +70,24 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
             className={s.profileButton}
             variant='secondary'
             as={Link}
-            href={'/profile/settings'}
+            href={'/profile/settings?tab=general'}
           >
-            Profile Settings
+            {t('profileSettings')}
           </PolymorphicButton>
         )}
         {!isOwner && data?.userId && (
           <>
             {!profile.isFollowing ? (
-              <PolymorphicButton>Follow</PolymorphicButton>
+              <PolymorphicButton>{t('follow')}</PolymorphicButton>
             ) : (
-              <PolymorphicButton>Unfollow</PolymorphicButton>
+              <PolymorphicButton>{t('unfollow')}</PolymorphicButton>
             )}
             <PolymorphicButton
               variant={'secondary'}
               as={Link}
               href={routes.messenger}
             >
-              SendMessage
+              {t('sendMessage')}
             </PolymorphicButton>
           </>
         )}

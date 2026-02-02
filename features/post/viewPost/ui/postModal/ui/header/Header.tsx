@@ -1,8 +1,6 @@
-import clsx from 'clsx';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-
-import s from './Header.module.scss';
+import { useTranslations } from 'next-intl';
+import clsx from 'clsx';
 
 import {
   CopyOutline,
@@ -17,6 +15,8 @@ import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ProfileImage } from '@/features/post/viewPost/ui/postModal/ui/profile-image/ProfileImage';
 import { ConfirmActionModal } from '@/shared/components/confirmActionModal';
 import { Popover } from '@/shared/ui/popover';
+
+import s from './Header.module.scss';
 
 type Props = {
   avatar: string | undefined;
