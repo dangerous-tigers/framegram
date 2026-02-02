@@ -137,5 +137,14 @@
     "description": "您需要登录才能访问此页面。",
     "login": "登录",
     "backToHome": "回到首页"
+  },
+  "profile": {
+  "publications": "帖子",
+  "followers": "关注者",
+  "following": "正在关注",
+  "profileSettings": "设置",
+  "follow": "关注",
+  "unfollow": "取消关注",
+  "sendMessage": "发送消息"
   }
 }

@@ -137,5 +137,14 @@
     "description": "Для доступа к этой странице необходимо войти в систему.",
     "login": "Войти",
     "backToHome": "Вернуться на главную"
+  },
+  "profile": {
+  "publications": "Публикации",
+  "followers": "Подписчики",
+  "following": "Подписки",
+  "profileSettings": "Настройки",
+  "follow": "Подписаться",
+  "unfollow": "Отписаться",
+  "sendMessage": "Написать сообщение"
   }
 }

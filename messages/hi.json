@@ -137,5 +137,14 @@
     "description": "इस पृष्ठ तक पहुँचने के लिए आपको लॉग इन करना होगा।",
     "login": "लॉग इन करें",
     "backToHome": "होम पर वापस जाएं"
+  },
+  "profile": {
+  "publications": "प्रकाशन",
+  "followers": "फ़ॉलोअर्स",
+  "following": "फ़ॉलो कर रहा है",
+  "profileSettings": "सेटिंग्स",
+  "follow": "फ़ॉलो करें",
+  "unfollow": "अनफ़ॉलो करें",
+  "sendMessage": "संदेश भेजें"
   }
 }

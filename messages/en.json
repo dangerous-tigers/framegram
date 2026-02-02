@@ -139,5 +139,14 @@
     "description": "You need to log in to access this page.",
     "login": "Log in",
     "backToHome": "Back to Home"
+  },
+  "profile": {
+  "publications": "Publications",
+  "followers": "Followers",
+  "following": "Following",
+  "profileSettings": "Settings",
+  "follow": "Follow",
+  "unfollow": "Unfollow",
+  "sendMessage": "Send Message"
   }
 }
