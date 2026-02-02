@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 
 import { ToggleLocale } from '@/shared/components/toggleLocale/ToggleLocale';
+import { Dropdown } from '@/shared/ui/dropdown/Dropdown';
 import { HeaderAuthButtons } from '@/widgets/header/ui/HeaderAuthButtons';
 import { Logo } from '@/widgets/header/ui/Logo';
-import { Notifications } from '@/widgets/header/ui/Notifications';
 
 import s from './header.module.scss';
 
@@ -19,7 +19,8 @@ export const Header = async (props: PropsHeader) => {
       <div className='container'>
         <div className={s.headerBody}>
           <Logo />
-          <Notifications />
+          <Dropdown />
+          {/* <Notifications /> */}
           <ToggleLocale />
           <HeaderAuthButtons />
         </div>
