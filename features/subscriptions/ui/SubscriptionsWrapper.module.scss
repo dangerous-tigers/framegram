@@ -28,6 +28,10 @@
 .iconBtn {
   background-color: transparent;
   padding: 0;
+
+  &:hover {
+    background-color: transparent;
+  }
 }
 
 .modalContent {

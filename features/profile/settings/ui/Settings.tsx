@@ -43,8 +43,6 @@ export const Settings = () => {
     <div className={s.container}>
       <div className={s.title}>
         <ArrowBackOutline onClick={handleBack} />
-        <h2>Settings</h2>
-        <ArrowBackOutline onClick={router.back} />
         <h2>{t('title')}</h2>
       </div>
       <Tabs
