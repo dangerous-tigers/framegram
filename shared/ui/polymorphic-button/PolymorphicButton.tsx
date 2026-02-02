@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react';
+import clsx from 'clsx';
 
 import s from './PolymorphicButton.module.scss';
 

@@ -1,13 +1,13 @@
 'use client';
 
-import debounce from 'lodash.debounce';
 import { useEffect, useMemo, useRef, useState } from 'react';
-
-import s from './addLocation.module.scss';
+import debounce from 'lodash.debounce';
 
 import { PinOutline } from '@/assets/icons';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { InputWithIcon } from '@/shared/ui/inputWithIcon';
+
+import s from './addLocation.module.scss';
 
 type City = {
   id: string;

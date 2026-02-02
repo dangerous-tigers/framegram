@@ -1,10 +1,9 @@
+import { ArrowIosBackOutline } from '@/assets/icons';
 import * as Dialog from '@radix-ui/react-dialog';
 
 import { Button } from '../button/Button';
 
 import styles from './ModalHeader.module.scss';
-
-import { ArrowIosBackOutline } from '@/assets/icons';
 
 type Props = {
   title: string;

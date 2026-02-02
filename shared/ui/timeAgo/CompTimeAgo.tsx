@@ -1,10 +1,11 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import './timeAgo';
 import ReactTimeAgo from 'react-time-ago';
 
 import { mapTimeAgoLocale } from '../../lib/';
+
+import './timeAgo';
 
 export default function CompTimeAgo({ date }: { date: Date }) {
   const locale = useLocale();

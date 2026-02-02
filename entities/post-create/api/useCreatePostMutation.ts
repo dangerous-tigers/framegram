@@ -1,6 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { createPost, uploadPostImages } from '@/entities/post/api/post.api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useCreatePostMutation = () => {
   const queryClient = useQueryClient();

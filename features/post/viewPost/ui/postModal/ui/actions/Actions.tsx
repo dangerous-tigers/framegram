@@ -1,12 +1,13 @@
 'use client';
 import clsx from 'clsx';
 
-import s from './Actions.module.scss';
-import { LikesInfo } from './LikesInfo';
-
-import { HeartOutline, PaperPlaneOutline, BookmarkOutline, Heart, Bookmark } from '@/assets/icons';
+import { Bookmark, BookmarkOutline, Heart, HeartOutline, PaperPlaneOutline } from '@/assets/icons';
 import { Button } from '@/shared/ui';
 import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
+
+import { LikesInfo } from './LikesInfo';
+
+import s from './Actions.module.scss';
 
 export function Actions({
   isLiked,

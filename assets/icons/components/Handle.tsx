@@ -1,5 +1,6 @@
+import { forwardRef, memo, Ref } from 'react';
 import type { SVGProps } from 'react';
-import { Ref, forwardRef, memo } from 'react';
+
 const SvgHandle = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     width={20}

@@ -1,7 +1,7 @@
 'use client';
 
-import clsx from 'clsx';
 import React from 'react';
+import clsx from 'clsx';
 
 import s from './List.module.scss';
 

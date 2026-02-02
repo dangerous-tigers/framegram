@@ -1,13 +1,14 @@
 'use client';
-import { useTranslations } from 'next-intl';
 import { ChangeEvent, useEffect, useRef } from 'react';
-
-import s from './Publish.module.scss';
+import { useTranslations } from 'next-intl';
 
 import { useViewPostStore } from '@/features/post/viewPost/model/useViewPost.store';
 import { Button } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Textarea } from '@/shared/ui/textarea';
+
+import s from './Publish.module.scss';
+
 export function Publish({ postId }: { postId: number }) {
   const type = useViewPostStore((state) => state.type);
   const setType = useViewPostStore((state) => state.setType);
