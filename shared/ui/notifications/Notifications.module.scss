@@ -1,12 +1,48 @@
 .content {
   background-color: var(--dark-500);
-  width: 355px;
+  width: 356px;
   height: 424px;
   border: 1px solid var(--dark-100);
   border-radius: 4px;
-  padding: 12px 8px 12px 12px;
+  padding: 18px 8px 10px 12px;
   z-index: 2;
-  max-height: 400px;
+  max-height: 424px;
+  position: relative;
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  animation: scaleIn 0.5s ease-out;
+
+  @media (width <=360) {
+    width: 340px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 2px;
+    z-index: 2;
+    width: 346px;
+    height: 1px;
+    background-color: var(--dark-500);
+
+    @media (width <=360) {
+      width: 310px;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 
   .separator {
     height: 1px;
@@ -20,15 +56,12 @@
   }
 
   .arrow {
-    svg {
-      display: block;
-    }
-
     width: 16px;
     height: 8px;
+    fill: var(--dark-500);
     stroke: var(--dark-100);
     stroke-width: 1px;
-    fill: var(--dark-500);
+    transform: translateY(-1px);
   }
 }
 
@@ -54,6 +87,8 @@
 
   .timeAgo {
     font-size: var(--font-size-xs);
+    font-weight: 400;
+    line-height: var(--line-height-s);
     color: var(--light-900);
   }
 }

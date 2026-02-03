@@ -1,6 +1,7 @@
 export { Button } from './button/Button';
 export { Checkbox } from './checkbox/Checkbox';
 export { Modal, ModalHeaderWithClose, ModalHeaderWithNext } from './modal';
+export { Notifications } from './notifications';
 export { Recaptcha } from './recaptcha/ui/ReCaptcha';
 export { Separator } from './separator/Separator';
 export { Skeleton } from './skeleton/Skeleton';
