@@ -8,7 +8,7 @@ import { useGetMySubscription } from './useGetSubscription';
 export function useSubscriptionState() {
   const { data: subscription } = useGetMySubscription();
   const cancelAutoRenewal = useCancelAutoRenewal();
-  const t = useTranslations('profile.subscriptions');
+  const t = useTranslations('profile.settings.accountManagement');
 
   const lastSubscription = subscription?.data.at(-1);
   const isSubscriptionActive = lastSubscription && new Date(lastSubscription.endDateOfSubscription) > new Date();

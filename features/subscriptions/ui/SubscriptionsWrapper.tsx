@@ -12,7 +12,7 @@ import { SubscriptionsCard } from './SubscriptionsCard';
 import s from './SubscriptionsWrapper.module.scss';
 
 export function SubscriptionsWrapper() {
-  const t = useTranslations('profile.subscriptions');
+  const t = useTranslations('profile.settings.accountManagement');
 
   const {
     costType,

@@ -13,9 +13,9 @@ import s from './Settings.module.scss';
 export const Settings = () => {
   const t = useTranslations('profile.settings');
   const TABS = [
-    { value: 'general', label: t('general'), content: <General /> },
+    { value: 'general', label: t('general.title'), content: <General /> },
     { value: 'devices', label: t('devices'), content: <Devices /> },
-    { value: 'account-management', label: t('accountManagement'), content: <AccountManagement /> },
+    { value: 'account-management', label: t('accountManagement.title'), content: <AccountManagement /> },
     { value: 'payments', label: t('payments'), content: <Payments /> },
   ];
 

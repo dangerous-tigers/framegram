@@ -22,7 +22,7 @@ interface UseSubscriptionModalsProps {
 }
 
 export function useSubscriptionModals({ costType, COST_TYPE }: UseSubscriptionModalsProps) {
-  const t = useTranslations('profile.subscriptions');
+  const t = useTranslations('profile.settings.accountManagement');
   const { show } = useAlertStore();
   const createSubscription = useSubscription();
   const params = useSearchParams();

@@ -93,11 +93,12 @@
     "emailExist": "Пользователь с таким адресом электронной почты не существует",
     "captcha": "Пожалуйста, подтвердите, что вы не робот"
   },
-  "confirmAction": {
+  "confirmActions": {
     "yes": "Да",
     "no": "Нет",
     "close": "Закрыть",
-    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесенные вами изменения не будут сохранены."
+    "closeEditMode": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесённые вами изменения не будут сохранены.",
+    "deletePhoto": "Вы действительно хотите удалить вашу фотографию профиля?"
   },
   "viewPost": {
     "likes": "Лайки",
@@ -140,10 +141,40 @@
   },
   "profile": {
     "settings": {
-      "title": "Настройки",
-      "general": "Общие",
+      "title": "Настройки",
+      "general": {
+        "title": "Общие",
+        "lastName": "Фамилия",
+        "firstName": "Имя",
+        "userName": "Имя пользователя",
+        "birthday": "Дата рождения",
+        "aboutMe": "О себе",
+        "selectImage": "Выбрать изображение",
+        "save": "Сохранить",
+        "saving": "Сохранение…"
+      },
+      "accountManagement": {
+        "title": "Управление аккаунтом",
+        "currentSubscription": "Текущая подписка:",
+        "expireAt": "Истекает",
+        "nextPayment": "Следующий платеж",
+        "autoRenewal": "Автопродление",
+        "accountType": "Тип аккаунта:",
+        "changeSubscription": "Изменить подписку:",
+        "personal": "Личный",
+        "business": "Бизнес",
+        "days": "{count} дн.",
+        "weekly": "{count} дн.",
+        "monthly": "мес.",
+        "per": "за",
+        "or": "или",
+        "createPayment": "Создать платеж",
+        "autoRenewalModalText": "С этим платежом будет включено автопродление. Вы можете отключить его в любое время в настройках профиля",
+        "paymentCanceled": "Автопродление отменено",
+        "comingSoon": "Скоро будет",
+        "disabled": "Отключено"
+      },
       "devices": "Устройства",
-      "accountManagement": "Управление аккаунтом",
       "payments": "Платежи",
       "successTitle": "Успех",
       "errorTitle": "Ошибка",
@@ -151,25 +182,12 @@
       "errorMessage": "Транзакция не удалась. Пожалуйста, напишите в службу поддержки",
       "backToPayment": "Вернуться к оплате"
     },
-    "subscriptions": {
-      "currentSubscription": "Текущая подписка:",
-      "expireAt": "Истекает",
-      "nextPayment": "Следующий платеж",
-      "autoRenewal": "Автопродление",
-      "accountType": "Тип аккаунта:",
-      "changeSubscription": "Изменить подписку:",
-      "personal": "Личный",
-      "business": "Бизнес",
-      "days": "{count} дн.",
-      "weekly": "{count} дн.",
-      "monthly": "мес.",
-      "per": "за",
-      "or": "или",
-      "createPayment": "Создать платеж",
-      "autoRenewalModalText": "С этим платежом будет включено автопродление. Вы можете отключить его в любое время в настройках профиля",
-      "paymentCanceled": "Автопродление отменено",
-      "comingSoon": "Скоро будет",
-      "disabled": "Отключено"
-    }
+    "publications": "Публикации",
+    "followers": "Подписчики",
+    "following": "Подписки",
+    "profileSettings": "Настройки",
+    "follow": "Подписаться",
+    "unfollow": "Отписаться",
+    "sendMessage": "Написать сообщение"
   }
 }

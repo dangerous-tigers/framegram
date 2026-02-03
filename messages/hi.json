@@ -93,11 +93,12 @@
     "emailExist": "इस ईमेल पते वाला उपयोगकर्ता मौजूद नहीं है",
     "captcha": "कृपया पुष्टि करें कि आप रोबोट नहीं हैं"
   },
-  "confirmAction": {
+  "confirmActions": {
     "yes": "हां",
     "no": "नहीं",
     "close": "बंद करें",
-    "Do you really want to finish editing? If you close the changes you have made will not be saved": "क्या आप वास्तव में संपादन समाप्त करना चाहते हैं? यदि आप बंद करते हैं तो आपके द्वारा किए गए परिवर्तन सहेजे नहीं जाएंगे।"
+    "closeEditMode": "क्या आप वास्तव में संपादन समाप्त करना चाहते हैं? यदि आप इसे बंद करते हैं, तो किए गए बदलाव सहेजे नहीं जाएंगे।",
+    "deletePhoto": "क्या आप वास्तव में अपनी प्रोफ़ाइल फ़ोटो हटाना चाहते हैं?"
   },
   "viewPost": {
     "likes": "लाइक्स",
@@ -141,9 +142,40 @@
   "profile": {
     "settings": {
       "title": "सेटिंग्स",
-      "general": "सामान्य",
+      "general": {
+        "title": "साधारण",
+        "lastName": "उपनाम",
+        "firstName": "नाम",
+        "userName": "यूज़रनेम",
+        "birthday": "जन्म तिथि",
+        "aboutMe": "मेरे बारे में",
+        "selectImage": "छवि चुनें",
+        "save": "सहेजें",
+        "saving": "सहेजा जा रहा है…"
+      },
+
+      "accountManagement": {
+        "title": "खाता प्रबंधन",
+        "currentSubscription": "वर्तमान सदस्यता:",
+        "expireAt": "समाप्ति तिथि",
+        "nextPayment": "अगला भुगतान",
+        "autoRenewal": "स्वचालित नवीनीकरण",
+        "accountType": "खाते का प्रकार:",
+        "changeSubscription": "सदस्यता बदलें:",
+        "personal": "व्यक्तिगत",
+        "business": "व्यवसाय",
+        "days": "{count} दिन",
+        "weekly": "{count} दिन",
+        "monthly": "महीना",
+        "per": "प्रति",
+        "or": "या",
+        "createPayment": "भुगतान बनाएँ",
+        "autoRenewalModalText": "इस भुगतान के साथ ऑटो-रिन्यू सक्षम होगा। आप इसे प्रोफ़ाइल सेटिंग्स में कभी भी बंद कर सकते हैं",
+        "paymentCanceled": "ऑटो रिन्यू रद्द किया गया",
+        "comingSoon": "जल्द आ रहा है",
+        "disabled": "अक्षम"
+      },
       "devices": "डिवाइस",
-      "accountManagement": "खाता प्रबंधन",
       "payments": "भुगतान",
       "successTitle": "सफलता",
       "errorTitle": "त्रुटि",
@@ -151,25 +183,12 @@
       "errorMessage": "लेन-देन विफल रहा। कृपया सहायता से संपर्क करें",
       "backToPayment": "भुगतान पर वापस जाएं"
     },
-    "subscriptions": {
-      "currentSubscription": "वर्तमान सदस्यता:",
-      "expireAt": "समाप्ति तिथि",
-      "nextPayment": "अगला भुगतान",
-      "autoRenewal": "स्वचालित नवीनीकरण",
-      "accountType": "खाते का प्रकार:",
-      "changeSubscription": "सदस्यता बदलें:",
-      "personal": "व्यक्तिगत",
-      "business": "व्यवसाय",
-      "days": "{count} दिन",
-      "weekly": "{count} दिन",
-      "monthly": "महीना",
-      "per": "प्रति",
-      "or": "या",
-      "createPayment": "भुगतान बनाएँ",
-      "autoRenewalModalText": "इस भुगतान के साथ ऑटो-रिन्यू सक्षम होगा। आप इसे प्रोफ़ाइल सेटिंग्स में कभी भी बंद कर सकते हैं",
-      "paymentCanceled": "ऑटो रिन्यू रद्द किया गया",
-      "comingSoon": "जल्द आ रहा है",
-      "disabled": "अक्षम"
-    }
+    "publications": "प्रकाशन",
+    "followers": "फ़ॉलोअर्स",
+    "following": "फ़ॉलो कर रहा है",
+    "profileSettings": "सेटिंग्स",
+    "follow": "फ़ॉलो करें",
+    "unfollow": "अनफ़ॉलो करें",
+    "sendMessage": "संदेश भेजें"
   }
 }
