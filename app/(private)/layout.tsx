@@ -12,11 +12,11 @@ export default function PrivateLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const { isPending, isSuccess } = useMe();
+  const { isPending, data } = useMe();
 
   if (isPending) return <CatPreloader />;
 
-  if (!isSuccess) return redirect(routes.notAuth);
+  if (!data?.userId) return redirect(routes.notAuth);
 
   return <AppShell>{children}</AppShell>;
 }

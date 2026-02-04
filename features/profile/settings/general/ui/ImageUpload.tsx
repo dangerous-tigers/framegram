@@ -33,6 +33,7 @@ export const ImageUpload = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     handleFiles(e.target.files);
     e.target.value = '';
   };

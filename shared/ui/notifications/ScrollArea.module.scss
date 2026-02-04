@@ -1,0 +1,24 @@
+.root {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.viewport {
+  height: 100%;
+  width: 100%;
+  padding-right: 4px;
+}
+
+.scrollbar {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  background-color: var(--dark-300);
+  width: 4px;
+  border-radius: 2px;
+}
+
+.thumb {
+  width: 4px;
+  background-color: var(--dark-100);
+  border-radius: 2px;
+}

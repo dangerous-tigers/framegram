@@ -63,6 +63,11 @@ export const Input = (p: Props) => {
             aria-invalid={hasError}
             aria-describedby={hasError ? `${rest.name}-error` : undefined}
             disabled={disabled}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+              }
+            }}
             {...rest}
           />
           {isPassword && (

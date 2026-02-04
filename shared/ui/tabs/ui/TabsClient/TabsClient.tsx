@@ -7,6 +7,7 @@ import s from './tabsClient.module.scss';
 
 type PropsTabsClient = {
   defaultValue: string;
+  handleTabChange: (tabValue: string) => void;
   tabs: {
     value: string;
     label: string;
@@ -15,9 +16,7 @@ type PropsTabsClient = {
   }[];
 };
 
-export const TabsClient = (props: PropsTabsClient) => {
-  const { defaultValue, tabs } = props;
-
+export const TabsClient = ({ defaultValue, tabs, handleTabChange }: PropsTabsClient) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
@@ -32,6 +31,7 @@ export const TabsClient = (props: PropsTabsClient) => {
             value={tab.value}
             className={s.trigger}
             disabled={tab.disabled}
+            onClick={() => handleTabChange(tab.value)}
             data-direction
           >
             <span>{tab.label}</span>

@@ -139,5 +139,26 @@
     "description": "You need to log in to access this page.",
     "login": "Log in",
     "backToHome": "Back to Home"
+  },
+  "profile": {
+    "settings": {
+      "general": {
+        "lastName": "Last Name",
+        "firstName": "First Name",
+        "userName": "User Name",
+        "birthday": "Date of birthday",
+        "aboutMe": "About me",
+        "selectImage": "Select Image",
+        "save": "Save",
+        "saving": "Saving..."
+  }
+    },
+  "publications": "Publications",
+  "followers": "Followers",
+  "following": "Following",
+  "profileSettings": "Settings",
+  "follow": "Follow",
+  "unfollow": "Unfollow",
+  "sendMessage": "Send Message"
   }
 }

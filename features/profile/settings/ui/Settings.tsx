@@ -1,8 +1,9 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { ArrowBackOutline } from '@/assets/icons';
+import { useMe } from '@/entities/user/model/useMe';
 import { AccountManagement, Devices, General, Payments } from '@/features/profile/settings';
 import { Tabs } from '@/shared/ui/tabs/ui/Tabs';
 
@@ -17,15 +18,35 @@ const TABS = [
 
 export const Settings = () => {
   const router = useRouter();
+  const params = useSearchParams();
+
+  const { data } = useMe();
+
+  const activeTab = params.get('tab');
+
+  const handleBack = () => {
+    router.replace(`/profile/${data?.userId}`);
+    router.refresh();
+  };
+
+  const activeTabIndex = TABS.find((item) => item.value === activeTab);
+
+  const handleTabChange = (tabValue: string) => {
+    const tab = new URLSearchParams(params);
+    tab.set('tab', tabValue);
+    router.replace(`?${tab}`);
+  };
 
   return (
     <div className={s.container}>
       <div className={s.title}>
-        <ArrowBackOutline onClick={router.back} />
+        <ArrowBackOutline onClick={handleBack} />
         <h2>Settings</h2>
       </div>
       <Tabs
         tabs={TABS}
+        handleTabChange={handleTabChange}
+        defaultValue={activeTabIndex?.value}
         className={s.tabs}
       />
     </div>
