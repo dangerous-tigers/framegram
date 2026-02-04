@@ -61,11 +61,13 @@ export function useSubscriptionState() {
     }
   }, [subscription, isSubscriptionActive]);
 
-  function handleCancelAutoRenewal() {
-    if (autoRenewal) {
-      cancelAutoRenewal.mutate();
-      setAutoRenewal(false);
-    }
+  function handleCancelAutoRenewal(nextChecked: boolean) {
+    if (!autoRenewal || nextChecked) return;
+
+    cancelAutoRenewal.mutate(undefined, {
+      onSuccess: () => setAutoRenewal(false),
+      onError: () => setAutoRenewal(true),
+    });
   }
 
   return {

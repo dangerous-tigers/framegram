@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 
 import { Button, Checkbox, Modal, ModalHeaderWithClose } from '@/shared/ui';
 
-import s from './SubsriptionsModal.module.scss';
+import s from './SubscriptionsModal.module.scss';
 
 export function PaymentModal({
   closePaymentModal,
@@ -17,7 +17,7 @@ export function PaymentModal({
   isPending: boolean;
   toggleIAgree: () => void;
 }) {
-  const t = useTranslations('profile.subscriptions');
+  const t = useTranslations('profile.settings.accountManagement');
   return (
     <Modal
       open

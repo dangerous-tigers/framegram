@@ -18,7 +18,15 @@ export function useCancelAutoRenewal() {
         variant: 'default',
         description: null,
       });
-      queryClient.invalidateQueries({ queryKey: ['subscriptions'] });
+      queryClient.invalidateQueries({ queryKey: ['subscription'] });
+    },
+    onError: () => {
+      show({
+        error: 'Failed to cancel auto renewal',
+        severity: 'error',
+        variant: 'default',
+        description: null,
+      });
     },
   });
   return mutate;

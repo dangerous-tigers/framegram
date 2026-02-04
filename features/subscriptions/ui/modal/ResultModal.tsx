@@ -4,7 +4,7 @@ import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
 
 import { ResultModalType } from '../../model/useSubscriptionModal';
 
-import s from './SubsriptionsModal.module.scss';
+import s from './SubscriptionsModal.module.scss';
 
 export function ResultModal({
   resultModal,

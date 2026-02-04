@@ -175,13 +175,13 @@
         "comingSoon": "Coming soon",
         "disabled": "Disabled"
       },
-      "devices": "Прылады",
-      "payments": "Плацяжы",
-      "successTitle": "Поспех",
-      "errorTitle": "Памылка",
-      "successMessage": "Плацёж паспяхова выкананы!",
-      "errorMessage": "Транзакцыя не ўдалася. Калі ласка, звярніцеся ў службу падтрымкі",
-      "backToPayment": "Вярнуцца да аплаты"
+      "devices": "Devices",
+      "payments": "Payments",
+      "successTitle": "Success",
+      "errorTitle": "Error",
+      "successMessage": "Payment was successful!",
+      "errorMessage": "Transaction failed. Please, write to support",
+      "backToPayment": "Back to payment"
     },
     "publications": "Publications",
     "followers": "Followers",
