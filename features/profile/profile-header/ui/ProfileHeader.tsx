@@ -46,20 +46,29 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
         <ul>
           <li>
             <Link href={'/publications'}>
-              {profile.publicationsCount}
-              <span>{t('publications')}</span>
+              {t.rich('publications', {
+                count: profile.publicationsCount,
+                b: (chunks) => <>{chunks}</>,
+                s: (chunks) => <span>{chunks}</span>,
+              })}
             </Link>
           </li>
           <li>
             <Link href={'/followers'}>
-              {profile.followersCount}
-              <span>{t('followers')}</span>
+              {t.rich('followers', {
+                count: profile.followersCount,
+                b: (chunks) => <>{chunks}</>,
+                s: (chunks) => <span>{chunks}</span>,
+              })}
             </Link>
           </li>
           <li>
             <Link href={'/following'}>
-              {profile.followingCount}
-              <span>{t('following')}</span>
+              {t.rich('following', {
+                count: profile.followingCount,
+                b: (chunks) => <>{chunks}</>,
+                s: (chunks) => <span>{chunks}</span>,
+              })}
             </Link>
           </li>
         </ul>

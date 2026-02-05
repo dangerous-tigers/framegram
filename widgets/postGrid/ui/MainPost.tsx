@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { TruncatedDescription } from '@/entities/post/ui/TruncatedDescription';
 import { PostViewModel } from '@/entities/profile';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
+import { useTimeAgo } from '@/shared/lib/hooks';
 
 import s from '@/widgets/postGrid/ui/PostsGrid.module.scss';
 
@@ -17,6 +17,7 @@ type Props = {
 };
 
 export const MainPost = ({ post, expanded, toggleExpanded }: Props) => {
+  const timeAgo = useTimeAgo(post.createdAt);
   return (
     <article
       key={post.id}
@@ -60,9 +61,7 @@ export const MainPost = ({ post, expanded, toggleExpanded }: Props) => {
         </Link>
       </div>
 
-      <p className={clsx(s.postData)}>
-        <CompTimeAgo date={new Date(post.createdAt)} />
-      </p>
+      <p className={clsx(s.postData)}>{timeAgo}</p>
 
       <div className={s.postDescription}>
         <TruncatedDescription

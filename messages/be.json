@@ -106,7 +106,6 @@
     "showReplies": "Паказаць адказы",
     "hideReplies": "Схаваць адказы",
     "publish": "Адправіць",
-    "beTheFirstLikes": "Будзь першым, хто паставіць ",
     "like": "Лайк!",
     "noCommentsYet": "Каментарыяў яшчэ няма.",
     "beTheFirstToComment": "Будзьце першымі, хто пакіне каментарый.",
@@ -114,7 +113,7 @@
     "emptyAnswerError": "Адказ не можа быць пустым",
     "prefixWarning": "Увага! Вы перайшлі ў рэжым адпраўкі каментара",
     "commentPlaceholder": "Дадаць каментар...",
-    "noLikesYet": "Лайкаў яшчэ няма."
+    "likesCount": "{count, plural, =0 {Лайкаў яшчэ няма} one {<b>{count}</b> лайк} few {<b>{count}</b> лайкі} other {<b>{count}</b> лайкаў}}"
   },
   "mainPagePost": {
     "RegisteredUsers": "Зарэгістраваныя карыстальнікі",
@@ -150,14 +149,14 @@
         "selectImage": "Выбраць выяву",
         "save": "Захаваць",
         "saving": "Захаванне…"
-  }
-  },
-  "publications": "Публікацыі",
-  "followers": "Падпісчыкі",
-  "following": "Падпіскі",
-  "profileSettings": "Налады",
-  "follow": "Падпісацца",
-  "unfollow": "Адпісацца",
-  "sendMessage": "Напісаць паведамленне"
+      }
+    },
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>Публікацый няма</s>} one {<b>{count}</b> <s>Публікацыя</s>} few {<b>{count}</b> <s>Публікацыі</s>} other {<b>{count}</b> <s>Публікацый</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s>Няма падпісчыкаў</s>} one {<b>{count}</b> <s>Падпісчык</s>} few {<b>{count}</b> <s>Падпісчыкі</s>} other {<b>{count}</b> <s>Падпісчыкаў</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s>Няма падпісак</s>} one {<b>{count}</b> <s>Падпіска</s>} few {<b>{count}</b> <s>Падпіскі</s>} other {<b>{count}</b> <s>Падпісак</s>}}",
+    "profileSettings": "Налады",
+    "follow": "Падпісацца",
+    "unfollow": "Адпісацца",
+    "sendMessage": "Напісаць паведамленне"
   }
 }

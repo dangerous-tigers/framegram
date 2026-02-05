@@ -106,7 +106,6 @@
     "showReplies": "जवाब दिखाएं",
     "hideReplies": "जवाब छुपाएं",
     "publish": "पब्लिश",
-    "beTheFirstLikes": "पहले बनें ",
     "like": "लाइक करें!",
     "noCommentsYet": "अभी तक कोई टिप्पणी नहीं.",
     "beTheFirstToComment": "पहली टिप्पणी करें.",
@@ -114,7 +113,8 @@
     "emptyAnswerError": "उत्तर खाली नहीं हो सकता",
     "prefixWarning": "ध्यान दें! आप टिप्पणी भेजने के मोड में प्रवेश कर चुके हैं",
     "commentPlaceholder": "टिप्पणी जोड़ें...",
-    "noLikesYet": "अभी तक कोई लाइक नहीं."
+    "noLikesYet": "अभी तक कोई लाइक नहीं.",
+    "likesCount": "{count, plural, =0 {लाइक नहीं} one {<b>{count}</b> लाइक} few {<b>{count}</b> लाइक} other {<b>{count}</b> लाइक}}"
   },
   "mainPagePost": {
     "RegisteredUsers": "पंजीकृत उपयोगकर्ता",
@@ -150,14 +150,14 @@
         "selectImage": "छवि चुनें",
         "save": "सहेजें",
         "saving": "सहेजा जा रहा है…"
-  }
+      }
     },
-  "publications": "प्रकाशन",
-  "followers": "फ़ॉलोअर्स",
-  "following": "फ़ॉलो कर रहा है",
-  "profileSettings": "सेटिंग्स",
-  "follow": "फ़ॉलो करें",
-  "unfollow": "अनफ़ॉलो करें",
-  "sendMessage": "संदेश भेजें"
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>कोई प्रकाशन नहीं</s>} one {<b>{count}</b> <s>प्रकाशन</s>} other {<b>{count}</b> <s>प्रकाशन</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s>कोई फॉलोअर नहीं</s>} one {<b>{count}</b> <s>फॉलोअर</s>} other {<b>{count}</b> <s>फॉलोअर्स</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s>किसी को फॉलो नहीं किया</s>} one {<b>{count}</b> <s>फॉलोइंग</s>} other {<b>{count}</b> <s>फॉलोइंग</s>}}",
+    "profileSettings": "सेटिंग्स",
+    "follow": "फ़ॉलो करें",
+    "unfollow": "अनफ़ॉलो करें",
+    "sendMessage": "संदेश भेजें"
   }
 }
