@@ -2,8 +2,8 @@
 import clsx from 'clsx';
 
 import { Bookmark, BookmarkOutline, Heart, HeartOutline, PaperPlaneOutline } from '@/assets/icons';
+import { useTimeAgo } from '@/shared/lib/hooks/useTimeAgo';
 import { Button } from '@/shared/ui';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
 
 import { LikesInfo } from './LikesInfo';
 
@@ -24,6 +24,8 @@ export function Actions({
   avatarWhoLikes: string[];
   isAuth: boolean;
 }) {
+  const timeago = useTimeAgo(time);
+
   return (
     <div className={s.container}>
       {isAuth && (
@@ -66,13 +68,9 @@ export function Actions({
             />
           ))}
 
-          <LikesInfo
-            likesCount={likesCount}
-            isAuth={isAuth}
-            handleLikesClick={() => alert('show likes')}
-          />
+          <LikesInfo likesCount={likesCount} />
         </div>
-        <CompTimeAgo date={new Date(time)} />
+        {timeago}
       </div>
     </div>
   );

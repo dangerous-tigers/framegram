@@ -106,7 +106,6 @@
     "showReplies": "显示回复",
     "hideReplies": "隐藏回复",
     "publish": "发布",
-    "beTheFirstLikes": "成为第一个 ",
     "like": "点赞！",
     "noCommentsYet": "暂无评论.",
     "beTheFirstToComment": "成为第一个评论者.",
@@ -114,7 +113,7 @@
     "emptyAnswerError": "回复不能为空",
     "prefixWarning": "注意！您已切换到发表评论模式",
     "commentPlaceholder": "添加评论...",
-    "noLikesYet": "暂无点赞."
+    "likesCount": "{count, plural, =0 {还没有人点赞} other {{count, number} 赞}}"
   },
   "mainPagePost": {
     "RegisteredUsers": "註冊用戶",
@@ -150,14 +149,14 @@
         "selectImage": "选择图片",
         "save": "保存",
         "saving": "正在保存…"
-  }
-  },
-  "publications": "帖子",
-  "followers": "关注者",
-  "following": "正在关注",
-  "profileSettings": "设置",
-  "follow": "关注",
-  "unfollow": "取消关注",
-  "sendMessage": "发送消息"
+      }
+    },
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>还没有发布</s>} other {<b>{count}</b> <s>条发布</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s>还没有粉丝</s>} other {<b>{count}</b> <s>粉丝</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s>未关注任何人</s>} other {<b>{count}</b> <s>关注</s>}}",
+    "profileSettings": "设置",
+    "follow": "关注",
+    "unfollow": "取消关注",
+    "sendMessage": "发送消息"
   }
 }

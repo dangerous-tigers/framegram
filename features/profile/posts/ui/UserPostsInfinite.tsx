@@ -108,26 +108,28 @@ export const UserPostsInfinite = ({ userId, firstBatchOfPosts }: Props) => {
   }
 
   return (
-    <ul className={s.postsGrid}>
-      {posts?.map((item: PostViewModel) => (
-        <PostItem
-          key={item.id}
-          post={item}
-        />
-      ))}
-      {isOver && <div className={s.endMessage}>Вы достигли конца ленты</div>}
-      {isFetchingNextPage &&
-        Array.from({ length: 4 }).map((_, index) => (
-          <Card
-            key={`more-skeleton-${index}`}
-            className={s.postCard}
-          >
-            <div className={s.postImageContainer}>
-              <Skeleton className={s.imageSkeleton} />
-            </div>
-          </Card>
+    <>
+      <ul className={s.postsGrid}>
+        {posts?.map((item: PostViewModel) => (
+          <PostItem
+            key={item.id}
+            post={item}
+          />
         ))}
+        {isOver && <div className={s.endMessage}>Вы достигли конца ленты</div>}
+        {isFetchingNextPage &&
+          Array.from({ length: 4 }).map((_, index) => (
+            <Card
+              key={`more-skeleton-${index}`}
+              className={s.postCard}
+            >
+              <div className={s.postImageContainer}>
+                <Skeleton className={s.imageSkeleton} />
+              </div>
+            </Card>
+          ))}
+      </ul>
       <div ref={cursorRef} />
-    </ul>
+    </>
   );
 };

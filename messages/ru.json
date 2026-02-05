@@ -106,7 +106,6 @@
     "showReplies": "Показать ответы",
     "hideReplies": "Скрыть ответы",
     "publish": "Опубликовать",
-    "beTheFirstLikes": "Будь первым ",
     "like": "Лайк!",
     "noCommentsYet": "Комментариев пока нет.",
     "beTheFirstToComment": "Будьте первым, кто оставит комментарий.",
@@ -114,7 +113,8 @@
     "emptyAnswerError": "Ответ не может быть пустым",
     "prefixWarning": "Внимание! Вы перешли в режим отправки комментария",
     "commentPlaceholder": "Добавить комментарий...",
-    "noLikesYet": "Лайков пока нет."
+    "noLikesYet": "Лайков пока нет.",
+    "likesCount": "{count, plural, =0 {Лайков нет} one {<b>{count}</b> лайк} few {<b>{count}</b> лайка} other {<b>{count}</b> лайков}}"
   },
   "mainPagePost": {
     "RegisteredUsers": "Зарегистрированные пользователи",
@@ -150,14 +150,14 @@
         "selectImage": "Выбрать изображение",
         "save": "Сохранить",
         "saving": "Сохранение…"
-  }
+      }
     },
-  "publications": "Публикации",
-  "followers": "Подписчики",
-  "following": "Подписки",
-  "profileSettings": "Настройки",
-  "follow": "Подписаться",
-  "unfollow": "Отписаться",
-  "sendMessage": "Написать сообщение"
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>Нет публикаций</s>} one {<b>{count}</b> <s>Публикация</s>} few {<b>{count}</b> <s>Публикации</s>} other {<b>{count}</b> <s>Публикаций</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s>Нет подписчиков</s>} one {<b>{count}</b> <s>Подписчик</s>} few {<b>{count}</b> <s>Подписчика</s>} other {<b>{count}</b> <s>Подписчиков</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s>Нет подписок</s>} one {<b>{count}</b> <s>Подписка</s>} few {<b>{count}</b> <s>Подписки</s>} other {<b>{count}</b> <s>Подписок</s>}}",
+    "profileSettings": "Настройки",
+    "follow": "Подписаться",
+    "unfollow": "Отписаться",
+    "sendMessage": "Написать сообщение"
   }
 }
