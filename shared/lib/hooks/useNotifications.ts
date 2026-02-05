@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import { useEffect } from 'react';
 import { useNotificationWSStore } from '@/shared/lib/websocket/notification-websocket.service';
-
 
 // Типы уведомлений
 export enum NotificationType {
@@ -21,8 +19,6 @@ interface NotificationParams {
 
 // Используем типы уведомлений в других частях приложения
 export type { NotificationParams };
-
-// Удаляем дублирующийся интерфейс
 
 // Интерфейс для типа уведомления
 export interface NotificationTypeInfo {

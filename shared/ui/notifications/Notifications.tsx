@@ -1,11 +1,11 @@
-/* eslint-disable no-unused-vars */
 'use client';
+
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import { CloseOutline, OutlineBell } from '@/assets/icons';
 import { Scroll } from '@/shared/ui/notifications/ScrollArea';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
+import { useTimeAgo } from '@/shared/lib/hooks/useTimeAgo';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useAuth } from '@/shared/lib/hooks/useAuth';
 import { useNotifications } from '@/shared/lib/hooks/useNotifications';
@@ -66,7 +66,7 @@ export const Notifications = ({ className }: Props) => {
             });
             
             // Обновляем счетчик непрочитанных
-            useNotificationWSStore.setState({ unreadCount: notReadCount });
+            useNotificationWSStore.setState({ unreadCount: response.data.notReadCount });
             
             // Обновляем информацию о пагинации
             if (items.length > 0) {
@@ -180,6 +180,8 @@ export const Notifications = ({ className }: Props) => {
 
             {notifications.map((notification) => {
               const notificationType = getNotificationTypeInfo(notification.message);
+              const timeAgoValue = useTimeAgo(notification.createdAt);
+              
               return (
                 <div key={notification.id} className={`${s.itemWrapper}`}>
                   <DropdownMenu.Item
@@ -191,7 +193,7 @@ export const Notifications = ({ className }: Props) => {
                       <span className={s.icon}>{notificationType.icon}</span> {notification.message}
                     </p>
                     <span className={s.timeAgo}>
-                      <CompTimeAgo date={new Date(notification.createdAt)} />
+                      {timeAgoValue}
                     </span>
                     <DropdownMenu.Separator className={s.separator} />
                   </DropdownMenu.Item>

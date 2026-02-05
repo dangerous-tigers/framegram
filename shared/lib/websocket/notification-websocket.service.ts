@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import { NotificationsView } from '@/shared/ui/notifications/types';
 import { create } from 'zustand';
 import { client } from '@/shared/api/client';
@@ -47,7 +47,6 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
         ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {
-          // console.log('WebSocket connected to notifications service');
           set({ isConnected: true, error: null });
           reconnectAttempts = 0; // Сброс попыток подключения при успешном подключении
         };

@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useNotificationWSStore } from '@/shared/lib/websocket/notification-websocket.service';
 import { NotificationsView } from '@/shared/ui/notifications/types';
+import { useTimeAgo } from '@/shared/lib/hooks/useTimeAgo';
 
 const NotificationDemo = () => {
   const { connect, disconnect, isConnected, notifications, unreadCount, addNotification } = useNotificationWSStore();
@@ -77,21 +78,24 @@ const NotificationDemo = () => {
           <p>Нет уведомлений</p>
         ) : (
           <ul style={{ listStyle: 'none', padding: 0 }}>
-            {notifications.map(notification => (
-              <li 
-                key={notification.id} 
-                style={{ 
-                  padding: '10px', 
-                  borderBottom: '1px solid #eee', 
-                  backgroundColor: notification.isRead ? '#f9f9f9' : '#f0f8ff' 
-                }}
-              >
-                <strong>ID:</strong> {notification.id} | 
-                <strong> Сообщение:</strong> {notification.message} | 
-                <strong> Прочитано:</strong> {notification.isRead ? 'Да' : 'Нет'} | 
-                <strong> Дата:</strong> {new Date(notification.createdAt).toLocaleString('ru-RU')}
-              </li>
-            ))}
+            {notifications.map(notification => {
+              const timeAgo = useTimeAgo(notification.createdAt);
+              return (
+                <li
+                  key={notification.id}
+                  style={{
+                    padding: '10px',
+                    borderBottom: '1px solid #eee',
+                    backgroundColor: notification.isRead ? '#f9f9f9' : '#f0f8ff'
+                  }}
+                >
+                  <strong>ID:</strong> {notification.id} |
+                  <strong> Сообщение:</strong> {notification.message} |
+                  <strong> Прочитано:</strong> {notification.isRead ? 'Да' : 'Нет'} |
+                  <strong> Дата:</strong> {timeAgo}
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
