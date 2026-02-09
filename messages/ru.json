@@ -141,7 +141,9 @@
   },
   "profile": {
     "settings": {
+      "title": "Настройки",
       "general": {
+        "title": "Общие",
         "lastName": "Фамилия",
         "firstName": "Имя",
         "userName": "Имя пользователя",
@@ -151,6 +153,36 @@
         "save": "Сохранить",
         "saving": "Сохранение…"
       }
+    },
+      },
+      "accountManagement": {
+        "title": "Управление аккаунтом",
+        "currentSubscription": "Текущая подписка:",
+        "expireAt": "Истекает",
+        "nextPayment": "Следующий платеж",
+        "autoRenewal": "Автопродление",
+        "accountType": "Тип аккаунта:",
+        "changeSubscription": "Изменить подписку:",
+        "personal": "Личный",
+        "business": "Бизнес",
+        "days": "{count} дн.",
+        "weekly": "{count} дн.",
+        "monthly": "мес.",
+        "per": "за",
+        "or": "или",
+        "createPayment": "Создать платеж",
+        "autoRenewalModalText": "С этим платежом будет включено автопродление. Вы можете отключить его в любое время в настройках профиля",
+        "paymentCanceled": "Автопродление отменено",
+        "comingSoon": "Скоро будет",
+        "disabled": "Отключено"
+      },
+      "devices": "Устройства",
+      "payments": "Платежи",
+      "successTitle": "Успех",
+      "errorTitle": "Ошибка",
+      "successMessage": "Платеж прошел успешно!",
+      "errorMessage": "Транзакция не удалась. Пожалуйста, напишите в службу поддержки",
+      "backToPayment": "Вернуться к оплате"
     },
     "publications": "{count, plural, =0 {<b>{count}</b> <s>Нет публикаций</s>} one {<b>{count}</b> <s>Публикация</s>} few {<b>{count}</b> <s>Публикации</s>} other {<b>{count}</b> <s>Публикаций</s>}}",
     "followers": "{count, plural, =0 {<b>{count}</b> <s>Нет подписчиков</s>} one {<b>{count}</b> <s>Подписчик</s>} few {<b>{count}</b> <s>Подписчика</s>} other {<b>{count}</b> <s>Подписчиков</s>}}",

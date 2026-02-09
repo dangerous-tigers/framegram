@@ -141,7 +141,9 @@
   },
   "profile": {
     "settings": {
+      "title": "सेटिंग्स",
       "general": {
+        "title": "साधारण",
         "lastName": "उपनाम",
         "firstName": "नाम",
         "userName": "यूज़रनेम",
@@ -151,6 +153,36 @@
         "save": "सहेजें",
         "saving": "सहेजा जा रहा है…"
       }
+    },
+      },
+      "accountManagement": {
+        "title": "खाता प्रबंधन",
+        "currentSubscription": "वर्तमान सदस्यता:",
+        "expireAt": "समाप्ति तिथि",
+        "nextPayment": "अगला भुगतान",
+        "autoRenewal": "स्वचालित नवीनीकरण",
+        "accountType": "खाते का प्रकार:",
+        "changeSubscription": "सदस्यता बदलें:",
+        "personal": "व्यक्तिगत",
+        "business": "व्यवसाय",
+        "days": "{count} दिन",
+        "weekly": "{count} दिन",
+        "monthly": "महीना",
+        "per": "प्रति",
+        "or": "या",
+        "createPayment": "भुगतान बनाएँ",
+        "autoRenewalModalText": "इस भुगतान के साथ ऑटो-रिन्यू सक्षम होगा। आप इसे प्रोफ़ाइल सेटिंग्स में कभी भी बंद कर सकते हैं",
+        "paymentCanceled": "ऑटो रिन्यू रद्द किया गया",
+        "comingSoon": "जल्द आ रहा है",
+        "disabled": "अक्षम"
+      },
+      "devices": "डिवाइस",
+      "payments": "भुगतान",
+      "successTitle": "सफलता",
+      "errorTitle": "त्रुटि",
+      "successMessage": "भुगतान सफल रहा!",
+      "errorMessage": "लेन-देन विफल रहा। कृपया सहायता से संपर्क करें",
+      "backToPayment": "भुगतान पर वापस जाएं"
     },
     "publications": "{count, plural, =0 {<b>{count}</b> <s>कोई प्रकाशन नहीं</s>} one {<b>{count}</b> <s>प्रकाशन</s>} other {<b>{count}</b> <s>प्रकाशन</s>}}",
     "followers": "{count, plural, =0 {<b>{count}</b> <s>कोई फॉलोअर नहीं</s>} one {<b>{count}</b> <s>फॉलोअर</s>} other {<b>{count}</b> <s>फॉलोअर्स</s>}}",

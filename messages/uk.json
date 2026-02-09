@@ -140,7 +140,9 @@
   },
   "profile": {
     "settings": {
+      "title": "Налаштування",
       "general": {
+        "title": "Загальні",
         "lastName": "Прізвище",
         "firstName": "Імʼя",
         "userName": "Імʼя користувача",
@@ -150,6 +152,36 @@
         "save": "Зберегти",
         "saving": "Збереження…"
       }
+    },
+      },
+      "accountManagement": {
+        "title": "Управління аккаунтом",
+        "currentSubscription": "Поточна підписка:",
+        "expireAt": "Діє до",
+        "nextPayment": "Наступний платіж",
+        "autoRenewal": "Автопродовження",
+        "accountType": "Тип акаунту:",
+        "changeSubscription": "Змінити підписку:",
+        "personal": "Особистий",
+        "business": "Бізнес",
+        "days": "{count} день",
+        "weekly": "{count} днів",
+        "monthly": "місяць",
+        "per": "за",
+        "or": "або",
+        "createPayment": "Створити платіж",
+        "autoRenewalModalText": "Автопродовження буде увімкнено з цим платежем. Ви можете вимкнути його в налаштуваннях профілю",
+        "paymentCanceled": "Автопродовження скасовано",
+        "comingSoon": "Незабаром",
+        "disabled": "Вимкнено"
+      },
+      "devices": "Пристрої",
+      "payments": "Платежі",
+      "successTitle": "Успіх",
+      "errorTitle": "Помилка",
+      "successMessage": "Платіж успішно виконано!",
+      "errorMessage": "Транзакція не вдалася. Будь ласка, зверніться до служби підтримки",
+      "backToPayment": "Повернутися до оплати"
     },
     "publications": "{count, plural, =0 {<b>{count}</b> <s>Публікацій немає</s>} one {<b>{count}</b> <s>Публікація</s>} few {<b>{count}</b> <s>Публікації</s>} other {<b>{count}</b> <s>Публікацій</s>}}",
     "followers": "{count, plural, =0 {<b>{count}</b> <s>Немає підписників</s>} one {<b>{count}</b> <s>Підписник</s>} few {<b>{count}</b> <s>Підписники</s>} other {<b>{count}</b> <s>Підписників</s>}}",

@@ -142,7 +142,9 @@
   },
   "profile": {
     "settings": {
+      "title": "Settings",
       "general": {
+        "title": "General",
         "lastName": "Last Name",
         "firstName": "First Name",
         "userName": "User Name",
@@ -152,6 +154,36 @@
         "save": "Save",
         "saving": "Saving..."
       }
+    },
+      },
+      "accountManagement": {
+        "title": "Account Management",
+        "currentSubscription": "Current Subscription:",
+        "expireAt": "Expire at",
+        "nextPayment": "Next payment",
+        "autoRenewal": "Auto-Renewal",
+        "accountType": "Account type:",
+        "changeSubscription": "Change your subscription:",
+        "personal": "Personal",
+        "business": "Business",
+        "days": "{count} Day",
+        "weekly": "{count} Day",
+        "monthly": "month",
+        "per": "per",
+        "or": "or",
+        "createPayment": "Create payment",
+        "autoRenewalModalText": "Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings",
+        "paymentCanceled": "Auto renewal canceled",
+        "comingSoon": "Coming soon",
+        "disabled": "Disabled"
+      },
+      "devices": "Devices",
+      "payments": "Payments",
+      "successTitle": "Success",
+      "errorTitle": "Error",
+      "successMessage": "Payment was successful!",
+      "errorMessage": "Transaction failed. Please, write to support",
+      "backToPayment": "Back to payment"
     },
     "publications": "{count, plural, =0 {<b>{count}</b> <s>No publications</s>} one {<b>{count}</b> <s>Publication</s>} other {<b>{count}</b> <s>Publications</s>}}",
     "followers": "{count, plural, =0 {<b>{count}</b> <s> No followers</s>} one {<b>{count}</b> <s>Follower</s>} other {<b>{count}</b> <s>Followers</s>}}",

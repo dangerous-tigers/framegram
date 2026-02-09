@@ -140,7 +140,9 @@
   },
   "profile": {
     "settings": {
+      "title": "Налады",
       "general": {
+        "title": "Агульныя",
         "lastName": "Прозвішча",
         "firstName": "Імя",
         "userName": "Імя карыстальніка",
@@ -150,6 +152,36 @@
         "save": "Захаваць",
         "saving": "Захаванне…"
       }
+    },
+      },
+      "accountManagement": {
+        "title": "Управлінне акаўнтом",
+        "currentSubscription": "Бягучая падпіска:",
+        "expireAt": "Сапраўдная да",
+        "nextPayment": "Наступны плацёж",
+        "autoRenewal": "Аўтаматычнае падаўжэнне",
+        "accountType": "Тып акаўнта:",
+        "changeSubscription": "Змяніць падпіску:",
+        "personal": "Асабісты",
+        "business": "Бізнес",
+        "days": "{count} дзень",
+        "weekly": "{count} дзён",
+        "monthly": "месяц",
+        "per": "за",
+        "or": "або",
+        "createPayment": "Стварыць плацёж",
+        "autoRenewalModalText": "Аўтаматычнае падаўжэнне будзе ўключана. Вы можаце адключыць яго ў наладах профілю",
+        "paymentCanceled": "Аўтападаўжэнне адключана",
+        "comingSoon": "Хутка",
+        "disabled": "Адключана"
+      },
+      "devices": "Прылады",
+      "payments": "Плацяжы",
+      "successTitle": "Поспех",
+      "errorTitle": "Памылка",
+      "successMessage": "Плацёж паспяхова выкананы!",
+      "errorMessage": "Транзакцыя не ўдалася. Калі ласка, звярніцеся ў службу падтрымкі",
+      "backToPayment": "Вярнуцца да аплаты"
     },
     "publications": "{count, plural, =0 {<b>{count}</b> <s>Публікацый няма</s>} one {<b>{count}</b> <s>Публікацыя</s>} few {<b>{count}</b> <s>Публікацыі</s>} other {<b>{count}</b> <s>Публікацый</s>}}",
     "followers": "{count, plural, =0 {<b>{count}</b> <s>Няма падпісчыкаў</s>} one {<b>{count}</b> <s>Падпісчык</s>} few {<b>{count}</b> <s>Падпісчыкі</s>} other {<b>{count}</b> <s>Падпісчыкаў</s>}}",
