@@ -8,7 +8,7 @@
     "feed": "Feed",
     "create": "Create",
     "myProfile": "My Profile",
-    "messenges" : "Messenges",
+    "messenges": "Messenges",
     "search": "Search",
     "statistic": "Statistics",
     "favorites": "Favorites",
@@ -99,7 +99,7 @@
     "close": "Close",
     "deletePost": "Do you really want delete post?",
     "closeEditMode": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
-    "deletePhoto" : "Do you really want to delete your profile photo?"
+    "deletePhoto": "Do you really want to delete your profile photo?"
   },
   "viewPost": {
     "likes": "Likes",
@@ -142,7 +142,9 @@
   },
   "profile": {
     "settings": {
+      "title": "Settings",
       "general": {
+        "title": "General",
         "lastName": "Last Name",
         "firstName": "First Name",
         "userName": "User Name",
@@ -151,14 +153,42 @@
         "selectImage": "Select Image",
         "save": "Save",
         "saving": "Saving..."
-  }
+      },
+      "accountManagement": {
+        "title": "Account Management",
+        "currentSubscription": "Current Subscription:",
+        "expireAt": "Expire at",
+        "nextPayment": "Next payment",
+        "autoRenewal": "Auto-Renewal",
+        "accountType": "Account type:",
+        "changeSubscription": "Change your subscription:",
+        "personal": "Personal",
+        "business": "Business",
+        "days": "{count} Day",
+        "weekly": "{count} Day",
+        "monthly": "month",
+        "per": "per",
+        "or": "or",
+        "createPayment": "Create payment",
+        "autoRenewalModalText": "Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings",
+        "paymentCanceled": "Auto renewal canceled",
+        "comingSoon": "Coming soon",
+        "disabled": "Disabled"
+      },
+      "devices": "Devices",
+      "payments": "Payments",
+      "successTitle": "Success",
+      "errorTitle": "Error",
+      "successMessage": "Payment was successful!",
+      "errorMessage": "Transaction failed. Please, write to support",
+      "backToPayment": "Back to payment"
     },
-  "publications": "Publications",
-  "followers": "Followers",
-  "following": "Following",
-  "profileSettings": "Settings",
-  "follow": "Follow",
-  "unfollow": "Unfollow",
-  "sendMessage": "Send Message"
+    "publications": "Publications",
+    "followers": "Followers",
+    "following": "Following",
+    "profileSettings": "Settings",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "sendMessage": "Send Message"
   }
 }
