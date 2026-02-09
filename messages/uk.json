@@ -106,7 +106,6 @@
     "showReplies": "Показати відповіді",
     "hideReplies": "Приховати відповіді",
     "publish": "Опублікувати",
-    "beTheFirstLikes": "Будь першим ",
     "like": "Вподобати!",
     "noCommentsYet": "Коментарів ще немає.",
     "beTheFirstToComment": "Будьте першим, хто залишить коментар.",
@@ -114,7 +113,7 @@
     "emptyAnswerError": "Відповідь не може бути порожньою",
     "prefixWarning": "Увага! Ви перейшли в режим надсилання коментаря",
     "commentPlaceholder": "Додати коментар...",
-    "noLikesYet": "Лайків поки що немає."
+    "likesCount": "{count, plural, =0 {Вподобань немає} one {<b>{count}</b> вподобання} few {<b>{count}</b> вподобання} other {<b>{count}</b> вподобань}}"
   },
   "mainPagePost": {
     "RegisteredUsers": "Зареєстровані користувачі",
@@ -152,6 +151,8 @@
         "selectImage": "Вибрати зображення",
         "save": "Зберегти",
         "saving": "Збереження…"
+      }
+    },
       },
       "accountManagement": {
         "title": "Управління аккаунтом",
@@ -182,9 +183,9 @@
       "errorMessage": "Транзакція не вдалася. Будь ласка, зверніться до служби підтримки",
       "backToPayment": "Повернутися до оплати"
     },
-    "publications": "Публікації",
-    "followers": "Підписники",
-    "following": "Підписки",
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>Публікацій немає</s>} one {<b>{count}</b> <s>Публікація</s>} few {<b>{count}</b> <s>Публікації</s>} other {<b>{count}</b> <s>Публікацій</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s>Немає підписників</s>} one {<b>{count}</b> <s>Підписник</s>} few {<b>{count}</b> <s>Підписники</s>} other {<b>{count}</b> <s>Підписників</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s>Немає підписок</s>} one {<b>{count}</b> <s>Підписка</s>} few {<b>{count}</b> <s>Підписки</s>} other {<b>{count}</b> <s>Підписок</s>}}",
     "profileSettings": "Налаштування",
     "follow": "Підписатися",
     "unfollow": "Відписатися",
