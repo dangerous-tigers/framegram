@@ -33,10 +33,10 @@ export function useSubscriptionModals({ costType, COST_TYPE }: UseSubscriptionMo
   const [iAgree, setIAgree] = useState(false);
 
   useEffect(() => {
-    if (params.get('success')) {
+    if (params.get('success') === 'true') {
       setResultModal('success');
     }
-    if (params.get('error')) {
+    if (params.get('success') === 'false') {
       setResultModal('error');
     }
   }, [params]);

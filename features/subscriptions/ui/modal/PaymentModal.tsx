@@ -41,7 +41,7 @@ export function PaymentModal({
             disabled={!iAgree || isPending}
             onClick={handleSubscribe}
           >
-            {isPending ? '...' : 'OK'}
+            {'OK'}
           </Button>
         </div>
       </div>
