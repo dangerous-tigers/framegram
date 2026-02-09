@@ -16,7 +16,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint:styles": "stylelint \"**/*.{css,scss}\"",
-    "lint:styles:fix": "stylelint \"**/*.{css,scss}\" --fix"
+    "lint:styles:fix": "stylelint \"**/*.{css,scss}\" --fix",
+    "generate-api": "pnpm openapi-typescript https://inctagram.work/api/v1/swagger-json -o ./shared/api/schema.ts --root-types"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint . --fix --no-cache --max-warnings=0",
