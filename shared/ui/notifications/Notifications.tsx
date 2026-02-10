@@ -3,24 +3,18 @@ import clsx from 'clsx';
 
 import { OutlineBell } from '@/assets/icons';
 import { Scroll } from '@/shared/ui/notifications/ScrollArea';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import s from './Notifications.module.scss';
 
 type Props = {
-  notRead: number;
   className?: string;
-  isRead: boolean;
-  createdAt: string;
 };
 
-export const Notifications = ({
-  className,
-  notRead = 12,
-  isRead = false,
-  createdAt = '2026-02-03T15:48:49.082Z',
-}: Props) => {
+export const Notifications = ({ className }: Props) => {
+  const notRead = 12;
+  const isRead = false;
+  const createdAt = '2026-02-03T15:48:49.082Z';
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
@@ -46,17 +40,13 @@ export const Notifications = ({
             <DropdownMenu.Item className={s.item}>
               Новое уведомление! {!isRead && <span className={s.rightSlot}>Новое</span>}
               <p className={s.notification}>Ваша подписка активирована и действует до 03.02.2025</p>
-              <span className={s.timeAgo}>
-                <CompTimeAgo date={new Date(createdAt)} />
-              </span>
+              <span className={s.timeAgo}>{createdAt}</span>
               <DropdownMenu.Separator className={s.separator} />
             </DropdownMenu.Item>
             <DropdownMenu.Item className={s.item}>
               Новое уведомление! <span className={s.rightSlot}>Новое</span>
               <p className={s.notification}>Следующий платеж у вас спишется через 1 день</p>
-              <span className={s.timeAgo}>
-                <CompTimeAgo date={new Date(createdAt)} />
-              </span>
+              <span className={s.timeAgo}>{createdAt}</span>
               <DropdownMenu.Separator className={s.separator} />
             </DropdownMenu.Item>
             <DropdownMenu.Item
@@ -65,9 +55,7 @@ export const Notifications = ({
             >
               Новое уведомление! <span className={s.rightSlot}>Новое</span>
               <p className={s.notification}>Ваша подписка истекает через 7 дней</p>
-              <span className={s.timeAgo}>
-                <CompTimeAgo date={new Date(createdAt)} />
-              </span>
+              <span className={s.timeAgo}>{createdAt}</span>
               <DropdownMenu.Separator className={s.separator} />
             </DropdownMenu.Item>
             <DropdownMenu.Item
@@ -76,9 +64,7 @@ export const Notifications = ({
             >
               Новое уведомление! <span className={s.rightSlot}>Новое</span>
               <p className={s.notification}>Следующий платеж у вас спишется через 1 день</p>
-              <span className={s.timeAgo}>
-                <CompTimeAgo date={new Date(createdAt)} />
-              </span>
+              <span className={s.timeAgo}>{createdAt}</span>
               <DropdownMenu.Separator className={s.separator} />
             </DropdownMenu.Item>
             <DropdownMenu.Item
@@ -87,9 +73,7 @@ export const Notifications = ({
             >
               Новое уведомление! <span className={s.rightSlot}>Новое</span>
               <p className={s.notification}>Следующий платеж у вас спишется через 1 день</p>
-              <span className={s.timeAgo}>
-                <CompTimeAgo date={new Date(createdAt)} />
-              </span>
+              <span className={s.timeAgo}>{createdAt}</span>
               <DropdownMenu.Separator className={s.separator} />
             </DropdownMenu.Item>
             <DropdownMenu.Item
@@ -98,9 +82,7 @@ export const Notifications = ({
             >
               Новое уведомление! <span className={s.rightSlot}>Новое</span>
               <p className={s.notification}>Следующий платеж у вас спишется через 1 день</p>
-              <span className={s.timeAgo}>
-                <CompTimeAgo date={new Date(createdAt)} />
-              </span>
+              <span className={s.timeAgo}>{createdAt}</span>
             </DropdownMenu.Item>
           </Scroll>
           <DropdownMenu.Arrow className={s.arrow} />
