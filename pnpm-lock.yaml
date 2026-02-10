@@ -92,9 +92,6 @@ importers:
       react:
         specifier: 19.2.0
         version: 19.2.0
-      react-date-range:
-        specifier: ^2.0.1
-        version: 2.0.1(date-fns@4.1.0)(react@19.2.0)
       react-dom:
         specifier: 19.2.0
         version: 19.2.0(react@19.2.0)
@@ -104,6 +101,9 @@ importers:
       react-time-ago:
         specifier: ^7.3.5
         version: 7.3.5(javascript-time-ago@2.5.12)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      rsuite:
+        specifier: ^6.1.2
+        version: 6.1.2(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       swiper:
         specifier: ^12.0.3
         version: 12.0.3
@@ -955,6 +955,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@juggle/resize-observer@3.4.0':
+    resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
 
   '@keyv/bigmap@1.3.0':
     resolution: {integrity: sha512-KT01GjzV6AQD5+IYrcpoYLkCu1Jod3nau1Z7EsEuViO3TZGRacSbO9MfHmbJ1WaOXFtWLxPVj169cn2WNKPkIg==}
@@ -1968,6 +1971,15 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@rsuite/icon-font@4.1.0':
+    resolution: {integrity: sha512-q0Y+uQCVvzhD6lFeAFrvCDd1lTjZfM6MIaBjre3lSW1w586VWbuFnhTiqos3v9HIMlUpm3aAsxd3SuM6gYaqqQ==}
+
+  '@rsuite/icons@1.4.0':
+    resolution: {integrity: sha512-NUOKX/KNO8Qy0nCJ4XzHKRdp0ovUM7zZhvuelteNkdhwwtmc9R0Ap4TlW2q/74sYa1aVXjH1RF+d2EGRD8EOEA==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
@@ -2235,6 +2247,9 @@ packages:
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
       '@types/react': ^19.2.0
+
+  '@types/react-window@1.8.8':
+    resolution: {integrity: sha512-8Ls660bHR1AUA2kuRvVG9D/4XpRC6wjAaPT9dil7Ckc76eP9TKWZwwmgfq8Q1LANX3QNDnoU4Zp48A3w+zK69Q==}
 
   '@types/react@19.2.7':
     resolution: {integrity: sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==}
@@ -2759,6 +2774,9 @@ packages:
 
   dom-accessibility-api@0.6.3:
     resolution: {integrity: sha512-7ZgogeTnjuHbo+ct10G9Ffp0mif17idi0IyWNVA/wcwcm7NPOD/WEHVP3n7n3MhXqxoIYm8d6MuZohYWIZ4T3w==}
+
+  dom-lib@3.3.2:
+    resolution: {integrity: sha512-ux0wcf6lggOCcJ6O3Q3mewbCOM/CL9f6+NXmxaWsF0/AKCvFNbfdmmqNnMG7cMVupCr9VeFEYWspSAD9WT/6gA==}
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -3537,6 +3555,9 @@ packages:
   lodash.truncate@4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
 
+  lodash@4.17.23:
+    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
+
   log-update@6.1.0:
     resolution: {integrity: sha512-9ie8ItPR6tjY5uYJh8K/Zrv/RMZ5VOlOWvtZdEHYSTFKZfIBPQa9tOAEeAWhd+AnIneLJ22w5fjOYtoutpWq5w==}
     engines: {node: '>=18'}
@@ -3581,6 +3602,9 @@ packages:
 
   mdn-data@2.25.0:
     resolution: {integrity: sha512-T2LPsjgUE/tgMmRXREVmwsux89DwWfNjiynOeXuLd2mX6jphGQ2YE3Ukz7LQ2VOFKiVZU/Ee1GqzHiipZCjymw==}
+
+  memoize-one@5.2.1:
+    resolution: {integrity: sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==}
 
   memoize-one@6.0.0:
     resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
@@ -3966,12 +3990,6 @@ packages:
   raf@3.4.1:
     resolution: {integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==}
 
-  react-date-range@2.0.1:
-    resolution: {integrity: sha512-jwKYc9zcjYMg2hWbPht+6BF2wjGG5DkRVNJLRXn2Y0B/QCOOnvQX6YXziZVujVADWmgsBaoQnILdmzYw+Bwh0g==}
-    peerDependencies:
-      date-fns: 3.0.6 || >=3.0.0
-      react: ^0.14 || ^15.0.0-rc || >=15.0
-
   react-docgen-typescript@2.4.0:
     resolution: {integrity: sha512-ZtAp5XTO5HRzQctjPU0ybY0RRCQO19X/8fxn3w7y2VVTUbGHDKULPTL4ky3vB05euSgG5NpALhEhDPvQ56wvXg==}
     peerDependencies:
@@ -3997,11 +4015,6 @@ packages:
 
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
-
-  react-list@0.8.18:
-    resolution: {integrity: sha512-1OSdDvzuKuwDJvQNuhXxxL+jTmmdtKg1i6KtYgxI9XR98kbOql1FcSGP+Lcvo91fk3cYng+Z6YkC6X9HRJwxfw==}
-    peerDependencies:
-      react: 0.14 || 15 - 19
 
   react-remove-scroll-bar@2.3.8:
     resolution: {integrity: sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q==}
@@ -4033,12 +4046,30 @@ packages:
       '@types/react':
         optional: true
 
+  react-textarea-autosize@8.5.9:
+    resolution: {integrity: sha512-U1DGlIQN5AwgjTyOEnI1oCcMuEr1pv1qOtklB2l4nyMGbHzWrI0eFsYK0zos2YWqAolJyG0IWJaqWmWj5ETh0A==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   react-time-ago@7.3.5:
     resolution: {integrity: sha512-ZyNd0GEy9ovcAOg+Stpg3zMXEtlYX1lCwO9ePiiXpHsrIa7Rn9h+ZS9dtM/zahf6xYcjmz7b6y2gDRSDG54tHQ==}
     peerDependencies:
       javascript-time-ago: ^2.3.7
       react: '>=0.16.8'
       react-dom: '>=0.16.8'
+
+  react-use-set@1.0.0:
+    resolution: {integrity: sha512-6BBbOcWc/tOKuwd9gDtdunvOr/g40S0SkCBYvrSJvpI0upzNlHmLoeDvylnoP8PrjQXItClAFxseVGGhEkk7kw==}
+    peerDependencies:
+      react: '>=16.8.0'
+
+  react-window@1.8.11:
+    resolution: {integrity: sha512-+SRbUVT2scadgFSWx+R1P754xHPEqvcfSfVX10QYg6POOz+WNgkN48pS+BtZNIMGiL1HYrSEiCkwsMS15QogEQ==}
+    engines: {node: '>8.0.0'}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react@19.2.0:
     resolution: {integrity: sha512-tmbWg6W31tQLeB5cdIBOicJDJRR2KzXsV7uSK9iNfLWQ5bIZfxuPEHp7M8wiHyHnn0DD1i7w3Zmin0FtkrwoCQ==}
@@ -4104,6 +4135,18 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
+  rsuite-table@5.19.2:
+    resolution: {integrity: sha512-0mnAuvTlDjNGo3FTWqIMdlCP2+gx8NJiMYJnGvOoYMt/kcxRsWzayQRrywc2cvnHTEOjMIQFi2uHYfie0irAHg==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
+  rsuite@6.1.2:
+    resolution: {integrity: sha512-fLeyN228UYeUpy9aTf1nj+iyPyPhOEMYdoO9TDbf38hnV9bQitZ5HzinhJqLN2v/OX+AuKH84TxRPEabnFhGpQ==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+
   run-applescript@7.1.0:
     resolution: {integrity: sha512-DPe5pVFaAsinSaV6QjQ6gdiedWDcRCbUuiQfQa2wmWV7+xC9bGulGI8+TdRmoFkAPaBXk8CrAbnlY2ISniJ47Q==}
     engines: {node: '>=18'}
@@ -4131,6 +4174,9 @@ packages:
   scheduler@0.27.0:
     resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
 
+  schema-typed@2.4.2:
+    resolution: {integrity: sha512-4eYZiheiPps+I7JEKrhm/S8OIPncXqY0lKQbvI/Agn9QMJUQ3cgfFZ2spy4Ta9Qr3xLYB3/qj4wGbsNcVwEO/w==}
+
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -4151,9 +4197,6 @@ packages:
   set-proto@1.0.0:
     resolution: {integrity: sha512-RJRdvCo6IAnPdsvP/7m6bsQqNnn1FCBX5ZNtFL98MmFF/4xAIJTIg1YbHW5DC2W5SKZanrC6i4HsJqlajw/dZw==}
     engines: {node: '>= 0.4'}
-
-  shallow-equal@1.2.1:
-    resolution: {integrity: sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==}
 
   sharp@0.34.5:
     resolution: {integrity: sha512-Ou9I5Ft9WNcCbXrU9cMgPBcCK8LiwLqcbywW3t4oDV37n1pzpuNLsYiAV8eODnjbtQlSDwZ2cUEeQz4E54Hltg==}
@@ -4526,10 +4569,37 @@ packages:
       '@types/react':
         optional: true
 
+  use-composed-ref@1.4.0:
+    resolution: {integrity: sha512-djviaxuOOh7wkj0paeO1Q/4wMZ8Zrnag5H6yBvzN7AKKe8beOaED9SF5/ByLqsku8NP4zQqsvM2u3ew/tJK8/w==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   use-intl@4.6.0:
     resolution: {integrity: sha512-eEV2y3jpwH0DqGuc7iCRikH4D7tBrN4gHQD8uSNT3KGQSNJ9erHnfUdLkuWTSO8dJGpru3jbOmT4Xev/eqh7lg==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+
+  use-isomorphic-layout-effect@1.2.1:
+    resolution: {integrity: sha512-tpZZ+EX0gaghDAiFR37hj5MgY6ZN55kLiPkJsKxBMZ6GZdOSPJXiOzPM984oPYZ5AnehYx5WQp1+ME8I/P/pRA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  use-latest@1.3.0:
+    resolution: {integrity: sha512-mhg3xdm9NaM8q+gLT8KryJPnRFOz1/5XPBhmDEVZK1webPzDjrPk7f/mbpeLqTgB9msytYWANxgALOCJKnLvcQ==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   use-sidecar@1.1.3:
     resolution: {integrity: sha512-Fedw0aZvkhynoPYlA5WXrMCAMm+nSWdZt6lzJQ7Ok8S6Q+VsHmHpRWndVRJ8Be0ZbkfPc5LRYH+5XrzXcEeLRQ==}
@@ -5335,6 +5405,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@juggle/resize-observer@3.4.0': {}
 
   '@keyv/bigmap@1.3.0(keyv@5.5.4)':
     dependencies:
@@ -6317,6 +6389,15 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.53.3':
     optional: true
 
+  '@rsuite/icon-font@4.1.0': {}
+
+  '@rsuite/icons@1.4.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@rsuite/icon-font': 4.1.0
+      classnames: 2.5.1
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
   '@rtsao/scc@1.1.0': {}
 
   '@schummar/icu-type-parser@1.21.5': {}
@@ -6607,6 +6688,10 @@ snapshots:
       date-fns: 2.30.0
 
   '@types/react-dom@19.2.3(@types/react@19.2.7)':
+    dependencies:
+      '@types/react': 19.2.7
+
+  '@types/react-window@1.8.8':
     dependencies:
       '@types/react': 19.2.7
 
@@ -7200,6 +7285,10 @@ snapshots:
   dom-accessibility-api@0.5.16: {}
 
   dom-accessibility-api@0.6.3: {}
+
+  dom-lib@3.3.2:
+    dependencies:
+      '@babel/runtime': 7.28.4
 
   dunder-proto@1.0.1:
     dependencies:
@@ -8112,6 +8201,8 @@ snapshots:
 
   lodash.truncate@4.4.2: {}
 
+  lodash@4.17.23: {}
+
   log-update@6.1.0:
     dependencies:
       ansi-escapes: 7.2.0
@@ -8155,6 +8246,8 @@ snapshots:
   mdn-data@2.12.2: {}
 
   mdn-data@2.25.0: {}
+
+  memoize-one@5.2.1: {}
 
   memoize-one@6.0.0: {}
 
@@ -8561,15 +8654,6 @@ snapshots:
     dependencies:
       performance-now: 2.1.0
 
-  react-date-range@2.0.1(date-fns@4.1.0)(react@19.2.0):
-    dependencies:
-      classnames: 2.5.1
-      date-fns: 4.1.0
-      prop-types: 15.8.1
-      react: 19.2.0
-      react-list: 0.8.18(react@19.2.0)
-      shallow-equal: 1.2.1
-
   react-docgen-typescript@2.4.0(typescript@5.9.3):
     dependencies:
       typescript: 5.9.3
@@ -8602,10 +8686,6 @@ snapshots:
 
   react-is@17.0.2: {}
 
-  react-list@0.8.18(react@19.2.0):
-    dependencies:
-      react: 19.2.0
-
   react-remove-scroll-bar@2.3.8(@types/react@19.2.7)(react@19.2.0):
     dependencies:
       react: 19.2.0
@@ -8633,12 +8713,32 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.7
 
+  react-textarea-autosize@8.5.9(@types/react@19.2.7)(react@19.2.0):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      react: 19.2.0
+      use-composed-ref: 1.4.0(@types/react@19.2.7)(react@19.2.0)
+      use-latest: 1.3.0(@types/react@19.2.7)(react@19.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+
   react-time-ago@7.3.5(javascript-time-ago@2.5.12)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       javascript-time-ago: 2.5.12
       memoize-one: 6.0.0
       prop-types: 15.8.1
       raf: 3.4.1
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
+  react-use-set@1.0.0(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+
+  react-window@1.8.11(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      memoize-one: 5.2.1
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
@@ -8736,6 +8836,37 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.53.3
       fsevents: 2.3.3
 
+  rsuite-table@5.19.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@juggle/resize-observer': 3.4.0
+      classnames: 2.5.1
+      dom-lib: 3.3.2
+      lodash: 4.17.23
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
+  rsuite@6.1.2(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@juggle/resize-observer': 3.4.0
+      '@rsuite/icons': 1.4.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@types/lodash': 4.17.21
+      '@types/react-window': 1.8.8
+      classnames: 2.5.1
+      date-fns: 4.1.0
+      dom-lib: 3.3.2
+      lodash: 4.17.23
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      react-textarea-autosize: 8.5.9(@types/react@19.2.7)(react@19.2.0)
+      react-use-set: 1.0.0(react@19.2.0)
+      react-window: 1.8.11(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      rsuite-table: 5.19.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      schema-typed: 2.4.2
+    transitivePeerDependencies:
+      - '@types/react'
+
   run-applescript@7.1.0: {}
 
   run-parallel@1.2.0:
@@ -8771,6 +8902,10 @@ snapshots:
 
   scheduler@0.27.0: {}
 
+  schema-typed@2.4.2:
+    dependencies:
+      lodash: 4.17.23
+
   semver@6.3.1: {}
 
   semver@7.7.3: {}
@@ -8796,8 +8931,6 @@ snapshots:
       dunder-proto: 1.0.1
       es-errors: 1.3.0
       es-object-atoms: 1.1.1
-
-  shallow-equal@1.2.1: {}
 
   sharp@0.34.5:
     dependencies:
@@ -9272,12 +9405,31 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.7
 
+  use-composed-ref@1.4.0(@types/react@19.2.7)(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+    optionalDependencies:
+      '@types/react': 19.2.7
+
   use-intl@4.6.0(react@19.2.0):
     dependencies:
       '@formatjs/fast-memoize': 2.2.7
       '@schummar/icu-type-parser': 1.21.5
       intl-messageformat: 10.7.18
       react: 19.2.0
+
+  use-isomorphic-layout-effect@1.2.1(@types/react@19.2.7)(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+    optionalDependencies:
+      '@types/react': 19.2.7
+
+  use-latest@1.3.0(@types/react@19.2.7)(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+      use-isomorphic-layout-effect: 1.2.1(@types/react@19.2.7)(react@19.2.0)
+    optionalDependencies:
+      '@types/react': 19.2.7
 
   use-sidecar@1.1.3(@types/react@19.2.7)(react@19.2.0):
     dependencies:

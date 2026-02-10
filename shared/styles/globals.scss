@@ -2,8 +2,7 @@
 @use 'typography';
 @use 'sizes';
 @use 'overlayscrollbarsTheme';
-@import 'react-date-range/dist/styles.css';
-@import 'react-date-range/dist/theme/default.css';
+@import 'rsuite/dist/rsuite.css';
 
 :root {
   --primary-100: #73a5ff;
