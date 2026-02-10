@@ -1,4 +1,4 @@
-export const ACCESS_TOKEN = 'access-token';
+export const ACCESS_TOKEN = 'accessToken';
 
 export const TEXT_AREA_MAX_LENGTH = 500;
 

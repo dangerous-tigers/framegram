@@ -2,8 +2,15 @@
 import clsx from 'clsx';
 
 import { OutlineBell } from '@/assets/icons';
+import { useMe } from '@/entities/user/model/useMe';
+import { useIntersection } from '@/shared/lib/hooks';
+import { getToken } from '@/shared/ui/notifications/getToken';
 import { Scroll } from '@/shared/ui/notifications/ScrollArea';
+import { NotificationsResponse, SelectData } from '@/shared/ui/notifications/types';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useInfiniteQuery } from '@tanstack/react-query';
+
+import { Notification } from './Notification';
 
 import s from './Notifications.module.scss';
 
@@ -12,9 +19,49 @@ type Props = {
 };
 
 export const Notifications = ({ className }: Props) => {
-  const notRead = 12;
-  const isRead = false;
-  const createdAt = '2026-02-03T15:48:49.082Z';
+  const { data } = useMe();
+
+  const token = getToken();
+
+  const {
+    data: notifications,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['notifications'],
+    enabled: Boolean(data),
+    initialPageParam: 0,
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/notifications/${pageParam}&sortBy=id`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Notifications response is empty');
+        }
+      }
+      return await response.json();
+    },
+    getNextPageParam: (lastPage: NotificationsResponse) => {
+      return lastPage.items?.at(-1)?.id;
+    },
+    select: (data: SelectData) => {
+      const items = data.pages.flatMap((page) => page.items);
+      const lastPage = data.pages.at(-1);
+
+      return {
+        items,
+        totalCount: lastPage?.totalCount,
+        notReadCount: lastPage?.notReadCount,
+      };
+    },
+  });
+
+  const nextPortionRef = useIntersection(() => fetchNextPage());
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
@@ -23,7 +70,7 @@ export const Notifications = ({ className }: Props) => {
       >
         <div>
           <OutlineBell />
-          {notRead > 0 && <span>{notRead}</span>}
+          {notifications && notifications.notReadCount! > 0 && <span>{notifications?.notReadCount}</span>}
         </div>
       </DropdownMenu.Trigger>
 
@@ -37,53 +84,16 @@ export const Notifications = ({ className }: Props) => {
           <Scroll>
             <span className={s.title}>Уведомления</span>
             <DropdownMenu.Separator className={s.separator} />
-            <DropdownMenu.Item className={s.item}>
-              Новое уведомление! {!isRead && <span className={s.rightSlot}>Новое</span>}
-              <p className={s.notification}>Ваша подписка активирована и действует до 03.02.2025</p>
-              <span className={s.timeAgo}>{createdAt}</span>
-              <DropdownMenu.Separator className={s.separator} />
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className={s.item}>
-              Новое уведомление! <span className={s.rightSlot}>Новое</span>
-              <p className={s.notification}>Следующий платеж у вас спишется через 1 день</p>
-              <span className={s.timeAgo}>{createdAt}</span>
-              <DropdownMenu.Separator className={s.separator} />
-            </DropdownMenu.Item>
-            <DropdownMenu.Item
-              className={s.item}
-              disabled
-            >
-              Новое уведомление! <span className={s.rightSlot}>Новое</span>
-              <p className={s.notification}>Ваша подписка истекает через 7 дней</p>
-              <span className={s.timeAgo}>{createdAt}</span>
-              <DropdownMenu.Separator className={s.separator} />
-            </DropdownMenu.Item>
-            <DropdownMenu.Item
-              className={s.item}
-              disabled
-            >
-              Новое уведомление! <span className={s.rightSlot}>Новое</span>
-              <p className={s.notification}>Следующий платеж у вас спишется через 1 день</p>
-              <span className={s.timeAgo}>{createdAt}</span>
-              <DropdownMenu.Separator className={s.separator} />
-            </DropdownMenu.Item>
-            <DropdownMenu.Item
-              className={s.item}
-              disabled
-            >
-              Новое уведомление! <span className={s.rightSlot}>Новое</span>
-              <p className={s.notification}>Следующий платеж у вас спишется через 1 день</p>
-              <span className={s.timeAgo}>{createdAt}</span>
-              <DropdownMenu.Separator className={s.separator} />
-            </DropdownMenu.Item>
-            <DropdownMenu.Item
-              className={s.item}
-              disabled
-            >
-              Новое уведомление! <span className={s.rightSlot}>Новое</span>
-              <p className={s.notification}>Следующий платеж у вас спишется через 1 день</p>
-              <span className={s.timeAgo}>{createdAt}</span>
-            </DropdownMenu.Item>
+            {notifications?.items.map((notification) => (
+              <Notification
+                notification={notification}
+                key={notification.id}
+              />
+            ))}
+            {!isFetchingNextPage && notifications?.items.length === notifications?.totalCount && (
+              <DropdownMenu.Item>У вас больше нет уведомлений</DropdownMenu.Item>
+            )}
+            <div ref={nextPortionRef}></div>
           </Scroll>
           <DropdownMenu.Arrow className={s.arrow} />
         </DropdownMenu.Content>

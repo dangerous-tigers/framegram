@@ -8,6 +8,11 @@ export type NotificationsView = {
 export type NotificationsResponse = {
   pageSize: number;
   totalCount: number;
-  notReadCount: number;
-  items: NotificationsView[];
+  notReadCount?: number;
+  items?: NotificationsView[];
+};
+
+export type SelectData = {
+  pageParams: number[];
+  pages: NotificationsResponse[];
 };

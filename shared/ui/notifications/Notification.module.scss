@@ -1,0 +1,27 @@
+.item {
+  color: var(--light-100);
+  font-weight: 700;
+  font-size: var(--font-size-s);
+
+  &:hover {
+    outline: none;
+  }
+
+  .rightSlot {
+    font-weight: 400;
+    font-size: var(--font-size-xs);
+    color: var(--primary-500);
+  }
+
+  .notification {
+    font-weight: 400;
+    font-size: var(--font-size-s);
+  }
+
+  .timeAgo {
+    font-size: var(--font-size-xs);
+    font-weight: 400;
+    line-height: var(--line-height-s);
+    color: var(--light-900);
+  }
+}
