@@ -158,5 +158,20 @@
     "follow": "关注",
     "unfollow": "取消关注",
     "sendMessage": "发送消息"
+  },
+  "notifications": {
+    "title": "通知",
+    "markAllAsRead": "全部标记为已读",
+    "empty": "没有通知",
+    "loading": "正在加载通知...",
+    "loadingMore": "加载中...",
+    "new": "新",
+    "deleteNotification": "删除通知",
+    "subscription": {
+      "activated": "您的订阅已激活，有效期至 {endDate}",
+      "paymentWarning": "您的下一次付款将在 {days} {daysWord} 后扣除",
+      "expiry7Days": "您的订阅将在 7 天后到期",
+      "expiry1Day": "您的订阅将在 1 天后到期"
+    }
   }
 }

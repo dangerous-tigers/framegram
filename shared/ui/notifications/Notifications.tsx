@@ -1,15 +1,16 @@
 'use client';
 
-import clsx from 'clsx';
 import { useEffect, useState } from 'react';
+import { useFormatter, useTranslations } from 'next-intl';
+import clsx from 'clsx';
 
 import { CloseOutline, OutlineBell } from '@/assets/icons';
-import { Scroll } from '@/shared/ui/notifications/ScrollArea';
-import { useTimeAgo } from '@/shared/lib/hooks/useTimeAgo';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { client } from '@/shared/api/client';
 import { useAuth } from '@/shared/lib/hooks/useAuth';
 import { useNotifications } from '@/shared/lib/hooks/useNotifications';
-import { client } from '@/shared/api/client';
+import { useNotificationWSStore } from '@/shared/lib/websocket/notification-websocket.service';
+import { Scroll } from '@/shared/ui/notifications/ScrollArea';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import s from './Notifications.module.scss';
 
@@ -17,80 +18,119 @@ type Props = {
   className?: string;
 };
 
+// Отдельный компонент для элемента уведомления (чтобы использовать хуки правильно)
+type NotificationItemProps = {
+  notification: {
+    id: number;
+    message: string;
+    isRead: boolean;
+    createdAt: string;
+  };
+  onMarkAsRead: (id: number) => void;
+  onDelete: (id: number) => void;
+};
+
+const NotificationItem = ({ notification, onMarkAsRead, onDelete }: NotificationItemProps) => {
+  const format = useFormatter();
+  const t = useTranslations('notifications');
+
+  // Форматирование относительного времени через next-intl
+  const timeAgoValue = format.relativeTime(new Date(notification.createdAt), new Date());
+
+  return (
+    <div className={s.itemWrapper}>
+      <DropdownMenu.Item
+        className={`${s.item} ${!notification.isRead ? s.unread : ''}`}
+        onClick={() => onMarkAsRead(notification.id)}
+      >
+        {!notification.isRead && <span className={s.rightSlot}>{t('new')}</span>}
+        <p className={s.notification}>{notification.message}</p>
+        <span className={s.timeAgo}>{timeAgoValue}</span>
+        <DropdownMenu.Separator className={s.separator} />
+      </DropdownMenu.Item>
+      <button
+        className={s.deleteBtn}
+        onClick={(e) => {
+          e.stopPropagation();
+          onDelete(notification.id);
+        }}
+        aria-label={t('deleteNotification')}
+      >
+        <CloseOutline
+          width={16}
+          height={16}
+        />
+      </button>
+    </div>
+  );
+};
+
 export const Notifications = ({ className }: Props) => {
-  const { isAuthenticated } = useAuth();
-  const {
-    notifications,
-    unreadCount,
-    markAsRead,
-    markAllAsRead,
-    deleteNotification,
-    getNotificationTypeInfo
-  } = useNotifications();
+  const { isAuth } = useAuth();
+  const t = useTranslations('notifications');
+  const { notifications, unreadCount, markAsRead, markAllAsRead, deleteNotification } = useNotifications();
   const [isLoading, setIsLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
   const [lastCursor, setLastCursor] = useState<number | null>(null);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   // Загрузка уведомлений с сервера при первом подключении
   useEffect(() => {
     const loadNotifications = async () => {
-      if (isAuthenticated && notifications.length === 0) {
-        try {
-          setIsLoading(true);
-          
-          // Получаем первые уведомления с сервера
-          const response = await client.GET('/notifications/{cursor}', {
-            params: {
-              path: { cursor: 0 }, // Начальный курсор
-              query: {
-                pageSize: 20,
-                isRead: undefined, // Получаем все уведомления
-                sortDirection: 'desc' as const,
-                sortBy: 'notifyAt'
-              }
-            }
+      if (!isAuth || !isInitialLoad) return;
+
+      try {
+        setIsLoading(true);
+
+        const response = await client.GET('/notifications/{cursor}', {
+          params: {
+            path: { cursor: 0 },
+            query: {
+              pageSize: 20,
+              isRead: undefined,
+              sortDirection: 'desc' as const,
+              sortBy: 'notifyAt',
+            },
+          },
+        });
+
+        if (response.data) {
+          const { items, totalCount } = response.data;
+
+          // Обновляем состояние уведомлений
+          items?.forEach((notification) => {
+            useNotificationWSStore.getState().addNotification({
+              id: notification.id,
+              message: notification.message,
+              isRead: notification.isRead,
+              createdAt: notification.createdAt,
+            });
           });
 
-          if (response.data) {
-            const { items, notReadCount, totalCount } = response.data;
-            
-            // Обновляем состояние уведомлений
-            items.forEach(notification => {
-              // Добавляем уведомление через store
-              useNotificationWSStore.getState().addNotification({
-                id: notification.id,
-                message: notification.message,
-                isRead: notification.isRead,
-                createdAt: notification.createdAt
-              });
-            });
-            
-            // Обновляем счетчик непрочитанных
-            useNotificationWSStore.setState({ unreadCount: response.data.notReadCount });
-            
-            // Обновляем информацию о пагинации
-            if (items.length > 0) {
-              setLastCursor(items[items.length - 1].id);
-            }
-            
-            setHasMore(items.length < totalCount);
+          // Обновляем информацию о пагинации
+          if (items && items.length > 0) {
+            setLastCursor(items[items.length - 1].id);
           }
-        } catch (_error) {
-          // console.error('Error loading notifications:', error);
-        } finally {
-          setIsLoading(false);
+
+          setHasMore((items?.length ?? 0) < totalCount);
+          setIsInitialLoad(false);
         }
+      } catch {
+        // console.error('Error loading notifications:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     loadNotifications();
-  }, [isAuthenticated, notifications.length]);
+  }, [isAuth, isInitialLoad]);
 
   // Загрузка дополнительных уведомлений при скролле
   const loadMoreNotifications = async () => {
     if (!hasMore || !lastCursor || isLoading) return;
 
     try {
+      setIsLoading(true);
       const response = await client.GET('/notifications/{cursor}', {
         params: {
           path: { cursor: lastCursor },
@@ -98,32 +138,33 @@ export const Notifications = ({ className }: Props) => {
             pageSize: 20,
             isRead: undefined,
             sortDirection: 'desc' as const,
-            sortBy: 'notifyAt'
-          }
-        }
+            sortBy: 'notifyAt',
+          },
+        },
       });
 
       if (response.data) {
         const { items, totalCount } = response.data;
-        
-        // Добавляем новые уведомления в хранилище
-        items.forEach(notification => {
+
+        items?.forEach((notification) => {
           useNotificationWSStore.getState().addNotification({
             id: notification.id,
             message: notification.message,
             isRead: notification.isRead,
-            createdAt: notification.createdAt
+            createdAt: notification.createdAt,
           });
         });
 
-        if (items.length > 0) {
+        if (items && items.length > 0) {
           setLastCursor(items[items.length - 1].id);
         }
-        
-        setHasMore(items.length < totalCount && items.length > 0);
+
+        setHasMore((items?.length ?? 0) < totalCount && (items?.length ?? 0) > 0);
       }
-    } catch (_error) {
+    } catch {
       // console.error('Error loading more notifications:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -158,62 +199,32 @@ export const Notifications = ({ className }: Props) => {
         >
           <Scroll onBottomReached={loadMoreNotifications}>
             <div className={s.header}>
-              <span className={s.title}>Уведомления</span>
-              {notifications.some(n => !n.isRead) && (
+              <span className={s.title}>{t('title')}</span>
+              {notifications.some((n) => !n.isRead) && (
                 <button
                   className={s.markAllAsRead}
                   onClick={markAllAsRead}
                 >
-                  Отметить все как прочитанные
+                  {t('markAllAsRead')}
                 </button>
               )}
             </div>
             <DropdownMenu.Separator className={s.separator} />
-            
-            {notifications.length === 0 && !isLoading && (
-              <div className={s.emptyState}>Нет уведомлений</div>
-            )}
-            
-            {isLoading && notifications.length === 0 && (
-              <div className={s.loadingState}>Загрузка уведомлений...</div>
-            )}
 
-            {notifications.map((notification) => {
-              const notificationType = getNotificationTypeInfo(notification.message);
-              const timeAgoValue = useTimeAgo(notification.createdAt);
-              
-              return (
-                <div key={notification.id} className={`${s.itemWrapper}`}>
-                  <DropdownMenu.Item
-                    className={`${s.item} ${!notification.isRead ? s.unread : ''}`}
-                    onClick={() => handleMarkAsRead(notification.id)}
-                  >
-                    {!notification.isRead && <span className={s.rightSlot}>Новое</span>}
-                    <p className={s.notification}>
-                      <span className={s.icon}>{notificationType.icon}</span> {notification.message}
-                    </p>
-                    <span className={s.timeAgo}>
-                      {timeAgoValue}
-                    </span>
-                    <DropdownMenu.Separator className={s.separator} />
-                  </DropdownMenu.Item>
-                  <button
-                    className={s.deleteBtn}
-                    onClick={(e) => {
-                      e.stopPropagation(); // Останавливаем всплытие события, чтобы не вызвать onClick у родителя
-                      handleDeleteNotification(notification.id);
-                    }}
-                    aria-label="Удалить уведомление"
-                  >
-                    <CloseOutline width={16} height={16} />
-                  </button>
-                </div>
-              );
-            })}
+            {notifications.length === 0 && !isLoading && <div className={s.emptyState}>{t('empty')}</div>}
 
-            {isLoading && notifications.length > 0 && (
-              <div className={s.loadingMore}>Загрузка...</div>
-            )}
+            {isLoading && notifications.length === 0 && <div className={s.loadingState}>{t('loading')}</div>}
+
+            {notifications.map((notification) => (
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
+                onMarkAsRead={handleMarkAsRead}
+                onDelete={handleDeleteNotification}
+              />
+            ))}
+
+            {isLoading && notifications.length > 0 && <div className={s.loadingMore}>{t('loadingMore')}</div>}
           </Scroll>
           <DropdownMenu.Arrow className={s.arrow} />
         </DropdownMenu.Content>

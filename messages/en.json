@@ -160,5 +160,20 @@
     "follow": "Follow",
     "unfollow": "Unfollow",
     "sendMessage": "Send Message"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllAsRead": "Mark all as read",
+    "empty": "No notifications",
+    "loading": "Loading notifications...",
+    "loadingMore": "Loading...",
+    "new": "New",
+    "deleteNotification": "Delete notification",
+    "subscription": {
+      "activated": "Your subscription is activated and valid until {endDate}",
+      "paymentWarning": "Your next payment will be deducted in {days} {daysWord}",
+      "expiry7Days": "Your subscription expires in 7 days",
+      "expiry1Day": "Your subscription expires in 1 day"
+    }
   }
 }
