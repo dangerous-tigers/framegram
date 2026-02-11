@@ -1,15 +1,22 @@
+import { io, Socket } from 'socket.io-client';
 import { create } from 'zustand';
 
 import { client } from '@/shared/api/client';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
-import {
-  NotificationViewDto,
-  WSBulkNotificationsPayload,
-  WSMessage,
-  WSNotificationDeletedPayload,
-  WSNotificationPayload,
-  WSUnreadCountPayload,
-} from '@/shared/ui/notifications/types';
+import { NotificationViewDto } from '@/shared/ui/notifications/types';
+
+const WS_EVENT_PATH = {
+  NOTIFICATIONS: 'notifications',
+  ERROR: 'error',
+} as const;
+
+interface ServerNotification {
+  id: number;
+  clientId?: string;
+  message: string;
+  isRead: boolean;
+  notifyAt: string;
+}
 
 export interface NotificationWebSocketService {
   isConnected: boolean;
@@ -22,17 +29,14 @@ export interface NotificationWebSocketService {
   disconnect: () => void;
   markAsRead: (ids: number[]) => void;
   markAllAsRead: () => void;
-  addNotification: (notification: NotificationViewDto, showtoast?: boolean) => void;
+  addNotification: (notification: NotificationViewDto, showToast?: boolean) => void;
   updateUnreadCount: () => void;
   deleteNotification: (id: number) => void;
   setShowToast: (show: boolean) => void;
 }
 
 export const useNotificationWSStore = create<NotificationWebSocketService>((set, get) => {
-  let ws: WebSocket | null = null;
-  let reconnectTimeout: NodeJS.Timeout | null = null;
-  const maxReconnectAttempts = 5;
-  let reconnectAttempts = 0;
+  let socket: Socket | null = null;
   let savedToken: string | null = null;
 
   return {
@@ -47,114 +51,71 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
     },
 
     connect: (token: string) => {
-      if (ws && ws.readyState === WebSocket.OPEN) {
+      if (socket?.connected) {
         return;
       }
 
       savedToken = token;
 
-      try {
-        // URL для WebSocket соединения (предполагаемый)
-        const wsUrl = `${process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8080'}/notifications?token=${token}`;
-        ws = new WebSocket(wsUrl);
+      // Socket.IO подключение
+      const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'https://inctagram.work';
 
-        ws.onopen = () => {
-          set({ isConnected: true, error: null });
-          reconnectAttempts = 0;
+      socket = io(wsUrl, {
+        path: '/socket.io',
+        query: {
+          accessToken: token,
+        },
+        transports: ['websocket'], // Только websocket, polling вызывает 400
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
+      });
+
+      socket.on('connect', () => {
+        set({ isConnected: true, error: null });
+      });
+
+      socket.on(WS_EVENT_PATH.NOTIFICATIONS, (notification: ServerNotification) => {
+        const notificationDto: NotificationViewDto = {
+          id: notification.id,
+          message: notification.message,
+          isRead: notification.isRead,
+          createdAt: notification.notifyAt,
         };
+        get().addNotification(notificationDto);
+      });
 
-        ws.onmessage = (event) => {
-          try {
-            const data: WSMessage = JSON.parse(event.data);
+      socket.on(WS_EVENT_PATH.ERROR, (error: { message: string; error: string }) => {
+        set({ error: error.message });
+      });
 
-            if (data.type === 'notification') {
-              const payload = data.payload as WSNotificationPayload;
-              const notification: NotificationViewDto = {
-                id: payload.id,
-                message: payload.message,
-                isRead: payload.isRead || false,
-                createdAt: payload.createdAt || new Date().toISOString(),
-              };
-
-              get().addNotification(notification);
-            } else if (data.type === 'unread_count') {
-              const payload = data.payload as WSUnreadCountPayload;
-              set({ unreadCount: payload.unreadCount });
-            } else if (data.type === 'bulk_notifications') {
-              const payload = data.payload as WSBulkNotificationsPayload;
-              const notifications: NotificationViewDto[] = payload.items.map((item) => ({
-                id: item.id,
-                message: item.message,
-                isRead: item.isRead,
-                createdAt: item.createdAt,
-              }));
-
-              set({
-                notifications: [...notifications, ...get().notifications],
-                unreadCount: payload.unreadCount || get().unreadCount,
-              });
-            } else if (data.type === 'notification_deleted') {
-              const payload = data.payload as WSNotificationDeletedPayload;
-              get().deleteNotification(payload.id);
-            }
-          } catch {
-            // console.error('Error parsing WebSocket message:', error);
+      socket.on('disconnect', (reason) => {
+        set({ isConnected: false });
+        if (reason === 'io server disconnect') {
+          if (savedToken) {
+            setTimeout(() => get().connect(savedToken!), 1000);
           }
-        };
+        }
+      });
 
-        ws.onclose = (event) => {
-          // console.log('WebSocket disconnected:', event.code, event.reason);
-          set({ isConnected: false });
-
-          if (reconnectAttempts < maxReconnectAttempts && event.code !== 1000 && savedToken) {
-            reconnectAttempts++;
-            // console.log(`Attempting to reconnect... (${reconnectAttempts}/${maxReconnectAttempts})`);
-
-            if (reconnectTimeout) {
-              clearTimeout(reconnectTimeout);
-            }
-
-            reconnectTimeout = setTimeout(() => {
-              if (savedToken) {
-                get().connect(savedToken);
-              }
-            }, 3000 * reconnectAttempts);
-          }
-        };
-
-        ws.onerror = () => {
-          // console.error('WebSocket error:', error);
-          set({ error: 'WebSocket connection error' });
-        };
-      } catch {
-        // console.error('Failed to create WebSocket connection:', error);
-        set({ error: 'Failed to establish WebSocket connection' });
-      }
+      socket.on('connect_error', (error) => {
+        set({ error: error.message, isConnected: false });
+      });
     },
 
     disconnect: () => {
-      savedToken = null;
-      reconnectAttempts = 0;
-
-      if (ws) {
-        ws.close(1000, 'User disconnected');
-        ws = null;
+      if (socket) {
+        socket.disconnect();
+        socket = null;
       }
-
-      if (reconnectTimeout) {
-        clearTimeout(reconnectTimeout);
-        reconnectTimeout = null;
-      }
-
-      set({ isConnected: false });
+      set({ isConnected: false, error: null });
     },
 
     markAsRead: async (ids: number[]) => {
-      set((state) => {
-        const updatedNotifications = state.notifications.map((notification) =>
-          ids.includes(notification.id) ? { ...notification, isRead: true } : notification,
-        );
+      if (ids.length === 0) return;
 
+      set((state) => {
+        const updatedNotifications = state.notifications.map((n) => (ids.includes(n.id) ? { ...n, isRead: true } : n));
         const newUnreadCount = updatedNotifications.filter((n) => !n.isRead).length;
 
         return {
@@ -168,89 +129,65 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
           body: { ids },
         });
       } catch {
-        // console.error('Failed to mark notifications as read on server:', error);
         set((state) => {
-          const revertedNotifications = state.notifications.map((notification) =>
-            ids.includes(notification.id) ? { ...notification, isRead: false } : notification,
+          const revertedNotifications = state.notifications.map((n) =>
+            ids.includes(n.id) ? { ...n, isRead: false } : n,
           );
-
-          const revertedUnreadCount = revertedNotifications.filter((n) => !n.isRead).length;
+          const newUnreadCount = revertedNotifications.filter((n) => !n.isRead).length;
 
           return {
             notifications: revertedNotifications,
-            unreadCount: revertedUnreadCount,
+            unreadCount: newUnreadCount,
           };
         });
       }
     },
 
     markAllAsRead: () => {
-      set((state) => {
-        const idsToMark = state.notifications.filter((n) => !n.isRead).map((n) => n.id);
-
-        if (idsToMark.length > 0) {
-          get().markAsRead(idsToMark);
-        }
-
-        return { unreadCount: 0 };
-      });
+      const unreadIds = get()
+        .notifications.filter((n) => !n.isRead)
+        .map((n) => n.id);
+      get().markAsRead(unreadIds);
     },
 
     addNotification: (notification: NotificationViewDto, showToastMessage = true) => {
       set((state) => {
         const exists = state.notifications.some((n) => n.id === notification.id);
-        if (exists) {
-          const updatedNotifications = state.notifications.map((n) => (n.id === notification.id ? notification : n));
+        if (exists) return state;
 
-          const newUnreadCount =
-            state.unreadCount +
-            (notification.isRead ? 0 : 1) -
-            (state.notifications.find((n) => n.id === notification.id)?.isRead ? 0 : 1);
+        const newNotifications = [notification, ...state.notifications];
+        const newUnreadCount = notification.isRead ? state.unreadCount : state.unreadCount + 1;
 
-          return {
-            notifications: updatedNotifications,
-            unreadCount: newUnreadCount,
-          };
-        } else {
-          const newNotifications = [notification, ...state.notifications];
-
-          const newUnreadCount = notification.isRead ? state.unreadCount : state.unreadCount + 1;
-
-          if (showToastMessage && state.showToast && !notification.isRead) {
-            useAlertStore.getState().show({
-              error: null,
-              description: notification.message,
-              severity: 'success',
-              variant: 'default',
-            });
-          }
-
-          return {
-            notifications: newNotifications,
-            unreadCount: newUnreadCount,
-          };
+        if (showToastMessage && state.showToast && !notification.isRead) {
+          useAlertStore.getState().show({
+            error: null,
+            description: notification.message,
+            severity: 'success',
+            variant: 'default',
+          });
         }
+
+        return {
+          notifications: newNotifications,
+          unreadCount: newUnreadCount,
+        };
       });
     },
 
     updateUnreadCount: () => {
-      set((state) => {
-        const unreadCount = state.notifications.filter((n) => !n.isRead).length;
-        return { unreadCount };
-      });
+      const unreadCount = get().notifications.filter((n) => !n.isRead).length;
+      set({ unreadCount });
     },
 
     deleteNotification: async (id: number) => {
       set((state) => {
-        const updatedNotifications = state.notifications.filter((notification) => notification.id !== id);
-        const removedNotification = state.notifications.find((notification) => notification.id === id);
-
-        const newUnreadCount =
-          removedNotification && !removedNotification.isRead ? Math.max(0, state.unreadCount - 1) : state.unreadCount;
+        const notification = state.notifications.find((n) => n.id === id);
+        const updatedNotifications = state.notifications.filter((n) => n.id !== id);
+        const newUnreadCount = notification && !notification.isRead ? state.unreadCount - 1 : state.unreadCount;
 
         return {
           notifications: updatedNotifications,
-          unreadCount: newUnreadCount,
+          unreadCount: Math.max(0, newUnreadCount),
         };
       });
 
@@ -277,12 +214,11 @@ export const notificationWebSocketService = {
 };
 
 // ============ MOCK DATA ДЛЯ РАЗРАБОТКИ ============
-// Запуск: loadMockNotifications() в консоли браузера или в useEffect
 
 const MOCK_NOTIFICATIONS: NotificationViewDto[] = [
   {
     id: 1,
-    message: 'Your subscription is activated and valid until 31-12-2026',
+    message: 'Your subscription is activated and valid until 2025-12-31',
     isRead: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
   },
@@ -345,4 +281,6 @@ export const addTestNotification = (message?: string) => {
 if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
   (window as unknown as Record<string, unknown>).loadMockNotifications = loadMockNotifications;
   (window as unknown as Record<string, unknown>).addTestNotification = addTestNotification;
+  (window as unknown as Record<string, unknown>).notificationWebSocketService = notificationWebSocketService;
+  (window as unknown as Record<string, unknown>).useNotificationWSStore = useNotificationWSStore;
 }

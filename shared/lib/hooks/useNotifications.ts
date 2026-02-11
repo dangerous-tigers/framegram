@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useNotificationWSStore } from '@/shared/lib/websocket/notification-websocket.service';
 
@@ -14,6 +14,8 @@ export const useNotifications = () => {
     deleteNotification,
   } = useNotificationWSStore();
 
+  const isMountedRef = useRef(false);
+
   const getRecentNotifications = (days = 30) => {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - days);
@@ -27,17 +29,20 @@ export const useNotifications = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    isMountedRef.current = true;
+
     const token = localStorage.getItem('accessToken');
     if (token) {
       connect(token);
     }
 
     return () => {
-      if (isConnected) {
+      if (isMountedRef.current) {
+        isMountedRef.current = false;
         disconnect();
       }
     };
-  }, [connect, disconnect, isConnected]);
+  }, [connect, disconnect]);
 
   return {
     notifications,
