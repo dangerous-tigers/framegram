@@ -18,7 +18,6 @@ type Props = {
   className?: string;
 };
 
-// Отдельный компонент для элемента уведомления (чтобы использовать хуки правильно)
 type NotificationItemProps = {
   notification: {
     id: number;
@@ -74,7 +73,6 @@ export const Notifications = ({ className }: Props) => {
   const [lastCursor, setLastCursor] = useState<number | null>(null);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-  // Загрузка уведомлений с сервера при первом подключении
   useEffect(() => {
     const loadNotifications = async () => {
       if (!isAuth || !isInitialLoad) return;
@@ -97,7 +95,6 @@ export const Notifications = ({ className }: Props) => {
         if (response.data) {
           const { items, totalCount } = response.data;
 
-          // Обновляем состояние уведомлений
           items?.forEach((notification) => {
             useNotificationWSStore.getState().addNotification({
               id: notification.id,
@@ -107,7 +104,6 @@ export const Notifications = ({ className }: Props) => {
             });
           });
 
-          // Обновляем информацию о пагинации
           if (items && items.length > 0) {
             setLastCursor(items[items.length - 1].id);
           }
@@ -125,7 +121,6 @@ export const Notifications = ({ className }: Props) => {
     loadNotifications();
   }, [isAuth, isInitialLoad]);
 
-  // Загрузка дополнительных уведомлений при скролле
   const loadMoreNotifications = async () => {
     if (!hasMore || !lastCursor || isLoading) return;
 
@@ -168,12 +163,10 @@ export const Notifications = ({ className }: Props) => {
     }
   };
 
-  // Обработчик отметки уведомлений как прочитанных
   const handleMarkAsRead = (id: number) => {
     markAsRead([id]);
   };
 
-  // Обработчик удаления уведомления
   const handleDeleteNotification = (id: number) => {
     deleteNotification(id);
   };

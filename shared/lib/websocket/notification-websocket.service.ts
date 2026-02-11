@@ -12,18 +12,12 @@ import {
 } from '@/shared/ui/notifications/types';
 
 export interface NotificationWebSocketService {
-  // Состояние соединения
   isConnected: boolean;
-  // Ошибка соединения
   error: string | null;
-  // Уведомления
   notifications: NotificationViewDto[];
-  // Количество непрочитанных уведомлений
   unreadCount: number;
-  // Показывать ли toast при новых уведомлениях
   showToast: boolean;
 
-  // Методы
   connect: (token: string) => void;
   disconnect: () => void;
   markAsRead: (ids: number[]) => void;
@@ -34,13 +28,12 @@ export interface NotificationWebSocketService {
   setShowToast: (show: boolean) => void;
 }
 
-// Создаем глобальное хранилище для уведомлений
 export const useNotificationWSStore = create<NotificationWebSocketService>((set, get) => {
   let ws: WebSocket | null = null;
   let reconnectTimeout: NodeJS.Timeout | null = null;
   const maxReconnectAttempts = 5;
   let reconnectAttempts = 0;
-  let savedToken: string | null = null; // Сохраняем токен для переподключения
+  let savedToken: string | null = null;
 
   return {
     isConnected: false,
@@ -55,10 +48,9 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
 
     connect: (token: string) => {
       if (ws && ws.readyState === WebSocket.OPEN) {
-        return; // Уже подключено
+        return;
       }
 
-      // Сохраняем токен для переподключения
       savedToken = token;
 
       try {
@@ -68,14 +60,13 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
 
         ws.onopen = () => {
           set({ isConnected: true, error: null });
-          reconnectAttempts = 0; // Сброс попыток подключения при успешном подключении
+          reconnectAttempts = 0;
         };
 
         ws.onmessage = (event) => {
           try {
             const data: WSMessage = JSON.parse(event.data);
 
-            // Обработка входящего уведомления
             if (data.type === 'notification') {
               const payload = data.payload as WSNotificationPayload;
               const notification: NotificationViewDto = {
@@ -87,11 +78,9 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
 
               get().addNotification(notification);
             } else if (data.type === 'unread_count') {
-              // Обновление количества непрочитанных уведомлений
               const payload = data.payload as WSUnreadCountPayload;
               set({ unreadCount: payload.unreadCount });
             } else if (data.type === 'bulk_notifications') {
-              // Обновление списка уведомлений (например, при первом подключении)
               const payload = data.payload as WSBulkNotificationsPayload;
               const notifications: NotificationViewDto[] = payload.items.map((item) => ({
                 id: item.id,
@@ -105,7 +94,6 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
                 unreadCount: payload.unreadCount || get().unreadCount,
               });
             } else if (data.type === 'notification_deleted') {
-              // Обработка удаленного уведомления
               const payload = data.payload as WSNotificationDeletedPayload;
               get().deleteNotification(payload.id);
             }
@@ -118,7 +106,6 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
           // console.log('WebSocket disconnected:', event.code, event.reason);
           set({ isConnected: false });
 
-          // Попытка переподключения с сохраненным токеном
           if (reconnectAttempts < maxReconnectAttempts && event.code !== 1000 && savedToken) {
             reconnectAttempts++;
             // console.log(`Attempting to reconnect... (${reconnectAttempts}/${maxReconnectAttempts})`);
@@ -131,7 +118,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
               if (savedToken) {
                 get().connect(savedToken);
               }
-            }, 3000 * reconnectAttempts); // Экспоненциальная задержка
+            }, 3000 * reconnectAttempts);
           }
         };
 
@@ -146,7 +133,6 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
     },
 
     disconnect: () => {
-      // Очищаем сохраненный токен при явном отключении
       savedToken = null;
       reconnectAttempts = 0;
 
@@ -177,14 +163,12 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
         };
       });
 
-      // Отправляем запрос на сервер для сохранения состояния
       try {
         await client.PUT('/notifications/mark-as-read', {
           body: { ids },
         });
       } catch {
         // console.error('Failed to mark notifications as read on server:', error);
-        // Восстанавливаем состояние в случае ошибки
         set((state) => {
           const revertedNotifications = state.notifications.map((notification) =>
             ids.includes(notification.id) ? { ...notification, isRead: false } : notification,
@@ -214,10 +198,8 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
 
     addNotification: (notification: NotificationViewDto, showToastMessage = true) => {
       set((state) => {
-        // Проверяем, существует ли уже уведомление с таким ID
         const exists = state.notifications.some((n) => n.id === notification.id);
         if (exists) {
-          // Обновляем существующее уведомление
           const updatedNotifications = state.notifications.map((n) => (n.id === notification.id ? notification : n));
 
           const newUnreadCount =
@@ -230,13 +212,10 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
             unreadCount: newUnreadCount,
           };
         } else {
-          // Добавляем новое уведомление в начало списка
           const newNotifications = [notification, ...state.notifications];
 
-          // Обновляем количество непрочитанных уведомлений
           const newUnreadCount = notification.isRead ? state.unreadCount : state.unreadCount + 1;
 
-          // Показываем toast при новом уведомлении (если включено)
           if (showToastMessage && state.showToast && !notification.isRead) {
             useAlertStore.getState().show({
               error: null,
@@ -266,7 +245,6 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
         const updatedNotifications = state.notifications.filter((notification) => notification.id !== id);
         const removedNotification = state.notifications.find((notification) => notification.id === id);
 
-        // Обновляем количество непрочитанных уведомлений
         const newUnreadCount =
           removedNotification && !removedNotification.isRead ? Math.max(0, state.unreadCount - 1) : state.unreadCount;
 
@@ -276,7 +254,6 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
         };
       });
 
-      // Отправляем запрос на сервер для удаления уведомления
       try {
         await client.DELETE('/notifications/{id}', {
           params: { path: { id } },
@@ -288,7 +265,6 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
   };
 });
 
-// Функция для получения экземпляра сервиса
 export const notificationWebSocketService = {
   connect: (token: string) => useNotificationWSStore.getState().connect(token),
   disconnect: () => useNotificationWSStore.getState().disconnect(),

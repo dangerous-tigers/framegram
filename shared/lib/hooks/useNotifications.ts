@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { useNotificationWSStore } from '@/shared/lib/websocket/notification-websocket.service';
 
-// Хук для работы с уведомлениями
 export const useNotifications = () => {
   const {
     notifications,
@@ -15,7 +14,6 @@ export const useNotifications = () => {
     deleteNotification,
   } = useNotificationWSStore();
 
-  // Функция для получения последних уведомлений за определенный период
   const getRecentNotifications = (days = 30) => {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - days);
@@ -26,9 +24,7 @@ export const useNotifications = () => {
     });
   };
 
-  // Эффект для автоматического подключения к WebSocket при аутентификации
   useEffect(() => {
-    // Проверка на SSR (localStorage недоступен на сервере)
     if (typeof window === 'undefined') return;
 
     const token = localStorage.getItem('accessToken');

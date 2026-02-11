@@ -1,16 +1,13 @@
 import type { components } from '@/shared/api/schema.d';
 
-// Тип уведомления из API
 export type NotificationViewDto = components['schemas']['NotificationViewDto'];
 
-// Дополнительные типы для UI
 export type NotificationsResponse = {
   pageSize: number;
   totalCount: number;
   items?: NotificationViewDto[];
 };
 
-// Типы для WebSocket сообщений
 export type WSMessageType = 'notification' | 'unread_count' | 'bulk_notifications' | 'notification_deleted';
 
 export interface WSNotificationPayload {
