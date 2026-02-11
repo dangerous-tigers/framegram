@@ -23,21 +23,20 @@ export const Notifications = ({ className }: Props) => {
 
   const token = getToken();
 
-  const {
-    data: notifications,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery({
+  const { data: notifications, fetchNextPage } = useInfiniteQuery({
     queryKey: ['notifications'],
     enabled: Boolean(data),
     initialPageParam: 0,
     queryFn: async ({ pageParam = 0 }) => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/notifications/${pageParam}&sortBy=id`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASEURL}/notifications/${pageParam}?pageSize=${12}&sortBy=id`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
       if (!response.ok) {
         if (response.status === 401) {
           throw new Error('Notifications response is empty');
@@ -46,16 +45,14 @@ export const Notifications = ({ className }: Props) => {
       return await response.json();
     },
     getNextPageParam: (lastPage: NotificationsResponse) => {
-      return lastPage.items?.at(-1)?.id;
+      const nextCursor = lastPage.items?.at(-1)?.id;
+      return nextCursor;
     },
     select: (data: SelectData) => {
-      const items = data.pages.flatMap((page) => page.items);
-      const lastPage = data.pages.at(-1);
-
       return {
-        items,
-        totalCount: lastPage?.totalCount,
-        notReadCount: lastPage?.notReadCount,
+        items: data.pages.flatMap((page) => page.items),
+        totalCount: data.pages[0].totalCount,
+        notReadCount: data.pages[0].notReadCount,
       };
     },
   });
@@ -90,9 +87,11 @@ export const Notifications = ({ className }: Props) => {
                 key={notification.id}
               />
             ))}
-            {!isFetchingNextPage && notifications?.items.length === notifications?.totalCount && (
-              <DropdownMenu.Item>У вас больше нет уведомлений</DropdownMenu.Item>
-            )}
+            {/* {!isFetchingNextPage && notifications?.items.length === notifications?.totalCount && (
+              <DropdownMenu.Item style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                Уведомлений 
+              </DropdownMenu.Item>
+            )} */}
             <div ref={nextPortionRef}></div>
           </Scroll>
           <DropdownMenu.Arrow className={s.arrow} />
