@@ -27,6 +27,9 @@ export const Notifications = ({ className }: Props) => {
   const { data: firstBatchOfNotifications } = useQuery({
     queryKey: ['first_batch_of_notifications'],
     enabled: Boolean(data),
+    staleTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
     queryFn: async () => {
       const response = await client.GET('/notifications/{cursor}', {
         params: {
