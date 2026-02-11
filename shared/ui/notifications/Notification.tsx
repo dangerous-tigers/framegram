@@ -13,7 +13,7 @@ export const Notification = ({ notification }: { notification: NotificationsView
       key={notification.id}
     >
       {!notification.isRead && <span className={s.rightSlot}>Новое уведомление!</span>}
-      <p className={s.notification}>Ваша подписка активирована и действует до 03.02.2025</p>
+      <p className={s.notification}>{notification.message}</p>
       <span className={s.timeAgo}>{timeAgo}</span>
       <DropdownMenu.Separator className={s.separator} />
     </DropdownMenu.Item>

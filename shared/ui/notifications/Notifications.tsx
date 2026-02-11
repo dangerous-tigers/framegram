@@ -1,14 +1,17 @@
 'use client';
+import { useRef } from 'react';
 import clsx from 'clsx';
 
 import { OutlineBell } from '@/assets/icons';
 import { useMe } from '@/entities/user/model/useMe';
+import { client } from '@/shared/api/client';
+import { NOTIFICATION_PORTION } from '@/shared/constants/constants';
 import { useIntersection } from '@/shared/lib/hooks';
-import { getToken } from '@/shared/ui/notifications/getToken';
 import { Scroll } from '@/shared/ui/notifications/ScrollArea';
 import { NotificationsResponse, SelectData } from '@/shared/ui/notifications/types';
+import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { Notification } from './Notification';
 
@@ -19,30 +22,46 @@ type Props = {
 };
 
 export const Notifications = ({ className }: Props) => {
-  const { data } = useMe();
+  const { data, isLoading, isFetching } = useMe();
 
-  const token = getToken();
+  const { data: firstBatchOfNotifications } = useQuery({
+    queryKey: ['first_batch_of_notifications'],
+    enabled: Boolean(data),
+    queryFn: async () => {
+      const response = await client.GET('/notifications/{cursor}', {
+        params: {
+          path: {
+            cursor: 0,
+          },
+          query: {
+            pageSize: NOTIFICATION_PORTION,
+          },
+        },
+      });
+      return response.data;
+    },
+  });
+
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const isOpen = triggerRef.current?.getAttribute('state-open') === 'open';
 
   const { data: notifications, fetchNextPage } = useInfiniteQuery({
     queryKey: ['notifications'],
-    enabled: Boolean(data),
+    enabled: isOpen,
+    refetchOnMount: false,
     initialPageParam: 0,
     queryFn: async ({ pageParam = 0 }) => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASEURL}/notifications/${pageParam}?pageSize=${12}&sortBy=id`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
+      const response = await client.GET('/notifications/{cursor}', {
+        params: {
+          path: {
+            cursor: pageParam,
+          },
+          query: {
+            pageSize: NOTIFICATION_PORTION,
           },
         },
-      );
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error('Notifications response is empty');
-        }
-      }
-      return await response.json();
+      });
+      return response.data as NotificationsResponse;
     },
     getNextPageParam: (lastPage: NotificationsResponse) => {
       const nextCursor = lastPage.items?.at(-1)?.id;
@@ -61,15 +80,26 @@ export const Notifications = ({ className }: Props) => {
 
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger
-        className={clsx(s.trigger, className)}
-        asChild
-      >
-        <div>
-          <OutlineBell />
-          {notifications && notifications.notReadCount! > 0 && <span>{notifications?.notReadCount}</span>}
-        </div>
-      </DropdownMenu.Trigger>
+      {(data && isLoading) || (data && isFetching) ? (
+        <Skeleton className={s.skeleton} />
+      ) : (
+        <DropdownMenu.Trigger
+          className={clsx(s.trigger, className)}
+          ref={triggerRef}
+          asChild
+        >
+          {data && (
+            <div>
+              <OutlineBell />
+              {!notifications && <span>{firstBatchOfNotifications?.notReadCount}</span>}
+              {notifications && notifications.notReadCount! > 0 && notifications.notReadCount <= 99 && (
+                <span>{notifications?.notReadCount}</span>
+              )}
+              {notifications && notifications.notReadCount > 99 && <span className={s.ellipsis}>...</span>}
+            </div>
+          )}
+        </DropdownMenu.Trigger>
+      )}
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
@@ -87,11 +117,9 @@ export const Notifications = ({ className }: Props) => {
                 key={notification.id}
               />
             ))}
-            {/* {!isFetchingNextPage && notifications?.items.length === notifications?.totalCount && (
-              <DropdownMenu.Item style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                Уведомлений 
-              </DropdownMenu.Item>
-            )} */}
+            {notifications && notifications?.items.length === notifications?.notReadCount && (
+              <DropdownMenu.Item className={s.endOfNotifyFeed}>Вы достигли конца ленты</DropdownMenu.Item>
+            )}
             <div ref={nextPortionRef}></div>
           </Scroll>
           <DropdownMenu.Arrow className={s.arrow} />
