@@ -1,39 +1,10 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-import { CreatePostStep, UploadedImage } from './CreatePostType';
+import { UploadedImageItem } from './CreatePostType';
 import { clearDraft, loadDraft, saveDraft } from './indexedDb';
-import type { DraftData } from './types';
-
-export type CreatePostStateType = {
-  step: CreatePostStep;
-  images: UploadedImage;
-  activeImageIndex: number;
-  description: string;
-
-  setStep: (step: CreatePostStep) => void;
-  addImages: (files: File[]) => void;
-  setImages: (images: UploadedImage) => void;
-  removeImage: (index: number) => void;
-  setDescription: (value: string) => void;
-  setActiveImageIndex: (value: number) => void;
-
-  hydrate: () => Promise<void>;
-  isHydrated: boolean;
-  reset: () => Promise<void>;
-
-  isOpen: boolean;
-  setOpen: (value: boolean) => void;
-
-  setImageFilter: (index: number, filter: string) => void;
-};
-
-const pickDraft = (state: CreatePostStateType): DraftData => ({
-  step: state.step,
-  images: state.images,
-  activeImageIndex: state.activeImageIndex,
-  description: state.description,
-});
+import type { CreatePostStateType } from './types';
+import { pickDraft } from './utils';
 
 export const useCreatePostStore = create<CreatePostStateType>()(
   devtools((set, get) => ({
@@ -74,15 +45,31 @@ export const useCreatePostStore = create<CreatePostStateType>()(
       await saveDraft(pickDraft({ ...get(), step: isDraft() }));
     },
 
+    updateActiveImage: (partialImage) => {
+      set((state) => {
+        const images = [...state.images];
+        const activeImage = images[state.activeImageIndex];
+        if (activeImage) {
+          images[state.activeImageIndex] = { ...activeImage, ...partialImage };
+        }
+        saveDraft(pickDraft({ ...state, images }));
+        return { images };
+      });
+    },
+
     addImages: (files) =>
       set((state) => {
         const images = [
           ...state.images,
-          ...files.slice(0, 10 - state.images.length).map((file) => ({
-            id: crypto.randomUUID(),
-            file,
-            preview: URL.createObjectURL(file),
-          })),
+          ...files.slice(0, 10 - state.images.length).map(
+            (file) =>
+              ({
+                id: crypto.randomUUID(),
+                file,
+                preview: URL.createObjectURL(file),
+                originalFile: file,
+              }) as UploadedImageItem,
+          ),
         ];
 
         saveDraft(pickDraft({ ...state, images }));
