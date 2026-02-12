@@ -8,7 +8,7 @@
     "feed": "Feed",
     "create": "Create",
     "myProfile": "My Profile",
-    "messenges" : "Messenges",
+    "messenges": "Messenges",
     "search": "Search",
     "statistic": "Statistics",
     "favorites": "Favorites",
@@ -99,7 +99,7 @@
     "close": "Close",
     "deletePost": "Do you really want delete post?",
     "closeEditMode": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
-    "deletePhoto" : "Do you really want to delete your profile photo?"
+    "deletePhoto": "Do you really want to delete your profile photo?"
   },
   "viewPost": {
     "likes": "Likes",
@@ -107,7 +107,6 @@
     "showReplies": "Show replies",
     "hideReplies": "Hide replies",
     "publish": "Publish",
-    "beTheFirstLikes": "Be the first ",
     "like": "Like!",
     "noCommentsYet": "No comments yet.",
     "beTheFirstToComment": "Be the first to comment.",
@@ -115,7 +114,8 @@
     "emptyAnswerError": "Answer cannot be empty",
     "prefixWarning": "Attention! You have switched to comment submission mode",
     "commentPlaceholder": "Add a Comment...",
-    "noLikesYet": "No likes yet."
+    "noLikesYet": "No likes yet.",
+    "likesCount": "{count, plural, =0 {No likes yet.} one {<count>{count, number}</count> like} other {<count>{count, number}</count> likes}}"
   },
   "mainPagePost": {
     "RegisteredUsers": "Registered users",
@@ -139,5 +139,56 @@
     "description": "You need to log in to access this page.",
     "login": "Log in",
     "backToHome": "Back to Home"
+  },
+  "profile": {
+    "settings": {
+      "title": "Settings",
+      "general": {
+        "title": "General",
+        "lastName": "Last Name",
+        "firstName": "First Name",
+        "userName": "User Name",
+        "birthday": "Date of birthday",
+        "aboutMe": "About me",
+        "selectImage": "Select Image",
+        "save": "Save",
+        "saving": "Saving..."
+      },
+      "accountManagement": {
+        "title": "Account Management",
+        "currentSubscription": "Current Subscription:",
+        "expireAt": "Expire at",
+        "nextPayment": "Next payment",
+        "autoRenewal": "Auto-Renewal",
+        "accountType": "Account type:",
+        "changeSubscription": "Change your subscription:",
+        "personal": "Personal",
+        "business": "Business",
+        "days": "{count} Day",
+        "weekly": "{count} Day",
+        "monthly": "month",
+        "per": "per",
+        "or": "or",
+        "createPayment": "Create payment",
+        "autoRenewalModalText": "Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings",
+        "paymentCanceled": "Auto renewal canceled",
+        "comingSoon": "Coming soon",
+        "disabled": "Disabled"
+      },
+      "devices": "Devices",
+      "payments": "Payments",
+      "successTitle": "Success",
+      "errorTitle": "Error",
+      "successMessage": "Payment was successful!",
+      "errorMessage": "Transaction failed. Please, write to support",
+      "backToPayment": "Back to payment"
+    },
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>No publications</s>} one {<b>{count}</b> <s>Publication</s>} other {<b>{count}</b> <s>Publications</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s> No followers</s>} one {<b>{count}</b> <s>Follower</s>} other {<b>{count}</b> <s>Followers</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s> No following</s>} one {<b>{count}</b> <s>Following</s>} other {<b>{count}</b> <s>Following</s>}}",
+    "profileSettings": "Settings",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "sendMessage": "Send Message"
   }
 }

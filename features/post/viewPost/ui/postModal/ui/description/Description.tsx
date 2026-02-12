@@ -2,8 +2,8 @@
 import { useTranslations } from 'next-intl';
 
 import placeholderAvatar from '@/assets/illustrations/avatar-placeholder.png';
+import { useTimeAgo } from '@/shared/lib/hooks';
 import { Button } from '@/shared/ui';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
 
 import { DescriptionInfo } from './DescriptionInfo';
 
@@ -31,6 +31,7 @@ export function Description({
   onAnswerClick,
 }: Props) {
   const t = useTranslations('viewPost');
+  const timeAgo = useTimeAgo(timeStamp);
   return (
     <div className={s.description}>
       <div className={s.userInfo}>
@@ -47,7 +48,7 @@ export function Description({
             text={text}
           />
           <div className={s.footer}>
-            <CompTimeAgo date={new Date(timeStamp)} />
+            {timeAgo}
             {isLikeCount && likeCount > 0 && (
               <>
                 <span className={s.likeCount}>
