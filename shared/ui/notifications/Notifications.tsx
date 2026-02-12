@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
 import { OutlineBell } from '@/assets/icons';
@@ -8,10 +8,11 @@ import { client } from '@/shared/api/client';
 import { NOTIFICATION_PORTION } from '@/shared/constants/constants';
 import { useIntersection } from '@/shared/lib/hooks';
 import { Scroll } from '@/shared/ui/notifications/ScrollArea';
+import { getSocket, SOCKET_EVENTS } from '@/shared/ui/notifications/socket';
 import { NotificationsResponse, SelectData } from '@/shared/ui/notifications/types';
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { Notification } from './Notification';
 
@@ -23,6 +24,47 @@ type Props = {
 
 export const Notifications = ({ className }: Props) => {
   const { data, isLoading, isFetching } = useMe();
+  const queryClient = useQueryClient();
+  const socket = getSocket();
+
+  useEffect(() => {
+    socket.connect();
+
+    socket.on(SOCKET_EVENTS.NOTIFICATIONS, (event) => {
+      if (!notifications) {
+        queryClient.setQueryData(['first_batch_of_notifications'], (prev: NotificationsResponse) => {
+          if (!prev) return prev;
+
+          return {
+            ...prev,
+            items: [event, ...prev.items],
+            totalCount: prev.totalCount + 1,
+            notReadCount: prev.notReadCount + 1,
+          };
+        });
+      }
+      queryClient.setQueryData(['notifications'], (prev: SelectData) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          pages: prev.pages.map((page, index) =>
+            index === 0
+              ? {
+                  ...page,
+                  items: [event, ...page.items],
+                  totalCount: page.totalCount + 1,
+                  notReadCount: page.notReadCount + 1,
+                }
+              : page,
+          ),
+        };
+      });
+    });
+    return () => {
+      socket.off(SOCKET_EVENTS.NOTIFICATIONS);
+      socket.disconnect();
+    };
+  }, []);
 
   const { data: firstBatchOfNotifications } = useQuery({
     queryKey: ['first_batch_of_notifications'],
