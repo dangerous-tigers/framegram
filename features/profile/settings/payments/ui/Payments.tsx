@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { paymentsApi } from '@/features/profile/settings/payments/model/payments.api';
-import { PaymentTableType } from '@/features/profile/settings/payments/model/PaymentTableType';
+import { useGetPayments } from '@/features/profile/settings/payments/model/useGetPayments';
 import { formatDate } from '@/shared/lib/formatDate';
 import { Skeleton } from '@/shared/ui';
 import { Pagination } from '@/shared/ui/pagination/Pagination';
@@ -9,35 +8,25 @@ import { Pagination } from '@/shared/ui/pagination/Pagination';
 import s from './Payments.module.scss';
 
 export const Payments = () => {
-  const [payments, setPayments] = useState<PaymentTableType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState('10');
-  const [loading, setLoading] = useState(false);
 
-  const totalPages = Math.ceil(payments.length / +pageSize);
+  const { data = [], isLoading, isError } = useGetPayments();
 
-  const paginatedPayments = payments.slice((currentPage - 1) * +pageSize, currentPage * +pageSize);
+  const totalPages = Math.ceil(data.length / +pageSize);
+
+  const paginatedPayments = data.slice((currentPage - 1) * +pageSize, currentPage * +pageSize);
 
   const handlePageSizeChange = (value: string) => {
     setPageSize(value);
     setCurrentPage(1);
   };
 
-  useEffect(() => {
-    setLoading(true);
+  if (isLoading) return <Skeleton />;
 
-    paymentsApi()
-      .then((res) => {
-        setPayments(res);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  if (isError) return <div>Ошибка загрузки платежей</div>;
 
-  if (loading) return <Skeleton />;
-
-  if (payments.length === 0) {
+  if (data.length === 0) {
     return <div>Платежей не было</div>;
   }
 
