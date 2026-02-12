@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons';
-import { formatDate } from '@/shared/lib';
+import { formatDate } from '@/shared/lib/formatDate';
 import { Button, Checkbox, RadioButtonGroup } from '@/shared/ui';
 
 import { useSubscriptionModals, useSubscriptionState } from '../model';
