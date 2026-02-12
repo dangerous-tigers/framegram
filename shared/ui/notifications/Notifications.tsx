@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
 import { OutlineBell } from '@/assets/icons';
@@ -7,14 +7,13 @@ import { useMe } from '@/entities/user/model/useMe';
 import { client } from '@/shared/api/client';
 import { NOTIFICATION_PORTION } from '@/shared/constants/constants';
 import { useIntersection } from '@/shared/lib/hooks';
+import { Notification } from '@/shared/ui/notifications/Notification';
 import { Scroll } from '@/shared/ui/notifications/ScrollArea';
 import { getSocket, SOCKET_EVENTS } from '@/shared/ui/notifications/socket';
 import { NotificationsResponse, SelectData } from '@/shared/ui/notifications/types';
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
-
-import { Notification } from './Notification';
 
 import s from './Notifications.module.scss';
 
@@ -23,7 +22,7 @@ type Props = {
 };
 
 export const Notifications = ({ className }: Props) => {
-  const { data, isLoading, isFetching } = useMe();
+  const { data, isLoading: meIsLoading, isFetching } = useMe();
   const queryClient = useQueryClient();
   const socket = getSocket();
 
@@ -90,7 +89,11 @@ export const Notifications = ({ className }: Props) => {
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const isOpen = triggerRef.current?.getAttribute('state-open') === 'open';
 
-  const { data: notifications, fetchNextPage } = useInfiniteQuery({
+  const {
+    data: notifications,
+    fetchNextPage,
+    isLoading,
+  } = useInfiniteQuery({
     queryKey: ['notifications'],
     enabled: isOpen,
     refetchOnMount: false,
@@ -125,7 +128,7 @@ export const Notifications = ({ className }: Props) => {
 
   return (
     <DropdownMenu.Root>
-      {(data && isLoading) || (data && isFetching) ? (
+      {(data && meIsLoading) || (data && isFetching) ? (
         <Skeleton className={s.skeleton} />
       ) : (
         <DropdownMenu.Trigger
@@ -154,7 +157,8 @@ export const Notifications = ({ className }: Props) => {
           sideOffset={5}
         >
           <Scroll>
-            <span className={s.title}>Уведомления</span>
+            {isLoading ? <Skeleton className={s.skeletonTitle} /> : <span className={s.title}>Уведомления</span>}
+
             <DropdownMenu.Separator className={s.separator} />
             {notifications?.items.map((notification) => (
               <Notification
@@ -162,6 +166,14 @@ export const Notifications = ({ className }: Props) => {
                 key={notification.id}
               />
             ))}
+            {isLoading &&
+              firstBatchOfNotifications &&
+              firstBatchOfNotifications.items?.map((notification) => (
+                <DropdownMenu.Item key={notification.id}>
+                  <Skeleton className={s.notifySkeleton} />
+                  <DropdownMenu.Separator className={s.separator} />
+                </DropdownMenu.Item>
+              ))}
             {notifications && notifications?.items.length === notifications?.notReadCount && (
               <DropdownMenu.Item className={s.endOfNotifyFeed}>Вы достигли конца ленты</DropdownMenu.Item>
             )}
