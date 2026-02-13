@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { OutlineBell } from '@/assets/icons';
@@ -30,15 +30,36 @@ export const Notifications = ({ className }: Props) => {
 
   const useAsRead = useMutation({
     mutationKey: ['markAsRead'],
-    mutationFn: async () =>
+    mutationFn: async () => {
       await client.PUT('/notifications/mark-as-read', {
         body: {
           ids: selectedIds,
         },
-      }),
-    onSuccess: async () => {
+      });
+      const previousNotifications: SelectData = queryClient.getQueryData(['notifications'])!;
+
+      const optimisticNotifications = {
+        ...previousNotifications,
+        pages: previousNotifications.pages.map((page) => {
+          const idsToRemove = new Set(selectedIds.map((id) => id));
+
+          return page
+            ? {
+                ...page,
+                items: page.items.filter((item) => !idsToRemove.has(item.id)),
+                totalCount: page.totalCount - selectedIds.length,
+                notReadCount: page.notReadCount - selectedIds.length,
+              }
+            : page;
+        }),
+      };
+      queryClient.setQueryData(['notifications'], optimisticNotifications);
+
+      return { optimisticNotifications };
+    },
+    onSuccess: async (data) => {
       setSelectedIds([]);
-      await queryClient.invalidateQueries({ queryKey: ['notifications'] });
+      queryClient.setQueryData(['notifications'], data.optimisticNotifications);
     },
   });
 
@@ -48,6 +69,14 @@ export const Notifications = ({ className }: Props) => {
     }
     useAsRead.mutate();
   };
+
+  useDebounce(
+    () => {
+      handleAsRead();
+    },
+    1500,
+    [selectedIds],
+  );
 
   useEffect(() => {
     socket.connect();
@@ -129,6 +158,7 @@ export const Notifications = ({ className }: Props) => {
           },
           query: {
             pageSize: NOTIFICATION_PORTION,
+            isRead: false,
           },
         },
       });
@@ -184,13 +214,18 @@ export const Notifications = ({ className }: Props) => {
             {isLoading ? <Skeleton className={s.skeletonTitle} /> : <span className={s.title}>Уведомления</span>}
 
             <DropdownMenu.Separator className={s.separator} />
-            {notifications?.items.map((notification) => (
-              <Notification
-                notification={notification}
-                key={notification.id}
-                setIsRead={setSelectedIds}
-              />
-            ))}
+            {notifications?.items.map((notification) => {
+              const isRead = selectedIds.includes(notification.id);
+
+              return (
+                <Notification
+                  notification={notification}
+                  key={notification.id}
+                  isRead={isRead}
+                  setSelectedIds={setSelectedIds}
+                />
+              );
+            })}
             {isLoading &&
               firstBatchOfNotifications &&
               firstBatchOfNotifications.items?.map((notification) => (
@@ -210,3 +245,21 @@ export const Notifications = ({ className }: Props) => {
     </DropdownMenu.Root>
   );
 };
+
+const useDebounce = (callback: () => void | Promise<void>, delay: number, deps: React.DependencyList = []) => {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    timeoutRef.current = setTimeout(() => {
+      callback();
+    }, delay);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [delay, ...deps]);
+};
+
+export default useDebounce;

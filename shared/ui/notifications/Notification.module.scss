@@ -34,12 +34,14 @@
   }
 
   .isRead {
+    color: var(--light-900);
     text-decoration: line-through;
   }
 }
 
 .separator {
   height: 1px;
+  width: 320px;
   background-color: var(--dark-100);
   margin: 12px 0;
 }
