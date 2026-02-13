@@ -2,11 +2,17 @@
   color: var(--light-100);
   font-weight: 700;
   font-size: var(--font-size-s);
+  cursor: pointer;
 
   // margin: 12px 0;
 
   &:hover {
     outline: none;
+    color: var(--primary-500);
+  }
+
+  &:active {
+    color: var(--primary-100);
   }
 
   .rightSlot {
@@ -25,6 +31,10 @@
     font-weight: 400;
     line-height: var(--line-height-s);
     color: var(--light-900);
+  }
+
+  .isRead {
+    text-decoration: line-through;
   }
 }
 

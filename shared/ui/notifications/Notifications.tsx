@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { OutlineBell } from '@/assets/icons';
@@ -13,7 +13,7 @@ import { getSocket, SOCKET_EVENTS } from '@/shared/ui/notifications/socket';
 import { NotificationsResponse, SelectData } from '@/shared/ui/notifications/types';
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import s from './Notifications.module.scss';
 
@@ -25,6 +25,29 @@ export const Notifications = ({ className }: Props) => {
   const { data, isLoading: meIsLoading, isFetching } = useMe();
   const queryClient = useQueryClient();
   const socket = getSocket();
+
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
+  const useAsRead = useMutation({
+    mutationKey: ['markAsRead'],
+    mutationFn: async () =>
+      await client.PUT('/notifications/mark-as-read', {
+        body: {
+          ids: selectedIds,
+        },
+      }),
+    onSuccess: async () => {
+      setSelectedIds([]);
+      await queryClient.invalidateQueries({ queryKey: ['notifications'] });
+    },
+  });
+
+  const handleAsRead = () => {
+    if (!selectedIds.length) {
+      return null;
+    }
+    useAsRead.mutate();
+  };
 
   useEffect(() => {
     socket.connect();
@@ -95,7 +118,7 @@ export const Notifications = ({ className }: Props) => {
     isLoading,
   } = useInfiniteQuery({
     queryKey: ['notifications'],
-    enabled: isOpen,
+    enabled: isOpen || useAsRead.status === 'success',
     refetchOnMount: false,
     initialPageParam: 0,
     queryFn: async ({ pageParam = 0 }) => {
@@ -155,6 +178,7 @@ export const Notifications = ({ className }: Props) => {
           arrowPadding={10}
           className={s.content}
           sideOffset={5}
+          onPointerDownOutside={handleAsRead}
         >
           <Scroll>
             {isLoading ? <Skeleton className={s.skeletonTitle} /> : <span className={s.title}>Уведомления</span>}
@@ -164,6 +188,7 @@ export const Notifications = ({ className }: Props) => {
               <Notification
                 notification={notification}
                 key={notification.id}
+                setIsRead={setSelectedIds}
               />
             ))}
             {isLoading &&
