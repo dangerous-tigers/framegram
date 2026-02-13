@@ -44,7 +44,7 @@
     "idb": "^8.0.3",
     "lodash.debounce": "^4.0.8",
     "motion": "^12.23.26",
-    "next": "16.0.4",
+    "next": "16.1.5",
     "next-intl": "^4.6.0",
     "openapi-fetch": "^0.15.0",
     "overlayscrollbars": "^2.13.0",

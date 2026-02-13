@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { create } from 'zustand';
 
@@ -38,6 +39,30 @@ export interface NotificationWebSocketService {
 export const useNotificationWSStore = create<NotificationWebSocketService>((set, get) => {
   let socket: Socket | null = null;
   let savedToken: string | null = null;
+  let pingInterval: NodeJS.Timeout | null = null;
+
+  // Обработчики network состояния
+  const handleOnline = () => {
+    if (!socket?.connected && savedToken) {
+      get().connect(savedToken!);
+    }
+  };
+
+  const handleOffline = () => {
+    if (socket?.connected) {
+      get().disconnect();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, [get]);
 
   return {
     isConnected: false,
@@ -52,6 +77,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
 
     connect: (token: string) => {
       if (socket?.connected) {
+        // console.log('WebSocket: Already connected');
         return;
       }
 
@@ -60,6 +86,8 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       // Socket.IO подключение
       const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'https://inctagram.work';
 
+      // console.log('WebSocket: Connecting to ', wsUrl);
+
       socket = io(wsUrl, {
         path: '/socket.io',
         query: {
@@ -67,15 +95,29 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
         },
         transports: ['websocket'], // Только websocket, polling вызывает 400
         reconnection: true,
-        reconnectionAttempts: 5,
+        reconnectionAttempts: Infinity,
         reconnectionDelay: 1000,
       });
 
       socket.on('connect', () => {
+        // console.log('WebSocket: Connected successfully');
         set({ isConnected: true, error: null });
+
+        // Запускаем ping каждые 30 секунд
+        pingInterval = setInterval(() => {
+          if (socket?.connected) {
+            // console.log('WebSocket: Sending ping');
+            socket.emit('ping');
+          }
+        }, 30000);
+      });
+
+      socket.on('pong', () => {
+        // console.log('WebSocket: Pong received');
       });
 
       socket.on(WS_EVENT_PATH.NOTIFICATIONS, (notification: ServerNotification) => {
+        // console.log('WebSocket: New notification received', notification);
         const notificationDto: NotificationViewDto = {
           id: notification.id,
           message: notification.message,
@@ -86,29 +128,53 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       });
 
       socket.on(WS_EVENT_PATH.ERROR, (error: { message: string; error: string }) => {
+        // console.error('WebSocket: Error received', error);
         set({ error: error.message });
       });
 
       socket.on('disconnect', (reason) => {
+        // console.log('WebSocket: Disconnected. Reason: ', reason);
         set({ isConnected: false });
         if (reason === 'io server disconnect') {
           if (savedToken) {
+            // console.log('WebSocket: Attempting to reconnect in 1 second');
             setTimeout(() => get().connect(savedToken!), 1000);
           }
+        }
+
+        // Очищаем ping interval
+        if (pingInterval) {
+          clearInterval(pingInterval);
+          pingInterval = null;
         }
       });
 
       socket.on('connect_error', (error) => {
+        // console.error('WebSocket: Connection error', error);
         set({ error: error.message, isConnected: false });
+
+        // Попытка реконнекции с увеличенной задержкой
+        setTimeout(() => {
+          if (savedToken) {
+            get().connect(savedToken!);
+          }
+        }, 5000);
       });
     },
 
     disconnect: () => {
       if (socket) {
+        // console.log('WebSocket: Disconnecting');
         socket.disconnect();
         socket = null;
       }
       set({ isConnected: false, error: null });
+
+      // Очищаем ping interval
+      if (pingInterval) {
+        clearInterval(pingInterval);
+        pingInterval = null;
+      }
     },
 
     markAsRead: async (ids: number[]) => {
@@ -125,6 +191,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       });
 
       try {
+        // console.log('WebSocket: Marking notifications as read', ids);
         await client.PUT('/notifications/mark-as-read', {
           body: { ids },
         });
@@ -192,6 +259,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       });
 
       try {
+        // console.log('WebSocket: Deleting notification', id);
         await client.DELETE('/notifications/{id}', {
           params: { path: { id } },
         });
