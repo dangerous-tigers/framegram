@@ -18,6 +18,8 @@ export function calculateCropDimensions(
   aspect: AspectType,
   canvasWidth: number,
   canvasHeight: number,
+  offsetX = 0,
+  offsetY = 0,
 ) {
   const targetAspect = getTargetAspect(image, aspect);
 
@@ -35,8 +37,11 @@ export function calculateCropDimensions(
   sourceWidth /= zoom;
   sourceHeight /= zoom;
 
-  const sourceX = (image.width - sourceWidth) / 2;
-  const sourceY = (image.height - sourceHeight) / 2;
+  const sourceX = (image.width - sourceWidth) / 2 - offsetX;
+  const sourceY = (image.height - sourceHeight) / 2 - offsetY;
+
+  const cropX = Math.max(0, Math.min(image.width - sourceWidth, sourceX));
+  const cropY = Math.max(0, Math.min(image.height - sourceHeight, sourceY));
 
   const scale = Math.min(canvasWidth / sourceWidth, canvasHeight / sourceHeight);
 
@@ -46,10 +51,13 @@ export function calculateCropDimensions(
   const dx = (canvasWidth - drawWidth) / 2;
   const dy = (canvasHeight - drawHeight) / 2;
 
+  const maxOffsetX = Math.max(0, (image.width - sourceWidth) / 2);
+  const maxOffsetY = Math.max(0, (image.height - sourceHeight) / 2);
+
   return {
     crop: {
-      x: sourceX,
-      y: sourceY,
+      x: cropX,
+      y: cropY,
       width: sourceWidth,
       height: sourceHeight,
     },
@@ -59,5 +67,8 @@ export function calculateCropDimensions(
       width: drawWidth,
       height: drawHeight,
     },
+    scale,
+    maxOffsetX,
+    maxOffsetY,
   };
 }

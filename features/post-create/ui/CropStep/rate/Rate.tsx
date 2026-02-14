@@ -1,28 +1,39 @@
+import { useEffect, useState } from 'react';
 import { clsx } from 'clsx';
-import { useShallow } from 'zustand/react/shallow';
 
-import { ExpandOutline } from '@/assets/icons'; // Using ExpandOutline as placeholder if Image icon is not correct for "selected" state, logic below confirms request.
-// Wait, I should probably check if I have a checkmark icon or similar.
+import { ExpandOutline } from '@/assets/icons';
 import { AspectType } from '@/features/post-create/model/CreatePostType';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
-import { useCropStore } from '@/features/post-create/model/storeCrop';
 
 import Popover from '../components/Popover';
+import { useCropContext } from '../CropContext';
 
 import s from './Rate.module.scss';
 
 export const Rate = () => {
   const activeImageIndex = useCreatePostStore((s) => s.activeImageIndex);
   const images = useCreatePostStore((s) => s.images);
-  const setAspect = useCropStore((s) => s.setAspect);
 
   const activeId = images[activeImageIndex]?.id;
 
-  const currentAspect = useCropStore(useShallow((s) => (activeId ? s.crops[activeId]?.aspect : 'original')));
+  const { getState, setCropState, commitCropState, subscribe } = useCropContext();
+  const [aspect, setAspect] = useState<AspectType>('original');
 
-  const handleAspectChange = (aspect: AspectType) => {
+  useEffect(() => {
+    if (!activeId) return;
+    setAspect(getState(activeId).aspect);
+
+    const unsubscribe = subscribe(activeId, (state) => {
+      setAspect(state.aspect);
+    });
+    return () => unsubscribe();
+  }, [activeId]);
+
+  const handleAspectChange = (newAspect: AspectType) => {
     if (activeId) {
-      setAspect(activeId, aspect);
+      setAspect(newAspect);
+      setCropState(activeId, { aspect: newAspect });
+      commitCropState(activeId);
     }
   };
 
@@ -43,7 +54,7 @@ export const Rate = () => {
           {aspects.map((item) => (
             <div
               key={item.value}
-              className={clsx(s.item, currentAspect === item.value && s.active)}
+              className={clsx(s.item, aspect === item.value && s.active)}
               onClick={() => handleAspectChange(item.value)}
             >
               <span className={s.label}>{item.label}</span>
