@@ -16,10 +16,16 @@ export const useCreatePostStore = create<CreatePostStateType>()(
     hydrate: async () => {
       const draft = await loadDraft();
 
-      if (draft) {
+      if (draft && draft.images) {
+        const images = draft.images.map((img) => ({
+          ...img,
+          preview: URL.createObjectURL(img.file),
+        }));
+
         set(
           {
             ...draft,
+            images,
             isHydrated: true,
           },
           false,
@@ -49,7 +55,13 @@ export const useCreatePostStore = create<CreatePostStateType>()(
       set((state) => {
         const images = [...state.images];
         const activeImage = images[state.activeImageIndex];
+        const partialFile = partialImage.file;
         if (activeImage) {
+          if (partialFile && partialFile !== activeImage.file) {
+            URL.revokeObjectURL(activeImage.preview);
+            partialImage.preview = URL.createObjectURL(partialFile);
+          }
+
           images[state.activeImageIndex] = { ...activeImage, ...partialImage };
         }
         saveDraft(pickDraft({ ...state, images }));
@@ -59,18 +71,17 @@ export const useCreatePostStore = create<CreatePostStateType>()(
 
     addImages: (files) =>
       set((state) => {
-        const images = [
-          ...state.images,
-          ...files.slice(0, 10 - state.images.length).map(
-            (file) =>
-              ({
-                id: crypto.randomUUID(),
-                file,
-                preview: URL.createObjectURL(file),
-                originalFile: file,
-              }) as UploadedImageItem,
-          ),
-        ];
+        const newImages = files.slice(0, 10 - state.images.length).map(
+          (file) =>
+            ({
+              id: crypto.randomUUID(),
+              file,
+              preview: URL.createObjectURL(file),
+              originalFile: file,
+            }) as UploadedImageItem,
+        );
+
+        const images = [...state.images, ...newImages];
 
         saveDraft(pickDraft({ ...state, images }));
         return { images };
@@ -87,6 +98,10 @@ export const useCreatePostStore = create<CreatePostStateType>()(
     removeImage: (index) =>
       set(
         (state) => {
+          const imageToRemove = state.images[index];
+          if (imageToRemove) {
+            URL.revokeObjectURL(imageToRemove.preview);
+          }
           const images = state.images.filter((_, i) => i !== index);
           saveDraft(pickDraft({ ...state, images }));
           return { images };
@@ -111,8 +126,18 @@ export const useCreatePostStore = create<CreatePostStateType>()(
       });
     },
 
+    cleanup: () => {
+      const images = get().images;
+      images.forEach((img) => {
+        if (img.preview) URL.revokeObjectURL(img.preview);
+      });
+    },
+
     reset: async () => {
       await clearDraft();
+
+      get().images.forEach((img) => URL.revokeObjectURL(img.preview));
+
       set(
         {
           step: '',

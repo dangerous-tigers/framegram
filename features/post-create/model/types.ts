@@ -13,6 +13,7 @@ export type CreatePostStateType = {
   activeImageIndex: number;
   description: string;
 
+  cleanup: () => void;
   setStep: (step: CreatePostStep) => void;
   addImages: (files: File[]) => void;
   setImages: (images: UploadedImage) => void;

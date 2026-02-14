@@ -21,6 +21,7 @@ export const CreatePostModal = () => {
   const step = useCreatePostStore((s) => s.step);
   const setStep = useCreatePostStore((s) => s.setStep);
   const reset = useCreatePostStore((s) => s.reset);
+  const cleanup = useCreatePostStore((s) => s.cleanup);
   const resetCrop = useCropStore((s) => s.reset);
   const queryClient = useQueryClient();
   const [showCloseModal, setShowCloseModal] = useState(false);
@@ -68,6 +69,7 @@ export const CreatePostModal = () => {
   };
 
   const saveDraftHandler = () => {
+    cleanup();
     setShowCloseModal(false);
     setOpen(false);
   };
