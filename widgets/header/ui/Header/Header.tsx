@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
+import { Notifications } from '@/features/notifications';
 import { ToggleLocale } from '@/shared/components/toggleLocale/ToggleLocale';
-import { Notifications } from '@/shared/ui';
 import { HeaderAuthButtons } from '@/widgets/header/ui/HeaderAuthButtons';
 import { Logo } from '@/widgets/header/ui/Logo';
 

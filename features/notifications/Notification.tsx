@@ -1,8 +1,8 @@
 import { Dispatch } from 'react';
 import clsx from 'clsx';
 
+import { NotificationsView } from '@/features/notifications/types';
 import { useTimeAgo } from '@/shared/lib/hooks';
-import { NotificationsView } from '@/shared/ui/notifications/types';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import s from './Notification.module.scss';

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 
-import s from './ScrollArea.module.scss';
+import s from './Scroll.module.scss';
 
 export const Scroll = ({ children }: { children: ReactNode }) => (
   <ScrollArea.Root className={s.root}>
