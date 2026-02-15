@@ -1,0 +1,47 @@
+.item {
+  color: var(--light-100);
+  font-weight: 700;
+  font-size: var(--font-size-s);
+  cursor: pointer;
+
+  // margin: 12px 0;
+
+  &:hover {
+    outline: none;
+    color: var(--primary-500);
+  }
+
+  &:active {
+    color: var(--primary-100);
+  }
+
+  .rightSlot {
+    font-weight: 400;
+    font-size: var(--font-size-xs);
+    color: var(--primary-500);
+  }
+
+  .notification {
+    font-weight: 400;
+    font-size: var(--font-size-s);
+  }
+
+  .timeAgo {
+    font-size: var(--font-size-xs);
+    font-weight: 400;
+    line-height: var(--line-height-s);
+    color: var(--light-900);
+  }
+
+  .isRead {
+    color: var(--light-900);
+    text-decoration: line-through;
+  }
+}
+
+.separator {
+  height: 1px;
+  width: 320px;
+  background-color: var(--dark-100);
+  margin: 12px 0;
+}

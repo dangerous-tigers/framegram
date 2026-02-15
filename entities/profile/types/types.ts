@@ -79,6 +79,7 @@ export type PostsByUserId = {
   pageSize: number;
   items: PostViewModel[];
   totalUsers: number;
+  notReadCount?: number;
 };
 
 export type UpdateProfileUser = {
