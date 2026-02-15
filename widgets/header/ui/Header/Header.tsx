@@ -7,15 +7,9 @@ import { Logo } from '@/widgets/header/ui/Logo';
 
 import s from './header.module.scss';
 
-type PropsHeader = {
-  className?: string;
-};
-
-export const Header = async (props: PropsHeader) => {
-  const { className } = props;
-
+export const Header = () => {
   return (
-    <header className={clsx(s.header, className)}>
+    <header className={s.header}>
       <div className='container'>
         <div className={s.headerBody}>
           <Logo />

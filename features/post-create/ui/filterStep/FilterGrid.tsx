@@ -27,7 +27,7 @@ export const FilterGrid = ({ className }: FilterGridType) => {
       onClick={() => setImageFilter(activeIndex, filter.css)}
     >
       <img
-        src={images[activeIndex].preview}
+        src={images[activeIndex]?.preview}
         alt={description ? 'photo' : ''}
         style={{ filter: filter.css }}
       />

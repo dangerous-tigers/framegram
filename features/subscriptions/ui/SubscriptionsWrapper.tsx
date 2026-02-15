@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons';
-import { formatDate } from '@/shared/lib/formatDate';
 import { Button, Checkbox, RadioButtonGroup } from '@/shared/ui';
 
 import { useSubscriptionModals, useSubscriptionState } from '../model';
@@ -15,10 +14,10 @@ export function SubscriptionsWrapper() {
   const t = useTranslations('profile.settings.accountManagement');
 
   const {
+    subscription,
     costType,
     ACCOUNT_TYPE,
     COST_TYPE,
-    autoRenewal,
     accountType,
     setAccountType,
     setCostType,
@@ -46,20 +45,19 @@ export function SubscriptionsWrapper() {
           <div className={s.currentContent}>
             <div className={s.currentHeader}>
               <p>{t('expireAt')}</p>
-              <span>{formatDate(lastSubscription?.endDateOfSubscription)}</span>
+              <span>{lastSubscription.formattedDateEnd}</span>
             </div>
             <div className={s.currentHeader}>
               <p>{t('nextPayment')}</p>
-              <span>{autoRenewal ? formatDate(lastSubscription?.endDateOfSubscription) : t('disabled')}</span>
+              <span>{subscription?.hasAutoRenewal ? lastSubscription.formattedDateEnd : t('disabled')}</span>
             </div>
           </div>
         </SubscriptionsCard>
       )}
       <Checkbox
         label={t('autoRenewal')}
-        checked={autoRenewal}
+        checked={subscription?.hasAutoRenewal}
         onCheckedChange={handleCancelAutoRenewal}
-        disabled={!autoRenewal}
       />
       <SubscriptionsCard title={t('accountType')}>
         <RadioButtonGroup
