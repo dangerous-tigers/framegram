@@ -6,25 +6,53 @@ import { client } from '@/shared/api/client';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { NotificationViewDto } from '@/shared/ui/notifications/types';
 
+import { Message, MessageSendRequest, WebSocketConfig, WebSocketError, WebSocketMetrics } from './types';
+
+// Utility functions
+const debounce = (func: (...args: unknown[]) => void, wait: number): (() => void) => {
+  let timeout: NodeJS.Timeout;
+  return (...args: unknown[]) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+};
+
 const WS_EVENT_PATH = {
   NOTIFICATIONS: 'notifications',
+  UNREAD_COUNT: 'unread_count',
+  BULK_NOTIFICATIONS: 'bulk_notifications',
+  NOTIFICATION_DELETED: 'notification_deleted',
+  RECEIVE_MESSAGE: 'receive_message',
+  MESSAGE_SEND: 'message_send',
+  UPDATE_MESSAGE: 'update_message',
+  MESSAGE_DELETED: 'message_deleted',
   ERROR: 'error',
 } as const;
 
-interface ServerNotification {
-  id: number;
-  clientId?: string;
-  message: string;
-  isRead: boolean;
-  notifyAt: string;
+interface WebSocketConnectionConfig {
+  url: string;
+  path: string;
+  query: Record<string, string>;
+  transports: string[];
+  reconnection: boolean;
+  reconnectionAttempts: number;
+  reconnectionDelay: number;
+  timeout: number;
+}
+
+interface WebSocketMessageHandler {
+  [key: string]: (data: unknown) => void;
 }
 
 export interface NotificationWebSocketService {
   isConnected: boolean;
-  error: string | null;
+  error: WebSocketError | null;
   notifications: NotificationViewDto[];
   unreadCount: number;
   showToast: boolean;
+  metrics: WebSocketMetrics;
+  config: WebSocketConfig;
+  messages: Message[];
 
   connect: (token: string) => void;
   disconnect: () => void;
@@ -34,25 +62,146 @@ export interface NotificationWebSocketService {
   updateUnreadCount: () => void;
   deleteNotification: (id: number) => void;
   setShowToast: (show: boolean) => void;
+  getMetrics: () => WebSocketMetrics;
+  validateMessage: (message: unknown) => boolean;
+  sendMessage: (message: MessageSendRequest, receiverId: number) => void;
+  updateMessage: (id: number, message: string) => void;
+  deleteMessage: (id: number) => void;
+  getMessages: () => Message[];
 }
 
 export const useNotificationWSStore = create<NotificationWebSocketService>((set, get) => {
   let socket: Socket | null = null;
   let savedToken: string | null = null;
   let pingInterval: NodeJS.Timeout | null = null;
+  let lastConnectionAttempt: number = 0;
+  let messages: Message[] = [];
 
-  // Обработчики network состояния
-  const handleOnline = () => {
+  const config: WebSocketConfig = {
+    url: process.env.NEXT_PUBLIC_WS_URL || 'https://inctagram.work',
+    path: '/socket.io',
+    pingInterval: 30000,
+    maxRetries: 10,
+    retryDelay: 1000,
+    maxRetryDelay: 30000,
+    timeout: 10000,
+  };
+
+  const metrics: WebSocketMetrics = {
+    connectionAttempts: 0,
+    successfulConnections: 0,
+    failedConnections: 0,
+    messagesReceived: 0,
+    messagesSent: 0,
+    averageLatency: 0,
+    currentLatency: 0,
+  };
+
+  const log = (level: 'debug' | 'info' | 'warn' | 'error', message: string, data?: unknown) => {
+    const timestamp = new Date().toISOString();
+    const logEntry = `[${timestamp}] [${level.toUpperCase()}] ${message}`;
+
+    if (process.env.NODE_ENV === 'production' && level === 'error') {
+      // В production режиме отправляем ошибки на сервер
+      if (typeof window !== 'undefined') {
+        (window as Record<string, unknown>).gtag('event', 'websocket_error', {
+          event_category: 'error',
+          event_label: message,
+          value: data ? JSON.stringify(data) : null,
+        });
+      }
+    }
+
+    if (data) {
+      log(logEntry, data);
+    } else {
+      log(logEntry);
+    }
+  };
+
+  const validateObject = (data: unknown, requiredKeys: string[]): data is Record<string, unknown> => {
+    if (typeof data !== 'object' || data === null) return false;
+    const obj = data as Record<string, unknown>;
+    return requiredKeys.every((key) => key in obj);
+  };
+
+  const validateNotification = (data: unknown): data is NotificationViewDto => {
+    if (!validateObject(data, ['id', 'message', 'isRead', 'createdAt'])) return false;
+    const notification = data as NotificationViewDto;
+    return (
+      typeof notification.id === 'number' &&
+      typeof notification.message === 'string' &&
+      typeof notification.isRead === 'boolean' &&
+      typeof notification.createdAt === 'string'
+    );
+  };
+
+  const validateMessage = (data: unknown): data is Message => {
+    if (
+      !validateObject(data, [
+        'id',
+        'ownerId',
+        'receiverId',
+        'messageText',
+        'status',
+        'messageType',
+        'createdAt',
+        'updatedAt',
+      ])
+    )
+      return false;
+    const message = data as Message;
+    return (
+      typeof message.id === 'number' &&
+      typeof message.ownerId === 'number' &&
+      typeof message.receiverId === 'number' &&
+      typeof message.messageText === 'string' &&
+      typeof message.status === 'string' &&
+      typeof message.messageType === 'string' &&
+      typeof message.createdAt === 'string' &&
+      typeof message.updatedAt === 'string'
+    );
+  };
+
+  const validateMessageSize = (message: string): boolean => {
+    const MAX_MESSAGE_SIZE = 10000; // 10KB
+    return message.length <= MAX_MESSAGE_SIZE;
+  };
+
+  const exponentialBackoff = (attempt: number): number => {
+    const delay = Math.min(config.maxRetryDelay, config.retryDelay * Math.pow(2, attempt));
+    const jitter = Math.random() * 1000;
+    return delay + jitter;
+  };
+
+  const updateMetrics = (type: 'connection' | 'message' | 'error') => {
+    switch (type) {
+      case 'connection':
+        metrics.connectionAttempts++;
+        break;
+      case 'message':
+        metrics.messagesReceived++;
+        break;
+      case 'error':
+        metrics.failedConnections++;
+        break;
+    }
+    set({ metrics: { ...metrics } });
+  };
+
+  const handleOnline = debounce(() => {
     if (!socket?.connected && savedToken) {
+      log('info', 'Network online, attempting to reconnect');
       get().connect(savedToken!);
     }
-  };
+  }, 1000);
 
-  const handleOffline = () => {
+  const handleOffline = debounce(() => {
     if (socket?.connected) {
+      log('info', 'Network offline, disconnecting');
       get().disconnect();
     }
-  };
+  }, 1000);
 
   useEffect(() => {
     window.addEventListener('online', handleOnline);
@@ -61,8 +210,199 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
+
+      // Graceful shutdown
+      if (socket) {
+        log('info', 'WebSocket: Component unmounting, disconnecting');
+        socket.disconnect();
+        socket = null;
+      }
+
+      if (pingInterval) {
+        clearInterval(pingInterval);
+        pingInterval = null;
+      }
     };
   }, [get]);
+
+  const connectWithRetry = (token: string, attempt: number = 0): void => {
+    // Increment retry count when attempting reconnection
+    if (attempt > 0) {
+      retryCount = attempt;
+    }
+    const now = Date.now();
+    const timeSinceLastAttempt = now - lastConnectionAttempt;
+
+    if (timeSinceLastAttempt < 1000) {
+      setTimeout(() => connectWithRetry(token, attempt), 1000 - timeSinceLastAttempt);
+      return;
+    }
+
+    // Update retry count for tracking
+    retryCount = attempt;
+
+    lastConnectionAttempt = now;
+    updateMetrics('connection');
+
+    if (attempt > 0) {
+      const delay = exponentialBackoff(attempt - 1);
+      log('info', `Reconnection attempt ${attempt}, waiting ${delay}ms`);
+      setTimeout(() => attemptConnection(token, attempt), delay);
+    } else {
+      attemptConnection(token, attempt);
+    }
+  };
+
+  const attemptConnection = (token: string, attempt: number): void => {
+    if (socket?.connected) {
+      log('debug', 'WebSocket: Already connected');
+      return;
+    }
+
+    savedToken = token;
+    const wsUrl = config.url;
+
+    log('info', 'WebSocket: Connecting to', wsUrl);
+
+    const connectionConfig: WebSocketConnectionConfig = {
+      url: wsUrl,
+      path: config.path,
+      query: { accessToken: token },
+      transports: ['websocket'],
+      reconnection: false,
+      reconnectionAttempts: 1,
+      reconnectionDelay: 0,
+      timeout: config.timeout,
+    };
+
+    socket = io(wsUrl, connectionConfig);
+
+    const messageHandlers: WebSocketMessageHandler = {
+      [WS_EVENT_PATH.NOTIFICATIONS]: (data: unknown) => {
+        if (validateNotification(data)) {
+          const notification = data as NotificationViewDto;
+          log('debug', 'WebSocket: New notification received', notification);
+          get().addNotification(notification);
+          metrics.messagesReceived++;
+          set({ metrics: { ...metrics } });
+        } else {
+          log('warn', 'WebSocket: Invalid notification message received', data);
+        }
+      },
+      [WS_EVENT_PATH.RECEIVE_MESSAGE]: (data: unknown) => {
+        if (validateMessage(data)) {
+          const message = data as Message;
+          log('debug', 'WebSocket: New message received', message);
+          messages.push(message);
+          set({ messages: [...messages], metrics: { ...metrics } });
+        } else {
+          log('warn', 'WebSocket: Invalid message received', data);
+        }
+      },
+      [WS_EVENT_PATH.MESSAGE_SEND]: (data: unknown) => {
+        if (validateMessage(data)) {
+          const message = data as Message;
+          log('debug', 'WebSocket: Message sent', message);
+          messages.push(message);
+          set({ messages: [...messages], metrics: { ...metrics } });
+        } else {
+          log('warn', 'WebSocket: Invalid message send data', data);
+        }
+      },
+      [WS_EVENT_PATH.UPDATE_MESSAGE]: (data: unknown) => {
+        if (validateMessage(data)) {
+          const message = data as Message;
+          log('debug', 'WebSocket: Message updated', message);
+          const index = messages.findIndex((m) => m.id === message.id);
+          if (index !== -1) {
+            messages[index] = message;
+            set({ messages: [...messages], metrics: { ...metrics } });
+          }
+        } else {
+          log('warn', 'WebSocket: Invalid message update data', data);
+        }
+      },
+      [WS_EVENT_PATH.MESSAGE_DELETED]: (data: unknown) => {
+        if (typeof data === 'object' && data !== null && 'id' in data) {
+          const payload = data as { id: number };
+          log('debug', 'WebSocket: Message deleted', payload);
+          messages = messages.filter((m) => m.id !== payload.id);
+          set({ messages: [...messages], metrics: { ...metrics } });
+        } else {
+          log('warn', 'WebSocket: Invalid message delete data', data);
+        }
+      },
+      [WS_EVENT_PATH.ERROR]: (data: unknown) => {
+        if (typeof data === 'object' && data !== null && 'message' in data) {
+          const error = data as { message: string };
+          log('error', 'WebSocket: Error received', error);
+          set({
+            error: { code: 'WS_ERROR', message: error.message, timestamp: new Date().toISOString(), retryable: true },
+          });
+        }
+      },
+      disconnect: (reason: string) => {
+        log('info', 'WebSocket: Disconnected. Reason:', reason);
+        set({ isConnected: false });
+        if (reason === 'io server disconnect' && savedToken && attempt < config.maxRetries) {
+          log('info', 'WebSocket: Attempting to reconnect');
+          connectWithRetry(savedToken, attempt + 1);
+        }
+      },
+      connect_error: (error: unknown) => {
+        log('error', 'WebSocket: Connection error', error);
+        set({
+          error: {
+            code: 'CONNECT_ERROR',
+            message: 'Connection failed',
+            timestamp: new Date().toISOString(),
+            retryable: true,
+          },
+          isConnected: false,
+        });
+
+        if (attempt < config.maxRetries) {
+          connectWithRetry(savedToken!, attempt + 1);
+        } else {
+          log('error', 'WebSocket: Max retry attempts reached');
+        }
+      },
+      connect: () => {
+        log('info', 'WebSocket: Connected successfully');
+        metrics.successfulConnections++;
+        retryCount = 0;
+        set({ isConnected: true, error: null, metrics: { ...metrics } });
+
+        if (pingInterval) {
+          clearInterval(pingInterval);
+        }
+
+        pingInterval = setInterval(() => {
+          if (socket?.connected) {
+            log('debug', 'WebSocket: Sending ping');
+            socket.emit('ping');
+            metrics.messagesSent++;
+            set({ metrics: { ...metrics } });
+          }
+        }, config.pingInterval);
+      },
+      pong: (latency: number) => {
+        log('debug', 'WebSocket: Pong received with latency', latency);
+        metrics.currentLatency = latency;
+        metrics.averageLatency = (metrics.averageLatency + latency) / 2;
+        set({ metrics: { ...metrics } });
+      },
+    };
+
+    Object.keys(messageHandlers).forEach((event) => {
+      socket?.on(event, (data: unknown) => {
+        const handler = messageHandlers[event];
+        if (handler) {
+          handler(data);
+        }
+      });
+    });
+  };
 
   return {
     isConnected: false,
@@ -70,107 +410,38 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
     notifications: [],
     unreadCount: 0,
     showToast: true,
+    metrics: metrics,
+    config: config,
+    messages: messages,
 
     setShowToast: (show: boolean) => {
       set({ showToast: show });
     },
 
     connect: (token: string) => {
-      if (socket?.connected) {
-        // console.log('WebSocket: Already connected');
+      if (!token) {
+        log('error', 'WebSocket: Connection failed - empty token');
+        set({
+          error: {
+            code: 'AUTH_ERROR',
+            message: 'Authentication failed',
+            timestamp: new Date().toISOString(),
+            retryable: false,
+          },
+        });
         return;
       }
-
-      savedToken = token;
-
-      // Socket.IO подключение
-      const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'https://inctagram.work';
-
-      // console.log('WebSocket: Connecting to ', wsUrl);
-
-      socket = io(wsUrl, {
-        path: '/socket.io',
-        query: {
-          accessToken: token,
-        },
-        transports: ['websocket'], // Только websocket, polling вызывает 400
-        reconnection: true,
-        reconnectionAttempts: Infinity,
-        reconnectionDelay: 1000,
-      });
-
-      socket.on('connect', () => {
-        // console.log('WebSocket: Connected successfully');
-        set({ isConnected: true, error: null });
-
-        // Запускаем ping каждые 30 секунд
-        pingInterval = setInterval(() => {
-          if (socket?.connected) {
-            // console.log('WebSocket: Sending ping');
-            socket.emit('ping');
-          }
-        }, 30000);
-      });
-
-      socket.on('pong', () => {
-        // console.log('WebSocket: Pong received');
-      });
-
-      socket.on(WS_EVENT_PATH.NOTIFICATIONS, (notification: ServerNotification) => {
-        // console.log('WebSocket: New notification received', notification);
-        const notificationDto: NotificationViewDto = {
-          id: notification.id,
-          message: notification.message,
-          isRead: notification.isRead,
-          createdAt: notification.notifyAt,
-        };
-        get().addNotification(notificationDto);
-      });
-
-      socket.on(WS_EVENT_PATH.ERROR, (error: { message: string; error: string }) => {
-        // console.error('WebSocket: Error received', error);
-        set({ error: error.message });
-      });
-
-      socket.on('disconnect', (reason) => {
-        // console.log('WebSocket: Disconnected. Reason: ', reason);
-        set({ isConnected: false });
-        if (reason === 'io server disconnect') {
-          if (savedToken) {
-            // console.log('WebSocket: Attempting to reconnect in 1 second');
-            setTimeout(() => get().connect(savedToken!), 1000);
-          }
-        }
-
-        // Очищаем ping interval
-        if (pingInterval) {
-          clearInterval(pingInterval);
-          pingInterval = null;
-        }
-      });
-
-      socket.on('connect_error', (error) => {
-        // console.error('WebSocket: Connection error', error);
-        set({ error: error.message, isConnected: false });
-
-        // Попытка реконнекции с увеличенной задержкой
-        setTimeout(() => {
-          if (savedToken) {
-            get().connect(savedToken!);
-          }
-        }, 5000);
-      });
+      connectWithRetry(token, 0);
     },
 
     disconnect: () => {
       if (socket) {
-        // console.log('WebSocket: Disconnecting');
+        log('info', 'WebSocket: Disconnecting');
         socket.disconnect();
         socket = null;
       }
       set({ isConnected: false, error: null });
 
-      // Очищаем ping interval
       if (pingInterval) {
         clearInterval(pingInterval);
         pingInterval = null;
@@ -191,11 +462,12 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       });
 
       try {
-        // console.log('WebSocket: Marking notifications as read', ids);
+        log('info', 'WebSocket: Marking notifications as read', ids);
         await client.PUT('/notifications/mark-as-read', {
           body: { ids },
         });
-      } catch {
+      } catch (error) {
+        log('error', 'WebSocket: Failed to mark notifications as read', error);
         set((state) => {
           const revertedNotifications = state.notifications.map((n) =>
             ids.includes(n.id) ? { ...n, isRead: false } : n,
@@ -259,13 +531,64 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       });
 
       try {
-        // console.log('WebSocket: Deleting notification', id);
+        log('info', 'WebSocket: Deleting notification', id);
         await client.DELETE('/notifications/{id}', {
           params: { path: { id } },
         });
-      } catch {
-        // Ошибка удаления уведомления на сервере - уведомление уже удалено локально
+      } catch (error) {
+        log('error', 'WebSocket: Failed to delete notification', error);
       }
+    },
+
+    sendMessage: (message: MessageSendRequest, receiverId: number) => {
+      if (!validateMessageSize(message.message)) {
+        log('error', 'WebSocket: Message size exceeds limit', { size: message.message.length });
+        return;
+      }
+
+      if (socket?.connected) {
+        log('info', 'WebSocket: Sending message', { message, receiverId });
+        socket.emit(WS_EVENT_PATH.RECEIVE_MESSAGE, { message: message.message, receiverId });
+        metrics.messagesSent++;
+        set({ metrics: { ...metrics } });
+      } else {
+        log('warn', 'WebSocket: Cannot send message, not connected');
+      }
+    },
+
+    updateMessage: (id: number, message: string) => {
+      if (!validateMessageSize(message)) {
+        log('error', 'WebSocket: Message size exceeds limit', { size: message.length });
+        return;
+      }
+
+      if (socket?.connected) {
+        log('info', 'WebSocket: Updating message', { id, message });
+        socket.emit(WS_EVENT_PATH.UPDATE_MESSAGE, { id, message });
+        metrics.messagesSent++;
+        set({ metrics: { ...metrics } });
+      } else {
+        log('warn', 'WebSocket: Cannot update message, not connected');
+      }
+    },
+
+    deleteMessage: (id: number) => {
+      if (socket?.connected) {
+        log('info', 'WebSocket: Deleting message', { id });
+        socket.emit(WS_EVENT_PATH.MESSAGE_DELETED, { id });
+        metrics.messagesSent++;
+        set({ metrics: { ...metrics } });
+      } else {
+        log('warn', 'WebSocket: Cannot delete message, not connected');
+      }
+    },
+
+    getMessages: () => messages,
+
+    getMetrics: () => metrics,
+
+    validateMessage: (message: unknown) => {
+      return validateNotification(message) || validateMessage(message);
     },
   };
 });
@@ -279,6 +602,22 @@ export const notificationWebSocketService = {
   getState: () => useNotificationWSStore.getState(),
   deleteNotification: (id: number) => useNotificationWSStore.getState().deleteNotification(id),
   setShowToast: (show: boolean) => useNotificationWSStore.getState().setShowToast(show),
+  getMetrics: () => useNotificationWSStore.getState().getMetrics(),
+  validateMessage: (message: unknown) => useNotificationWSStore.getState().validateMessage(message),
+  healthCheck: () => {
+    const state = useNotificationWSStore.getState();
+    return {
+      isConnected: state.isConnected,
+      error: state.error,
+      metrics: state.metrics,
+      config: state.config,
+    };
+  },
+  sendMessage: (message: MessageSendRequest, receiverId: number) =>
+    useNotificationWSStore.getState().sendMessage(message, receiverId),
+  updateMessage: (id: number, message: string) => useNotificationWSStore.getState().updateMessage(id, message),
+  deleteMessage: (id: number) => useNotificationWSStore.getState().deleteMessage(id),
+  getMessages: () => useNotificationWSStore.getState().getMessages(),
 };
 
 // ============ MOCK DATA ДЛЯ РАЗРАБОТКИ ============
