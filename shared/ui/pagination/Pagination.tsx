@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import { ArrowIosBack, ArrowIosForward } from '@/assets/icons/components';
 import { getPages } from '@/shared/ui/pagination/lib/getPages';
 import { pageSizeOptions } from '@/shared/ui/pagination/model/pageSizeOptions';
@@ -12,14 +14,15 @@ type Props = {
   onPageChange: (page: number) => void;
   pageSize: string;
   onPageSizeChange: (value: string) => void;
+  className?: string;
 };
 
 export const Pagination: React.FC<Props> = (props) => {
-  const { onPageSizeChange, onPageChange, pageSize, totalPages, currentPage } = props;
+  const { onPageSizeChange, onPageChange, pageSize, totalPages, currentPage, className } = props;
   const pages = getPages(currentPage, totalPages);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={clsx(styles.wrapper, className)}>
       <PaginationItem
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -56,7 +59,7 @@ export const Pagination: React.FC<Props> = (props) => {
           onValueChange={onPageSizeChange}
           disabled={false}
           variant='text'
-          width='52px'
+          width='75px'
         />
         <p>on page</p>
       </div>

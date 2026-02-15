@@ -1,6 +1,11 @@
 .header {
   border-bottom: 1px solid var(--dark-300);
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background: var(--dark-700);
 }
 
 .headerBody {
