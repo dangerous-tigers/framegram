@@ -2,22 +2,29 @@ import { useState } from 'react';
 
 import { SelectData } from '@/features/notifications/types';
 import { client } from '@/shared/api/client';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 export const useMarkAsRead = () => {
-  const queryClient = useQueryClient();
-
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const { mutate, status } = useMutation({
     mutationKey: ['markAsRead'],
     mutationFn: async () => {
-      await client.PUT('/notifications/mark-as-read', {
+      const response = await client.PUT('/notifications/mark-as-read', {
         body: {
           ids: selectedIds,
         },
       });
-      const previousNotifications: SelectData = queryClient.getQueryData(['notifications'])!;
+
+      if (response.error) {
+        throw response.error;
+      }
+      return response.data;
+    },
+    onMutate: async (_, context) => {
+      await context.client.cancelQueries({ queryKey: ['notifications'] });
+
+      const previousNotifications: SelectData = context.client.getQueryData(['notifications'])!;
 
       const optimisticNotifications = {
         ...previousNotifications,
@@ -34,13 +41,15 @@ export const useMarkAsRead = () => {
             : page;
         }),
       };
-      queryClient.setQueryData(['notifications'], optimisticNotifications);
-
-      return { optimisticNotifications };
+      context.client.setQueryData(['notifications'], optimisticNotifications);
+      return { previousNotifications };
     },
-    onSuccess: async (data) => {
+    onError: (error, variables, onMutateResult: { previousNotifications?: SelectData }, context) => {
+      context.client.setQueryData(['notifications'], onMutateResult.previousNotifications);
       setSelectedIds([]);
-      queryClient.setQueryData(['notifications'], data.optimisticNotifications);
+    },
+    onSuccess: async () => {
+      setSelectedIds([]);
     },
   });
   return { mutate, status, selectedIds, setSelectedIds };
