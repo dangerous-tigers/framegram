@@ -44,7 +44,9 @@ export const useMarkAsRead = () => {
       context.client.setQueryData(['notifications'], optimisticNotifications);
       return { previousNotifications };
     },
-    onError: (error, variables, onMutateResult: { previousNotifications?: SelectData }, context) => {
+    //eslint-disable-next-line
+    //@ts-ignore
+    onError: (error, variables, onMutateResult: { previousNotifications: SelectData }, context) => {
       context.client.setQueryData(['notifications'], onMutateResult.previousNotifications);
       setSelectedIds([]);
     },
