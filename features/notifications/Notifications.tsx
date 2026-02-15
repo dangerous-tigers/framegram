@@ -1,25 +1,21 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { OutlineBell } from '@/assets/icons';
 import { useMe } from '@/entities/user/model/useMe';
-import { getSocket, SOCKET_EVENTS } from '@/features/notifications/api';
+import { useNotificationsSocket } from '@/features/notifications/api/useNotificationsSocket';
 import { useGetNotifications, useInfinityNotifications, useMarkAsRead } from '@/features/notifications/model';
-import { NotificationsResponse, SelectData } from '@/features/notifications/types';
 import { useDebounce } from '@/shared/hooks';
 import { useIntersection } from '@/shared/lib/hooks';
 import { Scroll } from '@/shared/ui/scroll';
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { useQueryClient } from '@tanstack/react-query';
 
 import { Notification } from './Notification';
 
 import s from './Notifications.module.scss';
 
 export const Notifications = () => {
-  const queryClient = useQueryClient();
-  const socket = getSocket();
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const isOpen = triggerRef.current?.getAttribute('state-open') === 'open';
 
@@ -27,6 +23,7 @@ export const Notifications = () => {
   const { mutate, status, selectedIds, setSelectedIds } = useMarkAsRead();
   const { initNotifications, notReadCount } = useGetNotifications();
   const { notifications, fetchNextPage, isLoading } = useInfinityNotifications({ isOpen, status });
+  useNotificationsSocket({ notifications });
 
   const nextPortionRef = useIntersection(() => fetchNextPage());
 
@@ -44,45 +41,6 @@ export const Notifications = () => {
     1500,
     [selectedIds],
   );
-
-  useEffect(() => {
-    socket.connect();
-
-    socket.on(SOCKET_EVENTS.NOTIFICATIONS, (event) => {
-      if (!notifications) {
-        queryClient.setQueryData(['initNotifications'], (prev: NotificationsResponse) => {
-          if (!prev) return prev;
-
-          return {
-            ...prev,
-            items: [event, ...prev.items],
-            totalCount: prev.totalCount + 1,
-            notReadCount: prev.notReadCount + 1,
-          };
-        });
-      }
-      queryClient.setQueryData(['notifications'], (prev: SelectData) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          pages: prev.pages.map((page, index) =>
-            index === 0
-              ? {
-                  ...page,
-                  items: [event, ...page.items],
-                  totalCount: page.totalCount + 1,
-                  notReadCount: page.notReadCount + 1,
-                }
-              : page,
-          ),
-        };
-      });
-    });
-    return () => {
-      socket.off(SOCKET_EVENTS.NOTIFICATIONS);
-      socket.disconnect();
-    };
-  }, []);
 
   return (
     <DropdownMenu.Root>

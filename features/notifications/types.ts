@@ -6,7 +6,7 @@ export type NotificationsView = {
 };
 
 export type NotificationsResponse = {
-  pageSize: number;
+  pageSize?: number;
   totalCount: number;
   notReadCount: number;
   items: NotificationsView[];
