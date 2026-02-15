@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 
 import { AccountType, SubscriptionType } from './types';
 import { useCancelAutoRenewal } from './useCancelAutoRenewal';
@@ -8,11 +8,21 @@ import { useRenewAutoRenewal } from './useRenewAutoRenewal';
 
 export function useSubscriptionState() {
   const { data: subscription } = useGetMySubscription();
+
   const cancelAutoRenewal = useCancelAutoRenewal();
   const renewAutoSubscriptions = useRenewAutoRenewal();
+
+  const format = useFormatter();
+  const lastSubscription = subscription?.data.at(-1);
+  const formattedDateEnd = format.dateTime(new Date(lastSubscription?.endDateOfSubscription || ''), {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+  const lastSub = { ...lastSubscription, formattedDateEnd };
+
   const t = useTranslations('profile.settings.accountManagement');
 
-  const lastSubscription = subscription?.data.at(-1);
   const isSubscriptionActive = lastSubscription && new Date(lastSubscription.endDateOfSubscription) > new Date();
 
   const [accountType, setAccountType] = useState('personal');
@@ -75,7 +85,7 @@ export function useSubscriptionState() {
     costType,
     setCostType,
     isSubscriptionActive,
-    lastSubscription,
+    lastSubscription: lastSub,
     handleCancelAutoRenewal,
   };
 }

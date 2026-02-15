@@ -1,4 +1,4 @@
-import { useFormatter, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons';
 import { Button, Checkbox, RadioButtonGroup } from '@/shared/ui';
@@ -12,7 +12,6 @@ import s from './SubscriptionsWrapper.module.scss';
 
 export function SubscriptionsWrapper() {
   const t = useTranslations('profile.settings.accountManagement');
-  const format = useFormatter();
 
   const {
     subscription,
@@ -39,9 +38,6 @@ export function SubscriptionsWrapper() {
     toggleIAgree,
   } = useSubscriptionModals({ costType, COST_TYPE });
 
-  const dateEnd = new Date(lastSubscription?.endDateOfSubscription || '');
-  const formattedDateEnd = format.dateTime(dateEnd, { day: 'numeric', month: 'long', year: 'numeric' });
-
   return (
     <div className={s.container}>
       {isSubscriptionActive && (
@@ -49,11 +45,11 @@ export function SubscriptionsWrapper() {
           <div className={s.currentContent}>
             <div className={s.currentHeader}>
               <p>{t('expireAt')}</p>
-              <span>{formattedDateEnd}</span>
+              <span>{lastSubscription.formattedDateEnd}</span>
             </div>
             <div className={s.currentHeader}>
               <p>{t('nextPayment')}</p>
-              <span>{subscription?.hasAutoRenewal ? formattedDateEnd : t('disabled')}</span>
+              <span>{subscription?.hasAutoRenewal ? lastSubscription.formattedDateEnd : t('disabled')}</span>
             </div>
           </div>
         </SubscriptionsCard>
