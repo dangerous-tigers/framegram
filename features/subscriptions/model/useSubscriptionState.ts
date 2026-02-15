@@ -4,16 +4,17 @@ import { useTranslations } from 'next-intl';
 import { AccountType, SubscriptionType } from './types';
 import { useCancelAutoRenewal } from './useCancelAutoRenewal';
 import { useGetMySubscription } from './useGetSubscription';
+import { useRenewAutoRenewal } from './useRenewAutoRenewal';
 
 export function useSubscriptionState() {
   const { data: subscription } = useGetMySubscription();
   const cancelAutoRenewal = useCancelAutoRenewal();
+  const renewAutoSubscriptions = useRenewAutoRenewal();
   const t = useTranslations('profile.settings.accountManagement');
 
   const lastSubscription = subscription?.data.at(-1);
   const isSubscriptionActive = lastSubscription && new Date(lastSubscription.endDateOfSubscription) > new Date();
 
-  const [autoRenewal, setAutoRenewal] = useState(subscription?.hasAutoRenewal || false);
   const [accountType, setAccountType] = useState('personal');
   const [costType, setCostType] = useState('10');
 
@@ -48,10 +49,6 @@ export function useSubscriptionState() {
   useEffect(() => {
     if (!subscription) return;
 
-    if (subscription.hasAutoRenewal !== undefined) {
-      setAutoRenewal(subscription.hasAutoRenewal);
-    }
-
     if (subscription.hasAutoRenewal) {
       setAccountType('business');
     } else if (!isSubscriptionActive) {
@@ -61,21 +58,18 @@ export function useSubscriptionState() {
     }
   }, [subscription, isSubscriptionActive]);
 
-  function handleCancelAutoRenewal(nextChecked: boolean) {
-    if (!autoRenewal || nextChecked) return;
-
-    cancelAutoRenewal.mutate(undefined, {
-      onSuccess: () => setAutoRenewal(false),
-      onError: () => setAutoRenewal(true),
-    });
+  function handleCancelAutoRenewal(checked: boolean) {
+    if (checked) {
+      renewAutoSubscriptions.mutate();
+    } else {
+      cancelAutoRenewal.mutate();
+    }
   }
 
   return {
     subscription,
     ACCOUNT_TYPE,
     COST_TYPE,
-    autoRenewal,
-    setAutoRenewal,
     accountType,
     setAccountType,
     costType,

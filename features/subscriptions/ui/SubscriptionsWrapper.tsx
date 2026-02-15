@@ -1,7 +1,6 @@
-import { useTranslations } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons';
-import { formatDate } from '@/shared/lib';
 import { Button, Checkbox, RadioButtonGroup } from '@/shared/ui';
 
 import { useSubscriptionModals, useSubscriptionState } from '../model';
@@ -13,12 +12,13 @@ import s from './SubscriptionsWrapper.module.scss';
 
 export function SubscriptionsWrapper() {
   const t = useTranslations('profile.settings.accountManagement');
+  const format = useFormatter();
 
   const {
+    subscription,
     costType,
     ACCOUNT_TYPE,
     COST_TYPE,
-    autoRenewal,
     accountType,
     setAccountType,
     setCostType,
@@ -39,6 +39,9 @@ export function SubscriptionsWrapper() {
     toggleIAgree,
   } = useSubscriptionModals({ costType, COST_TYPE });
 
+  const dateEnd = new Date(lastSubscription?.endDateOfSubscription || '');
+  const formattedDateEnd = format.dateTime(dateEnd, { day: 'numeric', month: 'long', year: 'numeric' });
+
   return (
     <div className={s.container}>
       {isSubscriptionActive && (
@@ -46,20 +49,19 @@ export function SubscriptionsWrapper() {
           <div className={s.currentContent}>
             <div className={s.currentHeader}>
               <p>{t('expireAt')}</p>
-              <span>{formatDate(lastSubscription?.endDateOfSubscription)}</span>
+              <span>{formattedDateEnd}</span>
             </div>
             <div className={s.currentHeader}>
               <p>{t('nextPayment')}</p>
-              <span>{autoRenewal ? formatDate(lastSubscription?.endDateOfSubscription) : t('disabled')}</span>
+              <span>{subscription?.hasAutoRenewal ? formattedDateEnd : t('disabled')}</span>
             </div>
           </div>
         </SubscriptionsCard>
       )}
       <Checkbox
         label={t('autoRenewal')}
-        checked={autoRenewal}
+        checked={subscription?.hasAutoRenewal}
         onCheckedChange={handleCancelAutoRenewal}
-        disabled={!autoRenewal}
       />
       <SubscriptionsCard title={t('accountType')}>
         <RadioButtonGroup

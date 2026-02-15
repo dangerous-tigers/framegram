@@ -7,3 +7,16 @@ export type SubscriptionPayload = {
   amount: number;
   baseUrl: string;
 };
+
+export type Subscription = {
+  userId: number;
+  subscriptionId: string;
+  dateOfPayment: string;
+  endDateOfSubscription: string;
+  autoRenewal: boolean;
+};
+
+export type SubscriptionResponse = {
+  data: Subscription[];
+  hasAutoRenewal: boolean;
+};
