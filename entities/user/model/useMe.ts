@@ -6,9 +6,14 @@ export const useMe = () => {
     queryKey: ['me'],
     queryFn: async () => {
       const clientResponse = await client.GET('/auth/me');
+
+      if (clientResponse.error) {
+        return null;
+      }
+
       return clientResponse.data;
     },
     retry: 0,
-    staleTime: 0,
+    staleTime: 5 * 60 * 100,
   });
 };

@@ -14,15 +14,19 @@ export function useCommentAnswers({
     queryKey: ['answers', postId, commentId],
     enabled: openAnswer,
     queryFn: async () => {
-      const response = await client.GET('/posts/{postId}/comments/{commentId}/answers', {
-        params: {
-          path: {
-            postId: postId,
-            commentId: commentId,
+      try {
+        const response = await client.GET('/posts/{postId}/comments/{commentId}/answers', {
+          params: {
+            path: {
+              postId: postId,
+              commentId: commentId,
+            },
           },
-        },
-      });
-      return response.data?.items;
+        });
+        return response.data?.items;
+      } catch (error) {
+        throw new Error('Ошибка загрузки ответов' + error);
+      }
     },
   });
 }

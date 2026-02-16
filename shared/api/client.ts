@@ -15,7 +15,8 @@ function makeRefreshToken() {
       }
 
       if (!response.data?.accessToken) {
-        throw new Error('No access token in response');
+        localStorage.removeItem('accessToken');
+        return;
       }
 
       localStorage.setItem('accessToken', response.data.accessToken);
@@ -47,9 +48,13 @@ const authMiddleware: Middleware = {
   async onResponse({ request, response }) {
     if (response.ok) return response;
 
-    if (!response.ok && response.status !== 401) {
+    if (response.status !== 401) {
       return response;
     }
+
+    const token = localStorage.getItem('accessToken');
+
+    if (!token) return response;
 
     try {
       await makeRefreshToken();

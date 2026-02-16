@@ -45,61 +45,57 @@ export const createPost = async (args: { description?: string; uploadIds: string
 
 export const postApi = {
   getPostById: async ({ id }: { id: number }) => {
-    const response = await client.GET('/posts/id/{postId}', {
-      params: {
-        path: {
-          postId: id,
+    try {
+      const response = await client.GET('/posts/id/{postId}', {
+        params: {
+          path: {
+            postId: id,
+          },
         },
-      },
-    });
-    if (response.error) {
-      throw response.error;
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Ошибка загрузки поста' + error);
     }
-    return response.data;
   },
   getPostByIdServer: async (id: number) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/id/${id}`, {
-      cache: 'no-store',
-      credentials: 'include',
-    });
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch post ${id}`);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/id/${id}`, {
+        cache: 'no-store',
+        credentials: 'include',
+      });
+      return res.json();
+    } catch (error) {
+      throw new Error('Ошибка загрузки поста' + error);
     }
-
-    return res.json();
   },
   getPostsByUser: async (userId: number, endCursorPostId: number = 0) => {
-    const response = await client.GET('/posts/user/{userId}/{endCursorPostId}', {
-      params: {
-        path: {
-          userId,
-          endCursorPostId,
+    try {
+      const response = await client.GET('/posts/user/{userId}/{endCursorPostId}', {
+        params: {
+          path: {
+            userId,
+            endCursorPostId,
+          },
         },
-      },
-    });
-    if (response.error) {
-      throw response.error;
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Ошибка загрузки постов' + error);
     }
-    return response.data;
   },
   deletePost: async (id: number) => {
-    if (!id) {
-      throw new Error('Post ID is required for deletion');
-    }
-
-    const response = await client.DELETE('/posts/{postId}', {
-      params: {
-        path: {
-          postId: id,
+    try {
+      const response = await client.DELETE('/posts/{postId}', {
+        params: {
+          path: {
+            postId: id,
+          },
         },
-      },
-    });
-
-    if (response.error) {
-      throw response.error;
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Ошибка удаления поста' + error);
     }
-
-    return response.data;
   },
 };

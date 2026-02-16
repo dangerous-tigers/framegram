@@ -6,18 +6,22 @@ export function useGetPostCommentsInfinity({ postId }: { postId: number }) {
   const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['comments', postId],
     queryFn: async ({ pageParam = 1 }) => {
-      const response = await client.GET('/posts/{postId}/comments', {
-        params: {
-          path: {
-            postId: postId,
+      try {
+        const response = await client.GET('/posts/{postId}/comments', {
+          params: {
+            path: {
+              postId: postId,
+            },
+            query: {
+              pageNumber: pageParam,
+              pageSize: PORTION_COMMENTS,
+            },
           },
-          query: {
-            pageNumber: pageParam,
-            pageSize: PORTION_COMMENTS,
-          },
-        },
-      });
-      return response.data;
+        });
+        return response.data;
+      } catch (error) {
+        throw new Error('Ошибка загрузки комментариев' + error);
+      }
     },
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {

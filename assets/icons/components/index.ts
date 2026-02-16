@@ -18,6 +18,7 @@ export { default as Catpreloader } from './Catpreloader';
 export { default as CheckboxSelected } from './CheckboxSelected';
 export { default as CheckmarkOutline } from './CheckmarkOutline';
 export { default as Chinaflag } from './Chinaflag';
+export { default as Chrome } from './Chrome';
 export { default as Close } from './Close';
 export { default as CloseOutline } from './CloseOutline';
 export { default as ColorPaletteOutline } from './ColorPaletteOutline';
