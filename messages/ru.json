@@ -188,6 +188,9 @@
     "profileSettings": "Настройки",
     "follow": "Подписаться",
     "unfollow": "Отписаться",
-    "sendMessage": "Написать сообщение"
+    "sendMessage": "Написать сообщение",
+      "notifications": {
+      "notification": "{type, select, hasBeenActivated {Ваша подписка активирована и действует до {date}} nextPayment {Следующий платеж у вас спишется через 1 день} endsAfterWeek {Ваша подписка истекает через 7 дней} endsAfterDay {Ваша подписка истекает через 1 день} other {}}"
+    }
   }
 }

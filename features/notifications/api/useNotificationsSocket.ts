@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 import { getSocket } from '@/features/notifications/api/socket';
 import { SOCKET_EVENTS } from '@/features/notifications/api/types';
-import { NotificationsResponse, SelectData } from '@/features/notifications/types';
+import { SelectData, SocketNotificationsResponse } from '@/features/notifications/types';
 import { useQueryClient } from '@tanstack/react-query';
 
-export const useNotificationsSocket = ({ notifications }: { notifications?: NotificationsResponse }) => {
+export const useNotificationsSocket = ({ notifications }: { notifications?: SocketNotificationsResponse }) => {
   const queryClient = useQueryClient();
   const socket = getSocket();
 
@@ -14,7 +14,7 @@ export const useNotificationsSocket = ({ notifications }: { notifications?: Noti
 
     socket.on(SOCKET_EVENTS.NOTIFICATIONS, (event) => {
       if (!notifications) {
-        queryClient.setQueryData(['initNotifications'], (prev: NotificationsResponse) => {
+        queryClient.setQueryData(['initNotifications'], (prev: SocketNotificationsResponse) => {
           if (!prev) return prev;
 
           return {
