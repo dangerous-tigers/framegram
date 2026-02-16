@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { CloseOutline, OutlineBell } from '@/assets/icons';
 import { client } from '@/shared/api/client';
 import { useAuth } from '@/shared/lib/hooks/useAuth';
+import { useNetworkStatus } from '@/shared/lib/hooks/useNetworkStatus';
 import { useNotifications } from '@/shared/lib/hooks/useNotifications';
 import { useNotificationWSStore } from '@/shared/lib/websocket/notification-websocket.service';
 import { Scroll } from '@/shared/ui/notifications/ScrollArea';
@@ -66,6 +67,21 @@ const NotificationItem = ({ notification, onMarkAsRead, onDelete }: Notification
 
 export const Notifications = ({ className }: Props) => {
   const { isAuth } = useAuth();
+
+  // Подписываемся на изменения статуса сети для управления WebSocket соединением
+  useNetworkStatus();
+
+  // Управляем подключением к вебсокету в зависимости от статуса авторизации
+  useEffect(() => {
+    if (isAuth) {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        useNotificationWSStore.getState().connect(token);
+      }
+    } else {
+      useNotificationWSStore.getState().disconnect();
+    }
+  }, [isAuth]);
   const t = useTranslations('notifications');
   const { notifications, unreadCount, markAsRead, markAllAsRead, deleteNotification } = useNotifications();
   const [isLoading, setIsLoading] = useState(true);

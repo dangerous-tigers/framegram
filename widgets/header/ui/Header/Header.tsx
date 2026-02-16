@@ -11,7 +11,7 @@ type PropsHeader = {
   className?: string;
 };
 
-export const Header = async (props: PropsHeader) => {
+export const Header: async<PropsHeader> = (props) => {
   const { className } = props;
 
   return (

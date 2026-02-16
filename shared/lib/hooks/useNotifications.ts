@@ -1,20 +1,10 @@
-import { useEffect, useRef } from 'react';
-
 import { useNotificationWSStore } from '@/shared/lib/websocket/notification-websocket.service';
 
 export const useNotifications = () => {
-  const {
-    notifications,
-    unreadCount,
-    isConnected,
-    connect,
-    disconnect,
-    markAsRead,
-    markAllAsRead,
-    deleteNotification,
-  } = useNotificationWSStore();
+  const { notifications, unreadCount, isConnected, markAsRead, markAllAsRead, deleteNotification } =
+    useNotificationWSStore();
 
-  const isMountedRef = useRef(false);
+  // Убрали useRef, так как логика подключения теперь обрабатывается в другом месте
 
   const getRecentNotifications = (days = 30) => {
     const cutoffDate = new Date();
@@ -26,23 +16,8 @@ export const useNotifications = () => {
     });
   };
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    isMountedRef.current = true;
-
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      connect(token);
-    }
-
-    return () => {
-      if (isMountedRef.current) {
-        isMountedRef.current = false;
-        disconnect();
-      }
-    };
-  }, [connect, disconnect]);
+  // Логика подключения теперь обрабатывается в отдельном хуке useNetworkStatus
+  // и в компоненте Notifications
 
   return {
     notifications,

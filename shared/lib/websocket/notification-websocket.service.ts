@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { create } from 'zustand';
 
@@ -7,15 +6,6 @@ import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { NotificationViewDto } from '@/shared/ui/notifications/types';
 
 import { Message, MessageSendRequest, WebSocketConfig, WebSocketError, WebSocketMetrics } from './types';
-
-// Utility functions
-const debounce = (func: (...args: unknown[]) => void, wait: number): (() => void) => {
-  let timeout: NodeJS.Timeout;
-  return (...args: unknown[]) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-};
 
 const WS_EVENT_PATH = {
   NOTIFICATIONS: 'notifications',
@@ -40,7 +30,25 @@ interface WebSocketConnectionConfig {
   timeout: number;
 }
 
+// Тип для обработчиков событий WebSocket
 interface WebSocketMessageHandler {
+  [WS_EVENT_PATH.NOTIFICATIONS]: (data: unknown) => void;
+  [WS_EVENT_PATH.UNREAD_COUNT]: (data: unknown) => void;
+  [WS_EVENT_PATH.BULK_NOTIFICATIONS]: (data: unknown) => void;
+  [WS_EVENT_PATH.NOTIFICATION_DELETED]: (data: unknown) => void;
+  [WS_EVENT_PATH.RECEIVE_MESSAGE]: (data: unknown) => void;
+  [WS_EVENT_PATH.MESSAGE_SEND]: (data: unknown) => void;
+  [WS_EVENT_PATH.UPDATE_MESSAGE]: (data: unknown) => void;
+  [WS_EVENT_PATH.MESSAGE_DELETED]: (data: unknown) => void;
+  [WS_EVENT_PATH.ERROR]: (data: unknown) => void;
+  disconnect: (reason: string) => void;
+  connect_error: (error: unknown) => void;
+  connect: () => void;
+  pong: (latency: number) => void;
+  notification: (data: unknown) => void;
+  new_notification: (data: unknown) => void;
+  newNotification: (data: unknown) => void;
+  ping: () => void;
   [key: string]: (data: unknown) => void;
 }
 
@@ -68,6 +76,7 @@ export interface NotificationWebSocketService {
   updateMessage: (id: number, message: string) => void;
   deleteMessage: (id: number) => void;
   getMessages: () => Message[];
+  cleanup: () => void;
 }
 
 export const useNotificationWSStore = create<NotificationWebSocketService>((set, get) => {
@@ -75,6 +84,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
   let savedToken: string | null = null;
   let pingInterval: NodeJS.Timeout | null = null;
   let lastConnectionAttempt: number = 0;
+  let retryCount: number = 0;
   let messages: Message[] = [];
 
   const config: WebSocketConfig = {
@@ -112,10 +122,13 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       }
     }
 
-    if (data) {
-      log(logEntry, data);
-    } else {
-      log(logEntry);
+    // В development режиме можно использовать console.log для отладки
+    if (process.env.NODE_ENV !== 'production') {
+      if (data) {
+        log('debug', logEntry, data);
+      } else {
+        log('debug', logEntry);
+      }
     }
   };
 
@@ -189,41 +202,19 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
     set({ metrics: { ...metrics } });
   };
 
-  const handleOnline = debounce(() => {
-    if (!socket?.connected && savedToken) {
-      log('info', 'Network online, attempting to reconnect');
-      get().connect(savedToken!);
+  // Graceful shutdown при размонтировании компонента
+  const cleanup = () => {
+    if (socket) {
+      log('info', 'WebSocket: Component unmounting, disconnecting');
+      socket.disconnect();
+      socket = null;
     }
-  }, 1000);
 
-  const handleOffline = debounce(() => {
-    if (socket?.connected) {
-      log('info', 'Network offline, disconnecting');
-      get().disconnect();
+    if (pingInterval) {
+      clearInterval(pingInterval);
+      pingInterval = null;
     }
-  }, 1000);
-
-  useEffect(() => {
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-
-      // Graceful shutdown
-      if (socket) {
-        log('info', 'WebSocket: Component unmounting, disconnecting');
-        socket.disconnect();
-        socket = null;
-      }
-
-      if (pingInterval) {
-        clearInterval(pingInterval);
-        pingInterval = null;
-      }
-    };
-  }, [get]);
+  };
 
   const connectWithRetry = (token: string, attempt: number = 0): void => {
     // Increment retry count when attempting reconnection
@@ -263,6 +254,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
     const wsUrl = config.url;
 
     log('info', 'WebSocket: Connecting to', wsUrl);
+    log('debug', 'WebSocket: Using token', token.substring(0, 10) + '...');
 
     const connectionConfig: WebSocketConnectionConfig = {
       url: wsUrl,
@@ -273,6 +265,8 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       reconnectionAttempts: 1,
       reconnectionDelay: 0,
       timeout: config.timeout,
+      // Добавим дополнительные настройки для лучшей совместимости
+      withCredentials: true,
     };
 
     socket = io(wsUrl, connectionConfig);
@@ -287,6 +281,40 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
           set({ metrics: { ...metrics } });
         } else {
           log('warn', 'WebSocket: Invalid notification message received', data);
+        }
+      },
+      // Добавим дополнительные возможные события для получения уведомлений
+      notification: (data: unknown) => {
+        if (validateNotification(data)) {
+          const notification = data as NotificationViewDto;
+          log('debug', 'WebSocket: New notification received via "notification" event', notification);
+          get().addNotification(notification);
+          metrics.messagesReceived++;
+          set({ metrics: { ...metrics } });
+        } else {
+          log('warn', 'WebSocket: Invalid notification message received via "notification" event', data);
+        }
+      },
+      new_notification: (data: unknown) => {
+        if (validateNotification(data)) {
+          const notification = data as NotificationViewDto;
+          log('debug', 'WebSocket: New notification received via "new_notification" event', notification);
+          get().addNotification(notification);
+          metrics.messagesReceived++;
+          set({ metrics: { ...metrics } });
+        } else {
+          log('warn', 'WebSocket: Invalid notification message received via "new_notification" event', data);
+        }
+      },
+      newNotification: (data: unknown) => {
+        if (validateNotification(data)) {
+          const notification = data as NotificationViewDto;
+          log('debug', 'WebSocket: New notification received via "newNotification" event', notification);
+          get().addNotification(notification);
+          metrics.messagesReceived++;
+          set({ metrics: { ...metrics } });
+        } else {
+          log('warn', 'WebSocket: Invalid notification message received via "newNotification" event', data);
         }
       },
       [WS_EVENT_PATH.RECEIVE_MESSAGE]: (data: unknown) => {
@@ -341,6 +369,12 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
           });
         }
       },
+      ping: () => {
+        log('debug', 'WebSocket: Ping received from server');
+        if (socket?.connected) {
+          socket.emit('pong');
+        }
+      },
       disconnect: (reason: string) => {
         log('info', 'WebSocket: Disconnected. Reason:', reason);
         set({ isConnected: false });
@@ -371,7 +405,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
         log('info', 'WebSocket: Connected successfully');
         metrics.successfulConnections++;
         retryCount = 0;
-        set({ isConnected: true, error: null, metrics: { ...metrics } });
+        set({ isConnected: true, error: null, metrics: { ...metrics }, retryCount });
 
         if (pingInterval) {
           clearInterval(pingInterval);
@@ -394,6 +428,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       },
     };
 
+    // Подписываемся на конкретные обработчики событий
     Object.keys(messageHandlers).forEach((event) => {
       socket?.on(event, (data: unknown) => {
         const handler = messageHandlers[event];
@@ -401,6 +436,32 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
           handler(data);
         }
       });
+    });
+
+    // Обработчик для любых других событий, которые могут приходить от сервера
+    socket?.onAny((event, data) => {
+      log('debug', `WebSocket: Received unexpected event '${event}' with data`, data);
+    });
+
+    // Добавим обработчики для основных событий Socket.IO для диагностики
+    socket?.on('connect', () => {
+      log('info', 'WebSocket: Socket.IO connect event fired');
+    });
+
+    socket?.on('disconnect', (reason) => {
+      log('info', 'WebSocket: Socket.IO disconnect event fired', reason);
+    });
+
+    socket?.on('reconnect', (attemptNumber) => {
+      log('info', 'WebSocket: Socket.IO reconnect event fired', attemptNumber);
+    });
+
+    socket?.on('connect_error', (error) => {
+      log('error', 'WebSocket: Socket.IO connect_error event fired', error);
+    });
+
+    socket?.on('connect_timeout', () => {
+      log('error', 'WebSocket: Socket.IO connect_timeout event fired');
     });
   };
 
@@ -590,6 +651,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
     validateMessage: (message: unknown) => {
       return validateNotification(message) || validateMessage(message);
     },
+    cleanup: cleanup,
   };
 });
 
@@ -618,6 +680,7 @@ export const notificationWebSocketService = {
   updateMessage: (id: number, message: string) => useNotificationWSStore.getState().updateMessage(id, message),
   deleteMessage: (id: number) => useNotificationWSStore.getState().deleteMessage(id),
   getMessages: () => useNotificationWSStore.getState().getMessages(),
+  cleanup: () => useNotificationWSStore.getState().cleanup(),
 };
 
 // ============ MOCK DATA ДЛЯ РАЗРАБОТКИ ============
