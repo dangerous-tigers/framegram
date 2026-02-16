@@ -4,12 +4,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { subscriptionApi } from './subscription.api';
 import { SubscriptionResponse } from './types';
 
-export function useCancelAutoRenewal() {
+export function useRenewAutoRenewal() {
   const queryClient = useQueryClient();
   const { show } = useAlertStore();
   const mutate = useMutation({
     mutationFn: async () => {
-      const response = await subscriptionApi.cancelAutoSubscriptions();
+      const response = await subscriptionApi.renewAutoSubscriptions();
       return response;
     },
     onSuccess: () => {
@@ -20,21 +20,21 @@ export function useCancelAutoRenewal() {
         (oldData: SubscriptionResponse) => {
           return {
             ...oldData,
-            hasAutoRenewal: false,
+            hasAutoRenewal: true,
           };
         },
       );
 
       show({
-        error: 'Auto renewal canceled',
-        severity: 'error',
+        error: 'Auto renewal renewed',
+        severity: 'success',
         variant: 'default',
         description: null,
       });
     },
     onError: () => {
       show({
-        error: 'Failed to cancel auto renewal',
+        error: 'Failed to renew auto renewal',
         severity: 'error',
         variant: 'default',
         description: null,
