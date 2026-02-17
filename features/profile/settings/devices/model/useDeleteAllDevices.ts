@@ -1,8 +1,11 @@
 import { devicesDeleteAllApi } from '@/features/profile/settings/devices/model/devicesApi';
+import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useDeleteAllDevices = () => {
   const queryClient = useQueryClient();
+
+  const { show } = useAlertStore();
 
   return useMutation({
     mutationFn: devicesDeleteAllApi,
@@ -10,7 +13,12 @@ export const useDeleteAllDevices = () => {
       queryClient.invalidateQueries({ queryKey: ['devices'] });
     },
     onError: (error) => {
-      throw new Error('Ошибка удаления устройства' + error);
+      show({
+        error: error.message ? error.message : 'error message device',
+        description: null,
+        variant: 'default',
+        severity: 'error',
+      });
     },
   });
 };

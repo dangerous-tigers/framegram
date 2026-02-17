@@ -5,11 +5,11 @@ export const useGetProfile = () =>
   useQuery({
     queryKey: ['general'],
     queryFn: async () => {
-      try {
-        const response = await client.GET('/users/profile');
-        return response.data;
-      } catch (error) {
-        throw new Error('Ошибка загрузки профиля' + error);
+      const response = await client.GET('/users/profile');
+      if (response.error) {
+        throw new Error(response.error);
       }
+
+      return response.data;
     },
   });

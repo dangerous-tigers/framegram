@@ -17,14 +17,15 @@ export const useLogout = () => {
 
   return useMutation<void, ApiError, void>({
     mutationFn: async () => {
-      try {
-        const response = await client.POST('/auth/logout');
-        localStorage.removeItem('accessToken');
+      const response = await client.POST('/auth/logout');
 
-        return response.data;
-      } catch (error) {
-        throw new Error('' + error);
+      if (response.error) {
+        throw response.error;
       }
+
+      localStorage.removeItem('accessToken');
+
+      return response.data;
     },
     onSuccess: () => {
       router.push(routes.auth.login);

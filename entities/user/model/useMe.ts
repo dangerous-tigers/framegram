@@ -8,12 +8,12 @@ export const useMe = () => {
       const clientResponse = await client.GET('/auth/me');
 
       if (clientResponse.error) {
-        return null;
+        throw new Error('Unauthorized');
       }
 
       return clientResponse.data;
     },
     retry: 0,
-    staleTime: 5 * 60 * 100,
+    staleTime: 0,
   });
 };

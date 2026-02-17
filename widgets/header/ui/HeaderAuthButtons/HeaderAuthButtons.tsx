@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 
 import s from './headerAuthButtons.module.scss';
 
@@ -18,11 +19,11 @@ export const HeaderAuthButtons = (props: PropsHeaderAuthButtons) => {
 
   const t = useTranslations('header');
 
-  const { isLoading, data } = useMe();
+  const { isLoading, isError } = useMe();
   const path = usePathname();
 
   if (isLoading) return null;
-  if (data) return null;
+  if (!isError) return null;
 
   if (path === routes.auth.login) {
     return null;
@@ -30,18 +31,20 @@ export const HeaderAuthButtons = (props: PropsHeaderAuthButtons) => {
 
   return (
     <div className={clsx(s.headerAuthButtons, className)}>
-      <Link
+      <PolymorphicButton
+        as={Link}
         className={s.link}
         href={routes.auth.login}
       >
         {t('logIn')}
-      </Link>
-      <Link
+      </PolymorphicButton>
+      <PolymorphicButton
+        as={Link}
         className={s.linkBlue}
         href={routes.auth.registration}
       >
         {t('signUp')}
-      </Link>
+      </PolymorphicButton>
     </div>
   );
 };
