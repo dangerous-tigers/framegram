@@ -7,7 +7,7 @@ import s from './MainPage.module.scss';
 import { getLastPosts } from '@/entities/post/api/getLastPosts';
 import { postKeys, publicUserKeys } from '@/entities/post/queries';
 import { getTotalUsers } from '@/entities/publicUser/api/getTotalCount';
-import { DataRangePicker } from '@/widgets/dataPicker/ui/DataRangePicker';
+import { DataRangePicker } from '@/widgets/dataRangePicker/ui/DataRangePicker';
 import { PostsGrid } from '@/widgets/postGrid';
 import { UserCounter } from '@/widgets/registeredUsers/ui/userCounter';
 

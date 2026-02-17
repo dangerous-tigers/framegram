@@ -3,7 +3,7 @@
 export default {
   extends: ['stylelint-config-standard-scss'],
   plugins: ['stylelint-prettier'],
-  ignoreFiles: ['**/_*.scss', '**/node_modules/**', 'widgets/dataPicker/ui/*.scss'],
+  ignoreFiles: ['**/_*.scss', '**/node_modules/**', 'widgets/dataRangePicker/ui/*.scss'],
   rules: {
     'selector-pseudo-class-no-unknown': [
       true,

@@ -143,4 +143,32 @@
   outline-color: var(--primary-700);
 }
 
+:global(.rs-input) {
+  background-color: var(--dark-500);
+}
+
+:global(.rs-input::placeholder) {
+  color: var(--light-100);
+}
+
+:global(.rs-calendar-month-dropdown) {
+  background-color: var(--dark-300);
+}
+
+:global(.rs-calendar-btn-close) {
+  background: var(--primary-700);
+}
+
+:global(.rs-calendar-btn-close:hover) {
+  background: var(--dark-300);
+}
+
+
+:global(.rs-picker[data-picker="date"] .rs-input-group-addon) {
+  color: var(--light-100);
+}
+
+:global(.rs-picker[data-picker="date-range"] .rs-input-group-addon) {
+  color: var(--light-100);
+}
 
