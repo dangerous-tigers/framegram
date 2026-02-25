@@ -1,7 +1,4 @@
 .dataPicker {
-  width: 320px;
-
-  /* ===== INPUT ===== */
   :global(.rs-picker-input-group) {
     border: 1px solid var(--dark-300);
     border-radius: 2px;
@@ -33,14 +30,14 @@
   }
 }
 
-/* ===== POPUP ===== */
+
 :global(.rs-picker-popup) {
   border: 1px solid var(--dark-300);
   border-radius: 2px;
   background: var(--dark-500);
 }
 
-/* ===== HEADER ===== */
+
 :global(.rs-calendar-header-month-toolbar) {
   display: flex !important;
   align-items: center;
@@ -126,10 +123,10 @@
 
 :global(.rs-calendar-table-cell-in-range:before) {
   background: var(--primary-900);
-  //--rs-calendar-in-menu-content-side-length
 }
 
 /* toolbar низ с кнопками */
+
 :global(.rs-picker-toolbar) {
   border-top-color: var(--dark-300);
 }

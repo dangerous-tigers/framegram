@@ -7,7 +7,6 @@ import s from './MainPage.module.scss';
 import { getLastPosts } from '@/entities/post/api/getLastPosts';
 import { postKeys, publicUserKeys } from '@/entities/post/queries';
 import { getTotalUsers } from '@/entities/publicUser/api/getTotalCount';
-import { DataRangePicker } from '@/widgets/dataRangePicker/ui/DataRangePicker';
 import { PostsGrid } from '@/widgets/postGrid';
 import { UserCounter } from '@/widgets/registeredUsers/ui/userCounter';
 
@@ -30,7 +29,6 @@ export const MainPage = () => {
     <div className={clsx(s.mainPage)}>
       <UserCounter count={users?.totalCount} />
       <PostsGrid posts={posts?.items.slice(0, 4)} />
-      <DataRangePicker />
     </div>
   );
 };
