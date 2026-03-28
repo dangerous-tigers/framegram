@@ -1,13 +1,13 @@
 'use client';
 import clsx from 'clsx';
-import { useTranslations } from 'next-intl';
+
+import { Bookmark, BookmarkOutline, Heart, HeartOutline, PaperPlaneOutline } from '@/assets/icons';
+import { useTimeAgo } from '@/shared/lib/hooks/useTimeAgo';
+import { Button } from '@/shared/ui';
+
+import { LikesInfo } from './LikesInfo';
 
 import s from './Actions.module.scss';
-
-import { HeartOutline, PaperPlaneOutline, BookmarkOutline, Heart, Bookmark } from '@/assets/icons';
-import { formatLikes } from '@/shared/lib';
-import { Button } from '@/shared/ui';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
 
 export function Actions({
   isLiked,
@@ -24,7 +24,8 @@ export function Actions({
   avatarWhoLikes: string[];
   isAuth: boolean;
 }) {
-  const t = useTranslations('viewPost');
+  const timeago = useTimeAgo(time);
+
   return (
     <div className={s.container}>
       {isAuth && (
@@ -51,7 +52,7 @@ export function Actions({
               onClick={() => alert('saved')}
               className={clsx(s.saveButton, isSaved && s.saved)}
             >
-              {isSaved ? <Bookmark /> : <BookmarkOutline />}
+              {isSaved ? <BookmarkOutline /> : <Bookmark />}
             </Button>
           </div>
         </div>
@@ -67,26 +68,9 @@ export function Actions({
             />
           ))}
 
-          {likesCount >= 0 && !isAuth && (
-            <p className={s.likesCount}>
-              {formatLikes(likesCount)} <span>{t('likes')}</span>
-            </p>
-          )}
-
-          {!likesCount && isAuth && (
-            <div className={s.beTheFirst}>
-              {t('beTheFirstLikes')}
-              <Button
-                variant='text'
-                className={s.beTheFirstButton}
-                onClick={() => alert('like')}
-              >
-                {t('like')}
-              </Button>
-            </div>
-          )}
+          <LikesInfo likesCount={likesCount} />
         </div>
-        <CompTimeAgo date={new Date(time)} />
+        {timeago}
       </div>
     </div>
   );

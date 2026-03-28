@@ -1,5 +1,5 @@
 import { JSX, memo } from 'react';
-import { useController, Control, FieldValues, FieldPath } from 'react-hook-form';
+import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
 
 import { Checkbox } from '@/shared/ui';
 

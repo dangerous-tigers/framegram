@@ -1,17 +1,18 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ChangeEvent, useEffect } from 'react';
-
-import s from './EditMode.module.scss';
+import { useTranslations } from 'next-intl';
 
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
-import { ConfirmActionModal } from '@/features/post/editPost/ui/confirmActionModal/ConfirmActionModal';
 import { ProfileImage } from '@/features/post/viewPost';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { client } from '@/shared/api/client';
+import { ConfirmActionModal } from '@/shared/components/confirmActionModal';
 import { TEXT_AREA_MAX_LENGTH } from '@/shared/constants/constants';
 import { Button } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Textarea } from '@/shared/ui/textarea';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import s from './EditMode.module.scss';
 
 type Props = {
   profileImage: string | undefined;
@@ -25,6 +26,7 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
   const { show } = useAlertStore();
   const { setIsEdit } = useViewPostStore();
   const { open } = useConfirmStore();
+  const t = useTranslations('confirmActions');
 
   useEffect(() => {
     setValue(description);
@@ -32,7 +34,7 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
 
   const queryClient = useQueryClient();
 
-  const saveChangesMutation = useMutation({
+  const { mutate: saveChangesMutation, isPending } = useMutation({
     mutationFn: async (value: string) => {
       const response = await client.PUT('/posts/{postId}', {
         body: {
@@ -74,7 +76,7 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
 
   const saveChanges = () => {
     if (value !== undefined) {
-      saveChangesMutation.mutate(value);
+      saveChangesMutation(value);
     }
   };
 
@@ -90,7 +92,7 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
           value={value}
           onChange={onValueHandler}
         />
-        <span className={s.textAreaLenght}>
+        <span className={s.textAreaLength}>
           {value?.length === undefined ? 0 : value?.length} / {TEXT_AREA_MAX_LENGTH}
         </span>
       </div>
@@ -101,7 +103,14 @@ export const EditMode = ({ profileImage, userName, postId, description }: Props)
       >
         Save changes
       </Button>
-      {open && <ConfirmActionModal />}
+      {open && (
+        <ConfirmActionModal
+          isPending={isPending}
+          confirmCallback={() => setIsEdit(false)}
+        >
+          <span>{t('closeEditMode')}</span>
+        </ConfirmActionModal>
+      )}
     </div>
   );
 };

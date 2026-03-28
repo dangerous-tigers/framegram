@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { useState } from 'react';
 
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons';
 import { Option, Select } from '@/shared/ui/select/Select';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 export const langs: Option[] = [
   { value: 'English', label: 'United Kingdom flag', icon: FlagUnitedKingdom },

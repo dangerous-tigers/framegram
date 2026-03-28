@@ -1,5 +1,6 @@
+import { forwardRef, memo, Ref } from 'react';
 import type { SVGProps } from 'react';
-import { Ref, forwardRef, memo } from 'react';
+
 const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
@@ -12,8 +13,8 @@ const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
   >
     <g clipPath='url(#stripe-svgrepo-com-4_svg__a)'>
       <path
-        fill='currentcolor'
-        stroke='#F3F3F3'
+        fill='currentColor'
+        stroke='currentColor'
         d='M1.913.5h20.174c.79 0 1.413.624 1.413 1.372v12.256c0 .748-.623 1.372-1.413 1.372H1.913C1.123 15.5.5 14.876.5 14.128V1.872C.5 1.124 1.123.5 1.913.5Z'
       />
       <path
@@ -26,7 +27,7 @@ const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
     <defs>
       <clipPath id='stripe-svgrepo-com-4_svg__a'>
         <path
-          fill='currentcolor'
+          fill='currentColor'
           d='M0 0h24v16H0z'
         />
       </clipPath>

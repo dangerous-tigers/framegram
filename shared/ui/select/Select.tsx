@@ -1,12 +1,12 @@
 'use client';
-import * as PrimitiveSelect from '@radix-ui/react-select';
-import clsx from 'clsx';
 import React, { ComponentProps, ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode } from 'react';
-
-import styles from './Select.module.scss';
+import clsx from 'clsx';
 
 import ArrowIosDownOutline from '@/assets/icons/components/ArrowIosDownOutline';
 import { SelectItem } from '@/shared/ui/select/SelectItem';
+import * as PrimitiveSelect from '@radix-ui/react-select';
+
+import styles from './Select.module.scss';
 
 export type Option = {
   id?: string | number;

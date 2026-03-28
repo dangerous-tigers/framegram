@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from '@storybook/nextjs-vite';
 import React from 'react';
 
-import { SidebarItem } from './SidebarItem';
-
 import { HomeOutline, PlusSquareOutline } from '@/assets/icons';
+import { Meta, StoryObj } from '@storybook/nextjs-vite';
+
+import { SidebarItem } from './SidebarItem';
 
 const meta: Meta<typeof SidebarItem> = {
   title: 'Widgets/Sidebar/SidebarItem',

@@ -1,3 +1,5 @@
+import placeholderAvatar from '@/assets/illustrations/avatar-placeholder.png';
+
 import s from './ProfileImage.module.scss';
 
 type Props = {
@@ -9,7 +11,7 @@ export const ProfileImage = ({ avatar, userName }: Props) => {
   return (
     <div className={s.userInfo}>
       <img
-        src={avatar}
+        src={avatar || placeholderAvatar.src}
         alt='avatar'
         className={s.avatar}
       />

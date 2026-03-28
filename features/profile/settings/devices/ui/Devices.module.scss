@@ -1,0 +1,80 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--light-100);
+  margin-bottom: 6px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+  background: var(--dark-500);
+  padding: 18px 24px;
+
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+
+  @media (width <= 768px) {
+    padding: 10px;
+    gap: 10px;
+  }
+}
+
+.content {
+  display: flex;
+  gap: 12px 13px;
+}
+
+.img {
+  padding: 6px 0;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.device {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--light-100);
+}
+
+.ip {
+  font-size: 14px;
+  line-height: 171%;
+  color: var(--light-100);
+}
+
+.button {
+  color: var(--light-100);
+  display: flex;
+  gap: 5px;
+  grid-row: 2/3;
+  grid-column: 2/3;
+
+  @media (width <= 575px) {
+    justify-content: flex-end;
+  }
+}
+
+.allSessions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 12px;
+  margin-bottom: 18px;
+}

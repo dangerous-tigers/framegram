@@ -1,23 +1,23 @@
 'use client';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
-import { type RegisterFormValues, registerSchema } from '../model/register.schema';
-import { useRegisterMutation } from '../model/useRegister';
-
-import s from './RegisterForm.module.scss';
 
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { RegisterRequestDto } from '@/features/auth/register/model/register.types';
 import { routes } from '@/shared/config/routes';
 import { Modal, ModalHeaderWithClose } from '@/shared/ui';
 import { Button } from '@/shared/ui/button/Button';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent';
 import { FieldCheckbox } from '@/shared/ui/fieldCheckbox/FieldCheckbox';
 import { FieldInput } from '@/shared/ui/fieldInput/FieldInput';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { type RegisterFormValues, registerSchema } from '../model/register.schema';
+import { useRegisterMutation } from '../model/useRegister';
+
+import s from './RegisterForm.module.scss';
 
 export const RegisterForm = () => {
   const t = useTranslations('register');

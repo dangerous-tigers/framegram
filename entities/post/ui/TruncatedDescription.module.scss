@@ -1,0 +1,18 @@
+.text {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.showMoreBtn {
+  margin-left: 5px;
+  text-decoration: underline;
+  color: var(--primary-500);
+  cursor: pointer;
+  transition: color 0.2s;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--primary-100);
+    }
+  }
+}

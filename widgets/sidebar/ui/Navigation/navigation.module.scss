@@ -3,16 +3,34 @@
   flex-direction: column;
   flex: 1 1 auto;
   row-gap: 26px;
-  padding: 72px 0 110px;
+  padding: 72px 24px 110px 0;
   min-height: 100%;
   border-right: 1px solid var(--dark-300);
+  position: fixed;
+
+  & > a {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  & > button {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
   @media (width <= 768px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    padding: 20px 0;
+    padding: 20px 16px;
     border-right: none;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    background: black;
+    z-index: 3;
 
     span {
       display: none;

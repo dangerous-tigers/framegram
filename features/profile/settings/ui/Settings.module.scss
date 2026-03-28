@@ -1,0 +1,47 @@
+.container {
+  padding-top: 36px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs {
+  padding-top: 20px;
+  width: 100%;
+  min-height: 100%;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  h2 {
+    font-weight: 700;
+    font-size: var(--font-size-l);
+  }
+
+  svg {
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+
+    &:hover {
+      color: var(--primary-500);
+    }
+  }
+
+  @media (width <=360) {
+    gap: 74px;
+  }
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 36px 24px;
+}

@@ -1,11 +1,11 @@
 'use client';
-import s from './upload.module.scss';
-
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 import { validateImage } from '@/shared/lib/file/validateImage';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
 import { InputFile } from '@/shared/ui/inputFile';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
+
+import s from './upload.module.scss';
 
 export const UploadStep = () => {
   const addImages = useCreatePostStore((s) => s.addImages);

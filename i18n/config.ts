@@ -1,4 +1,4 @@
-import { FlagUnitedKingdom, FlagRussia, Chinaflag, Belarusflag, Indianflag, Ukraineflag } from '@/assets/icons';
+import { Belarusflag, Chinaflag, FlagRussia, FlagUnitedKingdom, Indianflag, Ukraineflag } from '@/assets/icons';
 import { Option } from '@/shared/ui/select/Select';
 
 export type Locale = (typeof locales)[number];

@@ -1,10 +1,10 @@
-import * as Toast from '@radix-ui/react-toast';
 import clsx from 'clsx';
-
-import styles from './Alert.module.scss';
 
 import { CloseOutline } from '@/assets/icons';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
+import * as Toast from '@radix-ui/react-toast';
+
+import styles from './Alert.module.scss';
 
 export const Alert = () => {
   const { open, hide, error, description, severity, variant } = useAlertStore();

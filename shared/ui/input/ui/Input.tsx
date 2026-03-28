@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import { ComponentPropsWithRef, useState } from 'react';
+import clsx from 'clsx';
+
+import { EyeOffOutline, EyeOutline, Search } from '@/assets/icons';
 
 import s from './Input.module.scss';
-
-import { Search, EyeOutline, EyeOffOutline } from '@/assets/icons';
 
 type Props = {
   type?: 'text' | 'password' | 'search' | 'email';
@@ -63,6 +63,11 @@ export const Input = (p: Props) => {
             aria-invalid={hasError}
             aria-describedby={hasError ? `${rest.name}-error` : undefined}
             disabled={disabled}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+              }
+            }}
             {...rest}
           />
           {isPassword && (

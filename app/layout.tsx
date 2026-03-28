@@ -1,13 +1,14 @@
-import { Inter } from 'next/font/google';
-
-import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
 
 import { AppProviders } from '@/app/provider/AppProviders';
+import { LocaleUiProvider } from '@/app/provider/LocaleUiProvider';
 import { Header } from '@/widgets/header/ui/Header';
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 import '../shared/styles/globals.scss';
 
 export const metadata: Metadata = {
@@ -33,14 +34,16 @@ export default async function RootLayout({
       className={inter.variable}
     >
       <body>
-        <AppProviders>
-          <NextIntlClientProvider>
-            <div className='wrapper'>
-              <Header />
-              {children}
-            </div>
-          </NextIntlClientProvider>
-        </AppProviders>
+        <NextIntlClientProvider>
+          <LocaleUiProvider>
+            <AppProviders>
+              <div className='wrapper'>
+                <Header />
+                {children}
+              </div>
+            </AppProviders>
+          </LocaleUiProvider>
+        </NextIntlClientProvider>
       </body>
       <GoogleAnalytics gaId='G-YCCX45VF8W' />
     </html>

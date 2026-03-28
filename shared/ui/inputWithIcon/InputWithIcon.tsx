@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { InputHTMLAttributes, ReactNode } from 'react';
+import clsx from 'clsx';
 
 import s from './inputWithIcon.module.scss';
 

@@ -1,8 +1,8 @@
 {
   "header": {
-    "logIn": "लॉग इन",
+    "logIn": "लॉग इन करें",
     "logOut": "लॉग आउट",
-    "signUp": "साइन अप"
+    "signUp": "साइन अप करें"
   },
   "sidebar": {
     "feed": "फ़ीड",
@@ -15,10 +15,18 @@
     "logOut": "लॉग आउट",
     "logOutMessage": "क्या आप वाकई अपने खाता {email} से लॉग आउट करना चाहते हैं?",
     "yes": "हां",
-    "no": "नहीं"
+    "no": "नहीं",
+    "email": "ईमेल",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "पासवर्ड",
+    "passwordPlaceholder": "अपना पासवर्ड दर्ज करें",
+    "forgotPassword": "पासवर्ड भूल गए",
+    "signIn": "साइन इन",
+    "noAccount": "कोई खाता नहीं है?",
+    "signUp": "साइन अप"
   },
   "login": {
-    "title": "साइन इन",
+    "title": "साइन इन करें",
     "email": "ईमेल",
     "emailPlaceholder": "Epam@epam.com",
     "password": "पासवर्ड",
@@ -50,8 +58,13 @@
     "password": "पासवर्ड",
     "passwordConfirm": "पासवर्ड पुष्टि"
   },
+  "confirmEmail": {
+    "title": "बधाई हो!",
+    "text": "आपका ईमेल पता पुष्टि कर दिया गया है",
+    "logIn": "लॉग इन करें"
+  },
   "forgot": {
-    "title": "साइन इन पर वापस जाएँ",
+    "title": "पासवर्ड भूल गए",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "text": "अपना ईमेल पता दर्ज करें और हम आपको आगे के निर्देश भेज देंगे।",
@@ -80,19 +93,106 @@
     "emailExist": "इस ईमेल पते वाला उपयोगकर्ता मौजूद नहीं है",
     "captcha": "कृपया पुष्टि करें कि आप रोबोट नहीं हैं"
   },
+  "confirmActions": {
+    "yes": "हां",
+    "no": "नहीं",
+    "close": "बंद करें",
+    "closeEditMode": "क्या आप वास्तव में संपादन समाप्त करना चाहते हैं? यदि आप इसे बंद करते हैं, तो किए गए बदलाव सहेजे नहीं जाएंगे।",
+    "deletePhoto": "क्या आप वास्तव में अपनी प्रोफ़ाइल फ़ोटो हटाना चाहते हैं?"
+  },
   "viewPost": {
     "likes": "लाइक्स",
     "reply": "जवाब दें",
     "showReplies": "जवाब दिखाएं",
     "hideReplies": "जवाब छुपाएं",
     "publish": "पब्लिश",
-    "beTheFirstLikes": "पहले बनें ",
     "like": "लाइक करें!",
     "noCommentsYet": "अभी तक कोई टिप्पणी नहीं.",
     "beTheFirstToComment": "पहली टिप्पणी करें.",
     "emptyFieldError": "टेक्स्ट फ़ील्ड खाली नहीं हो सकता",
     "emptyAnswerError": "उत्तर खाली नहीं हो सकता",
     "prefixWarning": "ध्यान दें! आप टिप्पणी भेजने के मोड में प्रवेश कर चुके हैं",
-    "commentPlaceholder": "टिप्पणी जोड़ें..."
+    "commentPlaceholder": "टिप्पणी जोड़ें...",
+    "noLikesYet": "अभी तक कोई लाइक नहीं.",
+    "likesCount": "{count, plural, =0 {लाइक नहीं} one {<b>{count}</b> लाइक} few {<b>{count}</b> लाइक} other {<b>{count}</b> लाइक}}"
+  },
+  "createPost": {
+    "Error loading the post": "पोस्ट लोड करने में त्रुटि",
+    "Error loading posts": "पोस्ट लोड करने में त्रुटि",
+    "Error deleting a post": "पोस्ट हटाने में त्रुटि"
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "पंजीकृत उपयोगकर्ता",
+    "ShowMore": "और दिखाएँ",
+    "Hide": "छिपाना"
+  },
+  "error404": {
+    "title": "404 - पृष्ठ नहीं मिला",
+    "description": "आप जिस पृष्ठ की तलाश कर रहे हैं वह मौजूद नहीं है या उसे हटा दिया गया है।",
+    "backToHome": "होम पर वापस जाएं",
+    "goBack": "वापस जाओ"
+  },
+  "errorPage": {
+    "title": "ओह! कुछ गलत हो गया",
+    "description": "एक अप्रत्याशित त्रुटि हुई। कृपया बाद में पुनः प्रयास करें।",
+    "tryAgain": "पुनः प्रयास करें",
+    "backToHome": "होम पर वापस जाएं"
+  },
+  "notAuth": {
+    "title": "प्राधिकरण आवश्यक",
+    "description": "इस पृष्ठ तक पहुँचने के लिए आपको लॉग इन करना होगा।",
+    "login": "लॉग इन करें",
+    "backToHome": "होम पर वापस जाएं"
+  },
+  "profile": {
+    "settings": {
+      "title": "सेटिंग्स",
+      "general": {
+        "title": "साधारण",
+        "lastName": "उपनाम",
+        "firstName": "नाम",
+        "userName": "यूज़रनेम",
+        "birthday": "जन्म तिथि",
+        "aboutMe": "मेरे बारे में",
+        "selectImage": "छवि चुनें",
+        "save": "सहेजें",
+        "saving": "सहेजा जा रहा है…"
+      },
+      "accountManagement": {
+        "title": "खाता प्रबंधन",
+        "currentSubscription": "वर्तमान सदस्यता:",
+        "expireAt": "समाप्ति तिथि",
+        "nextPayment": "अगला भुगतान",
+        "autoRenewal": "स्वचालित नवीनीकरण",
+        "accountType": "खाते का प्रकार:",
+        "changeSubscription": "सदस्यता बदलें:",
+        "personal": "व्यक्तिगत",
+        "business": "व्यवसाय",
+        "days": "{count} दिन",
+        "weekly": "{count} दिन",
+        "monthly": "महीना",
+        "per": "प्रति",
+        "or": "या",
+        "createPayment": "भुगतान बनाएँ",
+        "autoRenewalModalText": "इस भुगतान के साथ ऑटो-रिन्यू सक्षम होगा। आप इसे प्रोफ़ाइल सेटिंग्स में कभी भी बंद कर सकते हैं",
+        "paymentCanceled": "ऑटो रिन्यू रद्द किया गया",
+        "comingSoon": "जल्द आ रहा है",
+        "disabled": "अक्षम"
+      },
+      "devices": "डिवाइस",
+      "payments": "भुगतान",
+      "successTitle": "सफलता",
+      "errorTitle": "त्रुटि",
+      "successMessage": "भुगतान सफल रहा!",
+      "errorMessage": "लेन-देन विफल रहा। कृपया सहायता से संपर्क करें",
+      "backToPayment": "भुगतान पर वापस जाएं"
+    },
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>कोई प्रकाशन नहीं</s>} one {<b>{count}</b> <s>प्रकाशन</s>} other {<b>{count}</b> <s>प्रकाशन</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s>कोई फॉलोअर नहीं</s>} one {<b>{count}</b> <s>फॉलोअर</s>} other {<b>{count}</b> <s>फॉलोअर्स</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s>किसी को फॉलो नहीं किया</s>} one {<b>{count}</b> <s>फॉलोइंग</s>} other {<b>{count}</b> <s>फॉलोइंग</s>}}",
+    "profileSettings": "सेटिंग्स",
+    "follow": "फ़ॉलो करें",
+    "unfollow": "अनफ़ॉलो करें",
+    "sendMessage": "संदेश भेजें"
   }
 }
