@@ -1,10 +1,16 @@
 'use client';
 
+import React, { useEffect, useRef, useState } from 'react';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { createPortal } from 'react-dom';
+
+import { UploadedImage } from '@/features/post-create/model/CreatePostType';
 import {
   Active,
   closestCenter,
-  DragOverlay,
+  defaultDropAnimationSideEffects,
   DndContext,
+  DragOverlay,
   DropAnimation,
   KeyboardSensor,
   MouseSensor,
@@ -12,19 +18,14 @@ import {
   UniqueIdentifier,
   useSensor,
   useSensors,
-  defaultDropAnimationSideEffects,
 } from '@dnd-kit/core';
-import { useSortable, SortableContext, horizontalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import React, { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable } from '@dnd-kit/sortable';
 
 import { Upload } from '../upload/upload';
 
 import { Item, List } from './components';
-import s from './Sortable.module.scss';
 
-import { UploadedImage } from '@/features/post-create/model/CreatePostType';
+import s from './Sortable.module.scss';
 
 export interface ImageItem {
   id: number;

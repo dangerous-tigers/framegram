@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-import s from './notifications.module.scss';
-
 import { OutlineBell } from '@/assets/icons';
+
+import s from './notifications.module.scss';
 
 type PropsNotifications = {
   className?: string;

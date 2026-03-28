@@ -1,6 +1,6 @@
-import s from './CatPreloader.module.scss';
-
 import { Catpreloader } from '@/assets/icons';
+
+import s from './CatPreloader.module.scss';
 
 export const CatPreloader = () => {
   return (

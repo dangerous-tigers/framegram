@@ -1,18 +1,19 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState } from 'react';
+import clsx from 'clsx';
+
+import { PostViewModel } from '@/entities/profile';
+import { MainPost } from '@/widgets/postGrid/ui/MainPost';
 
 import s from './PostsGrid.module.scss';
 
-import { Post } from '@/entities/post/model/types';
-import { MainPost } from '@/widgets/postGrid/ui/MainPost';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 type Props = {
-  posts?: Post[];
+  posts?: PostViewModel[];
 };
 
 export const PostsGrid = ({ posts }: Props) => {

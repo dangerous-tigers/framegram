@@ -1,8 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useTranslations } from 'next-intl';
 import { ChangeEvent, useEffect } from 'react';
-
-import s from './EditMode.module.scss';
+import { useTranslations } from 'next-intl';
 
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { ProfileImage } from '@/features/post/viewPost';
@@ -13,6 +10,9 @@ import { TEXT_AREA_MAX_LENGTH } from '@/shared/constants/constants';
 import { Button } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Textarea } from '@/shared/ui/textarea';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import s from './EditMode.module.scss';
 
 type Props = {
   profileImage: string | undefined;

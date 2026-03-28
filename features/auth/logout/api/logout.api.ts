@@ -1,7 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { client } from '@/shared/api/client';
+import { routes } from '@/shared/config/routes';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface ApiError {
   statusCode: number;
@@ -10,6 +11,8 @@ interface ApiError {
 }
 
 export const useLogout = () => {
+  const queryClient = useQueryClient();
+
   const router = useRouter();
 
   return useMutation<void, ApiError, void>({
@@ -25,8 +28,9 @@ export const useLogout = () => {
       return response.data;
     },
     onSuccess: () => {
-      router.push('/login');
+      router.push(routes.auth.login);
       router.refresh();
+      queryClient.removeQueries({ queryKey: ['me'] });
     },
   });
 };

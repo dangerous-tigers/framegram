@@ -1,9 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-
-import { CropStep } from '../CropStep/CropStep';
-
-import s from './createPostModal.module.scss';
 
 import { postKeys } from '@/entities/post/queries';
 import { useCreatePostMutation } from '@/entities/post-create/api/useCreatePostMutation';
@@ -15,11 +10,19 @@ import { UploadStep } from '@/features/post-create/ui/uploadStep/UploadStep';
 import { applyFilterToFile } from '@/shared/lib/image';
 import { Modal, ModalHeaderWithClose, ModalHeaderWithNext } from '@/shared/ui';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { useCropStore } from '../../model/storeCrop';
+import { CropStep } from '../CropStep/CropStep';
+
+import s from './createPostModal.module.scss';
 
 export const CreatePostModal = () => {
   const step = useCreatePostStore((s) => s.step);
   const setStep = useCreatePostStore((s) => s.setStep);
   const reset = useCreatePostStore((s) => s.reset);
+  const cleanup = useCreatePostStore((s) => s.cleanup);
+  const resetCrop = useCropStore((s) => s.reset);
   const queryClient = useQueryClient();
   const [showCloseModal, setShowCloseModal] = useState(false);
 
@@ -44,6 +47,7 @@ export const CreatePostModal = () => {
           if (isPending) return;
 
           reset();
+          resetCrop();
           setShowCloseModal(false);
           setOpen(false);
 
@@ -59,11 +63,13 @@ export const CreatePostModal = () => {
 
   const discardHandler = async () => {
     await reset();
+    resetCrop();
     setShowCloseModal(false);
     setOpen(false);
   };
 
   const saveDraftHandler = () => {
+    cleanup();
     setShowCloseModal(false);
     setOpen(false);
   };

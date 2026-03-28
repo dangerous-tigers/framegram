@@ -1,9 +1,9 @@
-import * as Dialog from '@radix-ui/react-dialog';
 import type { KeyboardEvent } from 'react';
 
-import styles from './ModalHeader.module.scss';
-
 import { Close } from '@/assets/icons';
+import * as Dialog from '@radix-ui/react-dialog';
+
+import styles from './ModalHeader.module.scss';
 
 export const ModalHeaderWithClose = ({
   title,

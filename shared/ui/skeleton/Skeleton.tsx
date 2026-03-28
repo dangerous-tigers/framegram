@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { ComponentPropsWithoutRef } from 'react';
+import clsx from 'clsx';
 
 import s from './Skeleton.module.scss';
 

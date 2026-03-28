@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-import s from './ActionsSkeleton.module.scss';
-
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
+
+import s from './ActionsSkeleton.module.scss';
 
 export function ActionsSkeleton() {
   return (

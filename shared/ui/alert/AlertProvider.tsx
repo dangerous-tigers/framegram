@@ -1,6 +1,7 @@
-import * as Toast from '@radix-ui/react-toast';
-import clsx from 'clsx';
 import { ReactNode } from 'react';
+import clsx from 'clsx';
+
+import * as Toast from '@radix-ui/react-toast';
 
 
 import s from './AlertProvider.module.css';

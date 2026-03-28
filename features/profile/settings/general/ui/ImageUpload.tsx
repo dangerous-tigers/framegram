@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import React, { ReactNode, useRef, useState } from 'react';
+import clsx from 'clsx';
 
 import s from './ImageUpload.module.scss';
 
@@ -33,6 +33,7 @@ export const ImageUpload = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     handleFiles(e.target.files);
     e.target.value = '';
   };

@@ -1,6 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { AuthErrorResponse } from '@/features/auth/types';
 import { client } from '@/shared/api/client';
@@ -8,6 +7,7 @@ import { CatPreloader } from '@/shared/components/catPreloader/CatPreloader';
 import { routes } from '@/shared/config/routes';
 import { ACCESS_TOKEN } from '@/shared/constants/constants';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
+import { useMutation } from '@tanstack/react-query';
 
 export const GoogleOAuthRedirect = () => {
   const searchParams = useSearchParams();

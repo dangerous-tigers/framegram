@@ -2,13 +2,10 @@ import { ReactNode } from 'react';
 
 import { AppShell } from '@/app/ui/AppShell';
 
-export default function PublicLayout({ children, modal }: { children: ReactNode; modal?: ReactNode }) {
+export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <AppShell>
-      <>
-        {children}
-        {modal}
-      </>
+      <>{children}</>
     </AppShell>
   );
 }

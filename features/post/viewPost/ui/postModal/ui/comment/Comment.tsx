@@ -1,17 +1,17 @@
 'use client';
-import clsx from 'clsx';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-
-import { Description } from '..';
-import { type Comment } from '../../../../model/types';
-import { Answer } from '../answer/Answer';
-
-import s from './Comment.module.scss';
+import { useTranslations } from 'next-intl';
+import clsx from 'clsx';
 
 import { Heart, HeartOutline } from '@/assets/icons';
 import { useCommentAnswers, useViewPostStore } from '@/features/post/viewPost/model';
 import { Button } from '@/shared/ui';
+
+import { type Comment } from '../../../../model/types';
+import { Answer } from '../answer/Answer';
+import { Description } from '..';
+
+import s from './Comment.module.scss';
 
 type Props = {
   comment: Comment;

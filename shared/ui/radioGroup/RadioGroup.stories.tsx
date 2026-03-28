@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-
 import { RadioButtonGroup } from '@/shared/ui/radioGroup/RadioGroup';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 const meta: Meta<typeof RadioButtonGroup> = {
   title: 'Shared/RadioButtonGroup',
