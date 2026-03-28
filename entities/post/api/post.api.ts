@@ -112,26 +112,30 @@ export const postApi = {
           },
         },
       });
+      if (response.error) {
+        throw response.error;
+      }
       return response.data as ResponseLikesType;
     } catch (error) {
       throw new Error('Error loading likes' + error);
     }
   },
   postLike: async ({ id, likeStatus }: { id: number; likeStatus: 'LIKE' | 'DISLIKE' | 'NONE' }) => {
-    try {
-      const response = await client.PUT('/posts/{postId}/like-status', {
-        body: {
-          likeStatus,
+    const response = await client.PUT('/posts/{postId}/like-status', {
+      body: {
+        likeStatus,
+      },
+      params: {
+        path: {
+          postId: id,
         },
-        params: {
-          path: {
-            postId: id,
-          },
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw new Error('Error loading likes' + error);
+      },
+    });
+
+    if (response.error) {
+      throw response.error;
     }
+
+    return response.data;
   },
 };
