@@ -1,19 +1,28 @@
 'use client';
 import { useRouter } from 'next/navigation';
 
-import { type Post } from '../../model/types';
-import { useViewPostStore } from '../../model/useViewPost.store';
-
-import { PostContent } from './postContent/postContent';
-import s from './PostViewModal.module.scss';
-import { Header } from './ui';
-
 import { Close } from '@/assets/icons';
+import { PostViewModel } from '@/entities/profile';
 import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { useAuth, useMediaQuery } from '@/shared/lib/hooks';
 import { Button, Modal, ModalHeaderWithClose } from '@/shared/ui';
 
-export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; defaultOpen?: boolean; post?: Post }) {
+import { useViewPostStore } from '../../model/useViewPost.store';
+
+import { PostContent } from './postContent/PostContent';
+import { Header } from './ui';
+
+import s from './PostViewModal.module.scss';
+
+export function PostViewModal({
+  open,
+  defaultOpen,
+  post,
+}: {
+  open?: boolean;
+  defaultOpen?: boolean;
+  post?: PostViewModel;
+}) {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { user, isAuth, isLoading } = useAuth();
 
@@ -28,12 +37,17 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
   const router = useRouter();
 
   if (!post) {
+    router.back();
     return null;
   }
 
   const handleClose = () => {
     if (!isEdit) {
-      router.back();
+      if (typeof window !== 'undefined' && window.history.length <= 1) {
+        router.push(`/profile/${post.ownerId}`);
+      } else {
+        router.back();
+      }
       reset();
     }
     if (isEdit && value !== post.description) {
@@ -62,6 +76,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
           postOwnerId={post.ownerId}
           userId={user?.userId || 0}
           isAuth={isAuth}
+          postId={post.id || 0}
         />
       );
     }
@@ -76,6 +91,7 @@ export function PostViewModal({ open, defaultOpen, post }: { open?: boolean; def
       onOpenChange={handleClose}
       defaultOpen={defaultOpen}
       header={renderHeader()}
+      portal={false}
     >
       {!isEdit && (
         <Button

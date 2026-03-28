@@ -1,12 +1,19 @@
+import { client } from '@/shared/api/client';
 import { useQuery } from '@tanstack/react-query';
 
-import { userApi } from '@/entities/user/api/user.api';
-import { User } from '@/entities/user/model/types';
-
 export const useMe = () => {
-  return useQuery<User>({
+  return useQuery({
     queryKey: ['me'],
-    queryFn: userApi.me,
-    retry: false,
+    queryFn: async () => {
+      const clientResponse = await client.GET('/auth/me');
+
+      if (clientResponse.error) {
+        throw new Error('Unauthorized');
+      }
+
+      return clientResponse.data;
+    },
+    retry: 0,
+    staleTime: 0,
   });
 };

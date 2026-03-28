@@ -1,10 +1,10 @@
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { newPassword } from '@/features/auth/newPassword/api/NewPassword.api';
 import { NewPasswordRequest } from '@/features/auth/newPassword/model/types';
 import { routes } from '@/shared/config/routes';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
+import { useMutation } from '@tanstack/react-query';
 
 type Error = {
   statusCode: number;

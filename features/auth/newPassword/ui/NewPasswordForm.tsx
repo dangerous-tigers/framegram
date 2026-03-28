@@ -1,16 +1,16 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
-
-import s from './NewPasswordForm.module.scss';
 
 import { createNewPasswordData, newPasswordSchema } from '@/features/auth/newPassword/model/NewPassword.schema';
 import { useNewPassword } from '@/features/auth/newPassword/model/UseNewPassword';
 import { useRecoveryParams } from '@/features/auth/newPassword/model/useRecoveryParams';
 import { Button } from '@/shared/ui/button/Button';
 import { Input } from '@/shared/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import s from './NewPasswordForm.module.scss';
 
 export const CreateNewPasswordForm = () => {
   const t = useTranslations('newPassword');

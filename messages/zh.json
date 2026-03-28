@@ -13,9 +13,17 @@
     "statistic": "统计",
     "favorites": "收藏",
     "logOut": "退出",
-    "logOutMessage": "您确定要退出账户 {email}, 吗？",
+    "logOutMessage": "您确定要退出账户 {email} 吗？",
     "yes": "是",
-    "no": "否"
+    "no": "否",
+    "email": "邮箱",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "forgotPassword": "忘记密码",
+    "signIn": "登录",
+    "noAccount": "还没有账号？",
+    "signUp": "注册"
   },
   "login": {
     "title": "登录",
@@ -50,25 +58,30 @@
     "password": "密码",
     "passwordConfirm": "确认密码"
   },
+  "confirmEmail": {
+    "title": "恭喜！",
+    "text": "您的电子邮件已确认",
+    "logIn": "登录"
+  },
   "forgot": {
-    "title": "忘記密碼",
+    "title": "忘记密码",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
-    "text": "請輸入您的電子郵件地址，我們將向您發送更多說明。",
-    "sendLink": "發送連結",
-    "backToSignIn": "返回登入"
+    "text": "请输入您的电子邮件地址，我们将向您发送更多说明。",
+    "sendLink": "发送链接",
+    "backToSignIn": "返回登录"
   },
   "newPassword": {
-    "title": "建立新密碼",
-    "newPassword": "新密碼",
-    "passwordConfirm": "密碼確認",
-    "text": "您的密碼長度必須介於 6 到 20 個字元之間。",
-    "createBtn": "建立新密碼"
+    "title": "创建新密码",
+    "newPassword": "新密码",
+    "passwordConfirm": "密码确认",
+    "text": "您的密码长度必须介于 6 到 20 个字符之间。",
+    "createBtn": "创建新密码"
   },
   "resendLink": {
-    "title": "電子郵件驗證連結已過期",
-    "text": "驗證連結似乎已過期。不用擔心，我們可以再次發送連結。",
-    "resendBtn": "重新發送連結"
+    "title": "电子邮件验证链接已过期",
+    "text": "验证链接似乎已过期。不用担心，我们可以再次发送链接。",
+    "resendBtn": "重新发送链接"
   },
   "validateError": {
     "minChars": "最少 6 个字符",
@@ -77,8 +90,15 @@
     "passwordMatch": "密码必须一致",
     "passwordConfirm": "请确认您的密码",
     "email": "邮箱格式应为 example@example.com",
-    "emailExist": "此電子郵件地址對應的使用者不存在",
+    "emailExist": "此电子邮件地址对应的用户不存在",
     "captcha": "请验证您不是机器人"
+  },
+  "confirmActions": {
+    "yes": "是",
+    "no": "否",
+    "close": "关闭",
+    "closeEditMode": "您确定要结束编辑吗？如果关闭，您所做的更改将不会被保存。",
+    "deletePhoto": "您确定要删除您的头像吗？"
   },
   "viewPost": {
     "likes": "点赞",
@@ -86,13 +106,92 @@
     "showReplies": "显示回复",
     "hideReplies": "隐藏回复",
     "publish": "发布",
-    "beTheFirstLikes": "成为第一个 ",
     "like": "点赞！",
     "noCommentsYet": "暂无评论.",
     "beTheFirstToComment": "成为第一个评论者.",
     "emptyFieldError": "文本字段不能为空",
     "emptyAnswerError": "回复不能为空",
     "prefixWarning": "注意！您已切换到发表评论模式",
-    "commentPlaceholder": "添加评论..."
+    "commentPlaceholder": "添加评论...",
+    "likesCount": "{count, plural, =0 {还没有人点赞} other {{count, number} 赞}}"
+  },
+  "createPost": {
+    "Error loading the post": "加载帖子时出错",
+    "Error loading posts": "加载帖子列表时出错",
+    "Error deleting a post": "删除帖子时出错"
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "註冊用戶",
+    "ShowMore": "顯示更多",
+    "Hide": "隱藏"
+  },
+  "error404": {
+    "title": "404 - 找不到页面",
+    "description": "您查找的页面不存在或已被移动。",
+    "backToHome": "回到首页",
+    "goBack": "返回"
+  },
+  "errorPage": {
+    "title": "糟糕！出错了",
+    "description": "发生了意外错误。请稍后再试。",
+    "tryAgain": "重试",
+    "backToHome": "回到首页"
+  },
+  "notAuth": {
+    "title": "需要授权",
+    "description": "您需要登录才能访问此页面。",
+    "login": "登录",
+    "backToHome": "回到首页"
+  },
+  "profile": {
+    "settings": {
+      "title": "设置",
+      "general": {
+        "title": "常规",
+        "lastName": "姓",
+        "firstName": "名",
+        "userName": "用户名",
+        "birthday": "出生日期",
+        "aboutMe": "关于我",
+        "selectImage": "选择图片",
+        "save": "保存",
+        "saving": "正在保存…"
+      },
+      "accountManagement": {
+        "title": "账户管理",
+        "currentSubscription": "当前订阅：",
+        "expireAt": "到期时间",
+        "nextPayment": "下次支付",
+        "autoRenewal": "自动续费",
+        "accountType": "账户类型：",
+        "changeSubscription": "更改订阅：",
+        "personal": "个人",
+        "business": "企业",
+        "days": "{count} 天",
+        "weekly": "{count} 天",
+        "monthly": "月",
+        "per": "每",
+        "or": "或",
+        "createPayment": "创建支付",
+        "autoRenewalModalText": "此次支付将启用自动续费。您可以随时在个人资料设置中关闭",
+        "paymentCanceled": "自动续费已取消",
+        "comingSoon": "即将推出",
+        "disabled": "已禁用"
+      },
+      "devices": "设备",
+      "payments": "支付",
+      "successTitle": "成功",
+      "errorTitle": "错误",
+      "successMessage": "支付成功！",
+      "errorMessage": "交易失败。请联系支持团队",
+      "backToPayment": "返回支付"
+    },
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>还没有发布</s>} other {<b>{count}</b> <s>条发布</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s>还没有粉丝</s>} other {<b>{count}</b> <s>粉丝</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s>未关注任何人</s>} other {<b>{count}</b> <s>关注</s>}}",
+    "profileSettings": "设置",
+    "follow": "关注",
+    "unfollow": "取消关注",
+    "sendMessage": "发送消息"
   }
 }

@@ -15,10 +15,18 @@
     "logOut": "Выйти",
     "logOutMessage": "Вы действительно хотите выйти из аккаунта {email}?",
     "yes": "Да",
-    "no": "Нет"
+    "no": "Нет",
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "forgotPassword": "Забыли пароль",
+    "signIn": "Войти",
+    "noAccount": "Нет аккаунта?",
+    "signUp": "Зарегистрироваться"
   },
   "login": {
-    "title": "Вход",
+    "title": "Войти в систему",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
     "password": "Пароль",
@@ -50,6 +58,11 @@
     "password": "Пароль",
     "passwordConfirm": "Подтверждение пароля"
   },
+  "confirmEmail": {
+    "title": "Поздравляем!",
+    "text": "Ваш адрес электронной почты подтвержден",
+    "logIn": "Войти"
+  },
   "forgot": {
     "title": "Забыли пароль",
     "email": "Email",
@@ -80,11 +93,12 @@
     "emailExist": "Пользователь с таким адресом электронной почты не существует",
     "captcha": "Пожалуйста, подтвердите, что вы не робот"
   },
-  "confirmAction": {
-    "yes": "Yes",
-    "no": "No",
+  "confirmActions": {
+    "yes": "Да",
+    "no": "Нет",
     "close": "Закрыть",
-    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесенные вами изменения не будут сохранены."
+    "closeEditMode": "Вы действительно хотите завершить редактирование? Если вы закроете окно редактирования, внесённые вами изменения не будут сохранены.",
+    "deletePhoto": "Вы действительно хотите удалить вашу фотографию профиля?"
   },
   "viewPost": {
     "likes": "Лайки",
@@ -92,13 +106,96 @@
     "showReplies": "Показать ответы",
     "hideReplies": "Скрыть ответы",
     "publish": "Опубликовать",
-    "beTheFirstLikes": "Будь первым ",
     "like": "Лайк!",
     "noCommentsYet": "Комментариев пока нет.",
     "beTheFirstToComment": "Будьте первым, кто оставит комментарий.",
     "emptyFieldError": "Текстовое поле не может быть пустым",
     "emptyAnswerError": "Ответ не может быть пустым",
     "prefixWarning": "Внимание! Вы перешли в режим отправки комментария",
-    "commentPlaceholder": "Добавить комментарий..."
+    "commentPlaceholder": "Добавить комментарий...",
+    "noLikesYet": "Лайков пока нет.",
+    "likesCount": "{count, plural, =0 {Лайков нет} one {<b>{count}</b> лайк} few {<b>{count}</b> лайка} other {<b>{count}</b> лайков}}"
+  },
+  "createPost": {
+    "Error loading the post": "Ошибка загрузки поста",
+    "Error loading posts":"Ошибка загрузки постов",
+    "Error deleting a post": "Ошибка удаления поста"
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Зарегистрированные пользователи",
+    "ShowMore": "Показать подробнее",
+    "Hide": "Скрыть"
+  },
+  "error404": {
+    "title": "Упс! Страница не найдена",
+    "description": "Похоже, эта страница не существует или была перемещена.",
+    "backToHome": "Вернуться на главную",
+    "goBack": "Назад"
+  },
+  "errorPage": {
+    "title": "Ой! Что-то пошло не так",
+    "description": "Произошла непредвиденная ошибка. Пожалуйста, попробуйте снова или вернитесь на главную.",
+    "tryAgain": "Попробовать снова",
+    "backToHome": "Вернуться на главную"
+  },
+  "notAuth": {
+    "title": "Требуется авторизация",
+    "description": "Для доступа к этой странице необходимо войти в систему.",
+    "login": "Войти",
+    "backToHome": "Вернуться на главную"
+  },
+  "profile": {
+    "settings": {
+      "title": "Настройки",
+      "general": {
+        "title": "Общие",
+        "lastName": "Фамилия",
+        "firstName": "Имя",
+        "userName": "Имя пользователя",
+        "birthday": "Дата рождения",
+        "aboutMe": "О себе",
+        "selectImage": "Выбрать изображение",
+        "save": "Сохранить",
+        "saving": "Сохранение…"
+      },
+      "accountManagement": {
+        "title": "Управление аккаунтом",
+        "currentSubscription": "Текущая подписка:",
+        "expireAt": "Истекает",
+        "nextPayment": "Следующий платеж",
+        "autoRenewal": "Автопродление",
+        "accountType": "Тип аккаунта:",
+        "changeSubscription": "Изменить подписку:",
+        "personal": "Личный",
+        "business": "Бизнес",
+        "days": "{count} дн.",
+        "weekly": "{count} дн.",
+        "monthly": "мес.",
+        "per": "за",
+        "or": "или",
+        "createPayment": "Создать платеж",
+        "autoRenewalModalText": "С этим платежом будет включено автопродление. Вы можете отключить его в любое время в настройках профиля",
+        "paymentCanceled": "Автопродление отменено",
+        "comingSoon": "Скоро будет",
+        "disabled": "Отключено"
+      },
+      "devices": "Устройства",
+      "payments": "Платежи",
+      "successTitle": "Успех",
+      "errorTitle": "Ошибка",
+      "successMessage": "Платеж прошел успешно!",
+      "errorMessage": "Транзакция не удалась. Пожалуйста, напишите в службу поддержки",
+      "backToPayment": "Вернуться к оплате"
+    },
+    "publications": "{count, plural, =0 {<b>{count}</b> <s>Нет публикаций</s>} one {<b>{count}</b> <s>Публикация</s>} few {<b>{count}</b> <s>Публикации</s>} other {<b>{count}</b> <s>Публикаций</s>}}",
+    "followers": "{count, plural, =0 {<b>{count}</b> <s>Нет подписчиков</s>} one {<b>{count}</b> <s>Подписчик</s>} few {<b>{count}</b> <s>Подписчика</s>} other {<b>{count}</b> <s>Подписчиков</s>}}",
+    "following": "{count, plural, =0 {<b>{count}</b> <s>Нет подписок</s>} one {<b>{count}</b> <s>Подписка</s>} few {<b>{count}</b> <s>Подписки</s>} other {<b>{count}</b> <s>Подписок</s>}}",
+    "profileSettings": "Настройки",
+    "follow": "Подписаться",
+    "unfollow": "Отписаться",
+    "sendMessage": "Написать сообщение",
+      "notifications": {
+      "notification": "{type, select, hasBeenActivated {Ваша подписка активирована и действует до {date}} nextPayment {Следующий платеж у вас спишется через 1 день} endsAfterWeek {Ваша подписка истекает через 7 дней} endsAfterDay {Ваша подписка истекает через 1 день} other {}}"
+    }
   }
 }

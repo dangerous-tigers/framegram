@@ -1,0 +1,20 @@
+.root {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  background-color: rgb(var(--dark-500-rgb), 0.8);
+  z-index: 400;
+
+  /* padding: 0.75rem; */
+  bottom: 38px;
+}
+
+.topRight {
+  left: 0;
+}
+
+.topLeft {
+  right: 0;
+}

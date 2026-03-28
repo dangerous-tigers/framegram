@@ -13,10 +13,12 @@ export const routes = {
   },
   empty: '',
   feed: '/feed',
+  main: '/',
   create: '/create',
   profile: '/profile',
   messenger: '/messenger',
   search: '/search',
   statistics: '/statistics',
   favorites: '/favorites',
+  notAuth: '/not-auth',
 } as const;
