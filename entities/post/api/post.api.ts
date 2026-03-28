@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import { UploadPostImagesResponse } from '@/entities/post/model/postTypes';
+import { ResponseLikesType } from '@/features/post/viewPost/model/types';
 import { client } from '@/shared/api/client';
 // export const uploadPostImages = async (files: File[]) => {
 //   return client.POST('/posts/image', {
@@ -63,8 +64,6 @@ export const postApi = {
     }
   },
   getPostByIdServer: async (id: number) => {
-    const t = useTranslations('createPost');
-
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/id/${id}`, {
         cache: 'no-store',
@@ -72,12 +71,10 @@ export const postApi = {
       });
       return res.json();
     } catch (error) {
-      throw new Error(t('Error loading the post') + error);
+      throw new Error('Error loading the post' + error);
     }
   },
   getPostsByUser: async (userId: number, endCursorPostId: number = 0) => {
-    const t = useTranslations('createPost');
-
     try {
       const response = await client.GET('/posts/user/{userId}/{endCursorPostId}', {
         params: {
@@ -89,12 +86,10 @@ export const postApi = {
       });
       return response.data;
     } catch (error) {
-      throw new Error(t('Error loading posts') + error);
+      throw new Error('Error loading posts' + error);
     }
   },
   deletePost: async (id: number) => {
-    const t = useTranslations('createPost');
-
     try {
       const response = await client.DELETE('/posts/{postId}', {
         params: {
@@ -105,7 +100,38 @@ export const postApi = {
       });
       return response.data;
     } catch (error) {
-      throw new Error(t('Error deleting a post') + error);
+      throw new Error('Error deleting a post' + error);
+    }
+  },
+  getPostLikes: async (id: number) => {
+    try {
+      const response = await client.GET('/posts/{postId}/likes', {
+        params: {
+          path: {
+            postId: id,
+          },
+        },
+      });
+      return response.data as ResponseLikesType;
+    } catch (error) {
+      throw new Error('Error loading likes' + error);
+    }
+  },
+  postLike: async ({ id, likeStatus }: { id: number; likeStatus: 'LIKE' | 'DISLIKE' | 'NONE' }) => {
+    try {
+      const response = await client.PUT('/posts/{postId}/like-status', {
+        body: {
+          likeStatus,
+        },
+        params: {
+          path: {
+            postId: id,
+          },
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Error loading likes' + error);
     }
   },
 };

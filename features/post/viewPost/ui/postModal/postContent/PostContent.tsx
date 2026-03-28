@@ -9,6 +9,7 @@ import { useIntersection } from '@/shared/lib/hooks';
 import { Separator } from '@/shared/ui';
 import { Swiper } from '@/shared/ui/swiper';
 
+import { usePostLikes } from '../../../model/useGetPostLikes';
 import { Actions, ActionsSkeleton, Comment, Description, DescriptionSkeleton, Header, Publish } from '../ui';
 
 import s from './PostContent.module.scss';
@@ -23,6 +24,7 @@ type Props = {
 
 export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }: Props) {
   const { data: clientPost } = useGetPostById(initialPost.id);
+  const { data: postLikes } = usePostLikes({ id: initialPost.id });
   const isEdit = useViewPostStore((state) => state.isEdit);
   const t = useTranslations('viewPost');
 
@@ -135,12 +137,13 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
               <ActionsSkeleton />
             ) : (
               <Actions
-                isLiked={post.isLiked ?? false}
-                likesCount={post.likesCount}
-                avatarWhoLikes={post.avatarWhoLikes}
+                isLiked={postLikes?.isLiked ?? false}
+                likesCount={postLikes?.totalCount || 0}
+                avatarWhoLikes={postLikes?.items?.map((item) => item.avatars[0].url) || []}
                 isSaved
                 time={post?.createdAt || ''}
                 isAuth={isAuth}
+                postId={post.id}
               />
             )}
             {/*    PUBLISH      */}
