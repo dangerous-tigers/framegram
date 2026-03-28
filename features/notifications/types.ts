@@ -5,7 +5,8 @@ export type NotificationsView = {
   createdAt: string;
 };
 export interface NotificationIntl extends NotificationsView {
-  type: 'hasBeenActivated' | 'nextPayment' | 'endsAfterWeek' | 'endsAfterDay';
+  // type: 'hasBeenActivated' | 'nextPayment' | 'endsAfterWeek' | 'endsAfterDay';
+  type: string;
 }
 
 export type SocketNotificationsResponse = {

@@ -56,9 +56,6 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.91.1
         version: 5.91.1(@tanstack/react-query@5.90.12(react@19.2.0))(react@19.2.0)
-      '@types/date-fns':
-        specifier: ^2.6.3
-        version: 2.6.3
       '@types/react-date-range':
         specifier: ^1.4.10
         version: 1.4.10
@@ -107,12 +104,18 @@ importers:
       react-hook-form:
         specifier: 7.66.1
         version: 7.66.1(react@19.2.0)
+      react-konva:
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@19.2.7)(konva@10.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-time-ago:
         specifier: ^7.3.5
-        version: 7.3.5(javascript-time-ago@2.5.12)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 7.3.5(javascript-time-ago@2.6.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       rsuite:
         specifier: ^6.1.2
         version: 6.1.2(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      socket.io-client:
+        specifier: ^4.8.3
+        version: 4.8.3
       swiper:
         specifier: ^12.0.3
         version: 12.0.3
@@ -2271,6 +2274,16 @@ packages:
     peerDependencies:
       '@types/react': ^19.2.0
 
+  '@types/react-reconciler@0.28.9':
+    resolution: {integrity: sha512-HHM3nxyUZ3zAylX8ZEyrDNd2XZOnQ0D5XfunJF5FLQnZbHHYq4UWvW1QfelQNXv1ICNkwYhfxjwfnqivYB6bFg==}
+    peerDependencies:
+      '@types/react': '*'
+
+  '@types/react-reconciler@0.33.0':
+    resolution: {integrity: sha512-HZOXsKT0tGI9LlUw2LuedXsVeB88wFa536vVL0M6vE8zN63nI+sSr1ByxmPToP5K5bukaVscyeCJcF9guVNJ1g==}
+    peerDependencies:
+      '@types/react': '*'
+
   '@types/react-window@1.8.8':
     resolution: {integrity: sha512-8Ls660bHR1AUA2kuRvVG9D/4XpRC6wjAaPT9dil7Ckc76eP9TKWZwwmgfq8Q1LANX3QNDnoU4Zp48A3w+zK69Q==}
 
@@ -4033,6 +4046,9 @@ packages:
     resolution: {integrity: sha512-//nshmD55c46FuFw26xV/xFAaB5HF9Xdap7HJBBnrKdAd6/GxDBaNA1870O79+9ueg61cZLSVc+OaFlfmObYVQ==}
     engines: {node: '>= 14.16'}
 
+  performance-now@2.1.0:
+    resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
+
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -4155,6 +4171,9 @@ packages:
       '@types/react-dom':
         optional: true
 
+  raf@3.4.1:
+    resolution: {integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==}
+
   react-docgen-typescript@2.4.0:
     resolution: {integrity: sha512-ZtAp5XTO5HRzQctjPU0ybY0RRCQO19X/8fxn3w7y2VVTUbGHDKULPTL4ky3vB05euSgG5NpALhEhDPvQ56wvXg==}
     peerDependencies:
@@ -4181,8 +4200,8 @@ packages:
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
-  react-konva@19.2.2:
-    resolution: {integrity: sha512-fgIevJSiZ6mYxouR0XLq7oKgQkfHHySHyNpyc1f/3in0xXq8BV7M7Y82obyoBPOAj35TBUPuZ568qZcelYm3ag==}
+  react-konva@19.2.3:
+    resolution: {integrity: sha512-VsO5CJZwUo12xFa33UEIDOQn6ZZBeE6jlkStGFvpR/3NiDA/9RPQTzw6Ri++C0Pnh3Arco1AehB8qJNv9YCRwg==}
     peerDependencies:
       konva: ^8.0.1 || ^7.2.5 || ^9.0.0 || ^10.0.0
       react: ^19.2.0
@@ -4233,6 +4252,7 @@ packages:
   react-time-ago@7.3.5:
     resolution: {integrity: sha512-ZyNd0GEy9ovcAOg+Stpg3zMXEtlYX1lCwO9ePiiXpHsrIa7Rn9h+ZS9dtM/zahf6xYcjmz7b6y2gDRSDG54tHQ==}
     peerDependencies:
+      javascript-time-ago: ^2.3.7
       react: '>=0.16.8'
       react-dom: '>=0.16.8'
 
@@ -4433,8 +4453,8 @@ packages:
     resolution: {integrity: sha512-uP0bpjWrjQmUt5DTHq9RuoCBdFJF10cdX9X+a368j/Ft0wmaVgxlrjvK3kjvgCODOMMOz9lcaRzxmso0bTWZ/g==}
     engines: {node: '>=10.0.0'}
 
-  socket.io-parser@4.2.5:
-    resolution: {integrity: sha512-bPMmpy/5WWKHea5Y/jYAP6k74A+hvmRCQaJuJB6I/ML5JZq/KfNieUVo/3Mh7SAqn7TyFdIo6wqYHInG1MU1bQ==}
+  socket.io-parser@4.2.6:
+    resolution: {integrity: sha512-asJqbVBDsBCJx0pTqw3WfesSY0iRX+2xzWEWzrpcH7L6fLzrhyF8WPI8UaeM4YCuDfpwA/cgsdugMsmtz8EJeg==}
     engines: {node: '>=10.0.0'}
 
   source-map-js@1.2.1:
@@ -6911,6 +6931,14 @@ snapshots:
     dependencies:
       '@types/react': 19.2.7
 
+  '@types/react-reconciler@0.28.9(@types/react@19.2.7)':
+    dependencies:
+      '@types/react': 19.2.7
+
+  '@types/react-reconciler@0.33.0(@types/react@19.2.7)':
+    dependencies:
+      '@types/react': 19.2.7
+
   '@types/react-window@1.8.8':
     dependencies:
       '@types/react': 19.2.7
@@ -8837,6 +8865,8 @@ snapshots:
 
   pathval@2.0.1: {}
 
+  performance-now@2.1.0: {}
+
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
@@ -8987,6 +9017,10 @@ snapshots:
       '@types/react': 19.2.7
       '@types/react-dom': 19.2.3(@types/react@19.2.7)
 
+  raf@3.4.1:
+    dependencies:
+      performance-now: 2.1.0
+
   react-docgen-typescript@2.4.0(typescript@5.9.3):
     dependencies:
       typescript: 5.9.3
@@ -9019,9 +9053,9 @@ snapshots:
 
   react-is@17.0.2: {}
 
-  react-konva@19.2.2(@types/react@19.2.7)(konva@10.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  react-konva@19.2.3(@types/react@19.2.7)(konva@10.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
-      '@types/react-reconciler': 0.32.3(@types/react@19.2.7)
+      '@types/react-reconciler': 0.33.0(@types/react@19.2.7)
       its-fine: 2.0.0(@types/react@19.2.7)(react@19.2.0)
       konva: 10.2.0
       react: 19.2.0
@@ -9072,11 +9106,12 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  react-time-ago@7.3.5(javascript-time-ago@2.5.12)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  react-time-ago@7.3.5(javascript-time-ago@2.6.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       javascript-time-ago: 2.6.2
       memoize-one: 6.0.0
       prop-types: 15.8.1
+      raf: 3.4.1
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
@@ -9377,13 +9412,13 @@ snapshots:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.4.3(supports-color@10.2.2)
       engine.io-client: 6.6.4
-      socket.io-parser: 4.2.5
+      socket.io-parser: 4.2.6
     transitivePeerDependencies:
       - bufferutil
       - supports-color
       - utf-8-validate
 
-  socket.io-parser@4.2.5:
+  socket.io-parser@4.2.6:
     dependencies:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.4.3(supports-color@10.2.2)

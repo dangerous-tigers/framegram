@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import { useState } from 'react';
+import clsx from 'clsx';
 import { DateRangePicker } from 'rsuite';
 
-import s from './DataPicker.module.scss';
-
 import { renderWeekendCell } from '@/shared/lib/date/renderWeekendCell';
+
+import s from './DataPicker.module.scss';
 
 type Props = {
   disabled?: boolean;

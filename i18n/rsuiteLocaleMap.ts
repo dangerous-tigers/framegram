@@ -3,6 +3,7 @@ import ruRU from 'rsuite/locales/ru_RU';
 import zhCN from 'rsuite/locales/zh_CN';
 
 import type { Locale } from './config';
+
 type RsuiteLocale = typeof enGB;
 
 export const rsuiteLocaleMap: Record<Locale, RsuiteLocale> = {

@@ -2,7 +2,7 @@
 import { useLocale } from 'next-intl';
 import { CustomProvider } from 'rsuite';
 
-import { defaultLocale, locales, type Locale } from '@/i18n/config';
+import { defaultLocale, type Locale, locales } from '@/i18n/config';
 import { rsuiteLocaleMap } from '@/i18n/rsuiteLocaleMap';
 
 function isLocale(x: string): x is Locale {
