@@ -55,7 +55,12 @@ export const Modal = ({
           {header && (
             <>
               <div className={styles.header}>{header}</div>
-              {showDivider && <div className={styles.divider} />}
+              {showDivider && (
+                <div
+                  data-testid='divider'
+                  className={styles.divider}
+                />
+              )}
             </>
           )}
 
