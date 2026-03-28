@@ -1,5 +1,6 @@
 'use client';
 import { redirect } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 
 import { AppShell } from '@/app/ui/AppShell';
@@ -12,9 +13,16 @@ export default function PrivateLayout({
   children: ReactNode;
 }>) {
   const { isPending, isSuccess } = useMe();
+  const pathname = usePathname();
 
   if (isPending) return <div>loading...</div>;
 
   if (!isSuccess) return redirect(routes.auth.login);
+
+  // Для страницы feed используем специальный layout с боковыми панелями
+  if (pathname === '/feed') {
+    return <>{children}</>;
+  }
+
   return <AppShell>{children}</AppShell>;
 }

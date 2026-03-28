@@ -1,8 +1,9 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { createPost, uploadPostImages } from '@/entities/post/api/post.api';
 
 export const useCreatePostMutation = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ files, description }: { files: File[]; description?: string }) => {
       const uploadRes = await uploadPostImages(files);
@@ -21,6 +22,9 @@ export const useCreatePostMutation = () => {
       });
 
       return postRes.data;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['user-posts'] });
     },
   });
 };

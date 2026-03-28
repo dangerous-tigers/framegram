@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import s from './Header.module.scss';
@@ -10,9 +11,13 @@ import {
   PersonRemoveOutline,
   TrashOutline,
 } from '@/assets/icons/components';
+import { useRemovePost } from '@/entities/post/model/useRemovePost';
+import { useConfirmStore } from '@/features/post/editPost/modal/useConfirmStore';
 import { useViewPostStore } from '@/features/post/viewPost/model';
 import { ProfileImage } from '@/features/post/viewPost/ui/postModal/ui/profile-image/ProfileImage';
+import { ConfirmActionModal } from '@/shared/components/confirmActionModal';
 import { Popover } from '@/shared/ui/popover';
+
 type Props = {
   avatar: string | undefined;
   userName: string | undefined;
@@ -20,14 +25,43 @@ type Props = {
   userId: number;
   isAuth: boolean;
   postOwnerId: number;
+  postId: number;
 };
 
-export function Header({ avatar, userName, postOwnerId, userId, isAuth, className }: Props) {
+export function Header({ avatar, userName, postOwnerId, userId, isAuth, className, postId }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const { setIsEdit } = useViewPostStore();
 
+  const { mutate: removePost, isPending, isSuccess } = useRemovePost();
+  const { open: confirmModal, show, hide } = useConfirmStore();
+
   const isOwner = userId === postOwnerId;
+
+  const t = useTranslations('confirmActions');
+
   const isFollow = false;
+
+  const editPost = () => {
+    setIsEdit(true);
+  };
+
+  const follow = () => {};
+
+  const unfollow = () => {};
+
+  const copyLink = () => {};
+
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    show();
+  };
+
+  const handleDeleteConfirm = () => {
+    removePost(postId);
+    if (isSuccess) {
+      hide();
+    }
+  };
 
   const renderActions = () => {
     if (!isAuth) {
@@ -46,7 +80,7 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
             <Edit2Outline />
             <span>Edit</span>
           </li>
-          <li onClick={removePost}>
+          <li onClick={handleDeleteClick}>
             <TrashOutline />
             <span>Delete</span>
           </li>
@@ -72,34 +106,32 @@ export function Header({ avatar, userName, postOwnerId, userId, isAuth, classNam
     );
   };
 
-  const editPost = () => {
-    setIsEdit(true);
-  };
-
-  const removePost = () => {};
-
-  const follow = () => {};
-
-  const unfollow = () => {};
-
-  const copyLink = () => {};
-
   return (
-    <div className={clsx(s.header, className)}>
-      <ProfileImage
-        avatar={avatar}
-        userName={userName}
-      />
-      <div className={s.headerActions}>
-        <Popover
-          open={open}
-          onOpenChange={() => setOpen(!open)}
-          isOwner={isOwner}
-          isAuthorized={isAuth}
-        >
-          {renderActions()}
-        </Popover>
+    <>
+      <div className={clsx(s.header, className)}>
+        <ProfileImage
+          avatar={avatar}
+          userName={userName}
+        />
+        <div className={s.headerActions}>
+          <Popover
+            open={open}
+            onOpenChange={() => setOpen(!open)}
+            isOwner={isOwner}
+            isAuthorized={isAuth}
+          >
+            {renderActions()}
+          </Popover>
+        </div>
       </div>
-    </div>
+      {confirmModal && (
+        <ConfirmActionModal
+          isPending={isPending}
+          confirmCallback={() => handleDeleteConfirm()}
+        >
+          <span>{t('deletePost')}</span>
+        </ConfirmActionModal>
+      )}
+    </>
   );
 }

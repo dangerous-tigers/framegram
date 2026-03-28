@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 
 import s from './inputFile.module.scss';
 
 import { ImageOutline } from '@/assets/icons';
-import { PolymorphicButton } from '@/shared/ui/buttonComponent/PolymorphicButton';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
 
 type Props = {
   onSelect: (files: File[]) => void;
@@ -12,9 +12,17 @@ type Props = {
   accept?: string;
   disabled?: boolean;
   className?: string;
+  children?: ReactNode;
 };
 
-export const InputFile = ({ onSelect, multiple = false, accept = 'image/*', disabled = false, className }: Props) => {
+export const InputFile = ({
+  onSelect,
+  multiple = false,
+  accept = 'image/*',
+  disabled = false,
+  className,
+  children,
+}: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
 
@@ -73,23 +81,27 @@ export const InputFile = ({ onSelect, multiple = false, accept = 'image/*', disa
         onDrop={handleDrop}
         onClick={openDialog}
       >
-        <p className={s.drag}>
-          <ImageOutline
-            width={36}
-            height={36}
-          />
-        </p>
+        {children ?? (
+          <>
+            <p className={s.drag}>
+              <ImageOutline
+                width={36}
+                height={36}
+              />
+            </p>
 
-        <PolymorphicButton
-          type='button'
-          disabled={disabled}
-          onClick={(e) => {
-            e.stopPropagation();
-            openDialog();
-          }}
-        >
-          Select from Computer
-        </PolymorphicButton>
+            <PolymorphicButton
+              type='button'
+              disabled={disabled}
+              onClick={(e) => {
+                e.stopPropagation();
+                openDialog();
+              }}
+            >
+              Select from Computer
+            </PolymorphicButton>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
 
+import avatarPlaceholder from '@/assets/illustrations/avatar-placeholder.png';
+import { profileApi } from '@/entities/profile/api/profile.api';
 import { useMe } from '@/entities/user/model/useMe';
 import { AddLocation } from '@/features/addLocation/ui/AddLocation';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
@@ -23,6 +26,10 @@ export const PublishStep = () => {
   };
 
   const { data: user } = useMe();
+  const { data: profile } = useQuery({
+    queryKey: ['general'],
+    queryFn: () => profileApi.getProfile(),
+  });
 
   const isMobile = useMediaQuery('(max-width: 999px)');
   const ifMoreOneSlide = images.length > 1;
@@ -61,7 +68,11 @@ export const PublishStep = () => {
       <div className={s.content}>
         <div className={s.descBlock}>
           <div className={s.profile}>
-            <div className={s.avatar}></div>
+            <img
+              className={s.avatar}
+              src={profile?.avatars?.[0]?.url || avatarPlaceholder.src}
+              alt=''
+            />
             <div className={s.userName}>{user?.userName}</div>
           </div>
           <Textarea

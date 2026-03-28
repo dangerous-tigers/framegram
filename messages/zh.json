@@ -13,9 +13,17 @@
     "statistic": "统计",
     "favorites": "收藏",
     "logOut": "退出",
-    "logOutMessage": "您确定要退出账户 {email}, 吗？",
+    "logOutMessage": "您确定要退出账户 {email} 吗？",
     "yes": "是",
-    "no": "否"
+    "no": "否",
+    "email": "邮箱",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "密码",
+    "passwordPlaceholder": "请输入密码",
+    "forgotPassword": "忘记密码",
+    "signIn": "登录",
+    "noAccount": "还没有账号？",
+    "signUp": "注册"
   },
   "login": {
     "title": "登录",
@@ -50,25 +58,30 @@
     "password": "密码",
     "passwordConfirm": "确认密码"
   },
+  "confirmEmail": {
+    "title": "恭喜！",
+    "text": "您的电子邮件已确认",
+    "logIn": "登录"
+  },
   "forgot": {
-    "title": "忘記密碼",
+    "title": "忘记密码",
     "email": "Email",
     "emailPlaceholder": "Epam@epam.com",
-    "text": "請輸入您的電子郵件地址，我們將向您發送更多說明。",
-    "sendLink": "發送連結",
-    "backToSignIn": "返回登入"
+    "text": "请输入您的电子邮件地址，我们将向您发送更多说明。",
+    "sendLink": "发送链接",
+    "backToSignIn": "返回登录"
   },
   "newPassword": {
-    "title": "建立新密碼",
-    "newPassword": "新密碼",
-    "passwordConfirm": "密碼確認",
-    "text": "您的密碼長度必須介於 6 到 20 個字元之間。",
-    "createBtn": "建立新密碼"
+    "title": "创建新密码",
+    "newPassword": "新密码",
+    "passwordConfirm": "密码确认",
+    "text": "您的密码长度必须介于 6 到 20 个字符之间。",
+    "createBtn": "创建新密码"
   },
   "resendLink": {
-    "title": "電子郵件驗證連結已過期",
-    "text": "驗證連結似乎已過期。不用擔心，我們可以再次發送連結。",
-    "resendBtn": "重新發送連結"
+    "title": "电子邮件验证链接已过期",
+    "text": "验证链接似乎已过期。不用担心，我们可以再次发送链接。",
+    "resendBtn": "重新发送链接"
   },
   "validateError": {
     "minChars": "最少 6 个字符",
@@ -77,8 +90,14 @@
     "passwordMatch": "密码必须一致",
     "passwordConfirm": "请确认您的密码",
     "email": "邮箱格式应为 example@example.com",
-    "emailExist": "此電子郵件地址對應的使用者不存在",
+    "emailExist": "此电子邮件地址对应的用户不存在",
     "captcha": "请验证您不是机器人"
+  },
+  "confirmAction": {
+    "yes": "是",
+    "no": "否",
+    "close": "关闭",
+    "Do you really want to finish editing? If you close the changes you have made will not be saved": "您真的想结束编辑吗？如果您关闭，您所做的更改将不会被保存。"
   },
   "viewPost": {
     "likes": "点赞",
@@ -93,6 +112,12 @@
     "emptyFieldError": "文本字段不能为空",
     "emptyAnswerError": "回复不能为空",
     "prefixWarning": "注意！您已切换到发表评论模式",
-    "commentPlaceholder": "添加评论..."
+    "commentPlaceholder": "添加评论...",
+    "noLikesYet": "暂无点赞."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "註冊用戶",
+    "ShowMore": "顯示更多",
+    "Hide": "隱藏"
   }
 }

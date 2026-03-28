@@ -69,4 +69,37 @@ export const postApi = {
 
     return res.json();
   },
+  getPostsByUser: async (userId: number, endCursorPostId: number = 0) => {
+    const response = await client.GET('/posts/user/{userId}/{endCursorPostId}', {
+      params: {
+        path: {
+          userId,
+          endCursorPostId,
+        },
+      },
+    });
+    if (response.error) {
+      throw response.error;
+    }
+    return response.data;
+  },
+  deletePost: async (id: number) => {
+    if (!id) {
+      throw new Error('Post ID is required for deletion');
+    }
+
+    const response = await client.DELETE('/posts/{postId}', {
+      params: {
+        path: {
+          postId: id,
+        },
+      },
+    });
+
+    if (response.error) {
+      throw response.error;
+    }
+
+    return response.data;
+  },
 };

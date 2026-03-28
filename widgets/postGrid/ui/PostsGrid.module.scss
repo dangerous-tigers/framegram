@@ -1,0 +1,129 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .active {
+    .postImage {
+      height: 120px;
+    }
+  }
+}
+
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(234px, 1fr));
+  gap: 12px;
+  padding: 36px 0 117px;
+}
+
+.swiperSmall {
+  img {
+    height: 120px;
+    object-fit: cover;
+  }
+}
+
+.swiperLarge {
+  img {
+    height: 240px;
+  }
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+  max-height: 240px;
+  object-fit: cover;
+}
+
+.postInfoTop {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  cursor: pointer;
+}
+
+.postAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.postName {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--light-100);
+  transition: color 0.2s;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--primary-500);
+    }
+  }
+}
+
+.postData {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 133%;
+  color: var(--light-900);
+}
+
+/* stylelint-disable selector-class-pattern */
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+  background: var(--dark-500);
+  opacity: 0.7;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  color: var(--light-100);
+
+  svg {
+    width: 7px;
+    height: 14px;
+    fill: var(--light-100);
+  }
+
+  &:hover {
+    color: var(--primary-500);
+    background: var(--dark-500);
+    opacity: 1;
+  }
+}
+
+// :global(.swiper-button-next),
+// :global(.swiper-button-prev) {
+//   width: 24px;
+//   height: 24px;
+//   fill: var(--light-100);
+// }
+
+:global(.swiper-pagination) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  position: absolute;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  border-radius: 2px;
+  max-width: 78px;
+  background: rgba($color: #333, $alpha: 50%);
+}
+
+:global(.swiper-pagination-bullet) {
+  height: 6px;
+  width: 6px;
+  background: var(--light-100);
+  opacity: 1;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  opacity: 1;
+  background: var(--primary-500);
+}
+/* stylelint-enable selector-class-pattern */

@@ -8,7 +8,7 @@
     "feed": "Feed",
     "create": "Create",
     "myProfile": "My Profile",
-    "messenges": "Messenges",
+    "messenges" : "Messenges",
     "search": "Search",
     "statistic": "Statistics",
     "favorites": "Favorites",
@@ -16,7 +16,14 @@
     "logOutMessage": "Are you really want to log out of your account {email}?",
     "yes": "Yes",
     "no": "No",
-    "email": "Email"
+    "email": "Email",
+    "emailPlaceholder": "Epam@epam.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot Password",
+    "signIn": "Sign In",
+    "noAccount": "Dont have an account?",
+    "signUp": "Sign Up"
   },
   "login": {
     "title": "Sign In",
@@ -86,11 +93,13 @@
     "emailExist": "User with this email does not exist",
     "captcha": "Please verify that you are not a robot"
   },
-  "confirmAction": {
+  "confirmActions": {
     "yes": "Yes",
     "no": "No",
     "close": "Close",
-    "Do you really want to finish editing? If you close the changes you have made will not be saved": "Do you really want to finish editing? If you close the changes you have made will not be saved."
+    "deletePost": "Do you really want delete post?",
+    "closeEditMode": "Do you really want to finish editing? If you close the changes you have made will not be saved.",
+    "deletePhoto" : "Do you really want to delete your profile photo?"
   },
   "viewPost": {
     "likes": "Likes",
@@ -105,6 +114,12 @@
     "emptyFieldError": "Text field cannot be empty",
     "emptyAnswerError": "Answer cannot be empty",
     "prefixWarning": "Attention! You have switched to comment submission mode",
-    "commentPlaceholder": "Add a Comment..."
+    "commentPlaceholder": "Add a Comment...",
+    "noLikesYet": "No likes yet."
+  },
+  "mainPagePost": {
+    "RegisteredUsers": "Registered users",
+    "ShowMore": "Show more",
+    "Hide": "Hide"
   }
 }
