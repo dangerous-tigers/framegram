@@ -10,7 +10,17 @@ import tseslint from 'typescript-eslint';
 export default defineConfig([
   // Игнорируемые файлы
   {
-    ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'node_modules/**', '*.cjs', '**/*.cjs'],
+    ignores: [
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      'node_modules/**',
+      '*.cjs',
+      '**/*.cjs',
+      '**/storybook/**',
+      'storybook-static/**',
+    ],
   },
   // Базовый JS конфиг
   js.configs.recommended,
@@ -101,7 +111,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['**/*.stories.tsx', '**/*.stories.ts', '**/storybook/**'],
+    files: ['**/*.stories.tsx', '**/*.stories.ts', '**/storybook/**', '**/storybook-static/**'],
     rules: {
       'react/display-name': 'off',
     },
