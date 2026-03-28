@@ -2,6 +2,7 @@
 @use 'typography';
 @use 'sizes';
 @use 'overlayscrollbarsTheme';
+@import 'rsuite/dist/rsuite.css';
 
 :root {
   --primary-100: #73a5ff;

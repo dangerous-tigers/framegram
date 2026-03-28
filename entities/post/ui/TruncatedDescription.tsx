@@ -4,21 +4,21 @@ import s from './TruncatedDescription.module.scss';
 
 interface TruncatedDescriptionProps {
   text: string;
-  wordLimit?: number;
+  charLimit?: number;
   expanded?: boolean;
   onToggle?: () => void;
 }
 
 export const TruncatedDescription = ({
   text,
-  wordLimit = 13,
+  charLimit = 80,
   expanded = false,
   onToggle,
 }: TruncatedDescriptionProps) => {
   const t = useTranslations('mainPagePost');
-  const words = text.split(' ');
-  const isTruncated = words.length > wordLimit;
-  const displayedText = expanded || !isTruncated ? text : words.slice(0, wordLimit).join(' ') + '...';
+
+  const isTruncated = text.length > charLimit;
+  const displayedText = expanded || !isTruncated ? text : text.slice(0, charLimit) + '…';
 
   return (
     <div className={s.text}>
