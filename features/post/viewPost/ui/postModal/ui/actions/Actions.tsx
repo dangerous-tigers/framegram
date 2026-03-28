@@ -1,12 +1,13 @@
 'use client';
 import clsx from 'clsx';
 
-import s from './Actions.module.scss';
+import { Bookmark, BookmarkOutline, Heart, HeartOutline, PaperPlaneOutline } from '@/assets/icons';
+import { useTimeAgo } from '@/shared/lib/hooks/useTimeAgo';
+import { Button } from '@/shared/ui';
+
 import { LikesInfo } from './LikesInfo';
 
-import { HeartOutline, PaperPlaneOutline, BookmarkOutline, Heart, Bookmark } from '@/assets/icons';
-import { Button } from '@/shared/ui';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
+import s from './Actions.module.scss';
 
 export function Actions({
   isLiked,
@@ -23,6 +24,8 @@ export function Actions({
   avatarWhoLikes: string[];
   isAuth: boolean;
 }) {
+  const timeago = useTimeAgo(time);
+
   return (
     <div className={s.container}>
       {isAuth && (
@@ -65,13 +68,9 @@ export function Actions({
             />
           ))}
 
-          <LikesInfo
-            likesCount={likesCount}
-            isAuth={isAuth}
-            handleLikesClick={() => alert('show likes')}
-          />
+          <LikesInfo likesCount={likesCount} />
         </div>
-        <CompTimeAgo date={new Date(time)} />
+        {timeago}
       </div>
     </div>
   );

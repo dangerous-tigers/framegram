@@ -1,7 +1,8 @@
+import React from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+
 import * as Dialog from '@radix-ui/react-dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
-import type { ReactNode, ComponentPropsWithoutRef } from 'react';
-import React from 'react';
 
 import styles from './BaseModal.module.scss';
 /**
@@ -54,7 +55,12 @@ export const Modal = ({
           {header && (
             <>
               <div className={styles.header}>{header}</div>
-              {showDivider && <div className={styles.divider} />}
+              {showDivider && (
+                <div
+                  data-testid='divider'
+                  className={styles.divider}
+                />
+              )}
             </>
           )}
 

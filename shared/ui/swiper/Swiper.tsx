@@ -2,14 +2,16 @@
 
 import clsx from 'clsx';
 import type { Swiper as SwiperInstance } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
 import { Swiper as SwiperRoot, SwiperSlide } from 'swiper/react';
 
-import s from './swiper.module.scss';
 import type { AppSwiperProps } from './types';
+
+import s from './swiper.module.scss';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export const Swiper = ({
   slides,

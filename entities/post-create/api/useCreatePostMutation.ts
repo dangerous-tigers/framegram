@@ -1,8 +1,10 @@
+import { createPost, uploadPostImages } from '@/entities/post/api/post.api';
+import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { createPost, uploadPostImages } from '@/entities/post/api/post.api';
-
 export const useCreatePostMutation = () => {
+  const { show } = useAlertStore();
+
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ files, description }: { files: File[]; description?: string }) => {
@@ -10,9 +12,7 @@ export const useCreatePostMutation = () => {
 
       const { data, error } = uploadRes;
 
-      if (error || !data) {
-        throw error;
-      }
+      if (error || !data) throw error;
 
       const uploadIds = data.images.map((img) => img.uploadId);
 
@@ -20,11 +20,18 @@ export const useCreatePostMutation = () => {
         description,
         uploadIds,
       });
-
       return postRes.data;
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['user-posts'] });
+    },
+    onError: (error) => {
+      show({
+        error: error.message ? error.message : 'Some occurred error',
+        severity: 'error',
+        variant: 'default',
+        description: null,
+      });
     },
   });
 };

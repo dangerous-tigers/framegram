@@ -1,28 +1,30 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import clsx from 'clsx';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Post } from '@/entities/post/model/types';
 import { TruncatedDescription } from '@/entities/post/ui/TruncatedDescription';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
+import { PostViewModel } from '@/entities/profile';
+import { useTimeAgo } from '@/shared/lib/hooks';
+
 import s from '@/widgets/postGrid/ui/PostsGrid.module.scss';
 
 type Props = {
-  post: Post;
+  post: PostViewModel;
   expanded?: boolean;
   toggleExpanded: (id: number) => void;
 };
 
 export const MainPost = ({ post, expanded, toggleExpanded }: Props) => {
+  const timeAgo = useTimeAgo(post.createdAt);
   return (
     <article
       key={post.id}
       className={clsx(s.post)}
     >
       <div className={clsx(expanded ? s.swiperSmall : s.swiperLarge)}>
-        <Link href={`/post/${post.id}`}>
+        <Link href={`/profile/${post.ownerId}?postId=${post.id}`}>
           <Swiper
             modules={[Navigation, Pagination]}
             navigation={post.images.length > 1}
@@ -59,9 +61,7 @@ export const MainPost = ({ post, expanded, toggleExpanded }: Props) => {
         </Link>
       </div>
 
-      <p className={clsx(s.postData)}>
-        <CompTimeAgo date={new Date(post.createdAt)} />
-      </p>
+      <p className={clsx(s.postData)}>{timeAgo}</p>
 
       <div className={s.postDescription}>
         <TruncatedDescription

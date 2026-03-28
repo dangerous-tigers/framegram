@@ -1,18 +1,18 @@
 'use client';
-import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
-
-import { LoginFormData, LoginSchema } from '../model/Login.schema';
-import { useLogin } from '../model/useLogin';
-
-import styles from './LoginForm.module.scss';
 
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/assets/icons';
 import { handleGoogleOAuth } from '@/features/auth';
 import { Button } from '@/shared/ui/button/Button';
 import { Input } from '@/shared/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { LoginFormData, LoginSchema } from '../model/Login.schema';
+import { useLogin } from '../model/useLogin';
+
+import styles from './LoginForm.module.scss';
 
 export function LoginForm() {
   const t = useTranslations('login');

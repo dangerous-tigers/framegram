@@ -1,6 +1,6 @@
-import s from './sidebar.module.scss';
+import { Navigation } from '../Navigation';
 
-import { Navigation } from '@/widgets/sidebar/ui/Navigation';
+import s from './sidebar.module.scss';
 
 export const Sidebar = () => {
   return (

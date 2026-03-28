@@ -1,0 +1,17 @@
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 36px 24px;
+}
+
+.modalText {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}

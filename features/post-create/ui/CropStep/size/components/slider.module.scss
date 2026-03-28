@@ -1,0 +1,85 @@
+.root {
+  position: relative;
+  display: flex;
+  width: 100%;
+  touch-action: none;
+  align-items: center;
+  user-select: none;
+
+  &[data-orientation='vertical'] {
+    flex-direction: column;
+    width: auto;
+    height: 100%;
+    min-height: 10rem;
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+  }
+}
+
+.track {
+  position: relative;
+  flex-grow: 1;
+  overflow: hidden;
+  border-radius: 9999px;
+  background-color: var(--dark-100);
+
+  &[data-orientation='horizontal'] {
+    height: 0.25rem;
+    width: 100%;
+  }
+
+  &[data-orientation='vertical'] {
+    width: 0.25rem;
+    height: 100%;
+  }
+}
+
+.range {
+  position: absolute;
+  background-color: var(--primary-500);
+
+  &[data-orientation='horizontal'] {
+    height: 100%;
+  }
+
+  &[data-orientation='vertical'] {
+    width: 100%;
+  }
+}
+
+.thumb {
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: 1px solid var(--primary-500);
+  background-color: var(--light-100);
+  box-shadow: 0 0 0 1px var(--primary-500); /* ring-ring/50 approximation */
+  transition:
+    color 0.15s,
+    box-shadow 0.15s;
+
+  &:hover {
+    box-shadow: 0 0 0 3px rgb(var(--primary-900-rgb), 0.5);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(var(--primary-900-rgb), 0.5);
+  }
+
+  // Larger touch target
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -0.5rem;
+  }
+
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

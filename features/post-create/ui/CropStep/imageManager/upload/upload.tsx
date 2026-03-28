@@ -1,10 +1,10 @@
 'use client';
-import s from './Upload.module.scss';
-
 import { PlusCircleOutline } from '@/assets/icons';
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 import { validateImage } from '@/shared/lib/file/validateImage';
 import { InputFile } from '@/shared/ui/inputFile';
+
+import s from './Upload.module.scss';
 
 export const Upload = () => {
   const addImages = useCreatePostStore((s) => s.addImages);

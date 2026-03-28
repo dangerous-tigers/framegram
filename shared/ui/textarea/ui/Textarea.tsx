@@ -1,15 +1,15 @@
 'use client';
 
+import { ComponentPropsWithRef, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { ClickScrollPlugin, OverlayScrollbars } from 'overlayscrollbars';
 import { useOverlayScrollbars } from 'overlayscrollbars-react';
-import { ComponentPropsWithRef, useEffect, useRef } from 'react';
+
+import { osFieldPlugin } from '@/shared/ui/textarea/model/fieldPlugin';
 
 import { useResizable, UseResizableOptions } from '../model/useResizable';
 
 import s from './Textarea.module.scss';
-
-import { osFieldPlugin } from '@/shared/ui/textarea/model/fieldPlugin';
 
 OverlayScrollbars.plugin([ClickScrollPlugin, osFieldPlugin]);
 

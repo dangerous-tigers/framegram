@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 
-import { Description } from '..';
-import { type Answer } from '../../../../model/types';
-
-import s from './Answer.module.scss';
-
 import { Heart, HeartOutline } from '@/assets/icons';
 import { Button } from '@/shared/ui';
+
+import { type Answer } from '../../../../model/types';
+import { Description } from '..';
+
+import s from './Answer.module.scss';
 
 type Props = {
   answer: Answer;

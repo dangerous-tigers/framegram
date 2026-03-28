@@ -1,19 +1,20 @@
 'use client';
 
-import Link from 'next/link';
 import React, { useCallback } from 'react';
-
-import s from './UserPostsInfinite.module.scss';
+import Link from 'next/link';
 
 import { useUserPostsInfiniteQuery } from '@/entities/post/api/useUserPostsInfiniteQuery';
-import { PostViewModel } from '@/entities/profile';
+import { PostsByUserId, PostViewModel } from '@/entities/profile';
 import { useIntersection } from '@/shared/lib/hooks/useIntersection';
 import { Button } from '@/shared/ui/button/Button';
 import { Card } from '@/shared/ui/card/Card';
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 
+import s from './UserPostsInfinite.module.scss';
+
 type Props = {
   userId: string;
+  firstBatchOfPosts: PostsByUserId;
 };
 
 const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
@@ -21,7 +22,10 @@ const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
     key={post.id}
     className={s.postItem}
   >
-    <Link href={`/post/${post.id}`}>
+    <Link
+      href={`?postId=${post.id}`}
+      scroll={false}
+    >
       <img
         src={post.images?.[0]?.url}
         alt={`post image by id ${post.images?.[0]?.uploadId}`}
@@ -33,9 +37,9 @@ const PostItem = React.memo(({ post }: { post: PostViewModel }) => (
 
 PostItem.displayName = 'PostItem';
 
-export const UserPostsInfinite = ({ userId }: Props) => {
+export const UserPostsInfinite = ({ userId, firstBatchOfPosts }: Props) => {
   const { posts, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isOver, isFetching } =
-    useUserPostsInfiniteQuery({ userId });
+    useUserPostsInfiniteQuery({ userId, firstBatchOfPosts });
 
   // Создаем ref для хранения актуальных значений
   const intersectionDataRef = React.useRef({
@@ -104,26 +108,28 @@ export const UserPostsInfinite = ({ userId }: Props) => {
   }
 
   return (
-    <ul className={s.postsGrid}>
-      {posts?.map((item: PostViewModel) => (
-        <PostItem
-          key={item.id}
-          post={item}
-        />
-      ))}
-      {isOver && <div className={s.endMessage}>Вы достигли конца ленты</div>}
-      {isFetchingNextPage &&
-        Array.from({ length: 4 }).map((_, index) => (
-          <Card
-            key={`more-skeleton-${index}`}
-            className={s.postCard}
-          >
-            <div className={s.postImageContainer}>
-              <Skeleton className={s.imageSkeleton} />
-            </div>
-          </Card>
+    <>
+      <ul className={s.postsGrid}>
+        {posts?.map((item: PostViewModel) => (
+          <PostItem
+            key={item.id}
+            post={item}
+          />
         ))}
+        {isOver && <div className={s.endMessage}>Вы достигли конца ленты</div>}
+        {isFetchingNextPage &&
+          Array.from({ length: 4 }).map((_, index) => (
+            <Card
+              key={`more-skeleton-${index}`}
+              className={s.postCard}
+            >
+              <div className={s.postImageContainer}>
+                <Skeleton className={s.imageSkeleton} />
+              </div>
+            </Card>
+          ))}
+      </ul>
       <div ref={cursorRef} />
-    </ul>
+    </>
   );
 };

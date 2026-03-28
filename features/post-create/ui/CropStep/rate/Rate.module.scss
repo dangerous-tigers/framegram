@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  min-width: 120px;
+  padding: 4px 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  cursor: pointer;
+  color: var(--light-900);
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background-color: var(--dark-300);
+    opacity: 0.8;
+    color: var(--accent-500);
+  }
+
+  &.active {
+    color: var(--accent-500);
+
+    .icon {
+      opacity: 1;
+    }
+  }
+
+  .label {
+    flex-grow: 1;
+  }
+}
