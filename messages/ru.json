@@ -116,6 +116,11 @@
     "noLikesYet": "Лайков пока нет.",
     "likesCount": "{count, plural, =0 {Лайков нет} one {<b>{count}</b> лайк} few {<b>{count}</b> лайка} other {<b>{count}</b> лайков}}"
   },
+  "createPost": {
+    "Error loading the post": "Ошибка загрузки поста",
+    "Error loading posts":"Ошибка загрузки постов",
+    "Error deleting a post": "Ошибка удаления поста"
+  },
   "mainPagePost": {
     "RegisteredUsers": "Зарегистрированные пользователи",
     "ShowMore": "Показать подробнее",

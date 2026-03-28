@@ -7,8 +7,9 @@ export const useGetProfile = () =>
     queryFn: async () => {
       const response = await client.GET('/users/profile');
       if (response.error) {
-        throw response;
+        throw new Error(response.error);
       }
+
       return response.data;
     },
   });
