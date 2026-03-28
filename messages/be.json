@@ -192,6 +192,9 @@
     "profileSettings": "Налады",
     "follow": "Падпісацца",
     "unfollow": "Адпісацца",
-    "sendMessage": "Напісаць паведамленне"
+    "sendMessage": "Напісаць паведамленне",
+        "notifications": {
+      "notification": "{type, select, hasBeenActivated {Ваша падпіска актываваная і дзейнічае да {date}} nextPayment {Наступны плацёж будзе спісаны праз 1 дзень} endsAfterWeek {Ваша падпіска скончыцца праз 7 дзён} endsAfterDay {Ваша падпіска скончыцца праз 1 дзень} other {}}"
+    }
   }
 }

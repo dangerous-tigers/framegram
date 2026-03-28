@@ -59,6 +59,13 @@ export function useSubscriptionModals({ costType, COST_TYPE }: UseSubscriptionMo
         amount: Number(costType),
         baseUrl: `${window.location}`,
       });
+    } else if (paymentModal === 'paypal') {
+      createSubscription.mutate({
+        paymentType: 'PAYPAL' as PaymentType,
+        typeSubscription: COST_TYPE.find((item) => item.value === costType)?.typeSubscription as SubscriptionType,
+        amount: Number(costType),
+        baseUrl: `${window.location}`,
+      });
     } else {
       show({
         error: t('comingSoon'),

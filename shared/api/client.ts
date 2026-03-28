@@ -1,5 +1,7 @@
 import createClient, { Middleware } from 'openapi-fetch';
 
+import { ACCESS_TOKEN } from '@/shared/constants/constants';
+
 //import { useAlertStore } from '../ui/alert/model/alert-store';
 import type { paths } from './schema';
 
@@ -11,7 +13,7 @@ function makeRefreshToken() {
       const response = await refreshClient.POST('/auth/update');
 
       if (response.error) {
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem(ACCESS_TOKEN);
       }
 
       if (!response.data?.accessToken) {
@@ -19,7 +21,7 @@ function makeRefreshToken() {
         return;
       }
 
-      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
     })();
 
     refreshPromise.finally(() => {
@@ -35,7 +37,7 @@ const retryMap = new WeakMap<Request, Request>();
 const authMiddleware: Middleware = {
   onRequest({ request }) {
     // set "foo" header
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem(ACCESS_TOKEN);
     if (token) {
       request.headers.set('Authorization', `Bearer ${token}`);
     }
@@ -69,11 +71,11 @@ const authMiddleware: Middleware = {
       const retryRequest = new Request(originalRequest, {
         headers: new Headers(originalRequest.headers),
       });
-      retryRequest.headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`);
+      retryRequest.headers.set('Authorization', `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`);
 
       return fetch(retryRequest);
     } catch {
-      localStorage.removeItem('accessToken');
+      localStorage.removeItem(ACCESS_TOKEN);
       return response;
     }
   },
