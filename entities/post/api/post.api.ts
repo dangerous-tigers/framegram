@@ -63,8 +63,6 @@ export const postApi = {
     }
   },
   getPostByIdServer: async (id: number) => {
-    const t = useTranslations('createPost');
-
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/posts/id/${id}`, {
         cache: 'no-store',
@@ -72,12 +70,10 @@ export const postApi = {
       });
       return res.json();
     } catch (error) {
-      throw new Error(t('Error loading the post') + error);
+      throw new Error('Error loading the post' + error);
     }
   },
   getPostsByUser: async (userId: number, endCursorPostId: number = 0) => {
-    const t = useTranslations('createPost');
-
     try {
       const response = await client.GET('/posts/user/{userId}/{endCursorPostId}', {
         params: {
@@ -89,12 +85,10 @@ export const postApi = {
       });
       return response.data;
     } catch (error) {
-      throw new Error(t('Error loading posts') + error);
+      throw new Error('Error loading posts' + error);
     }
   },
   deletePost: async (id: number) => {
-    const t = useTranslations('createPost');
-
     try {
       const response = await client.DELETE('/posts/{postId}', {
         params: {
@@ -105,7 +99,33 @@ export const postApi = {
       });
       return response.data;
     } catch (error) {
-      throw new Error(t('Error deleting a post') + error);
+      throw new Error('Error deleting a post' + error);
     }
+  },
+  addAnswerToComment: async ({
+    postId,
+    commentId,
+    content,
+  }: {
+    postId: number;
+    commentId: number;
+    content: string;
+  }) => {
+    const response = await client.POST('/posts/{postId}/comments/{commentId}/answers', {
+      body: {
+        content,
+      },
+      params: {
+        path: {
+          postId: postId,
+          commentId: commentId,
+        },
+      },
+    });
+    if (response.error) {
+      return response.error;
+    }
+
+    return response.data;
   },
 };

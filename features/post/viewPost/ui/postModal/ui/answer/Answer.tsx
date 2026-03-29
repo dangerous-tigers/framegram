@@ -1,8 +1,3 @@
-import clsx from 'clsx';
-
-import { Heart, HeartOutline } from '@/assets/icons';
-import { Button } from '@/shared/ui';
-
 import { type Answer } from '../../../../model/types';
 import { Description } from '..';
 
@@ -10,11 +5,9 @@ import s from './Answer.module.scss';
 
 type Props = {
   answer: Answer;
-  onLike: (id: number) => void;
-  isAuth: boolean;
 };
 
-export function Answer({ answer, onLike, isAuth }: Props) {
+export function Answer({ answer }: Props) {
   return (
     <div className={s.container}>
       <Description
@@ -25,16 +18,6 @@ export function Answer({ answer, onLike, isAuth }: Props) {
         likeCount={answer.likeCount}
         isLikeCount
       />
-
-      {isAuth && (
-        <Button
-          variant='text'
-          onClick={() => onLike(answer.id)}
-          className={clsx(s.likeButton, answer.isLiked && s.liked)}
-        >
-          {answer.isLiked ? <Heart /> : <HeartOutline />}
-        </Button>
-      )}
     </div>
   );
 }

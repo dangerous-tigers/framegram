@@ -2,6 +2,7 @@
 import { ChangeEvent, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 
+import { useAddAnswerToComment } from '@/features/post/viewPost/model/useAddAnswerToComment';
 import { useViewPostStore } from '@/features/post/viewPost/model/useViewPost.store';
 import { Button } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
@@ -19,6 +20,7 @@ export function Publish({ postId }: { postId: number }) {
   const { show } = useAlertStore();
 
   const ANSWER_PREFIX = `@${commentUsername} `;
+  const { mutate: addAnswerToComment } = useAddAnswerToComment();
 
   const { commentId, content } = useViewPostStore();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -77,15 +79,9 @@ export function Publish({ postId }: { postId: number }) {
         });
         return;
       }
-
-      alert(
-        JSON.stringify({
-          type: 'answer',
-          postId,
-          commentId,
-          content: answerContent,
-        }),
-      );
+      if (commentId) {
+        addAnswerToComment({ postId, commentId, content: answerContent });
+      }
     } else {
       alert(
         JSON.stringify({

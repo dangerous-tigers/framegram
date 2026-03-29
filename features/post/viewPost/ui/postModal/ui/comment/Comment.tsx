@@ -32,7 +32,6 @@ export function Comment({ comment, postId, isAuth }: Props) {
   const t = useTranslations('viewPost');
 
   const handleAnswer = (id: number) => {
-    alert('Answered by comment id: ' + id + ' by post id: ' + postId + ' by username: ' + comment.from.username);
     setType('answer');
     setComentUsername(comment.from.username);
     setPostId(id);
@@ -41,10 +40,6 @@ export function Comment({ comment, postId, isAuth }: Props) {
   const handleLike = (id: number) => {
     alert('Liked by comment id: ' + id);
   };
-  const handleLikeAnswer = (id: number) => {
-    alert('Liked by answer id: ' + id + ' by comment id: ' + comment.id);
-  };
-
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
@@ -90,8 +85,6 @@ export function Comment({ comment, postId, isAuth }: Props) {
               <Answer
                 key={answer.id}
                 answer={answer}
-                onLike={handleLikeAnswer}
-                isAuth={isAuth}
               />
             </div>
           ))}
