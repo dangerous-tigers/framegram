@@ -61,7 +61,6 @@ export const postApi = {
       return res.json();
     } catch (error) {
       throw new Error('Error loading the post' + error);
-      throw new Error('Error loading the post' + error);
     }
   },
   getPostsByUser: async (userId: number, endCursorPostId: number = 0) => {
@@ -76,7 +75,6 @@ export const postApi = {
       });
       return response.data;
     } catch (error) {
-      throw new Error('Error loading posts' + error);
       throw new Error('Error loading posts' + error);
     }
   },
@@ -119,6 +117,81 @@ export const postApi = {
       params: {
         path: {
           postId: id,
+        },
+      },
+    });
+
+    if (response.error) {
+      throw response.error;
+    }
+
+    return response.data;
+  },
+  addComent: async ({ id, content }: { id: number; content: string }) => {
+    const response = await client.POST('/posts/{postId}/comments', {
+      body: {
+        content,
+      },
+      params: {
+        path: {
+          postId: id,
+        },
+      },
+    });
+
+    if (response.error) {
+      throw response.error;
+    }
+
+    return response.data;
+  },
+  comentLike: async ({
+    postId,
+    commentId,
+    likeStatus,
+  }: {
+    postId: number;
+    commentId: number;
+    likeStatus: 'LIKE' | 'DISLIKE' | 'NONE';
+  }) => {
+    const response = await client.PUT('/posts/{postId}/comments/{commentId}/like-status', {
+      body: {
+        likeStatus,
+      },
+      params: {
+        path: {
+          postId: postId,
+          commentId: commentId,
+        },
+      },
+    });
+
+    if (response.error) {
+      throw response.error;
+    }
+
+    return response.data;
+  },
+  answerLike: async ({
+    postId,
+    commentId,
+    answerId,
+    likeStatus,
+  }: {
+    postId: number;
+    commentId: number;
+    answerId: number;
+    likeStatus: 'LIKE' | 'DISLIKE' | 'NONE';
+  }) => {
+    const response = await client.PUT('/posts/{postId}/comments/{commentId}/answers/{answerId}/like-status', {
+      body: {
+        likeStatus,
+      },
+      params: {
+        path: {
+          postId: postId,
+          commentId: commentId,
+          answerId: answerId,
         },
       },
     });

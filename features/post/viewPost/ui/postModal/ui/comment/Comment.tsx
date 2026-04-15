@@ -5,6 +5,8 @@ import clsx from 'clsx';
 
 import { Heart, HeartOutline } from '@/assets/icons';
 import { useCommentAnswers, useViewPostStore } from '@/features/post/viewPost/model';
+import { usePostAnswerLikeMutation } from '@/features/post/viewPost/model/usePostAnswerLikeMutation';
+import { usePostCommentLikeMutation } from '@/features/post/viewPost/model/usePostCommentLikeMutation';
 import { Button } from '@/shared/ui';
 
 import { type Comment } from '../../../../model/types';
@@ -29,6 +31,9 @@ export function Comment({ comment, postId, isAuth }: Props) {
     openAnswer,
   });
 
+  const mutation = usePostCommentLikeMutation();
+  const answerMutation = usePostAnswerLikeMutation();
+
   const t = useTranslations('viewPost');
 
   const handleAnswer = (id: number) => {
@@ -38,11 +43,22 @@ export function Comment({ comment, postId, isAuth }: Props) {
     setPostId(id);
     setCommentId(comment.id);
   };
-  const handleLike = (id: number) => {
-    alert('Liked by comment id: ' + id);
+  const handleLike = (commentId: number) => {
+    mutation.mutate({
+      commentId,
+      postId,
+      likeStatus: comment.isLiked ? 'NONE' : 'LIKE',
+    });
   };
   const handleLikeAnswer = (id: number) => {
-    alert('Liked by answer id: ' + id + ' by comment id: ' + comment.id);
+    const isLikes = answers?.find((answer) => answer.id === id)?.isLiked;
+
+    answerMutation.mutate({
+      answerId: id,
+      commentId: comment.id,
+      postId,
+      likeStatus: isLikes ? 'NONE' : 'LIKE',
+    });
   };
 
   return (
