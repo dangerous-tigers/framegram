@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { useAddAnswerToComment } from '@/features/post/viewPost/model/useAddAnswerToComment';
+import { useAddComment } from '@/features/post/viewPost/model/useAddComment';
 import { useViewPostStore } from '@/features/post/viewPost/model/useViewPost.store';
 import { Button } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
@@ -18,6 +19,8 @@ export function Publish({ postId }: { postId: number }) {
   const reset = useViewPostStore((state) => state.reset);
   const t = useTranslations('viewPost');
   const { show } = useAlertStore();
+
+  const { mutate: addComment, isPending } = useAddComment();
 
   const ANSWER_PREFIX = `@${commentUsername} `;
   const { mutate: addAnswerToComment } = useAddAnswerToComment();
@@ -83,13 +86,7 @@ export function Publish({ postId }: { postId: number }) {
         addAnswerToComment({ postId, commentId, content: answerContent });
       }
     } else {
-      alert(
-        JSON.stringify({
-          type: 'comment',
-          postId,
-          content: trimmedContent,
-        }),
-      );
+      addComment({ id: postId, content: trimmedContent });
     }
     reset();
   }
@@ -108,6 +105,7 @@ export function Publish({ postId }: { postId: number }) {
 
         <Button
           onClick={handlePublish}
+          disabled={!content || isPending}
           className={s.publishButton}
           variant='text'
         >

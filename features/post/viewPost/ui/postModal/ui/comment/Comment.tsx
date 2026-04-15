@@ -44,7 +44,7 @@ export function Comment({ comment, postId, isAuth }: Props) {
     <div className={s.wrapper}>
       <div className={s.container}>
         <Description
-          avatar={comment.from.avatars[0].url}
+          avatar={comment.from.avatars[0]?.url}
           userName={comment.from.username}
           text={comment.content}
           timeStamp={comment.createdAt}
