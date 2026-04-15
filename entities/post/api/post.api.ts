@@ -1,14 +1,5 @@
-import { useTranslations } from 'next-intl';
-
 import { UploadPostImagesResponse } from '@/entities/post/model/postTypes';
 import { client } from '@/shared/api/client';
-// export const uploadPostImages = async (files: File[]) => {
-//   return client.POST('/posts/image', {
-//     body: {
-//       file: files, // Тут типизация не дает передать файл - там стоит String
-//     },
-//   })
-// };
 
 export async function uploadPostImages(files: File[]): Promise<{ data?: UploadPostImagesResponse; error?: unknown }> {
   const formData = new FormData();
@@ -72,8 +63,6 @@ export const postApi = {
     }
   },
   getPostsByUser: async (userId: number, endCursorPostId: number = 0) => {
-    const t = useTranslations('createPost');
-
     try {
       const response = await client.GET('/posts/user/{userId}/{endCursorPostId}', {
         params: {
@@ -85,7 +74,7 @@ export const postApi = {
       });
       return response.data;
     } catch (error) {
-      throw new Error(t('Error loading posts') + error);
+      throw new Error('Error loading posts' + error);
     }
   },
   deletePost: async (id: number) => {

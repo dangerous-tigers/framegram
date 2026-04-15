@@ -18,7 +18,7 @@ export function Answer({ answer, onLike, isAuth }: Props) {
   return (
     <div className={s.container}>
       <Description
-        avatar={answer.from.avatars[0].url}
+        avatar={answer.from.avatars[0]?.url}
         userName={answer.from.username}
         text={answer.content}
         timeStamp={answer.createdAt}
