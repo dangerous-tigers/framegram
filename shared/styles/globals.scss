@@ -2,6 +2,7 @@
 @use 'typography';
 @use 'sizes';
 @use 'overlayscrollbarsTheme';
+@import 'rsuite/dist/rsuite.css';
 
 :root {
   --primary-100: #73a5ff;
@@ -55,7 +56,8 @@ body {
   display: flex;
   flex-direction: column;
   column-gap: 24px;
-  min-height: 100vh;
+
+  //  min-height: 100vh;
 }
 
 .container {
@@ -69,10 +71,11 @@ body {
   height: 100%;
   width: 100%;
   max-width: 1188px;
-  margin: 0 auto;
+  margin: 82px auto 0;
   padding: 0 16px;
   display: flex;
   flex-direction: column;
+  min-height: 100%;
 }
 
 .mainBoxBody {

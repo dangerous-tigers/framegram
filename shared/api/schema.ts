@@ -1132,7 +1132,7 @@ export interface components {
       /** @example 100 */
       totalCount: number;
       /** @example 100 */
-      totalUsers?: number;
+      notReadCount?: number;
     };
     /** @enum {string} */
     MessageType: 'TEXT' | 'IMAGE' | 'VOICE';
@@ -1149,7 +1149,7 @@ export interface components {
       fileSize: number;
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:09.622Z
+       * @example 2026-02-05T09:30:50.131Z
        */
       createdAt?: string;
     };
@@ -1160,12 +1160,12 @@ export interface components {
       messageText: string;
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:11.543Z
+       * @example 2026-02-05T09:30:51.569Z
        */
       createdAt: string;
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:11.543Z
+       * @example 2026-02-05T09:30:51.569Z
        */
       updatedAt: string;
       messageType: components['schemas']['MessageType'];
@@ -1182,12 +1182,12 @@ export interface components {
       messageText: string;
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:11.543Z
+       * @example 2026-02-05T09:30:51.569Z
        */
       createdAt: string;
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:11.543Z
+       * @example 2026-02-05T09:30:51.569Z
        */
       updatedAt: string;
       messageType: components['schemas']['MessageType'];
@@ -1482,7 +1482,7 @@ export interface components {
       /** @example About me */
       aboutMe: string | null;
       avatars: components['schemas']['AvatarViewDto'][];
-      /** @example 2025-12-11T15:26:09.622Z */
+      /** @example 2026-02-05T09:30:50.131Z */
       createdAt?: string;
     };
     UpdateProfileInputDto: {
@@ -1508,7 +1508,7 @@ export interface components {
       region?: string | null;
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:09.797Z
+       * @example 2026-02-05T09:30:50.275Z
        */
       dateOfBirth?: string;
       /**
@@ -1728,7 +1728,7 @@ export interface components {
       fileSize: number;
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:09.622Z
+       * @example 2026-02-05T09:30:50.131Z
        */
       createdAt?: string;
       uploadId: string;
@@ -1761,12 +1761,12 @@ export interface components {
       images: components['schemas']['PostImageViewModel'][];
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:10.418Z
+       * @example 2026-02-05T09:30:50.762Z
        */
       createdAt: string;
       /**
        * Format: date-time
-       * @example 2025-12-11T15:26:10.418Z
+       * @example 2026-02-05T09:30:50.762Z
        */
       updatedAt: string;
       /** @example 1 */
@@ -1853,6 +1853,78 @@ export interface components {
   headers: never;
   pathItems: never;
 }
+export type SchemaInfinityPaginationViewModel = components['schemas']['InfinityPaginationViewModel'];
+export type SchemaMessageType = components['schemas']['MessageType'];
+export type SchemaMessageStatus = components['schemas']['MessageStatus'];
+export type SchemaAvatarViewDto = components['schemas']['AvatarViewDto'];
+export type SchemaLastMessageViewDto = components['schemas']['LastMessageViewDto'];
+export type SchemaMessageViewModel = components['schemas']['MessageViewModel'];
+export type SchemaUpdateMessagesStatusDto = components['schemas']['UpdateMessagesStatusDto'];
+export type SchemaRegisterInputDto = components['schemas']['RegisterInputDto'];
+export type SchemaValidationFieldError = components['schemas']['ValidationFieldError'];
+export type SchemaValidationErrorResponseDto = components['schemas']['ValidationErrorResponseDto'];
+export type SchemaConfirmationCodeInputDto = components['schemas']['ConfirmationCodeInputDto'];
+export type SchemaFieldError = components['schemas']['FieldError'];
+export type SchemaApiErrorResultDto = components['schemas']['ApiErrorResultDto'];
+export type SchemaRegistrationEmailResendingInputDto = components['schemas']['RegistrationEmailResendingInputDto'];
+export type SchemaLoginInputDto = components['schemas']['LoginInputDto'];
+export type SchemaTokenTypeSwaggerDto = components['schemas']['TokenTypeSwaggerDto'];
+export type SchemaAuthFieldError = components['schemas']['AuthFieldError'];
+export type SchemaAuthErrorResponseDto = components['schemas']['AuthErrorResponseDto'];
+export type SchemaUnauthorizedErrorResponseDto = components['schemas']['UnauthorizedErrorResponseDto'];
+export type SchemaPasswordRecoveryInputDto = components['schemas']['PasswordRecoveryInputDto'];
+export type SchemaRecaptchaFieldError = components['schemas']['RecaptchaFieldError'];
+export type SchemaRecaptchaErrorResponseDto = components['schemas']['RecaptchaErrorResponseDto'];
+export type SchemaPasswordRecoveryResendingInputDto = components['schemas']['PasswordRecoveryResendingInputDto'];
+export type SchemaPasswordRecoveryCodeInputDto = components['schemas']['PasswordRecoveryCodeInputDto'];
+export type SchemaPasswordRecoveryViewDto = components['schemas']['PasswordRecoveryViewDto'];
+export type SchemaNewPasswordInputDto = components['schemas']['NewPasswordInputDto'];
+export type SchemaMeViewDto = components['schemas']['MeViewDto'];
+export type SchemaSessionViewModel = components['schemas']['SessionViewModel'];
+export type SchemaGetAllUserSessionsResponseDto = components['schemas']['GetAllUserSessionsResponseDto'];
+export type SchemaProfileViewModel = components['schemas']['ProfileViewModel'];
+export type SchemaUpdateProfileInputDto = components['schemas']['UpdateProfileInputDto'];
+export type SchemaAvatarsViewModel = components['schemas']['AvatarsViewModel'];
+export type SchemaFileUploadFieldError = components['schemas']['FileUploadFieldError'];
+export type SchemaFileUploadErrorResponseDto = components['schemas']['FileUploadErrorResponseDto'];
+export type SchemaResponseCountRegisteredUsers = components['schemas']['ResponseCountRegisteredUsers'];
+export type SchemaUserMetadata = components['schemas']['UserMetadata'];
+export type SchemaPublicProfileViewModel = components['schemas']['PublicProfileViewModel'];
+export type SchemaUserFieldError = components['schemas']['UserFieldError'];
+export type SchemaUserErrorResponseDto = components['schemas']['UserErrorResponseDto'];
+export type SchemaProfileViewAfterSearchModel = components['schemas']['ProfileViewAfterSearchModel'];
+export type SchemaUserWithPaginationViewDto = components['schemas']['UserWithPaginationViewDto'];
+export type SchemaProfileWithPostsViewModel = components['schemas']['ProfileWithPostsViewModel'];
+export type SchemaUserSubscriptionInputDto = components['schemas']['UserSubscriptionInputDto'];
+export type SchemaUserFollowingFollowersViewModel = components['schemas']['UserFollowingFollowersViewModel'];
+export type SchemaFollowingWithPaginationViewModel = components['schemas']['FollowingWithPaginationViewModel'];
+export type SchemaCreateSubscriptionInputDto = components['schemas']['CreateSubscriptionInputDto'];
+export type SchemaPaymentSessionUrlViewModel = components['schemas']['PaymentSessionUrlViewModel'];
+export type SchemaActiveSubscriptionViewModel = components['schemas']['ActiveSubscriptionViewModel'];
+export type SchemaCurrentActiveSubscriptionsViewModel = components['schemas']['CurrentActiveSubscriptionsViewModel'];
+export type SchemaPaymentsViewModel = components['schemas']['PaymentsViewModel'];
+export type SchemaPricingDetailsViewModel = components['schemas']['PricingDetailsViewModel'];
+export type SchemaSubscriptionPriceViewModel = components['schemas']['SubscriptionPriceViewModel'];
+export type SchemaNotificationViewDto = components['schemas']['NotificationViewDto'];
+export type SchemaUpdateNotificationIsReadDto = components['schemas']['UpdateNotificationIsReadDto'];
+export type SchemaProviderCodeInputDto = components['schemas']['ProviderCodeInputDto'];
+export type SchemaProviderLoginResSwaggerDto = components['schemas']['ProviderLoginResSwaggerDto'];
+export type SchemaPostImageViewModel = components['schemas']['PostImageViewModel'];
+export type SchemaUploadedImageViewModel = components['schemas']['UploadedImageViewModel'];
+export type SchemaChildMetadataDto = components['schemas']['ChildMetadataDto'];
+export type SchemaCreatePostInputDto = components['schemas']['CreatePostInputDto'];
+export type SchemaOwner = components['schemas']['Owner'];
+export type SchemaPostViewModel = components['schemas']['PostViewModel'];
+export type SchemaUpdatePostInputDto = components['schemas']['UpdatePostInputDto'];
+export type SchemaUpdateLikeStatusDto = components['schemas']['UpdateLikeStatusDto'];
+export type SchemaInfinityPaginatedPosts = components['schemas']['InfinityPaginatedPosts'];
+export type SchemaAvatarModel = components['schemas']['AvatarModel'];
+export type SchemaParentViewModel = components['schemas']['ParentViewModel'];
+export type SchemaCommentsViewModel = components['schemas']['CommentsViewModel'];
+export type SchemaAnswersViewModel = components['schemas']['AnswersViewModel'];
+export type SchemaCreateCommentDto = components['schemas']['CreateCommentDto'];
+export type SchemaPublicationsFollowersWithPaginationViewModel =
+  components['schemas']['PublicationsFollowersWithPaginationViewModel'];
 export type $defs = Record<string, never>;
 export interface operations {
   AuthController_checkPasswordRecovery: {

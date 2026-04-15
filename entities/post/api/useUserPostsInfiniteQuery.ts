@@ -22,7 +22,13 @@ export function useUserPostsInfiniteQuery({
     pageParams: [1],
   };
 
-  const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfiniteQuery({
+  const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfiniteQuery<
+    PostsByUserId,
+    Error,
+    InfiniteData<PostsByUserId>,
+    string[],
+    number
+  >({
     queryKey: ['user-posts', userId],
     initialData,
     initialPageParam: 1,
@@ -39,7 +45,12 @@ export function useUserPostsInfiniteQuery({
           },
         },
       });
-      return response.data;
+
+      if (!response.data) {
+        throw new Error('Posts not found');
+      }
+
+      return response.data as PostsByUserId;
     },
     getNextPageParam: (lastPage, allPages) => {
       const currentPage = allPages.length;

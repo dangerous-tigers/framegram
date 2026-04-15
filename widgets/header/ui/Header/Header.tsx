@@ -1,21 +1,13 @@
-import clsx from 'clsx';
-
+import { Notifications } from '@/features/notifications';
 import { ToggleLocale } from '@/shared/components/toggleLocale/ToggleLocale';
-import { Notifications } from '@/shared/ui';
 import { HeaderAuthButtons } from '@/widgets/header/ui/HeaderAuthButtons';
 import { Logo } from '@/widgets/header/ui/Logo';
 
 import s from './header.module.scss';
 
-type PropsHeader = {
-  className?: string;
-};
-
-export const Header = async (props: PropsHeader) => {
-  const { className } = props;
-
+export const Header = () => {
   return (
-    <header className={clsx(s.header, className)}>
+    <header className={s.header}>
       <div className='container'>
         <div className={s.headerBody}>
           <Logo />

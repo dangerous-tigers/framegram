@@ -6,6 +6,11 @@ export const useMe = () => {
     queryKey: ['me'],
     queryFn: async () => {
       const clientResponse = await client.GET('/auth/me');
+
+      if (clientResponse.error) {
+        throw new Error('Unauthorized');
+      }
+
       return clientResponse.data;
     },
     retry: 0,

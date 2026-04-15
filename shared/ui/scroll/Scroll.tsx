@@ -4,7 +4,7 @@ import { ReactNode, useCallback, useEffect, useRef } from 'react';
 
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 
-import s from './ScrollArea.module.scss';
+import s from './Scroll.module.scss';
 
 interface ScrollProps {
   children: ReactNode;

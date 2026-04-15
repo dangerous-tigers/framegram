@@ -115,6 +115,11 @@
     "commentPlaceholder": "Додати коментар...",
     "likesCount": "{count, plural, =0 {Вподобань немає} one {<b>{count}</b> вподобання} few {<b>{count}</b> вподобання} other {<b>{count}</b> вподобань}}"
   },
+  "createPost": {
+    "Error loading the post": "Помилка завантаження посту",
+    "Error loading posts": "Помилка завантаження постів",
+    "Error deleting a post": "Помилка видалення посту"
+  },
   "mainPagePost": {
     "RegisteredUsers": "Зареєстровані користувачі",
     "ShowMore": "Показати більше",
@@ -140,7 +145,9 @@
   },
   "profile": {
     "settings": {
+      "title": "Налаштування",
       "general": {
+        "title": "Загальні",
         "lastName": "Прізвище",
         "firstName": "Імʼя",
         "userName": "Імʼя користувача",
@@ -149,7 +156,35 @@
         "selectImage": "Вибрати зображення",
         "save": "Зберегти",
         "saving": "Збереження…"
-      }
+      },
+      "accountManagement": {
+        "title": "Управління аккаунтом",
+        "currentSubscription": "Поточна підписка:",
+        "expireAt": "Діє до",
+        "nextPayment": "Наступний платіж",
+        "autoRenewal": "Автопродовження",
+        "accountType": "Тип акаунту:",
+        "changeSubscription": "Змінити підписку:",
+        "personal": "Особистий",
+        "business": "Бізнес",
+        "days": "{count} день",
+        "weekly": "{count} днів",
+        "monthly": "місяць",
+        "per": "за",
+        "or": "або",
+        "createPayment": "Створити платіж",
+        "autoRenewalModalText": "Автопродовження буде увімкнено з цим платежем. Ви можете вимкнути його в налаштуваннях профілю",
+        "paymentCanceled": "Автопродовження скасовано",
+        "comingSoon": "Незабаром",
+        "disabled": "Вимкнено"
+      },
+      "devices": "Пристрої",
+      "payments": "Платежі",
+      "successTitle": "Успіх",
+      "errorTitle": "Помилка",
+      "successMessage": "Платіж успішно виконано!",
+      "errorMessage": "Транзакція не вдалася. Будь ласка, зверніться до служби підтримки",
+      "backToPayment": "Повернутися до оплати"
     },
     "publications": "{count, plural, =0 {<b>{count}</b> <s>Публікацій немає</s>} one {<b>{count}</b> <s>Публікація</s>} few {<b>{count}</b> <s>Публікації</s>} other {<b>{count}</b> <s>Публікацій</s>}}",
     "followers": "{count, plural, =0 {<b>{count}</b> <s>Немає підписників</s>} one {<b>{count}</b> <s>Підписник</s>} few {<b>{count}</b> <s>Підписники</s>} other {<b>{count}</b> <s>Підписників</s>}}",
@@ -157,21 +192,9 @@
     "profileSettings": "Налаштування",
     "follow": "Підписатися",
     "unfollow": "Відписатися",
-    "sendMessage": "Написати повідомлення"
-  },
-  "notifications": {
-    "title": "Сповіщення",
-    "markAllAsRead": "Позначити всі як прочитані",
-    "empty": "Немає сповіщень",
-    "loading": "Завантаження сповіщень...",
-    "loadingMore": "Завантаження...",
-    "new": "Нове",
-    "deleteNotification": "Видалити сповіщення",
-    "subscription": {
-      "activated": "Ваша підписка активована і діє до {endDate}",
-      "paymentWarning": "Наступний платіж буде списано через {days} {daysWord}",
-      "expiry7Days": "Ваша підписка закінчується через 7 днів",
-      "expiry1Day": "Ваша підписка закінчується через 1 день"
+    "sendMessage": "Написати повідомлення",
+        "notifications": {
+      "notification": "{type, select, hasBeenActivated {Вашу підписку активовано і вона діє до {date}} nextPayment {Наступний платіж буде списано через 1 день} endsAfterWeek {Ваша підписка закінчується через 7 днів} endsAfterDay {Ваша підписка закінчується через 1 день} other {}}"
     }
   }
 }

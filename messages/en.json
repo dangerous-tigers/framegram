@@ -117,6 +117,11 @@
     "noLikesYet": "No likes yet.",
     "likesCount": "{count, plural, =0 {No likes yet.} one {<count>{count, number}</count> like} other {<count>{count, number}</count> likes}}"
   },
+  "createPost": {
+    "Error loading the post": "Error loading the post",
+    "Error loading posts":"Error loading posts",
+    "Error deleting a post": "Error deleting a post"
+  },
   "mainPagePost": {
     "RegisteredUsers": "Registered users",
     "ShowMore": "Show more",
@@ -142,7 +147,9 @@
   },
   "profile": {
     "settings": {
+      "title": "Settings",
       "general": {
+        "title": "General",
         "lastName": "Last Name",
         "firstName": "First Name",
         "userName": "User Name",
@@ -151,7 +158,35 @@
         "selectImage": "Select Image",
         "save": "Save",
         "saving": "Saving..."
-      }
+      },
+      "accountManagement": {
+        "title": "Account Management",
+        "currentSubscription": "Current Subscription:",
+        "expireAt": "Expire at",
+        "nextPayment": "Next payment",
+        "autoRenewal": "Auto-Renewal",
+        "accountType": "Account type:",
+        "changeSubscription": "Change your subscription:",
+        "personal": "Personal",
+        "business": "Business",
+        "days": "{count} Day",
+        "weekly": "{count} Day",
+        "monthly": "month",
+        "per": "per",
+        "or": "or",
+        "createPayment": "Create payment",
+        "autoRenewalModalText": "Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings",
+        "paymentCanceled": "Auto renewal canceled",
+        "comingSoon": "Coming soon",
+        "disabled": "Disabled"
+      },
+      "devices": "Devices",
+      "payments": "Payments",
+      "successTitle": "Success",
+      "errorTitle": "Error",
+      "successMessage": "Payment was successful!",
+      "errorMessage": "Transaction failed. Please, write to support",
+      "backToPayment": "Back to payment"
     },
     "publications": "{count, plural, =0 {<b>{count}</b> <s>No publications</s>} one {<b>{count}</b> <s>Publication</s>} other {<b>{count}</b> <s>Publications</s>}}",
     "followers": "{count, plural, =0 {<b>{count}</b> <s> No followers</s>} one {<b>{count}</b> <s>Follower</s>} other {<b>{count}</b> <s>Followers</s>}}",
@@ -159,21 +194,9 @@
     "profileSettings": "Settings",
     "follow": "Follow",
     "unfollow": "Unfollow",
-    "sendMessage": "Send Message"
-  },
-  "notifications": {
-    "title": "Notifications",
-    "markAllAsRead": "Mark all as read",
-    "empty": "No notifications",
-    "loading": "Loading notifications...",
-    "loadingMore": "Loading...",
-    "new": "New",
-    "deleteNotification": "Delete notification",
-    "subscription": {
-      "activated": "Your subscription is activated and valid until {endDate}",
-      "paymentWarning": "Your next payment will be deducted in {days} {daysWord}",
-      "expiry7Days": "Your subscription expires in 7 days",
-      "expiry1Day": "Your subscription expires in 1 day"
+    "sendMessage": "Send Message",
+    "notifications": {
+      "notification": "{type, select, hasBeenActivated {Your subscription has been activated and is valid until {date}} nextPayment {Your next payment will be charged in 1 day} endsAfterWeek {Your subscription expires in 7 days} endsAfterDay {Your subscription expires in 1 days} other {}}"
     }
-  }
+  }  
 }

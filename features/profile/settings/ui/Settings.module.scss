@@ -9,6 +9,7 @@
 .tabs {
   padding-top: 20px;
   width: 100%;
+  min-height: 100%;
 }
 
 .title {
@@ -36,4 +37,11 @@
   @media (width <=360) {
     gap: 74px;
   }
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 36px 24px;
 }

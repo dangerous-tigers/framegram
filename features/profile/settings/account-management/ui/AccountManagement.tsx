@@ -1,3 +1,5 @@
+import { SubscriptionsWrapper } from '@/features/subscriptions/ui/SubscriptionsWrapper';
+
 export const AccountManagement = () => {
-  return <div>Account Management</div>;
+  return <SubscriptionsWrapper />;
 };
