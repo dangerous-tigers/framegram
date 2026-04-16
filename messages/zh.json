@@ -192,7 +192,12 @@
     "profileSettings": "设置",
     "follow": "关注",
     "unfollow": "取消关注",
-    "sendMessage": "发送消息"
+    "sendMessage": "发送消息",
+    "loading": "加载中...",
+    "search": "搜索",
+    "searchPlaceholder": "输入用户名...",
+    "noResults": "未找到用户",
+    "loadingMore": "加载更多..."
   },
   "notifications": {
     "title": "通知",

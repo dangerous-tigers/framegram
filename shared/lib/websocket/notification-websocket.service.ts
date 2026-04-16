@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { create } from 'zustand';
 
+import type { NotificationsView } from '@/features/notifications/types';
 import { client } from '@/shared/api/client';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
-import { NotificationViewDto } from '@/shared/ui/notifications/types';
 
 const WS_EVENT_PATH = {
   NOTIFICATIONS: 'notifications',
@@ -22,7 +22,7 @@ interface ServerNotification {
 export interface NotificationWebSocketService {
   isConnected: boolean;
   error: string | null;
-  notifications: NotificationViewDto[];
+  notifications: NotificationsView[];
   unreadCount: number;
   showToast: boolean;
 
@@ -30,7 +30,7 @@ export interface NotificationWebSocketService {
   disconnect: () => void;
   markAsRead: (ids: number[]) => void;
   markAllAsRead: () => void;
-  addNotification: (notification: NotificationViewDto, showToast?: boolean) => void;
+  addNotification: (notification: NotificationsView, showToast?: boolean) => void;
   updateUnreadCount: () => void;
   deleteNotification: (id: number) => void;
   setShowToast: (show: boolean) => void;
@@ -118,7 +118,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
 
       socket.on(WS_EVENT_PATH.NOTIFICATIONS, (notification: ServerNotification) => {
         // console.log('WebSocket: New notification received', notification);
-        const notificationDto: NotificationViewDto = {
+        const notificationDto: NotificationsView = {
           id: notification.id,
           message: notification.message,
           isRead: notification.isRead,
@@ -217,7 +217,7 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
       get().markAsRead(unreadIds);
     },
 
-    addNotification: (notification: NotificationViewDto, showToastMessage = true) => {
+    addNotification: (notification: NotificationsView, showToastMessage = true) => {
       set((state) => {
         const exists = state.notifications.some((n) => n.id === notification.id);
         if (exists) return state;
@@ -283,7 +283,7 @@ export const notificationWebSocketService = {
 
 // ============ MOCK DATA ДЛЯ РАЗРАБОТКИ ============
 
-const MOCK_NOTIFICATIONS: NotificationViewDto[] = [
+const MOCK_NOTIFICATIONS: NotificationsView[] = [
   {
     id: 1,
     message: 'Your subscription is activated and valid until 2025-12-31',
@@ -336,7 +336,7 @@ export const addTestNotification = (message?: string) => {
   if (process.env.NODE_ENV === 'production') return;
 
   const store = useNotificationWSStore.getState();
-  const newNotification: NotificationViewDto = {
+  const newNotification: NotificationsView = {
     id: Date.now(),
     message: message || `Test notification at ${new Date().toLocaleTimeString()}`,
     isRead: false,

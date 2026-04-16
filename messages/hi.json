@@ -193,7 +193,12 @@
     "profileSettings": "सेटिंग्स",
     "follow": "फ़ॉलो करें",
     "unfollow": "अनफ़ॉलो करें",
-    "sendMessage": "संदेश भेजें"
+    "sendMessage": "संदेश भेजें",
+    "loading": "लोड हो रहा है...",
+    "search": "खोजें",
+    "searchPlaceholder": "यूज़रनेम दर्ज करें...",
+    "noResults": "कोई उपयोगकर्ता नहीं मिला",
+    "loadingMore": "और लोड हो रहा है..."
   },
   "notifications": {
     "title": "सूचनाएं",

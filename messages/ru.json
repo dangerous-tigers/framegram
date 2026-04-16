@@ -194,7 +194,12 @@
     "follow": "Подписаться",
     "unfollow": "Отписаться",
     "sendMessage": "Написать сообщение",
-      "notifications": {
+    "loading": "Загрузка...",
+    "search": "Поиск",
+    "searchPlaceholder": "Введите имя пользователя...",
+    "noResults": "Пользователи не найдены",
+    "loadingMore": "Загрузка ещё...",
+    "notifications": {
       "notification": "{type, select, hasBeenActivated {Ваша подписка активирована и действует до {date}} nextPayment {Следующий платеж у вас спишется через 1 день} endsAfterWeek {Ваша подписка истекает через 7 дней} endsAfterDay {Ваша подписка истекает через 1 день} other {}}"
     }
   }

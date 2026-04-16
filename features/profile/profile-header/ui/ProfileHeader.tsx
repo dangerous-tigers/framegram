@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Paid } from '@/assets/icons';
 import profile_img_placeholder from '@/assets/illustrations/avatar-placeholder.png';
 import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
+import { useSubscribe, useUnsubscribe } from '@/entities/user/api';
 import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
@@ -20,8 +21,18 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
   const t = useTranslations('profile');
 
   const { data } = useMe();
+  const subscribeMutation = useSubscribe();
+  const unsubscribeMutation = useUnsubscribe();
 
   const isOwner = data?.userId === profile.id;
+
+  const handleFollowToggle = async () => {
+    if (profile.isFollowing) {
+      await unsubscribeMutation.mutateAsync(profile.id);
+    } else {
+      await subscribeMutation.mutateAsync(profile.id);
+    }
+  };
 
   return (
     <div className={s.container}>
@@ -87,9 +98,19 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
         {!isOwner && data?.userId && (
           <>
             {!profile.isFollowing ? (
-              <PolymorphicButton>{t('follow')}</PolymorphicButton>
+              <PolymorphicButton
+                onClick={handleFollowToggle}
+                disabled={subscribeMutation.isPending}
+              >
+                {subscribeMutation.isPending ? t('loading') : t('follow')}
+              </PolymorphicButton>
             ) : (
-              <PolymorphicButton>{t('unfollow')}</PolymorphicButton>
+              <PolymorphicButton
+                onClick={handleFollowToggle}
+                disabled={unsubscribeMutation.isPending}
+              >
+                {unsubscribeMutation.isPending ? t('loading') : t('unfollow')}
+              </PolymorphicButton>
             )}
             <PolymorphicButton
               variant={'secondary'}

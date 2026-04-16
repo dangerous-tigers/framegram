@@ -1,4 +1,4 @@
-import { Notifications as NotificationsUI } from '@/shared/ui/notifications';
+import { Notifications as NotificationsUI } from '@/features/notifications';
 
 type PropsNotifications = {
   className?: string;
@@ -7,5 +7,9 @@ type PropsNotifications = {
 export const Notifications = (props: PropsNotifications) => {
   const { className } = props;
 
-  return <NotificationsUI className={className} />;
+  return (
+    <div className={className}>
+      <NotificationsUI />
+    </div>
+  );
 };
