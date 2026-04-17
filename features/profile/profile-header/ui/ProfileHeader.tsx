@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Paid } from '@/assets/icons';
 import profile_img_placeholder from '@/assets/illustrations/avatar-placeholder.png';
 import { UserProfileByIdWithPostsResponse } from '@/entities/profile';
-import { useSubscribe, useUnsubscribe } from '@/entities/user/api';
+import { useGetProfileByUserName, useSubscribe, useUnsubscribe } from '@/entities/user/api';
 import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
@@ -24,13 +24,18 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
   const subscribeMutation = useSubscribe();
   const unsubscribeMutation = useUnsubscribe();
 
-  const isOwner = data?.userId === profile.id;
+  // Fetch latest profile data using React Query for live updates
+  const { data: queryProfile } = useGetProfileByUserName(profile.userName);
+
+  // Use query data if available, otherwise use prop data (server-side)
+  const currentProfile = queryProfile || profile;
+  const isOwner = data?.userId === currentProfile.id;
 
   const handleFollowToggle = async () => {
-    if (profile.isFollowing) {
-      await unsubscribeMutation.mutateAsync(profile.id);
+    if (currentProfile.isFollowing) {
+      await unsubscribeMutation.mutateAsync(currentProfile.id);
     } else {
-      await subscribeMutation.mutateAsync(profile.id);
+      await subscribeMutation.mutateAsync(currentProfile.id);
     }
   };
 
@@ -38,18 +43,18 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
     <div className={s.container}>
       <div className={s.profilePicture}>
         <img
-          src={profile.avatars?.[0]?.url ?? profile_img_placeholder.src}
-          alt={`${profile.userName}'s profile picture`}
+          src={currentProfile.avatars?.[0]?.url ?? profile_img_placeholder.src}
+          alt={`${currentProfile.userName}'s profile picture`}
         />
       </div>
       <div className={s.userName}>
         <h2>
-          {profile.userName}
+          {currentProfile.userName}
           {hasPaymentSubscription && <Paid />}
         </h2>
         <div className={s.name}>
           <span>
-            {profile?.firstName} {profile?.lastName}
+            {currentProfile?.firstName} {currentProfile?.lastName}
           </span>
         </div>
       </div>
@@ -58,7 +63,7 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
           <li>
             <Link href={'/publications'}>
               {t.rich('publications', {
-                count: profile.publicationsCount,
+                count: currentProfile.publicationsCount,
                 b: (chunks) => <>{chunks}</>,
                 s: (chunks) => <span>{chunks}</span>,
               })}
@@ -67,7 +72,7 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
           <li>
             <Link href={'/followers'}>
               {t.rich('followers', {
-                count: profile.followersCount,
+                count: currentProfile.followersCount,
                 b: (chunks) => <>{chunks}</>,
                 s: (chunks) => <span>{chunks}</span>,
               })}
@@ -76,7 +81,7 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
           <li>
             <Link href={'/following'}>
               {t.rich('following', {
-                count: profile.followingCount,
+                count: currentProfile.followingCount,
                 b: (chunks) => <>{chunks}</>,
                 s: (chunks) => <span>{chunks}</span>,
               })}
@@ -97,7 +102,7 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
         )}
         {!isOwner && data?.userId && (
           <>
-            {!profile.isFollowing ? (
+            {!currentProfile.isFollowing ? (
               <PolymorphicButton
                 onClick={handleFollowToggle}
                 disabled={subscribeMutation.isPending}
@@ -124,7 +129,7 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
       </div>
 
       <div className={s.bio}>
-        <p>{profile.aboutMe}</p>
+        <p>{currentProfile.aboutMe}</p>
       </div>
     </div>
   );

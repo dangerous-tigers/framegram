@@ -16,6 +16,7 @@ export const routes = {
   main: '/',
   create: '/create',
   profile: '/profile',
+  publicProfile: '/profile',
   messenger: '/messenger',
   search: '/search',
   statistics: '/statistics',

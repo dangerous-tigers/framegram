@@ -8,10 +8,10 @@ export interface UserSearchParams {
 }
 
 export function useSearchUsersQuery({ search }: UserSearchParams) {
-  return useInfiniteQuery({
+  return useInfiniteQuery<SchemaUserWithPaginationViewDto, Error>({
     queryKey: ['search-users', search],
     queryFn: async ({ pageParam = 1 }) => {
-      const response = await client.GET('/users/search', {
+      const response = await client.GET('/users', {
         params: {
           query: {
             search,
@@ -22,7 +22,7 @@ export function useSearchUsersQuery({ search }: UserSearchParams) {
       });
 
       if (response.error) {
-        throw new Error('Search failed');
+        throw new Error(`Search failed: ${JSON.stringify(response.error)}`);
       }
 
       return response.data as SchemaUserWithPaginationViewDto;
@@ -40,5 +40,6 @@ export function useSearchUsersQuery({ search }: UserSearchParams) {
     },
     enabled: search.length > 0,
     staleTime: 1000 * 60 * 5, // 5 минут
+    retry: 1,
   });
 }

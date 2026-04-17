@@ -8,7 +8,7 @@ import { useIntersection } from '@/shared/lib/hooks/useIntersection';
 
 import { UserSearchResultCard } from './UserSearchResultCard';
 
-import { UserSearchModule } from './UserSearch.module.scss';
+import s from './UserSearch.module.scss';
 
 export function UserSearch() {
   const t = useTranslations('profile');
@@ -39,25 +39,23 @@ export function UserSearch() {
   const users = data?.pages.flatMap((page) => page?.items || []) || [];
 
   return (
-    <div className={UserSearchModule.container}>
-      <h1 className={UserSearchModule.title}>{t('search')}</h1>
-      <div className={UserSearchModule.searchBox}>
+    <div className={s.container}>
+      <h1 className={s.title}>{t('search')}</h1>
+      <div className={s.searchBox}>
         <input
           type='text'
-          className={UserSearchModule.input}
+          className={s.input}
           placeholder={t('searchPlaceholder')}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
-      {isLoading && <div className={UserSearchModule.loading}>{t('loading')}</div>}
+      {isLoading && <div className={s.loading}>{t('loading')}</div>}
 
-      {!isLoading && users.length === 0 && debouncedSearch && (
-        <div className={UserSearchModule.empty}>{t('noResults')}</div>
-      )}
+      {!isLoading && users.length === 0 && debouncedSearch && <div className={s.empty}>{t('noResults')}</div>}
 
-      <div className={UserSearchModule.results}>
+      <div className={s.results}>
         {users.map((user, index) => {
           if (user && users.length === index + 1) {
             return (
@@ -81,7 +79,7 @@ export function UserSearch() {
         })}
       </div>
 
-      {isFetchingNextPage && <div className={UserSearchModule.loading}>{t('loadingMore')}</div>}
+      {isFetchingNextPage && <div className={s.loading}>{t('loadingMore')}</div>}
     </div>
   );
 }

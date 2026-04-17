@@ -3,20 +3,22 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { useSubscribe } from '@/entities/user/api/useSubscribe';
 import { useUnsubscribe } from '@/entities/user/api/useUnsubscribe';
 import type { SchemaProfileViewAfterSearchModel } from '@/shared/api/schema';
 import { routes } from '@/shared/config/routes';
 
-import { UserSearchResultCardModule } from './UserSearchResultCard.module.scss';
+import s from './UserSearchResultCard.module.scss';
 
 interface UserSearchResultCardProps {
   user: SchemaProfileViewAfterSearchModel;
 }
 
 export function UserSearchResultCard({ user }: UserSearchResultCardProps) {
-  const [isFollowing, setIsFollowing] = useState(user.avatars.length > 0);
+  const t = useTranslations('profile');
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const subscribeMutation = useSubscribe();
   const unsubscribeMutation = useUnsubscribe();
@@ -24,37 +26,41 @@ export function UserSearchResultCard({ user }: UserSearchResultCardProps) {
   const avatarUrl = user.avatars?.[0]?.url;
 
   const handleFollowToggle = async () => {
-    if (isFollowing) {
-      await unsubscribeMutation.mutateAsync(user.id);
-    } else {
-      await subscribeMutation.mutateAsync(user.id);
+    try {
+      if (isFollowing) {
+        await unsubscribeMutation.mutateAsync(user.id);
+      } else {
+        await subscribeMutation.mutateAsync(user.id);
+      }
+      setIsFollowing(!isFollowing);
+    } catch {
+      // State remains unchanged on error
     }
-    setIsFollowing(!isFollowing);
   };
 
   return (
-    <div className={UserSearchResultCardModule.card}>
+    <div className={s.card}>
       <Link
-        href={`${routes.publicProfile}/${user.userName}`}
-        className={UserSearchResultCardModule.link}
+        href={`${routes.publicProfile}/${user.id}`}
+        className={s.link}
       >
-        <div className={UserSearchResultCardModule.avatar}>
+        <div className={s.avatar}>
           {avatarUrl ? (
             <Image
               src={avatarUrl}
               alt={user.userName}
               width={80}
               height={80}
-              className={UserSearchResultCardModule.image}
+              className={s.image}
             />
           ) : (
-            <div className={UserSearchResultCardModule.placeholder}>{user.userName.charAt(0).toUpperCase()}</div>
+            <div className={s.placeholder}>{user.userName.charAt(0).toUpperCase()}</div>
           )}
         </div>
-        <div className={UserSearchResultCardModule.info}>
-          <p className={UserSearchResultCardModule.username}>{user.userName}</p>
+        <div className={s.info}>
+          <p className={s.username}>{user.userName}</p>
           {(user.firstName || user.lastName) && (
-            <p className={UserSearchResultCardModule.name}>
+            <p className={s.name}>
               {user.firstName} {user.lastName}
             </p>
           )}
@@ -62,11 +68,11 @@ export function UserSearchResultCard({ user }: UserSearchResultCardProps) {
       </Link>
       <button
         type='button'
-        className={`${UserSearchResultCardModule.button} ${isFollowing ? UserSearchResultCardModule.buttonFollowing : ''}`}
+        className={`${s.button} ${isFollowing ? s.buttonFollowing : ''}`}
         onClick={handleFollowToggle}
         disabled={subscribeMutation.isPending || unsubscribeMutation.isPending}
       >
-        {isFollowing ? 'Unfollow' : 'Follow'}
+        {isFollowing ? t('unfollow') : t('follow')}
       </button>
     </div>
   );

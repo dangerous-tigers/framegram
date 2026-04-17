@@ -1,37 +1,64 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+  width: 100%;
+  padding: 2rem;
+
+  @media (width <= 768px) {
+    padding: 1.5rem 1rem;
+  }
+
+  @media (width <= 480px) {
+    padding: 1rem 0.75rem;
+  }
 }
 
 .title {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: var(--color-text-primary);
+  color: var(--light-100);
+
+  @media (width <= 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (width <= 480px) {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
 }
 
 .searchBox {
   margin-bottom: 2rem;
+
+  @media (width <= 480px) {
+    margin-bottom: 1rem;
+  }
 }
 
 .input {
   width: 100%;
   padding: 1rem 1.5rem;
-  border: 2px solid var(--color-border);
+  border: none;
   border-radius: 0.75rem;
-  background: var(--color-bg-secondary);
-  color: var(--color-text-primary);
+  background: transparent;
+  color: var(--light-100);
   font-size: 1rem;
-  transition: border-color 0.2s ease;
+  box-shadow: 0 0 0 1px var(--dark-100);
+  transition: box-shadow 0.2s ease;
 
   &:focus {
     outline: none;
-    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--primary-500);
   }
 
   &::placeholder {
-    color: var(--color-text-secondary);
+    color: var(--light-900);
+  }
+
+  @media (width <= 480px) {
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
   }
 }
 
@@ -39,18 +66,32 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (width <= 480px) {
+    gap: 0.75rem;
+  }
 }
 
 .loading {
   text-align: center;
   padding: 2rem;
-  color: var(--color-text-secondary);
+  color: var(--light-900);
   font-size: 1rem;
+
+  @media (width <= 480px) {
+    padding: 1.5rem;
+    font-size: 0.9375rem;
+  }
 }
 
 .empty {
   text-align: center;
   padding: 3rem;
-  color: var(--color-text-secondary);
+  color: var(--light-900);
   font-size: 1.125rem;
+
+  @media (width <= 480px) {
+    padding: 2rem 1rem;
+    font-size: 1rem;
+  }
 }

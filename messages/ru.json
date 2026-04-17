@@ -118,7 +118,7 @@
   },
   "createPost": {
     "Error loading the post": "Ошибка загрузки поста",
-    "Error loading posts":"Ошибка загрузки постов",
+    "Error loading posts": "Ошибка загрузки постов",
     "Error deleting a post": "Ошибка удаления поста"
   },
   "mainPagePost": {

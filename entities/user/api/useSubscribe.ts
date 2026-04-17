@@ -19,9 +19,13 @@ export function useSubscribe() {
       return response.data;
     },
     onSuccess: () => {
-      // Инвалидируем кеш поиска и профиля
+      // Инвалидируем кеш поиска и всех профилей
       queryClient.invalidateQueries({ queryKey: ['search-users'] });
+      // Инвалидируем все профиль queries (по всем userName)
       queryClient.invalidateQueries({ queryKey: ['profile'] });
+    },
+    onError: () => {
+      // Error will be handled by the component using this hook
     },
   });
 }
