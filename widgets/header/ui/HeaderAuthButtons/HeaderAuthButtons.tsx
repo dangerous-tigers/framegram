@@ -23,7 +23,7 @@ export const HeaderAuthButtons = (props: PropsHeaderAuthButtons) => {
   const path = usePathname();
 
   if (isLoading) return null;
-  if (!isError) return null;
+  if (isError) return null;
 
   if (path === routes.auth.login) {
     return null;

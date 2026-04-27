@@ -193,6 +193,26 @@
     "profileSettings": "सेटिंग्स",
     "follow": "फ़ॉलो करें",
     "unfollow": "अनफ़ॉलो करें",
-    "sendMessage": "संदेश भेजें"
+    "sendMessage": "संदेश भेजें",
+    "loading": "लोड हो रहा है...",
+    "search": "खोजें",
+    "searchPlaceholder": "यूज़रनेम दर्ज करें...",
+    "noResults": "कोई उपयोगकर्ता नहीं मिला",
+    "loadingMore": "और लोड हो रहा है..."
+  },
+  "notifications": {
+    "title": "सूचनाएं",
+    "markAllAsRead": "सभी को पढ़ा हुआ चिह्नित करें",
+    "empty": "कोई सूचना नहीं",
+    "loading": "सूचनाएं लोड हो रही हैं...",
+    "loadingMore": "लोड हो रहा है...",
+    "new": "नया",
+    "deleteNotification": "सूचना हटाएं",
+    "subscription": {
+      "activated": "आपकी सदस्यता सक्रिय है और {endDate} तक मान्य है",
+      "paymentWarning": "आपका अगला भुगतान {days} {daysWord} में कटा जाएगा",
+      "expiry7Days": "आपकी सदस्यता 7 दिनों में समाप्त हो जाएगी",
+      "expiry1Day": "आपकी सदस्यता 1 दिन में समाप्त हो जाएगी"
+    }
   }
 }

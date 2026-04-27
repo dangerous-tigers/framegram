@@ -193,7 +193,12 @@
     "follow": "Підписатися",
     "unfollow": "Відписатися",
     "sendMessage": "Написати повідомлення",
-        "notifications": {
+    "loading": "Завантаження...",
+    "search": "Пошук",
+    "searchPlaceholder": "Введіть ім'я користувача...",
+    "noResults": "Користувачів не знайдено",
+    "loadingMore": "Завантаження ще...",
+    "notifications": {
       "notification": "{type, select, hasBeenActivated {Вашу підписку активовано і вона діє до {date}} nextPayment {Наступний платіж буде списано через 1 день} endsAfterWeek {Ваша підписка закінчується через 7 днів} endsAfterDay {Ваша підписка закінчується через 1 день} other {}}"
     }
   }

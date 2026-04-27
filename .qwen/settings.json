@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(pnpm install)",
+      "Bash(pnpm *)"
+    ]
+  },
+  "$version": 3
+}

@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+AGENTS.md
+README.md
+/etc
 
 # debug
 npm-debug.log*
@@ -42,6 +45,7 @@ next-env.d.ts
 
 .idea
 .vscode/
+.continueignore
 
 *storybook.log
 storybook-static
