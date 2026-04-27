@@ -6,6 +6,9 @@ import { useTranslations } from 'next-intl';
 import { useSearchUsersQuery } from '@/entities/user/api/useSearchUsersQuery';
 import { useIntersection } from '@/shared/lib/hooks/useIntersection';
 
+import { useRecentSearches } from '../hooks/useRecentSearches';
+
+import { RecentSearches } from './RecentSearches';
 import { UserSearchResultCard } from './UserSearchResultCard';
 
 import s from './UserSearch.module.scss';
@@ -14,6 +17,7 @@ export function UserSearch() {
   const t = useTranslations('profile');
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
+  const { recentSearches, addSearch, removeSearch, isLoaded } = useRecentSearches();
 
   // Debounce для поиска
   useEffect(() => {
@@ -23,6 +27,13 @@ export function UserSearch() {
 
     return () => clearTimeout(timer);
   }, [searchTerm]);
+
+  // Сохранить поиск когда пользователь вводит текст и есть результаты
+  useEffect(() => {
+    if (debouncedSearch.trim()) {
+      addSearch(debouncedSearch);
+    }
+  }, [debouncedSearch, addSearch]);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useSearchUsersQuery({
     search: debouncedSearch,
@@ -37,6 +48,38 @@ export function UserSearch() {
   const ref = useIntersection(handleObserver);
 
   const users = data?.pages.flatMap((page) => page?.items || []) || [];
+
+  const handleRecentSearchClick = (search: string) => {
+    setSearchTerm(search);
+  };
+
+  const handleClearRecentSearch = (search: string) => {
+    removeSearch(search);
+  };
+
+  // Показывать недавние поиски если поиск не начат
+  if (!debouncedSearch && isLoaded) {
+    return (
+      <div className={s.container}>
+        <h1 className={s.title}>{t('search')}</h1>
+        <div className={s.searchBox}>
+          <input
+            type='text'
+            className={s.input}
+            placeholder={t('searchPlaceholder')}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        <RecentSearches
+          searches={recentSearches}
+          onSearchClick={handleRecentSearchClick}
+          onClearSearch={handleClearRecentSearch}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={s.container}>

@@ -19,13 +19,17 @@ export const HeaderAuthButtons = (props: PropsHeaderAuthButtons) => {
 
   const t = useTranslations('header');
 
-  const { isLoading, isError } = useMe();
+  const { isLoading, data } = useMe();
   const path = usePathname();
 
   if (isLoading) return null;
-  if (isError) return null;
 
-  if (path === routes.auth.login) {
+  // Если пользователь залогинен, не показываем кнопки
+  if (data) {
+    return null;
+  }
+
+  if (path === routes.auth.login || path === routes.auth.registration) {
     return null;
   }
 

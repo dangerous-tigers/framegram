@@ -198,6 +198,9 @@
     "searchPlaceholder": "Увядзіце імя карыстальніка...",
     "noResults": "Карыстальнікі не знойдзены",
     "loadingMore": "Загрузка яшчэ...",
+    "recentSearches": "Апошнія пошукі",
+    "noRecentSearchesTitle": "Ой! Тут пусто!",
+    "noRecentSearchesSubtitle": "Няма апошніх запытаў",
     "notifications": {
       "notification": "{type, select, hasBeenActivated {Ваша падпіска актываваная і дзейнічае да {date}} nextPayment {Наступны плацёж будзе спісаны праз 1 дзень} endsAfterWeek {Ваша падпіска скончыцца праз 7 дзён} endsAfterDay {Ваша падпіска скончыцца праз 1 дзень} other {}}"
     }

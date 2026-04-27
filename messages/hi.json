@@ -198,7 +198,10 @@
     "search": "खोजें",
     "searchPlaceholder": "यूज़रनेम दर्ज करें...",
     "noResults": "कोई उपयोगकर्ता नहीं मिला",
-    "loadingMore": "और लोड हो रहा है..."
+    "loadingMore": "और लोड हो रहा है...",
+    "recentSearches": "हाल की खोजें",
+    "noRecentSearchesTitle": "अरे! यह जगह खाली दिख रही है!",
+    "noRecentSearchesSubtitle": "कोई हाल की अनुरोध नहीं"
   },
   "notifications": {
     "title": "सूचनाएं",

@@ -18,7 +18,7 @@ export function UserSearchResultCard({ user }: UserSearchResultCardProps) {
   return (
     <div className={s.card}>
       <Link
-        href={`${routes.publicProfile}/${user.id}`}
+        href={`${routes.profile}/${user.id}`}
         className={s.link}
       >
         <div className={s.avatar}>
@@ -35,12 +35,10 @@ export function UserSearchResultCard({ user }: UserSearchResultCardProps) {
           )}
         </div>
         <div className={s.info}>
-          <p className={s.username}>{user.userName}</p>
-          {(user.firstName || user.lastName) && (
-            <p className={s.name}>
-              {user.firstName} {user.lastName}
-            </p>
-          )}
+          <p className={s.fullName}>
+            {user.firstName} {user.lastName}
+          </p>
+          <p className={s.userTag}>@{user.userName}</p>
         </div>
       </Link>
     </div>

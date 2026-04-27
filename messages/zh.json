@@ -197,7 +197,10 @@
     "search": "搜索",
     "searchPlaceholder": "输入用户名...",
     "noResults": "未找到用户",
-    "loadingMore": "加载更多..."
+    "loadingMore": "加载更多...",
+    "recentSearches": "最近搜索",
+    "noRecentSearchesTitle": "哎呀！这个地方看起来很空！",
+    "noRecentSearchesSubtitle": "没有最近的请求"
   },
   "notifications": {
     "title": "通知",

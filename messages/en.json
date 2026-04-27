@@ -200,6 +200,9 @@
     "searchPlaceholder": "Enter username...",
     "noResults": "No users found",
     "loadingMore": "Loading more...",
+    "recentSearches": "Recent Searches",
+    "noRecentSearchesTitle": "Oops! This place look empty!",
+    "noRecentSearchesSubtitle": "No recent request",
     "notifications": {
       "notification": "{type, select, hasBeenActivated {Your subscription has been activated and is valid until {date}} nextPayment {Your next payment will be charged in 1 day} endsAfterWeek {Your subscription expires in 7 days} endsAfterDay {Your subscription expires in 1 days} other {}}"
     }

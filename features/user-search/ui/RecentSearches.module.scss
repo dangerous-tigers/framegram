@@ -1,0 +1,158 @@
+.container {
+  width: 100%;
+  padding: 2rem;
+
+  @media (width <= 768px) {
+    padding: 1.5rem 1rem;
+  }
+
+  @media (width <= 480px) {
+    padding: 1rem 0.75rem;
+  }
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--light-100);
+
+  @media (width <= 768px) {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (width <= 480px) {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  @media (width <= 480px) {
+    gap: 0.5rem;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  transition: background 0.2s ease;
+  gap: 0.5rem;
+
+  &:hover {
+    background: var(--dark-100);
+  }
+
+  @media (width <= 480px) {
+    padding: 0.75rem 0.875rem;
+  }
+}
+
+.searchButton {
+  flex: 1;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--light-100);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-family: inherit;
+
+  &:hover {
+    color: var(--primary-500);
+  }
+
+  &:active {
+    color: var(--primary-700);
+  }
+
+  @media (width <= 480px) {
+    font-size: 0.9375rem;
+  }
+}
+
+.clearButton {
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  color: var(--light-900);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &:hover {
+    color: var(--light-100);
+  }
+
+  @media (width <= 480px) {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 1.25rem;
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+  padding: 2rem;
+
+  @media (width <= 768px) {
+    min-height: 300px;
+    padding: 1.5rem;
+  }
+
+  @media (width <= 480px) {
+    min-height: 250px;
+    padding: 1rem;
+  }
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--light-900);
+  margin: 0 0 0.5rem;
+
+  @media (width <= 768px) {
+    font-size: 1.25rem;
+  }
+
+  @media (width <= 480px) {
+    font-size: 1.125rem;
+  }
+}
+
+.emptySubtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--light-900);
+  margin: 0;
+
+  @media (width <= 768px) {
+    font-size: 0.9375rem;
+  }
+
+  @media (width <= 480px) {
+    font-size: 0.875rem;
+  }
+}
