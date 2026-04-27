@@ -157,6 +157,21 @@ export const postApi = {
     const response = await client.POST('/posts/{postId}/comments/{commentId}/answers', {
       body: {
         content,
+      },
+      params: {
+        path: {
+          postId: postId,
+          commentId: commentId,
+        },
+      },
+    });
+
+    if (response.error) {
+      throw response.error;
+    }
+
+    return response.data;
+  },
   comentLike: async ({
     postId,
     commentId,

@@ -5,7 +5,6 @@ import clsx from 'clsx';
 
 import { Heart, HeartOutline } from '@/assets/icons';
 import { useCommentAnswers, useViewPostStore } from '@/features/post/viewPost/model';
-import { usePostAnswerLikeMutation } from '@/features/post/viewPost/model/usePostAnswerLikeMutation';
 import { usePostCommentLikeMutation } from '@/features/post/viewPost/model/usePostCommentLikeMutation';
 import { Button } from '@/shared/ui';
 
@@ -32,7 +31,6 @@ export function Comment({ comment, postId, isAuth }: Props) {
   });
 
   const mutation = usePostCommentLikeMutation();
-  const answerMutation = usePostAnswerLikeMutation();
 
   const t = useTranslations('viewPost');
 
@@ -47,16 +45,6 @@ export function Comment({ comment, postId, isAuth }: Props) {
       commentId,
       postId,
       likeStatus: comment.isLiked ? 'NONE' : 'LIKE',
-    });
-  };
-  const handleLikeAnswer = (id: number) => {
-    const isLikes = answers?.find((answer) => answer.id === id)?.isLiked;
-
-    answerMutation.mutate({
-      answerId: id,
-      commentId: comment.id,
-      postId,
-      likeStatus: isLikes ? 'NONE' : 'LIKE',
     });
   };
 
