@@ -145,6 +145,18 @@ export const postApi = {
 
     return response.data;
   },
+  addAnswerToComment: async ({
+    postId,
+    commentId,
+    content,
+  }: {
+    postId: number;
+    commentId: number;
+    content: string;
+  }) => {
+    const response = await client.POST('/posts/{postId}/comments/{commentId}/answers', {
+      body: {
+        content,
   comentLike: async ({
     postId,
     commentId,

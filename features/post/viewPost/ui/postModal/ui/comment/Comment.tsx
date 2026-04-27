@@ -37,7 +37,6 @@ export function Comment({ comment, postId, isAuth }: Props) {
   const t = useTranslations('viewPost');
 
   const handleAnswer = (id: number) => {
-    alert('Answered by comment id: ' + id + ' by post id: ' + postId + ' by username: ' + comment.from.username);
     setType('answer');
     setComentUsername(comment.from.username);
     setPostId(id);
@@ -106,8 +105,6 @@ export function Comment({ comment, postId, isAuth }: Props) {
               <Answer
                 key={answer.id}
                 answer={answer}
-                onLike={handleLikeAnswer}
-                isAuth={isAuth}
               />
             </div>
           ))}
