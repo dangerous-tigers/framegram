@@ -1,4 +1,5 @@
 import { UploadPostImagesResponse } from '@/entities/post/model/postTypes';
+import { ResponseLikesType } from '@/features/post/viewPost/model/types';
 import { client } from '@/shared/api/client';
 
 export async function uploadPostImages(files: File[]): Promise<{ data?: UploadPostImagesResponse; error?: unknown }> {
@@ -91,6 +92,41 @@ export const postApi = {
       throw new Error('Error deleting a post' + error);
     }
   },
+  getPostLikes: async (id: number) => {
+    try {
+      const response = await client.GET('/posts/{postId}/likes', {
+        params: {
+          path: {
+            postId: id,
+          },
+        },
+      });
+      if (response.error) {
+        throw response.error;
+      }
+      return response.data as ResponseLikesType;
+    } catch (error) {
+      throw new Error('Error loading likes' + error);
+    }
+  },
+  postLike: async ({ id, likeStatus }: { id: number; likeStatus: 'LIKE' | 'DISLIKE' | 'NONE' }) => {
+    const response = await client.PUT('/posts/{postId}/like-status', {
+      body: {
+        likeStatus,
+      },
+      params: {
+        path: {
+          postId: id,
+        },
+      },
+    });
+
+    if (response.error) {
+      throw response.error;
+    }
+
+    return response.data;
+  },
   addComent: async ({ id, content }: { id: number; content: string }) => {
     const response = await client.POST('/posts/{postId}/comments', {
       body: {
@@ -121,6 +157,18 @@ export const postApi = {
     const response = await client.POST('/posts/{postId}/comments/{commentId}/answers', {
       body: {
         content,
+  comentLike: async ({
+    postId,
+    commentId,
+    likeStatus,
+  }: {
+    postId: number;
+    commentId: number;
+    likeStatus: 'LIKE' | 'DISLIKE' | 'NONE';
+  }) => {
+    const response = await client.PUT('/posts/{postId}/comments/{commentId}/like-status', {
+      body: {
+        likeStatus,
       },
       params: {
         path: {
@@ -129,8 +177,39 @@ export const postApi = {
         },
       },
     });
+
     if (response.error) {
-      return response.error;
+      throw response.error;
+    }
+
+    return response.data;
+  },
+  answerLike: async ({
+    postId,
+    commentId,
+    answerId,
+    likeStatus,
+  }: {
+    postId: number;
+    commentId: number;
+    answerId: number;
+    likeStatus: 'LIKE' | 'DISLIKE' | 'NONE';
+  }) => {
+    const response = await client.PUT('/posts/{postId}/comments/{commentId}/answers/{answerId}/like-status', {
+      body: {
+        likeStatus,
+      },
+      params: {
+        path: {
+          postId: postId,
+          commentId: commentId,
+          answerId: answerId,
+        },
+      },
+    });
+
+    if (response.error) {
+      throw response.error;
     }
 
     return response.data;
