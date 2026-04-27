@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { create } from 'zustand';
 
@@ -10,14 +9,6 @@ const WS_EVENT_PATH = {
   NOTIFICATIONS: 'notifications',
   ERROR: 'error',
 } as const;
-
-interface ServerNotification {
-  id: number;
-  clientId?: string;
-  message: string;
-  isRead: boolean;
-  notifyAt: string;
-}
 
 export interface NotificationWebSocketService {
   isConnected: boolean;
@@ -41,7 +32,6 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
   let savedToken: string | null = null;
   let pingInterval: NodeJS.Timeout | null = null;
 
-  // Обработчики network состояния
   const handleOnline = () => {
     if (!socket?.connected && savedToken) {
       get().connect(savedToken!);
@@ -54,15 +44,10 @@ export const useNotificationWSStore = create<NotificationWebSocketService>((set,
     }
   };
 
-  useEffect(() => {
+  if (typeof window !== 'undefined') {
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, [get]);
+  }
 
   return {
     isConnected: false,

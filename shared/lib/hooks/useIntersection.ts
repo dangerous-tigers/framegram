@@ -1,25 +1,33 @@
 'use client';
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export function useIntersection(onIntersect: () => void) {
   const unsubscribe = useRef(() => {});
 
-  return useCallback((el: HTMLDivElement | null) => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            onIntersect();
-          }
-        });
-      },
-      { threshold: 1 },
-    );
-    if (el) {
+  useEffect(() => {
+    return () => unsubscribe.current();
+  }, []);
+
+  return useCallback(
+    (el: HTMLDivElement | null) => {
+      unsubscribe.current();
+
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              onIntersect();
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
       observer.observe(el);
       unsubscribe.current = () => observer.disconnect();
-    } else {
-      unsubscribe.current();
-    }
-  }, []);
+    },
+    [onIntersect],
+  );
 }

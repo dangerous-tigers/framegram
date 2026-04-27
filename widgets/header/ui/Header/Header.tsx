@@ -5,7 +5,11 @@ import { Logo } from '@/widgets/header/ui/Logo';
 
 import s from './header.module.scss';
 
-export const Header = () => {
+type PropsHeader = {
+  className?: string;
+};
+
+export const Header: React.FC<PropsHeader> = () => {
   return (
     <header className={s.header}>
       <div className='container'>

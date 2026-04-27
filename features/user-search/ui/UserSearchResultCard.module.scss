@@ -1,7 +1,6 @@
 .card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 1rem;
   background: var(--dark-100);
   border-radius: 1rem;
@@ -99,37 +98,4 @@
   @media (width <= 480px) {
     font-size: 0.75rem;
   }
-}
-
-.button {
-  padding: 0.5rem 1.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  background: var(--primary-500);
-  color: var(--light-100);
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-  white-space: nowrap;
-
-  &:hover {
-    opacity: 0.9;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  @media (width <= 480px) {
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
-  }
-}
-
-.buttonFollowing {
-  background: transparent;
-  border: 2px solid var(--primary-500);
 }

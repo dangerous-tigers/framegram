@@ -1,12 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 
-import { useSubscribe } from '@/entities/user/api/useSubscribe';
-import { useUnsubscribe } from '@/entities/user/api/useUnsubscribe';
 import type { SchemaProfileViewAfterSearchModel } from '@/shared/api/schema';
 import { routes } from '@/shared/config/routes';
 
@@ -17,26 +13,7 @@ interface UserSearchResultCardProps {
 }
 
 export function UserSearchResultCard({ user }: UserSearchResultCardProps) {
-  const t = useTranslations('profile');
-  const [isFollowing, setIsFollowing] = useState(false);
-
-  const subscribeMutation = useSubscribe();
-  const unsubscribeMutation = useUnsubscribe();
-
   const avatarUrl = user.avatars?.[0]?.url;
-
-  const handleFollowToggle = async () => {
-    try {
-      if (isFollowing) {
-        await unsubscribeMutation.mutateAsync(user.id);
-      } else {
-        await subscribeMutation.mutateAsync(user.id);
-      }
-      setIsFollowing(!isFollowing);
-    } catch {
-      // State remains unchanged on error
-    }
-  };
 
   return (
     <div className={s.card}>
@@ -66,14 +43,6 @@ export function UserSearchResultCard({ user }: UserSearchResultCardProps) {
           )}
         </div>
       </Link>
-      <button
-        type='button'
-        className={`${s.button} ${isFollowing ? s.buttonFollowing : ''}`}
-        onClick={handleFollowToggle}
-        disabled={subscribeMutation.isPending || unsubscribeMutation.isPending}
-      >
-        {isFollowing ? t('unfollow') : t('follow')}
-      </button>
     </div>
   );
 }
