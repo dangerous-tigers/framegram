@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 export function useIntersection(onIntersect: () => void) {
   const unsubscribe = useRef(() => {});
+  const isIntersectingRef = useRef(false);
 
   useEffect(() => {
     return () => unsubscribe.current();
@@ -17,8 +18,13 @@ export function useIntersection(onIntersect: () => void) {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !isIntersectingRef.current) {
+              isIntersectingRef.current = true;
               onIntersect();
+            }
+
+            if (!entry.isIntersecting) {
+              isIntersectingRef.current = false;
             }
           });
         },

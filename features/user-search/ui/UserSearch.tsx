@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { useSearchUsersQuery } from '@/entities/user/api/useSearchUsersQuery';
@@ -39,11 +39,11 @@ export function UserSearch() {
     search: debouncedSearch,
   });
 
-  const handleObserver = () => {
+  const handleObserver = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const ref = useIntersection(handleObserver);
 
@@ -99,17 +99,8 @@ export function UserSearch() {
       {!isLoading && users.length === 0 && debouncedSearch && <div className={s.empty}>{t('noResults')}</div>}
 
       <div className={s.results}>
-        {users.map((user, index) => {
-          if (user && users.length === index + 1) {
-            return (
-              <div
-                ref={ref}
-                key={user.id}
-              >
-                <UserSearchResultCard user={user} />
-              </div>
-            );
-          } else if (user) {
+        {users.map((user) => {
+          if (user) {
             return (
               <UserSearchResultCard
                 key={user.id}
@@ -120,6 +111,7 @@ export function UserSearch() {
 
           return null;
         })}
+        {hasNextPage && <div ref={ref} />}
       </div>
 
       {isFetchingNextPage && <div className={s.loading}>{t('loadingMore')}</div>}
