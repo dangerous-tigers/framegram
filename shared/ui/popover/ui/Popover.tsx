@@ -33,7 +33,6 @@ export const Popover = ({ open, onOpenChange, children }: Props) => {
           <MoreHorizontalOutline />
         </Button>
       </PrimitivePopover.Trigger>
-      <PrimitivePopover.Anchor />
       <PrimitivePopover.Portal>
         <PrimitivePopover.Content
           align='end'
