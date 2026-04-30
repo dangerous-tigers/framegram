@@ -193,5 +193,11 @@
     "follow": "关注",
     "unfollow": "取消关注",
     "sendMessage": "发送消息"
+  },
+  "searchPage": {
+    "title": "Search",
+    "placeholder": "Search by username",
+    "loading": "Loading...",
+    "error": "Failed to search users."
   }
 }
