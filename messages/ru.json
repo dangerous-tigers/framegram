@@ -118,7 +118,7 @@
   },
   "createPost": {
     "Error loading the post": "Ошибка загрузки поста",
-    "Error loading posts":"Ошибка загрузки постов",
+    "Error loading posts": "Ошибка загрузки постов",
     "Error deleting a post": "Ошибка удаления поста"
   },
   "mainPagePost": {
@@ -194,7 +194,7 @@
     "follow": "Подписаться",
     "unfollow": "Отписаться",
     "sendMessage": "Написать сообщение",
-      "notifications": {
+    "notifications": {
       "notification": "{type, select, hasBeenActivated {Ваша подписка активирована и действует до {date}} nextPayment {Следующий платеж у вас спишется через 1 день} endsAfterWeek {Ваша подписка истекает через 7 дней} endsAfterDay {Ваша подписка истекает через 1 день} other {}}"
     }
   }

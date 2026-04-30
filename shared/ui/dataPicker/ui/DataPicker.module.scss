@@ -30,13 +30,11 @@
   }
 }
 
-
 :global(.rs-picker-popup) {
   border: 1px solid var(--dark-300);
   border-radius: 2px;
   background: var(--dark-500);
 }
-
 
 :global(.rs-calendar-header-month-toolbar) {
   display: flex !important;
@@ -132,7 +130,7 @@
 }
 
 /* focus */
-:global(.rs-input-group:not([data-disabled="true"]).rs-input-group-focus) {
+:global(.rs-input-group:not([data-disabled='true']).rs-input-group-focus) {
   outline-color: var(--primary-700);
 }
 
@@ -160,12 +158,10 @@
   background: var(--dark-300);
 }
 
-
-:global(.rs-picker[data-picker="date"] .rs-input-group-addon) {
+:global(.rs-picker[data-picker='date'] .rs-input-group-addon) {
   color: var(--light-100);
 }
 
-:global(.rs-picker[data-picker="date-range"] .rs-input-group-addon) {
+:global(.rs-picker[data-picker='date-range'] .rs-input-group-addon) {
   color: var(--light-100);
 }
-

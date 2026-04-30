@@ -1,3 +1,5 @@
+import { FeedPage } from '@/features/feed/ui/FeedPage';
+
 export default function Page() {
-  return <span>feed</span>;
+  return <FeedPage />;
 }
