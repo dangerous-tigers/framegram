@@ -194,5 +194,11 @@
     "follow": "फ़ॉलो करें",
     "unfollow": "अनफ़ॉलो करें",
     "sendMessage": "संदेश भेजें"
+  },
+  "searchPage": {
+    "title": "Search",
+    "placeholder": "Search by username",
+    "loading": "Loading...",
+    "error": "Failed to search users."
   }
 }

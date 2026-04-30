@@ -9,6 +9,8 @@ import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 
+import { useProfileFollow } from '../model/useProfileFollow';
+
 import s from './ProfileHeader.module.scss';
 
 type Props = {
@@ -22,6 +24,11 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
   const { data } = useMe();
 
   const isOwner = data?.userId === profile.id;
+  const { isFollowing, followersCount, onToggleFollow } = useProfileFollow({
+    profileId: profile.id,
+    initialFollowersCount: profile.followersCount,
+    initialIsFollowing: profile.isFollowing,
+  });
 
   return (
     <div className={s.container}>
@@ -56,7 +63,7 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
           <li>
             <Link href={'/followers'}>
               {t.rich('followers', {
-                count: profile.followersCount,
+                count: followersCount,
                 b: (chunks) => <>{chunks}</>,
                 s: (chunks) => <span>{chunks}</span>,
               })}
@@ -86,10 +93,10 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
         )}
         {!isOwner && data?.userId && (
           <>
-            {!profile.isFollowing ? (
-              <PolymorphicButton>{t('follow')}</PolymorphicButton>
+            {!isFollowing ? (
+              <PolymorphicButton onClick={onToggleFollow}>{t('follow')}</PolymorphicButton>
             ) : (
-              <PolymorphicButton>{t('unfollow')}</PolymorphicButton>
+              <PolymorphicButton onClick={onToggleFollow}>{t('unfollow')}</PolymorphicButton>
             )}
             <PolymorphicButton
               variant={'secondary'}

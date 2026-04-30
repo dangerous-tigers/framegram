@@ -197,5 +197,11 @@
     "notifications": {
       "notification": "{type, select, hasBeenActivated {Ваша подписка активирована и действует до {date}} nextPayment {Следующий платеж у вас спишется через 1 день} endsAfterWeek {Ваша подписка истекает через 7 дней} endsAfterDay {Ваша подписка истекает через 1 день} other {}}"
     }
+  },
+  "searchPage": {
+    "title": "Поиск",
+    "placeholder": "Поиск по username",
+    "loading": "Загрузка...",
+    "error": "Не удалось выполнить поиск пользователей."
   }
 }
