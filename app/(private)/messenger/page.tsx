@@ -10,6 +10,9 @@ import {
   useUpdateMessagesStatusMutation,
 } from '@/features/messenger/api';
 
+import { formatMessengerTime } from './model/formatMessengerTime';
+import { getSelectedDialog, getSortedMessages } from './model/messengerSelectors';
+import { markFirstSendingAsFailed, removeOptimisticMessageByPayload } from './model/optimisticMessageHandlers';
 import { useMessengerPageEffects } from './model/useMessengerPageEffects';
 import { useMessengerPageState } from './model/useMessengerPageState';
 import { MessengerDialogPane } from './ui/MessengerDialogPane';
@@ -45,13 +48,10 @@ export default function Page() {
   const messages = useMemo(() => {
     const mergedMessages: MessageItem[] = messagesQuery.data?.pages.flatMap((page) => page.items ?? []) ?? [];
 
-    return mergedMessages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    return getSortedMessages(mergedMessages);
   }, [messagesQuery.data?.pages]);
 
-  const selectedDialog = dialogs.find((dialog) => {
-    const dialogPartnerId = me?.userId === dialog.ownerId ? dialog.receiverId : dialog.ownerId;
-    return dialogPartnerId === partnerId;
-  });
+  const selectedDialog = getSelectedDialog(dialogs, me?.userId, partnerId);
 
   const hasNextDialogsPage = Boolean(dialogsQuery.hasNextPage);
   const isDialogsFetchingNextPage = dialogsQuery.isFetchingNextPage;
@@ -83,34 +83,12 @@ export default function Page() {
   const { sendMessage } = useMessengerSocket({
     myUserId: me?.userId,
     onReceiveMessage: (payload) => {
-      if (!partnerId || !me?.userId) {
-        return;
-      }
-
-      if (payload.ownerId !== me.userId || payload.receiverId !== partnerId) {
-        return;
-      }
-
-      setOptimisticMessages((prev) => {
-        const index = prev.findIndex((item) => item.messageText === payload.messageText);
-
-        if (index === -1) {
-          return prev;
-        }
-
-        return prev.filter((_, idx) => idx !== index);
-      });
+      setOptimisticMessages((prev) =>
+        removeOptimisticMessageByPayload(prev, { payload, meUserId: me?.userId, partnerId }),
+      );
     },
     onErrorMessage: () => {
-      setOptimisticMessages((prev) => {
-        const index = prev.findIndex((item) => item.status === 'sending');
-
-        if (index === -1) {
-          return prev;
-        }
-
-        return prev.map((item, idx) => (idx === index ? { ...item, status: 'failed' } : item));
-      });
+      setOptimisticMessages(markFirstSendingAsFailed);
     },
   });
 
@@ -158,16 +136,6 @@ export default function Page() {
     });
   };
 
-  const formatTime = (dateString: string) => {
-    const date = new Date(dateString);
-
-    return date.toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    });
-  };
-
   return (
     <section className={s.page}>
       <h1 className={s.pageTitle}>Messenger</h1>
@@ -182,7 +150,7 @@ export default function Page() {
           myUserId={me?.userId}
           onSearchInputChange={setSearchInput}
           onSelectDialog={handleSelectDialog}
-          formatTime={formatTime}
+          formatTime={formatMessengerTime}
         />
         <MessengerDialogPane
           partnerId={partnerId}
@@ -195,7 +163,7 @@ export default function Page() {
           isMessagesLoading={isMessagesLoading}
           onMessageInputChange={setMessageInput}
           onSend={handleSend}
-          formatTime={formatTime}
+          formatTime={formatMessengerTime}
         />
       </div>
     </section>
