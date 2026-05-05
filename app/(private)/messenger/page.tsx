@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useMemo, useRef } from 'react';
 
 import { useMe } from '@/entities/user/model/useMe';
 import {
@@ -11,37 +10,33 @@ import {
   useUpdateMessagesStatusMutation,
 } from '@/features/messenger/api';
 
+import { useMessengerPageEffects } from './model/useMessengerPageEffects';
+import { useMessengerPageState } from './model/useMessengerPageState';
 import { MessengerDialogPane } from './ui/MessengerDialogPane';
 import { MessengerSidebar } from './ui/MessengerSidebar';
-import { DialogItem, MessageItem, OptimisticMessage } from './ui/types';
+import { DialogItem, MessageItem } from './ui/types';
 
 import s from './page.module.scss';
 
 export default function Page() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [searchInput, setSearchInput] = useState('');
-  const [searchName, setSearchName] = useState('');
-  const [messageInput, setMessageInput] = useState('');
-  const [optimisticMessages, setOptimisticMessages] = useState<OptimisticMessage[]>([]);
+  const {
+    searchInput,
+    setSearchInput,
+    searchName,
+    setSearchName,
+    messageInput,
+    setMessageInput,
+    optimisticMessages,
+    setOptimisticMessages,
+    partnerId,
+    handleSelectDialog,
+  } = useMessengerPageState();
+
   const dialogsRef = useRef<HTMLDivElement | null>(null);
   const messagesRef = useRef<HTMLDivElement | null>(null);
   const markedAsReadRef = useRef<Set<number>>(new Set());
   const isLoadingOlderMessagesRef = useRef(false);
   const { data: me } = useMe();
-
-  const partnerId = useMemo(() => {
-    const rawPartnerId = searchParams.get('partnerId');
-    const parsed = Number(rawPartnerId);
-
-    if (!rawPartnerId || Number.isNaN(parsed) || parsed <= 0) {
-      return undefined;
-    }
-
-    return parsed;
-  }, [searchParams]);
-  const selectedPartnerId = partnerId;
 
   const dialogsQuery = useDialogsInfiniteQuery(searchName);
   const messagesQuery = useMessagesInfiniteQuery(partnerId);
@@ -52,10 +47,12 @@ export default function Page() {
 
     return mergedMessages.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
   }, [messagesQuery.data?.pages]);
+
   const selectedDialog = dialogs.find((dialog) => {
     const dialogPartnerId = me?.userId === dialog.ownerId ? dialog.receiverId : dialog.ownerId;
-    return dialogPartnerId === selectedPartnerId;
+    return dialogPartnerId === partnerId;
   });
+
   const hasNextDialogsPage = Boolean(dialogsQuery.hasNextPage);
   const isDialogsFetchingNextPage = dialogsQuery.isFetchingNextPage;
   const fetchNextDialogsPage = dialogsQuery.fetchNextPage;
@@ -65,6 +62,23 @@ export default function Page() {
   const isMessagesLoading = messagesQuery.isLoading || messagesQuery.isFetchingNextPage;
   const isDialogsLoading = dialogsQuery.isLoading || dialogsQuery.isFetchingNextPage;
   const updateReadStatus = useUpdateMessagesStatusMutation();
+
+  useMessengerPageEffects({
+    searchInput,
+    setSearchName,
+    dialogsRef,
+    hasNextDialogsPage,
+    isDialogsFetchingNextPage,
+    fetchNextDialogsPage,
+    messagesRef,
+    hasNextMessagesPage,
+    isMessagesFetchingNextPage,
+    fetchNextMessagesPage,
+    isLoadingOlderMessagesRef,
+    messages,
+    optimisticMessages,
+    partnerId,
+  });
 
   const { sendMessage } = useMessengerSocket({
     myUserId: me?.userId,
@@ -99,71 +113,6 @@ export default function Page() {
       });
     },
   });
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setSearchName(searchInput.trim());
-    }, 350);
-
-    return () => clearTimeout(timeoutId);
-  }, [searchInput]);
-
-  useEffect(() => {
-    const node = dialogsRef.current;
-
-    if (!node) {
-      return;
-    }
-
-    const handleScroll = () => {
-      const nearBottom = node.scrollTop + node.clientHeight >= node.scrollHeight - 24;
-
-      if (nearBottom && hasNextDialogsPage && !isDialogsFetchingNextPage) {
-        fetchNextDialogsPage();
-      }
-    };
-
-    node.addEventListener('scroll', handleScroll);
-
-    return () => node.removeEventListener('scroll', handleScroll);
-  }, [fetchNextDialogsPage, hasNextDialogsPage, isDialogsFetchingNextPage]);
-
-  useEffect(() => {
-    const node = messagesRef.current;
-
-    if (!node) {
-      return;
-    }
-
-    const handleScroll = () => {
-      const nearTop = node.scrollTop <= 24;
-
-      if (nearTop && hasNextMessagesPage && !isMessagesFetchingNextPage) {
-        const previousHeight = node.scrollHeight;
-        isLoadingOlderMessagesRef.current = true;
-
-        fetchNextMessagesPage().then(() => {
-          const nextHeight = node.scrollHeight;
-          node.scrollTop = nextHeight - previousHeight + node.scrollTop;
-          isLoadingOlderMessagesRef.current = false;
-        });
-      }
-    };
-
-    node.addEventListener('scroll', handleScroll);
-
-    return () => node.removeEventListener('scroll', handleScroll);
-  }, [fetchNextMessagesPage, hasNextMessagesPage, isMessagesFetchingNextPage]);
-
-  useEffect(() => {
-    const node = messagesRef.current;
-
-    if (!node || isLoadingOlderMessagesRef.current) {
-      return;
-    }
-
-    node.scrollTop = node.scrollHeight;
-  }, [messages, optimisticMessages, partnerId]);
 
   useEffect(() => {
     if (!partnerId || !messages.length) {
@@ -209,13 +158,6 @@ export default function Page() {
     });
   };
 
-  const handleSelectDialog = (dialogPartnerId: number) => {
-    const nextParams = new URLSearchParams(searchParams.toString());
-    nextParams.set('partnerId', String(dialogPartnerId));
-    router.replace(`${pathname}?${nextParams.toString()}`);
-    setOptimisticMessages([]);
-  };
-
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
 
@@ -236,7 +178,7 @@ export default function Page() {
           dialogsRef={dialogsRef}
           isDialogsLoading={isDialogsLoading}
           searchInput={searchInput}
-          selectedPartnerId={selectedPartnerId}
+          selectedPartnerId={partnerId}
           myUserId={me?.userId}
           onSearchInputChange={setSearchInput}
           onSelectDialog={handleSelectDialog}
