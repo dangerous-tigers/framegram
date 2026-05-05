@@ -101,7 +101,7 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
             <PolymorphicButton
               variant={'secondary'}
               as={Link}
-              href={routes.messenger}
+              href={{ pathname: routes.messenger, query: { partnerId: profile.id } }}
             >
               {t('sendMessage')}
             </PolymorphicButton>
