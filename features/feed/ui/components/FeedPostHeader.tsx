@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 import { CopyOutline, PersonAddOutline, PersonRemoveOutline } from '@/assets/icons';
+import { Avatar } from '@/shared/ui/avatar';
 import { Popover } from '@/shared/ui/popover';
-import { Avatar } from '@dangerous-tigers/framehub-ui-kit/components';
 
 import { FeedPost } from '../../model/feed.api';
 
@@ -25,7 +25,7 @@ export function FeedPostHeader({ post, isFollowing, menuOpen, timeAgo, onMenuOpe
         className={s.author}
       >
         <Avatar
-          src={post.avatarOwner}
+          url={post.avatarOwner}
           size='m'
           className={s.avatar}
         />
