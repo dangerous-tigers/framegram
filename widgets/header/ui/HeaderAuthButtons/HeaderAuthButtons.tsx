@@ -33,6 +33,7 @@ export const HeaderAuthButtons = (props: PropsHeaderAuthButtons) => {
     <div className={clsx(s.headerAuthButtons, className)}>
       <PolymorphicButton
         as={Link}
+        variant='text'
         className={s.link}
         href={routes.auth.login}
       >
@@ -40,6 +41,7 @@ export const HeaderAuthButtons = (props: PropsHeaderAuthButtons) => {
       </PolymorphicButton>
       <PolymorphicButton
         as={Link}
+        variant='primary'
         className={s.linkBlue}
         href={routes.auth.registration}
       >
