@@ -99,6 +99,20 @@
   overflow-wrap: anywhere;
 }
 
+.messageBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.messageBlockIncoming {
+  align-items: flex-start;
+}
+
+.messageBlockOutgoing {
+  align-items: flex-end;
+}
+
 .messageIncoming {
   background: #35373d;
 }
@@ -118,4 +132,39 @@
   margin: 8px 0;
   color: var(--light-900);
   text-align: center;
+}
+
+.messageActions {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton,
+.actionButtonDanger {
+  border: none;
+  background: transparent;
+  color: #8a92ab;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.actionButton:hover {
+  color: var(--light-100);
+}
+
+.actionButtonDanger:hover {
+  color: #ff7f7f;
+}
+
+.editInput {
+  width: 100%;
+  min-width: 220px;
+  resize: vertical;
+  border: 1px solid var(--dark-100);
+  border-radius: 6px;
+  background: rgb(0 0 0 / 12%);
+  color: inherit;
+  padding: 6px 8px;
+  font: inherit;
 }

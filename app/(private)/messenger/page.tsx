@@ -1,16 +1,19 @@
 'use client';
 
 import { useEffect, useMemo, useRef } from 'react';
+import { useFormatter } from 'next-intl';
 
 import { useMe } from '@/entities/user/model/useMe';
 import {
+  messengerKeys,
+  useDeleteMessageMutation,
   useDialogsInfiniteQuery,
   useMessagesInfiniteQuery,
   useMessengerSocket,
   useUpdateMessagesStatusMutation,
 } from '@/features/messenger/api';
+import { useQueryClient } from '@tanstack/react-query';
 
-import { formatMessengerTime } from './model/formatMessengerTime';
 import { getSelectedDialog, getSortedMessages } from './model/messengerSelectors';
 import { markFirstSendingAsFailed, removeOptimisticMessageByPayload } from './model/optimisticMessageHandlers';
 import { useMessengerPageEffects } from './model/useMessengerPageEffects';
@@ -22,6 +25,8 @@ import { DialogItem, MessageItem } from './ui/types';
 import s from './page.module.scss';
 
 export default function Page() {
+  const queryClient = useQueryClient();
+  const format = useFormatter();
   const {
     searchInput,
     setSearchInput,
@@ -62,6 +67,7 @@ export default function Page() {
   const isMessagesLoading = messagesQuery.isLoading || messagesQuery.isFetchingNextPage;
   const isDialogsLoading = dialogsQuery.isLoading || dialogsQuery.isFetchingNextPage;
   const updateReadStatus = useUpdateMessagesStatusMutation();
+  const deleteMessageMutation = useDeleteMessageMutation();
 
   useMessengerPageEffects({
     searchInput,
@@ -80,7 +86,7 @@ export default function Page() {
     partnerId,
   });
 
-  const { sendMessage } = useMessengerSocket({
+  const { sendMessage, updateMessage } = useMessengerSocket({
     myUserId: me?.userId,
     onReceiveMessage: (payload) => {
       setOptimisticMessages((prev) =>
@@ -136,6 +142,30 @@ export default function Page() {
     });
   };
 
+  const handleDeleteMessage = (id: number) => {
+    if (!partnerId) {
+      return;
+    }
+
+    deleteMessageMutation.mutate(id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: messengerKeys.dialog(partnerId) });
+        queryClient.invalidateQueries({ queryKey: messengerKeys.dialogs(searchName) });
+      },
+    });
+  };
+
+  const handleEditMessage = (id: number, text: string) => {
+    updateMessage({ id, message: text });
+  };
+
+  const formatTime = (dateString: string) =>
+    format.dateTime(new Date(dateString), {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+
   return (
     <section className={s.page}>
       <h1 className={s.pageTitle}>Messenger</h1>
@@ -150,7 +180,7 @@ export default function Page() {
           myUserId={me?.userId}
           onSearchInputChange={setSearchInput}
           onSelectDialog={handleSelectDialog}
-          formatTime={formatMessengerTime}
+          formatTime={formatTime}
         />
         <MessengerDialogPane
           partnerId={partnerId}
@@ -163,7 +193,9 @@ export default function Page() {
           isMessagesLoading={isMessagesLoading}
           onMessageInputChange={setMessageInput}
           onSend={handleSend}
-          formatTime={formatMessengerTime}
+          onDeleteMessage={handleDeleteMessage}
+          onEditMessage={handleEditMessage}
+          formatTime={formatTime}
         />
       </div>
     </section>

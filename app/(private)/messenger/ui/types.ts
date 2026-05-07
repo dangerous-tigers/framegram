@@ -13,6 +13,7 @@ export type MessageItem = {
   ownerId: number;
   messageText: string;
   createdAt: string;
+  updatedAt: string;
   status: string;
 };
 

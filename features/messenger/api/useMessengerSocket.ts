@@ -26,6 +26,11 @@ type SendMessagePayload = {
   message: string;
 };
 
+type UpdateMessagePayload = {
+  id: number;
+  message: string;
+};
+
 type UseMessengerSocketArgs = {
   myUserId?: number;
   onReceiveMessage?: (payload: SocketMessagePayload) => void;
@@ -122,6 +127,59 @@ export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage 
       queryClient.invalidateQueries({ queryKey: messengerKeys.all });
     };
 
+    const handleUpdateMessage = (payload: SocketMessagePayload) => {
+      if (!payload) {
+        return;
+      }
+
+      const dialogPartnerId = payload.ownerId === myUserId ? payload.receiverId : payload.ownerId;
+
+      if (!dialogPartnerId) {
+        return;
+      }
+
+      queryClient.setQueryData(messengerKeys.dialog(dialogPartnerId), (prev: MessengerDialogCache | undefined) => {
+        if (!prev?.pages?.length) {
+          return prev;
+        }
+
+        const pages = prev.pages.map((page) => ({
+          ...page,
+          items: (page.items ?? []).map((item) =>
+            item.id === payload.id ? { ...item, messageText: payload.messageText, updatedAt: payload.updatedAt } : item,
+          ),
+        }));
+
+        return { ...prev, pages };
+      });
+      queryClient.invalidateQueries({ queryKey: messengerKeys.dialogs('') });
+    };
+
+    const handleDeleteMessage = (payload: { id?: number; ownerId?: number; receiverId?: number }) => {
+      if (!payload?.id) {
+        return;
+      }
+
+      const possibleDialogIds = [payload.ownerId, payload.receiverId].filter(Boolean) as number[];
+
+      possibleDialogIds.forEach((dialogId) => {
+        queryClient.setQueryData(messengerKeys.dialog(dialogId), (prev: MessengerDialogCache | undefined) => {
+          if (!prev?.pages?.length) {
+            return prev;
+          }
+
+          const pages = prev.pages.map((page) => ({
+            ...page,
+            items: (page.items ?? []).filter((item) => item.id !== payload.id),
+          }));
+
+          return { ...prev, pages };
+        });
+      });
+
+      queryClient.invalidateQueries({ queryKey: messengerKeys.all });
+    };
+
     const handleConnectError = async () => {
       await connectWithFreshToken();
     };
@@ -136,6 +194,8 @@ export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage 
 
     socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, handleIncoming);
     socket.on(SOCKET_EVENTS.MESSAGE_SEND, handleMessageSend);
+    socket.on(SOCKET_EVENTS.UPDATE_MESSAGE, handleUpdateMessage);
+    socket.on(SOCKET_EVENTS.MESSAGE_DELETED, handleDeleteMessage);
     socket.on(SOCKET_EVENTS.ERROR, handleError);
     socket.on('exception', handleException);
     socket.on('connect_error', handleConnectError);
@@ -146,6 +206,8 @@ export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage 
       isMounted = false;
       socket.off(SOCKET_EVENTS.RECEIVE_MESSAGE, handleIncoming);
       socket.off(SOCKET_EVENTS.MESSAGE_SEND, handleMessageSend);
+      socket.off(SOCKET_EVENTS.UPDATE_MESSAGE, handleUpdateMessage);
+      socket.off(SOCKET_EVENTS.MESSAGE_DELETED, handleDeleteMessage);
       socket.off(SOCKET_EVENTS.ERROR, handleError);
       socket.off('exception', handleException);
       socket.off('connect_error', handleConnectError);
@@ -169,5 +231,21 @@ export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage 
     [socket],
   );
 
-  return { sendMessage };
+  const updateMessage = useCallback(
+    ({ id, message }: UpdateMessagePayload) => {
+      const text = message.trim();
+
+      if (!text) {
+        return;
+      }
+
+      socket.emit(SOCKET_EVENTS.UPDATE_MESSAGE, {
+        id,
+        message: text,
+      });
+    },
+    [socket],
+  );
+
+  return { sendMessage, updateMessage };
 };

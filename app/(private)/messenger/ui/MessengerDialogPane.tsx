@@ -1,6 +1,6 @@
 'use client';
 
-import type { RefObject } from 'react';
+import { type RefObject, useEffect, useState } from 'react';
 
 import avatarPlaceholder from '@/assets/illustrations/avatar-placeholder.png';
 
@@ -20,6 +20,8 @@ type MessengerDialogPaneProps = {
   isMessagesLoading: boolean;
   onMessageInputChange: (value: string) => void;
   onSend: () => void;
+  onDeleteMessage: (id: number) => void;
+  onEditMessage: (id: number, message: string) => void;
   formatTime: (dateString: string) => string;
 };
 
@@ -34,8 +36,55 @@ export const MessengerDialogPane = ({
   isMessagesLoading,
   onMessageInputChange,
   onSend,
+  onDeleteMessage,
+  onEditMessage,
   formatTime,
 }: MessengerDialogPaneProps) => {
+  const [editingMessageId, setEditingMessageId] = useState<number | null>(null);
+  const [editingText, setEditingText] = useState('');
+
+  useEffect(() => {
+    if (editingMessageId === null) {
+      return;
+    }
+
+    const message = messages.find((item) => item.id === editingMessageId);
+
+    if (!message) {
+      setEditingMessageId(null);
+      setEditingText('');
+    }
+  }, [editingMessageId, messages]);
+
+  const startEditing = (id: number, text: string) => {
+    setEditingMessageId(id);
+    setEditingText(text);
+  };
+
+  const cancelEditing = () => {
+    setEditingMessageId(null);
+    setEditingText('');
+  };
+
+  const saveEditing = () => {
+    if (editingMessageId === null) {
+      return;
+    }
+
+    const text = editingText.trim();
+
+    if (!text) {
+      return;
+    }
+
+    onEditMessage(editingMessageId, text);
+    cancelEditing();
+  };
+
+  const isMessageEdited = (createdAt: string, updatedAt: string) => {
+    return new Date(updatedAt).getTime() > new Date(createdAt).getTime();
+  };
+
   return (
     <div className={s.rightContent}>
       {!partnerId && <p className={s.emptyState}>Choose who you would like to talk to</p>}
@@ -70,9 +119,61 @@ export const MessengerDialogPane = ({
                       />
                     </div>
                   )}
-                  <div className={`${s.messageItem} ${isOutgoing ? s.messageOutgoing : s.messageIncoming}`}>
-                    {message.messageText}
-                    <span className={s.messageMeta}>{formatTime(message.createdAt)}</span>
+                  <div className={`${s.messageBlock} ${isOutgoing ? s.messageBlockOutgoing : s.messageBlockIncoming}`}>
+                    <div className={`${s.messageItem} ${isOutgoing ? s.messageOutgoing : s.messageIncoming}`}>
+                      {editingMessageId === message.id ? (
+                        <textarea
+                          className={s.editInput}
+                          value={editingText}
+                          onChange={(event) => setEditingText(event.target.value)}
+                          rows={2}
+                        />
+                      ) : (
+                        message.messageText
+                      )}
+                      <span className={s.messageMeta}>
+                        {isMessageEdited(message.createdAt, message.updatedAt)
+                          ? `edited ${formatTime(message.updatedAt)} · `
+                          : ''}
+                        {formatTime(message.createdAt)}
+                      </span>
+                    </div>
+                    {isOutgoing && editingMessageId !== message.id && (
+                      <div className={s.messageActions}>
+                        <button
+                          type='button'
+                          className={s.actionButton}
+                          onClick={() => startEditing(message.id, message.messageText)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type='button'
+                          className={s.actionButtonDanger}
+                          onClick={() => onDeleteMessage(message.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                    {isOutgoing && editingMessageId === message.id && (
+                      <div className={s.messageActions}>
+                        <button
+                          type='button'
+                          className={s.actionButton}
+                          onClick={saveEditing}
+                        >
+                          Save
+                        </button>
+                        <button
+                          type='button'
+                          className={s.actionButton}
+                          onClick={cancelEditing}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
