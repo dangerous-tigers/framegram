@@ -17,7 +17,7 @@ function makeRefreshToken() {
       }
 
       if (!response.data?.accessToken) {
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem(ACCESS_TOKEN);
         return;
       }
 
@@ -27,9 +27,14 @@ function makeRefreshToken() {
     refreshPromise.finally(() => {
       refreshPromise = null;
     });
-
-    return refreshPromise;
   }
+
+  return refreshPromise;
+}
+
+export async function ensureFreshAccessToken(): Promise<string | null> {
+  await makeRefreshToken();
+  return localStorage.getItem(ACCESS_TOKEN);
 }
 
 const retryMap = new WeakMap<Request, Request>();
@@ -54,12 +59,12 @@ const authMiddleware: Middleware = {
       return response;
     }
 
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem(ACCESS_TOKEN);
 
     if (!token) return response;
 
     try {
-      await makeRefreshToken();
+      await ensureFreshAccessToken();
 
       //const originalRequest: Request = request._retryRequest;
       const originalRequest = retryMap.get(request);

@@ -1,0 +1,109 @@
+.leftContent {
+  width: 300px;
+  border-right: 1px solid var(--dark-300);
+  background: var(--dark-500);
+}
+
+.searchInput {
+  padding: 10px;
+  border-bottom: 1px solid var(--dark-300);
+}
+
+.dialogList {
+  display: flex;
+  flex-direction: column;
+  height: calc(620px - 60px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dark-100) var(--dark-300);
+}
+
+.dialogList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dialogList::-webkit-scrollbar-track {
+  margin: 8px 0;
+  background: var(--dark-300);
+  border-radius: 2px;
+}
+
+.dialogList::-webkit-scrollbar-thumb {
+  background: var(--dark-100);
+  border-radius: 2px;
+}
+
+.dialogItem {
+  width: 100%;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.dialogItemActive {
+  background: rgb(78 80 85 / 58%);
+}
+
+.dialogRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dialogContent {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--dark-300);
+}
+
+.dialogAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dialogAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dialogTextBlock {
+  min-width: 0;
+  flex: 1;
+}
+
+.dialogName {
+  margin: 0;
+  color: var(--light-100);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.dialogTime {
+  color: var(--light-900);
+  font-size: 12px;
+}
+
+.dialogMessage {
+  margin: 6px 0 0;
+  color: var(--light-900);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.listInfo {
+  margin: 8px 0;
+  color: var(--light-900);
+  text-align: center;
+}

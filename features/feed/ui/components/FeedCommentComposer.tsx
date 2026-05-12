@@ -1,4 +1,5 @@
-import { Button, Input } from '@dangerous-tigers/framehub-ui-kit/components';
+import { Button } from '@/shared/ui';
+import { Input } from '@/shared/ui/input';
 
 import s from '../FeedPage.module.scss';
 
