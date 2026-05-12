@@ -1,12 +1,11 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { getSocket } from '@/features/notifications/api/socket';
 import { SOCKET_EVENTS } from '@/features/notifications/api/types';
-import { refreshClient } from '@/shared/api/client';
+import { ensureFreshAccessToken } from '@/shared/api/client';
 import { components } from '@/shared/api/schema';
-import { ACCESS_TOKEN } from '@/shared/constants/constants';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { messengerKeys } from './queryKeys';
@@ -37,28 +36,75 @@ type UseMessengerSocketArgs = {
   onErrorMessage?: (error: { message: string; error?: string }) => void;
 };
 
+type SocketErrorPayload = {
+  message?: string;
+  status?: string;
+  error?: string | { message?: string; error?: string };
+};
+
 export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage }: UseMessengerSocketArgs) => {
   const socket = getSocket();
   const queryClient = useQueryClient();
+  const reconnectPromiseRef = useRef<Promise<boolean> | null>(null);
+
+  const reconnectWithFreshToken = useCallback(async (): Promise<boolean> => {
+    if (reconnectPromiseRef.current) {
+      return reconnectPromiseRef.current;
+    }
+
+    reconnectPromiseRef.current = (async () => {
+      const accessToken = await ensureFreshAccessToken();
+
+      if (!accessToken) {
+        return false;
+      }
+
+      socket.io.opts.query = {
+        ...(socket.io.opts.query as Record<string, string>),
+        accessToken,
+      };
+
+      await new Promise<void>((resolve, reject) => {
+        function cleanup() {
+          window.clearTimeout(timeoutId);
+          socket.off('connect', handleConnect);
+          socket.off('connect_error', handleConnectError);
+        }
+
+        function handleConnect() {
+          cleanup();
+          resolve();
+        }
+
+        function handleConnectError() {
+          cleanup();
+          reject(new Error('Socket reconnect failed'));
+        }
+
+        const timeoutId = window.setTimeout(() => {
+          cleanup();
+          reject(new Error('Socket reconnect timeout'));
+        }, 5000);
+
+        socket.once('connect', handleConnect);
+        socket.once('connect_error', handleConnectError);
+        socket.disconnect();
+        socket.connect();
+      });
+
+      return socket.connected;
+    })().finally(() => {
+      reconnectPromiseRef.current = null;
+    });
+
+    return reconnectPromiseRef.current;
+  }, [socket]);
 
   useEffect(() => {
     let isMounted = true;
 
-    const refreshAccessToken = async () => {
-      const response = await refreshClient.POST('/auth/update');
-      const accessToken = response.data?.accessToken;
-
-      if (!accessToken) {
-        return null;
-      }
-
-      localStorage.setItem(ACCESS_TOKEN, accessToken);
-      return accessToken;
-    };
-
     const connectWithFreshToken = async () => {
-      const localToken = localStorage.getItem(ACCESS_TOKEN);
-      const token = localToken || (await refreshAccessToken());
+      const token = await ensureFreshAccessToken();
 
       if (!isMounted || !token) {
         return;
@@ -181,15 +227,65 @@ export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage 
     };
 
     const handleConnectError = async () => {
-      await connectWithFreshToken();
+      if (reconnectPromiseRef.current) {
+        return;
+      }
+
+      await reconnectWithFreshToken().catch(() => undefined);
     };
 
-    const handleError = (error: { message: string; error?: string }) => {
-      onErrorMessage?.(error);
+    const normalizeSocketError = (error: SocketErrorPayload): { message: string; error?: string } => {
+      if (typeof error.error === 'object' && error.error !== null) {
+        return {
+          message: error.error.message || error.message || 'Socket error',
+          error: error.error.error,
+        };
+      }
+
+      return {
+        message: error.message || 'Socket error',
+        error: error.error,
+      };
     };
 
-    const handleException = (error: { message: string; error?: string }) => {
-      onErrorMessage?.(error);
+    const isAuthSocketError = (error: SocketErrorPayload) => {
+      const normalized = normalizeSocketError(error);
+      const text = `${normalized.message} ${normalized.error ?? ''} ${error.status ?? ''}`.toLowerCase();
+
+      return (
+        text.includes('auth_error') ||
+        text.includes('authentication') ||
+        text.includes('forbidden') ||
+        text.includes('unauthorized') ||
+        text.includes('token') ||
+        text.includes('jwt')
+      );
+    };
+
+    const handleError = (error: SocketErrorPayload) => {
+      const normalized = normalizeSocketError(error);
+
+      if (isAuthSocketError(error)) {
+        if (!reconnectPromiseRef.current) {
+          void reconnectWithFreshToken().catch(() => onErrorMessage?.(normalized));
+        }
+        return;
+      }
+
+      onErrorMessage?.(normalized);
+    };
+
+    const handleException = (error: SocketErrorPayload) => {
+      const normalized = normalizeSocketError(error);
+
+      if (isAuthSocketError(error)) {
+        if (!reconnectPromiseRef.current) {
+          void reconnectWithFreshToken().catch(() => onErrorMessage?.(normalized));
+        }
+        return;
+      }
+
+      onErrorMessage?.(normalized);
     };
 
     socket.on(SOCKET_EVENTS.RECEIVE_MESSAGE, handleIncoming);
@@ -213,7 +309,7 @@ export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage 
       socket.off('connect_error', handleConnectError);
       socket.off('reconnect', handleReconnect);
     };
-  }, [myUserId, onErrorMessage, onReceiveMessage, queryClient, socket]);
+  }, [myUserId, onErrorMessage, onReceiveMessage, queryClient, reconnectWithFreshToken, socket]);
 
   const sendMessage = useCallback(
     ({ receiverId, message }: SendMessagePayload) => {
@@ -223,12 +319,22 @@ export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage 
         return;
       }
 
-      socket.emit(SOCKET_EVENTS.RECEIVE_MESSAGE, {
-        receiverId,
-        message: text,
-      });
+      void reconnectWithFreshToken()
+        .then((isConnected) => {
+          if (!isConnected) {
+            throw new Error('Socket reconnect failed');
+          }
+
+          socket.emit(SOCKET_EVENTS.RECEIVE_MESSAGE, {
+            receiverId,
+            message: text,
+          });
+        })
+        .catch(() => {
+          onErrorMessage?.({ message: 'Authentication error', error: 'AUTH_ERROR' });
+        });
     },
-    [socket],
+    [onErrorMessage, reconnectWithFreshToken, socket],
   );
 
   const updateMessage = useCallback(
@@ -239,12 +345,22 @@ export const useMessengerSocket = ({ myUserId, onReceiveMessage, onErrorMessage 
         return;
       }
 
-      socket.emit(SOCKET_EVENTS.UPDATE_MESSAGE, {
-        id,
-        message: text,
-      });
+      void reconnectWithFreshToken()
+        .then((isConnected) => {
+          if (!isConnected) {
+            throw new Error('Socket reconnect failed');
+          }
+
+          socket.emit(SOCKET_EVENTS.UPDATE_MESSAGE, {
+            id,
+            message: text,
+          });
+        })
+        .catch(() => {
+          onErrorMessage?.({ message: 'Authentication error', error: 'AUTH_ERROR' });
+        });
     },
-    [socket],
+    [onErrorMessage, reconnectWithFreshToken, socket],
   );
 
   return { sendMessage, updateMessage };

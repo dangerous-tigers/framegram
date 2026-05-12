@@ -20,9 +20,10 @@ export function getSocket(): Socket {
       transports: ['websocket'],
       query: { accessToken: getToken() },
     });
+    socket.on('reconnect_attempt', () => {
+      setQueryToken(socket!, getToken());
+    });
   }
-  socket.on('reconnect_attempt', () => {
-    setQueryToken(socket!, getToken());
-  });
+
   return socket;
 }
