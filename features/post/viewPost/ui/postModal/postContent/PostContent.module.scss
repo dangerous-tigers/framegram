@@ -31,12 +31,6 @@
   gap: 12px;
   height: 350px;
   padding: 12px 24px 0;
-  overflow-y: auto;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .imageWrapper {
