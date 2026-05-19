@@ -1,12 +1,13 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { Virtuoso } from 'react-virtuoso';
 
 import { EditMode } from '@/features/post/editPost/ui/editMode/EditMode';
 import { useGetPostById, useGetPostCommentsInfinity, useViewPostStore } from '@/features/post/viewPost/model';
 import { Post } from '@/features/post/viewPost/model/types';
-import { useIntersection } from '@/shared/lib/hooks';
 import { Separator } from '@/shared/ui';
+import { VirtuosoScroll } from '@/shared/ui/scroll';
 import { Swiper } from '@/shared/ui/swiper';
 
 import { usePostLikes } from '../../../model/useGetPostLikes';
@@ -33,13 +34,16 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
     comments,
     isLoading: isLoadingComments,
     fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   } = useGetPostCommentsInfinity({
     postId: post.id,
   });
-
-  const cursorRef = useIntersection(() => {
-    fetchNextPage();
-  });
+  const handleEndReached = () => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  };
 
   return (
     <div className={s.container}>
@@ -116,18 +120,25 @@ export function PostContent({ initialPost, isAuth, userId, isMobile, isLoading }
                   text={post.description || ''}
                   timeStamp={post.createdAt || ''}
                 />
-                {/*    COMMENTS      */}
-                {isLoadingComments
-                  ? Array.from({ length: 3 }).map((_, i) => <DescriptionSkeleton key={i} />)
-                  : comments?.map((comment) => (
+                {/* COMMENTS      */}
+                {isLoadingComments ? (
+                  Array.from({ length: 3 }).map((_, i) => <DescriptionSkeleton key={i} />)
+                ) : (
+                  <Virtuoso
+                    style={{ height: '100%' }}
+                    endReached={handleEndReached}
+                    data={comments}
+                    components={{ Scroller: VirtuosoScroll }}
+                    computeItemKey={(_, comment) => comment.id}
+                    itemContent={(_, comment) => (
                       <Comment
-                        key={comment.id}
                         comment={comment}
                         postId={post.id}
                         isAuth={isAuth}
                       />
-                    ))}
-                <div ref={cursorRef} />
+                    )}
+                  />
+                )}
               </div>
             )}
 
