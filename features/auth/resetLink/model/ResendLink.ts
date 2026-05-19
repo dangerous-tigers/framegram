@@ -1,6 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
-
 import { ResendLinkApiRequest } from '@/features/auth/resetLink/api/ResendLink.api';
+import { useMutation } from '@tanstack/react-query';
 
 export const UseResendLink = () => {
   return useMutation({

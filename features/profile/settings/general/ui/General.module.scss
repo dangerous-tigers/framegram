@@ -3,6 +3,12 @@
   display: grid;
   grid-template-columns: 202px 1fr;
   column-gap: 30px;
+
+  @media (width <= 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 .download {
@@ -61,6 +67,17 @@
   div {
     width: 202px;
     gap: 24px;
+
+    @media (width <= 768px) {
+      padding-bottom: 36px;
+    }
+  }
+
+  @media (width <= 768px) {
+    & > div > button {
+      width: 330px;
+      height: 48px;
+    }
   }
 }
 
@@ -69,12 +86,6 @@
   font-style: var(--font-size-s);
   line-height: 24px;
   color: var(--light-900);
-}
-
-.location {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .separator {
@@ -86,6 +97,15 @@
   align-items: center;
   justify-content: end;
   padding-bottom: 26px;
+
+  @media (width <=768px) {
+    justify-content: center;
+
+    & > button {
+      width: 330px;
+      height: 48px;
+    }
+  }
 }
 
 .birthday {

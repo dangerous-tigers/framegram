@@ -1,10 +1,12 @@
-import clsx from 'clsx';
+'use client';
 import Link from 'next/link';
-
-import s from './logo.module.scss';
+import clsx from 'clsx';
 
 import { Framehublogo } from '@/assets/icons';
+import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
+
+import s from './logo.module.scss';
 
 type PropsLogo = {
   className?: string;
@@ -13,9 +15,11 @@ type PropsLogo = {
 export const Logo = (props: PropsLogo) => {
   const { className } = props;
 
+  const { data } = useMe();
+
   return (
     <Link
-      href={routes.feed}
+      href={!data ? routes.main : routes.feed}
       className={clsx(s.logo, className)}
     >
       <Framehublogo />

@@ -1,53 +1,59 @@
-import Image from 'next/image';
+'use client';
 
-import s from './CropStep.module.scss';
-import { ImageManager } from './imageManager';
-import { Rate } from './rate';
-import { Size } from './size';
+import { useShallow } from 'zustand/react/shallow';
 
 import { useCreatePostStore } from '@/features/post-create/model/storeCreatePost';
 import { Swiper } from '@/shared/ui/swiper';
 
-export const CropStep = () => {
-  const images = useCreatePostStore((s) => s.images);
+import { CropSlide } from './components/CropSlide/CropSlide';
+import { CropProvider } from './CropContext';
+import { ImageManager } from './imageManager';
+import { Rate } from './rate';
+import { Size } from './size';
 
+import s from './CropStep.module.scss';
+
+export const CropStep = () => {
+  const imageIds = useCreatePostStore(useShallow((s) => s.images.map((i) => i.id)));
   const setActiveImageIndex = useCreatePostStore((s) => s.setActiveImageIndex);
 
   return (
-    <div className={s.root}>
-      <Swiper
-        slides={images.map((image) => (
-          <Image
-            key={image.file.name}
-            src={image.preview}
-            alt={image.file.name}
-            fill
-            style={{ filter: image.filter ?? 'none' }}
-          />
-        ))}
-        options={{
-          loop: true,
-          breakpoints: {
-            320: {
-              slidesPerView: 1,
-              spaceBetween: 12,
+    <CropProvider>
+      <div className={s.root}>
+        <Swiper
+          slides={imageIds.map((id) => {
+            return (
+              <CropSlide
+                key={id}
+                id={id}
+              />
+            );
+          })}
+          options={{
+            allowTouchMove: false,
+            loop: true,
+            breakpoints: {
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 12,
+              },
             },
-          },
-        }}
-        onIndexChange={(index) => setActiveImageIndex(index)}
-        className={s.swiperMain}
-      />
-      <div className={s.cropSetting}>
-        <div>
-          <div className={s.cropSettingDiv}>
-            <Size />
-            <Rate />
+          }}
+          onIndexChange={(index) => setActiveImageIndex(index)}
+          className={s.swiperMain}
+        />
+        <div className={s.cropSetting}>
+          <div>
+            <div className={s.cropSettingDiv}>
+              <Rate />
+              <Size />
+            </div>
+          </div>
+          <div>
+            <ImageManager />
           </div>
         </div>
-        <div>
-          <ImageManager />
-        </div>
       </div>
-    </div>
+    </CropProvider>
   );
 };

@@ -47,3 +47,31 @@ export type PaginatedResponse<TItem> = {
 
 export type PostCommentsResponse = PaginatedResponse<Comment>;
 export type CommentAnswersResponse = PaginatedResponse<Answer>;
+export type Avatar = {
+  url: string;
+  width: number;
+  height: number;
+  fileSize: number;
+  createdAt: string;
+};
+
+export type UserItem = {
+  id: number;
+  userId: number;
+  userName: string;
+  createdAt: string;
+  avatars: Avatar[];
+  isFollowing: boolean;
+  isFollowedBy: boolean;
+};
+
+export type ResponseLikesType = {
+  totalCount: number;
+  pagesCount: number;
+  page: number;
+  pageSize: number;
+  prevCursor: number | null;
+  nextCursor: number | null;
+  items: UserItem[];
+  isLiked: boolean;
+};

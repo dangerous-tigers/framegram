@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import { ReactNode, useRef, useState } from 'react';
-
-import s from './inputFile.module.scss';
+import clsx from 'clsx';
 
 import { ImageOutline } from '@/assets/icons';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button/PolymorphicButton';
+
+import s from './inputFile.module.scss';
 
 type Props = {
   onSelect: (files: File[]) => void;

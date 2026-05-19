@@ -1,0 +1,167 @@
+.dataPicker {
+  :global(.rs-picker-input-group) {
+    border: 1px solid var(--dark-300);
+    border-radius: 2px;
+    padding: 6px 12px;
+    background: var(--dark-500);
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--light-100);
+
+    transition: border-color 0.15s ease;
+  }
+
+  :global(.rs-date-range-input) {
+    background: transparent;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--light-100);
+
+    &::placeholder {
+      color: var(--light-100);
+    }
+  }
+
+  :global(.rs-input-group-addon) {
+    color: #e5e7eb;
+  }
+}
+
+:global(.rs-picker-popup) {
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+  background: var(--dark-500);
+}
+
+:global(.rs-calendar-header-month-toolbar) {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:global(.rs-calendar-header-month-toolbar .rs-calendar-header-title-date) {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--light-100);
+}
+
+:global(.rs-calendar-header-has-month:not(.rs-calendar-header-has-time) .rs-calendar-header-month-toolbar:before) {
+  display: none;
+}
+
+:global(.rs-calendar-header-has-month:not(.rs-calendar-header-has-time) .rs-calendar-header-month-toolbar:after) {
+  display: none;
+}
+
+/* Кнопки в шапке */
+:global(.rs-calendar-header-has-month:not(.rs-calendar-header-has-time) .rs-calendar-header-forward) {
+  border-radius: 24px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  background: var(--dark-100);
+
+  svg {
+    fill: var(--light-100);
+  }
+}
+
+:global(.rs-calendar-header-has-month:not(.rs-calendar-header-has-time) .rs-calendar-header-backward) {
+  border-radius: 24px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  background: var(--dark-100);
+
+  svg {
+    fill: var(--light-100);
+  }
+}
+
+/* сегодня */
+:global(.rs-calendar-table-cell-is-today .rs-calendar-table-cell-content) {
+  border-radius: 50%;
+  background: var(--primary-900);
+  box-shadow: none;
+}
+
+/* При наведение отключаем стили у самой кнопки */
+:global(.rs-calendar-table-cell-content:hover) {
+  background: none;
+}
+
+/* При наведение меняем стили */
+:global(.rs-picker-popup .rs-calendar .rs-calendar-table-cell:hover .rs-calendar-table-cell-content) {
+  background: var(--primary-700);
+  color: var(--light-100);
+}
+
+:global(.rs-calendar-table-cell-content) {
+  border-radius: 0;
+}
+
+/* Стилизация выбранного первого и последнего элемента и выбранных элементов */
+
+:global(.rs-calendar-table-cell-selected .rs-calendar-table-cell-content) {
+  border-radius: 50%;
+  background: var(--primary-900);
+}
+
+:global(.rs-calendar-table-cell-selected-start .rs-calendar-table-cell-content) {
+  border-radius: 18px 0 0 18px;
+}
+
+:global(.rs-calendar-table-cell-selected-end .rs-calendar-table-cell-content) {
+  border-radius: 0 18px 18px 0;
+}
+
+:global(.rs-calendar-table-cell-in-range:before) {
+  background: var(--primary-900);
+}
+
+/* toolbar низ с кнопками */
+
+:global(.rs-picker-toolbar) {
+  border-top-color: var(--dark-300);
+}
+
+/* focus */
+:global(.rs-input-group:not([data-disabled='true']).rs-input-group-focus) {
+  outline-color: var(--primary-700);
+}
+
+:global(.rs-input-group:focus-within) {
+  outline-color: var(--primary-700);
+}
+
+:global(.rs-input) {
+  background-color: var(--dark-500);
+}
+
+:global(.rs-input::placeholder) {
+  color: var(--light-100);
+}
+
+:global(.rs-calendar-month-dropdown) {
+  background-color: var(--dark-300);
+}
+
+:global(.rs-calendar-btn-close) {
+  background: var(--primary-700);
+}
+
+:global(.rs-calendar-btn-close:hover) {
+  background: var(--dark-300);
+}
+
+:global(.rs-picker[data-picker='date'] .rs-input-group-addon) {
+  color: var(--light-100);
+}
+
+:global(.rs-picker[data-picker='date-range'] .rs-input-group-addon) {
+  color: var(--light-100);
+}

@@ -1,11 +1,8 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
-
-import s from './ForgotPasswordForm.module.scss';
 
 import { ForgotPasswordData, forgotPasswordSchema } from '@/features/auth/ForgotPassword/model/ForgotPassword.schema';
 import { useForgotPassword } from '@/features/auth/ForgotPassword/model/UseForgotPassword';
@@ -13,6 +10,9 @@ import { routes } from '@/shared/config/routes';
 import { Modal, ModalHeaderWithClose, Recaptcha } from '@/shared/ui';
 import { Button } from '@/shared/ui/button/Button';
 import { Input } from '@/shared/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import s from './ForgotPasswordForm.module.scss';
 
 export const ForgotPasswordForm = () => {
   const t = useTranslations('forgot'); // Переводы страницы

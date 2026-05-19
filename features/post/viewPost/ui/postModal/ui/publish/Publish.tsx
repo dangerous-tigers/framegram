@@ -1,13 +1,16 @@
 'use client';
-import { useTranslations } from 'next-intl';
 import { ChangeEvent, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 
-import s from './Publish.module.scss';
-
+import { useAddAnswerToComment } from '@/features/post/viewPost/model/useAddAnswerToComment';
+import { useAddComment } from '@/features/post/viewPost/model/useAddComment';
 import { useViewPostStore } from '@/features/post/viewPost/model/useViewPost.store';
 import { Button } from '@/shared/ui';
 import { useAlertStore } from '@/shared/ui/alert/model/alert-store';
 import { Textarea } from '@/shared/ui/textarea';
+
+import s from './Publish.module.scss';
+
 export function Publish({ postId }: { postId: number }) {
   const type = useViewPostStore((state) => state.type);
   const setType = useViewPostStore((state) => state.setType);
@@ -17,7 +20,10 @@ export function Publish({ postId }: { postId: number }) {
   const t = useTranslations('viewPost');
   const { show } = useAlertStore();
 
+  const { mutate: addComment, isPending } = useAddComment();
+
   const ANSWER_PREFIX = `@${commentUsername} `;
+  const { mutate: addAnswerToComment } = useAddAnswerToComment();
 
   const { commentId, content } = useViewPostStore();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -76,23 +82,11 @@ export function Publish({ postId }: { postId: number }) {
         });
         return;
       }
-
-      alert(
-        JSON.stringify({
-          type: 'answer',
-          postId,
-          commentId,
-          content: answerContent,
-        }),
-      );
+      if (commentId) {
+        addAnswerToComment({ postId, commentId, content: answerContent });
+      }
     } else {
-      alert(
-        JSON.stringify({
-          type: 'comment',
-          postId,
-          content: trimmedContent,
-        }),
-      );
+      addComment({ id: postId, content: trimmedContent });
     }
     reset();
   }
@@ -111,6 +105,7 @@ export function Publish({ postId }: { postId: number }) {
 
         <Button
           onClick={handlePublish}
+          disabled={!content || isPending}
           className={s.publishButton}
           variant='text'
         >

@@ -1,12 +1,14 @@
 'use client';
 
+import { memo, Ref, useEffect } from 'react';
+import Image from 'next/image';
+import clsx from 'clsx';
+
 import type { DraggableSyntheticListeners } from '@dnd-kit/core';
 import type { Transform } from '@dnd-kit/utilities';
-import clsx from 'clsx';
-import Image from 'next/image';
-import { memo, Ref, useEffect } from 'react';
 
 import { Handle, Remove } from './components';
+
 import s from './Item.module.scss';
 
 export type Props = {

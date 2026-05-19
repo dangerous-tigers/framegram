@@ -1,12 +1,13 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
-import s from './Description.module.scss';
+import placeholderAvatar from '@/assets/illustrations/avatar-placeholder.png';
+import { useTimeAgo } from '@/shared/lib/hooks';
+import { Button } from '@/shared/ui';
+
 import { DescriptionInfo } from './DescriptionInfo';
 
-import placeholderAvatar from '@/assets/illustrations/avatar-placeholder.png';
-import { Button } from '@/shared/ui';
-import CompTimeAgo from '@/shared/ui/timeAgo/CompTimeAgo';
+import s from './Description.module.scss';
 
 type Props = {
   avatar: string;
@@ -30,6 +31,7 @@ export function Description({
   onAnswerClick,
 }: Props) {
   const t = useTranslations('viewPost');
+  const timeAgo = useTimeAgo(timeStamp);
   return (
     <div className={s.description}>
       <div className={s.userInfo}>
@@ -46,7 +48,7 @@ export function Description({
             text={text}
           />
           <div className={s.footer}>
-            <CompTimeAgo date={new Date(timeStamp)} />
+            {timeAgo}
             {isLikeCount && likeCount > 0 && (
               <>
                 <span className={s.likeCount}>

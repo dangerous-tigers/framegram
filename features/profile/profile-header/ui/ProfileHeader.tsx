@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
-
-import s from './ProfileHeader.module.scss';
+import { useTranslations } from 'next-intl';
 
 import { Paid } from '@/assets/icons';
 import profile_img_placeholder from '@/assets/illustrations/avatar-placeholder.png';
@@ -10,15 +9,26 @@ import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
 import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
 
+import { useProfileFollow } from '../model/useProfileFollow';
+
+import s from './ProfileHeader.module.scss';
+
 type Props = {
   hasPaymentSubscription: boolean;
   profile: UserProfileByIdWithPostsResponse;
 };
 
 export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
+  const t = useTranslations('profile');
+
   const { data } = useMe();
 
   const isOwner = data?.userId === profile.id;
+  const { isFollowing, followersCount, onToggleFollow } = useProfileFollow({
+    profileId: profile.id,
+    initialFollowersCount: profile.followersCount,
+    initialIsFollowing: profile.isFollowing,
+  });
 
   return (
     <div className={s.container}>
@@ -43,20 +53,29 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
         <ul>
           <li>
             <Link href={'/publications'}>
-              {profile.publicationsCount}
-              <span>Publications</span>
+              {t.rich('publications', {
+                count: profile.publicationsCount,
+                b: (chunks) => <>{chunks}</>,
+                s: (chunks) => <span>{chunks}</span>,
+              })}
             </Link>
           </li>
           <li>
             <Link href={'/followers'}>
-              {profile.followersCount}
-              <span>Followers</span>
+              {t.rich('followers', {
+                count: followersCount,
+                b: (chunks) => <>{chunks}</>,
+                s: (chunks) => <span>{chunks}</span>,
+              })}
             </Link>
           </li>
           <li>
             <Link href={'/following'}>
-              {profile.followingCount}
-              <span>Following</span>
+              {t.rich('following', {
+                count: profile.followingCount,
+                b: (chunks) => <>{chunks}</>,
+                s: (chunks) => <span>{chunks}</span>,
+              })}
             </Link>
           </li>
         </ul>
@@ -67,24 +86,24 @@ export const ProfileHeader = ({ profile, hasPaymentSubscription }: Props) => {
             className={s.profileButton}
             variant='secondary'
             as={Link}
-            href={'/profile/settings'}
+            href={'/profile/settings?tab=general'}
           >
-            Profile Settings
+            {t('profileSettings')}
           </PolymorphicButton>
         )}
         {!isOwner && data?.userId && (
           <>
-            {!profile.isFollowing ? (
-              <PolymorphicButton>Follow</PolymorphicButton>
+            {!isFollowing ? (
+              <PolymorphicButton onClick={onToggleFollow}>{t('follow')}</PolymorphicButton>
             ) : (
-              <PolymorphicButton>Unfollow</PolymorphicButton>
+              <PolymorphicButton onClick={onToggleFollow}>{t('unfollow')}</PolymorphicButton>
             )}
             <PolymorphicButton
               variant={'secondary'}
               as={Link}
-              href={routes.messenger}
+              href={{ pathname: routes.messenger, query: { partnerId: profile.id } }}
             >
-              SendMessage
+              {t('sendMessage')}
             </PolymorphicButton>
           </>
         )}

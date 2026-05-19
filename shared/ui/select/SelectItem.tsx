@@ -1,5 +1,6 @@
-import * as PrimitiveSelect from '@radix-ui/react-select';
 import { ReactElement, ReactNode } from 'react';
+
+import * as PrimitiveSelect from '@radix-ui/react-select';
 
 type Props = {
   children: ReactNode;

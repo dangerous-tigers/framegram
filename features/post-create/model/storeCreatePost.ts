@@ -1,39 +1,10 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-import { CreatePostStep, UploadedImage } from './CreatePostType';
-import { saveDraft, loadDraft, clearDraft } from './indexedDb';
-import type { DraftData } from './types';
-
-export type CreatePostStateType = {
-  step: CreatePostStep;
-  images: UploadedImage;
-  activeImageIndex: number;
-  description: string;
-
-  setStep: (step: CreatePostStep) => void;
-  addImages: (files: File[]) => void;
-  setImages: (images: UploadedImage) => void;
-  removeImage: (index: number) => void;
-  setDescription: (value: string) => void;
-  setActiveImageIndex: (value: number) => void;
-
-  hydrate: () => Promise<void>;
-  isHydrated: boolean;
-  reset: () => Promise<void>;
-
-  isOpen: boolean;
-  setOpen: (value: boolean) => void;
-
-  setImageFilter: (index: number, filter: string) => void;
-};
-
-const pickDraft = (state: CreatePostStateType): DraftData => ({
-  step: state.step,
-  images: state.images,
-  activeImageIndex: state.activeImageIndex,
-  description: state.description,
-});
+import { UploadedImageItem } from './CreatePostType';
+import { clearDraft, loadDraft, saveDraft } from './indexedDb';
+import type { CreatePostStateType } from './types';
+import { pickDraft } from './utils';
 
 export const useCreatePostStore = create<CreatePostStateType>()(
   devtools((set, get) => ({
@@ -45,10 +16,16 @@ export const useCreatePostStore = create<CreatePostStateType>()(
     hydrate: async () => {
       const draft = await loadDraft();
 
-      if (draft) {
+      if (draft && draft.images) {
+        const images = draft.images.map((img) => ({
+          ...img,
+          preview: URL.createObjectURL(img.file),
+        }));
+
         set(
           {
             ...draft,
+            images,
             isHydrated: true,
           },
           false,
@@ -74,16 +51,37 @@ export const useCreatePostStore = create<CreatePostStateType>()(
       await saveDraft(pickDraft({ ...get(), step: isDraft() }));
     },
 
+    updateActiveImage: (partialImage) => {
+      set((state) => {
+        const images = [...state.images];
+        const activeImage = images[state.activeImageIndex];
+        const partialFile = partialImage.file;
+        if (activeImage) {
+          if (partialFile && partialFile !== activeImage.file) {
+            URL.revokeObjectURL(activeImage.preview);
+            partialImage.preview = URL.createObjectURL(partialFile);
+          }
+
+          images[state.activeImageIndex] = { ...activeImage, ...partialImage };
+        }
+        saveDraft(pickDraft({ ...state, images }));
+        return { images };
+      });
+    },
+
     addImages: (files) =>
       set((state) => {
-        const images = [
-          ...state.images,
-          ...files.slice(0, 10 - state.images.length).map((file) => ({
-            id: crypto.randomUUID(),
-            file,
-            preview: URL.createObjectURL(file),
-          })),
-        ];
+        const newImages = files.slice(0, 10 - state.images.length).map(
+          (file) =>
+            ({
+              id: crypto.randomUUID(),
+              file,
+              preview: URL.createObjectURL(file),
+              originalFile: file,
+            }) as UploadedImageItem,
+        );
+
+        const images = [...state.images, ...newImages];
 
         saveDraft(pickDraft({ ...state, images }));
         return { images };
@@ -100,6 +98,10 @@ export const useCreatePostStore = create<CreatePostStateType>()(
     removeImage: (index) =>
       set(
         (state) => {
+          const imageToRemove = state.images[index];
+          if (imageToRemove) {
+            URL.revokeObjectURL(imageToRemove.preview);
+          }
           const images = state.images.filter((_, i) => i !== index);
           saveDraft(pickDraft({ ...state, images }));
           return { images };
@@ -124,8 +126,18 @@ export const useCreatePostStore = create<CreatePostStateType>()(
       });
     },
 
+    cleanup: () => {
+      const images = get().images;
+      images.forEach((img) => {
+        if (img.preview) URL.revokeObjectURL(img.preview);
+      });
+    },
+
     reset: async () => {
       await clearDraft();
+
+      get().images.forEach((img) => URL.revokeObjectURL(img.preview));
+
       set(
         {
           step: '',

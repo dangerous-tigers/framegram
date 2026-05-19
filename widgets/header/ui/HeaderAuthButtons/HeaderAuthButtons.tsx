@@ -1,12 +1,14 @@
 'use client';
-import clsx from 'clsx';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-
-import s from './headerAuthButtons.module.scss';
+import clsx from 'clsx';
 
 import { useMe } from '@/entities/user/model/useMe';
 import { routes } from '@/shared/config/routes';
+import { PolymorphicButton } from '@/shared/ui/polymorphic-button';
+
+import s from './headerAuthButtons.module.scss';
 
 type PropsHeaderAuthButtons = {
   className?: string;
@@ -17,26 +19,34 @@ export const HeaderAuthButtons = (props: PropsHeaderAuthButtons) => {
 
   const t = useTranslations('header');
 
-  const { isLoading, data: user } = useMe();
+  const { isLoading, isError } = useMe();
+  const path = usePathname();
 
   if (isLoading) return null;
+  if (!isError) return null;
 
-  if (user) return null;
+  if (path === routes.auth.login) {
+    return null;
+  }
 
   return (
     <div className={clsx(s.headerAuthButtons, className)}>
-      <Link
+      <PolymorphicButton
+        as={Link}
+        variant='text'
         className={s.link}
         href={routes.auth.login}
       >
         {t('logIn')}
-      </Link>
-      <Link
+      </PolymorphicButton>
+      <PolymorphicButton
+        as={Link}
+        variant='primary'
         className={s.linkBlue}
         href={routes.auth.registration}
       >
         {t('signUp')}
-      </Link>
+      </PolymorphicButton>
     </div>
   );
 };

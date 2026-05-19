@@ -1,17 +1,18 @@
 'use client';
-import clsx from 'clsx';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-
-import { Description } from '..';
-import { type Comment } from '../../../../model/types';
-import { Answer } from '../answer/Answer';
-
-import s from './Comment.module.scss';
+import { useTranslations } from 'next-intl';
+import clsx from 'clsx';
 
 import { Heart, HeartOutline } from '@/assets/icons';
 import { useCommentAnswers, useViewPostStore } from '@/features/post/viewPost/model';
+import { usePostCommentLikeMutation } from '@/features/post/viewPost/model/usePostCommentLikeMutation';
 import { Button } from '@/shared/ui';
+
+import { type Comment } from '../../../../model/types';
+import { Answer } from '../answer/Answer';
+import { Description } from '..';
+
+import s from './Comment.module.scss';
 
 type Props = {
   comment: Comment;
@@ -29,27 +30,29 @@ export function Comment({ comment, postId, isAuth }: Props) {
     openAnswer,
   });
 
+  const mutation = usePostCommentLikeMutation();
+
   const t = useTranslations('viewPost');
 
   const handleAnswer = (id: number) => {
-    alert('Answered by comment id: ' + id + ' by post id: ' + postId + ' by username: ' + comment.from.username);
     setType('answer');
     setComentUsername(comment.from.username);
     setPostId(id);
     setCommentId(comment.id);
   };
-  const handleLike = (id: number) => {
-    alert('Liked by comment id: ' + id);
-  };
-  const handleLikeAnswer = (id: number) => {
-    alert('Liked by answer id: ' + id + ' by comment id: ' + comment.id);
+  const handleLike = (commentId: number) => {
+    mutation.mutate({
+      commentId,
+      postId,
+      likeStatus: comment.isLiked ? 'NONE' : 'LIKE',
+    });
   };
 
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
         <Description
-          avatar={comment.from.avatars[0].url}
+          avatar={comment.from.avatars[0]?.url}
           userName={comment.from.username}
           text={comment.content}
           timeStamp={comment.createdAt}
@@ -90,8 +93,6 @@ export function Comment({ comment, postId, isAuth }: Props) {
               <Answer
                 key={answer.id}
                 answer={answer}
-                onLike={handleLikeAnswer}
-                isAuth={isAuth}
               />
             </div>
           ))}

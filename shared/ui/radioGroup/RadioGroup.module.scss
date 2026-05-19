@@ -63,8 +63,8 @@
         color: var(--light-900);
       }
     }
-
-    &[data-state='checked'] > .radioIndicator {
+    /* stylelint-disable selector-class-pattern */
+    &[data-state='checked'] > .radio__indicator {
       transform: scale(1);
     }
   }
@@ -82,7 +82,7 @@
     background-color: var(--light-100);
     border-radius: 50%;
     will-change: transform;
-    transition: transform 1s;
+    transition: transform 0.2s;
   }
 
   &__label {

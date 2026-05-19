@@ -1,5 +1,5 @@
 // hooks/useResizable.ts
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 type ResizeDirection = 'both' | 'horizontal' | 'vertical' | 'none';
 
